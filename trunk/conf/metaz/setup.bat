@@ -1,8 +1,10 @@
-REM Huidige directory
+REM FP: Huidige directory
 SET CLASSPATH=.
 
-REM Source root
+REM FP: Source root
 SET CLASSPATH=%CLASSPATH%;%METAZHOME%\src
 
-REM Library directory
+REM FP: Library directory
 SET CLASSPATH=%CLASSPATH%;%METAZHOME%\lib
+
+REM Toevoegingen hieronder opnemen met initialen!
