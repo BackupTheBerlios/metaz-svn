@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -23,7 +24,7 @@ public class DiasClient extends JFrame
   /**
    * Timer voor het periodiek tonen van een (volgend) plaatje.
    */
-  protected javax.swing.Timer timer;
+  protected Timer timer;
   /**
    * Het ingetoetste tempo in seconden.
    */
@@ -72,7 +73,7 @@ public class DiasClient extends JFrame
     serverLabel.setText("Server (server:poort):");
     serverLabel.setBounds(new Rectangle(33, 35, 125, 20));
 
-    serverVeld.setText("");
+    serverVeld.setText("localhost:8080");
     serverVeld.setBounds(new Rectangle(33, 69, 225, 20));
 
     verbindingKnop.setText("Maakverbinding");
@@ -304,7 +305,7 @@ public class DiasClient extends JFrame
         timer.stop();
       if (!vector.isEmpty())
       {
-        timer = new javax.swing.Timer(0, new TimerLuisteraar(vector));
+        timer = new Timer(0, new TimerLuisteraar(vector));
         timer.start();
         vector.removeAllElements();
       }
@@ -440,7 +441,7 @@ public class DiasClient extends JFrame
   }
 }
 
-class DiasClient_this_windowAdapter extends java.awt.event.WindowAdapter
+class DiasClient_this_windowAdapter extends WindowAdapter
 {
   DiasClient adaptee;
 
@@ -454,7 +455,7 @@ class DiasClient_this_windowAdapter extends java.awt.event.WindowAdapter
   }
 }
 
-class DiasClient_verbindingKnop_actionAdapter implements java.awt.event.ActionListener
+class DiasClient_verbindingKnop_actionAdapter implements ActionListener
 {
   DiasClient adaptee;
 
@@ -468,7 +469,7 @@ class DiasClient_verbindingKnop_actionAdapter implements java.awt.event.ActionLi
   }
 }
 
-class DiasClient_klikLijst_listSelectionAdapter implements javax.swing.event.ListSelectionListener
+class DiasClient_klikLijst_listSelectionAdapter implements ListSelectionListener
 {
   DiasClient adaptee;
 
