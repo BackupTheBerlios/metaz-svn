@@ -5,7 +5,7 @@ public class FunctieTest {
     }
 
     public void setUp() {
-	//dit is het proberen waard
+	//dit is het proberen1 waard
     }
 
     public void tearDown() {
