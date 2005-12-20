@@ -10,5 +10,6 @@ public class FunctieTest {
 
     public void tearDown() {
 	//dit is een ander probeerseltje
+	//andere wijziging
     }
 }
