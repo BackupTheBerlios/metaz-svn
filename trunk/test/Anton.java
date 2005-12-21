@@ -9,6 +9,8 @@ public class FunctieTest {
     public void setUp() {
     }
 
+
+    // commentaar van Ben
     public void tearDown() {
     }
 }
