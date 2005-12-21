@@ -1,5 +1,5 @@
 package org.metaz.test;
-dit is van Anton!!
+Dit is van Anton!!
 public class FunctieTest {
 
     public FunctieTest() {
