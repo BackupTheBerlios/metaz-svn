@@ -1,10 +1,10 @@
 REM FP: Huidige directory
 SET CLASSPATH=.
 
-REM FP: Source root
-SET CLASSPATH=%CLASSPATH%;%METAZHOME%\src
+REM LO: Source root
+SET CLASSPATH=%CLASSPATH%;%METAZHOME%\src\main\java
 
-REM FP: Library directory
-SET CLASSPATH=%CLASSPATH%;%METAZHOME%\lib
+REM LO: Library directory
+SET CLASSPATH=%CLASSPATH%;%METAZHOME%\src\main\resources
 
 REM Toevoegingen hieronder opnemen met initialen!
