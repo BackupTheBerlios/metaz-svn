@@ -6,8 +6,9 @@ to maven.
 1. install maven
 	Maven can be obtained from
 	http://maven.apache.org.
-	Download version 2.0.1 and install conforming
-	to the instructions found on the maven site.
+	For a installation walkthrough please check out Appendix
+	II from the latest version of the Meta/Z Software 
+	Configuration Management Plan
 	
 2. check out the helloworld project from metaz.berlios.de
 	The helloworld project is contained in the helloworld
