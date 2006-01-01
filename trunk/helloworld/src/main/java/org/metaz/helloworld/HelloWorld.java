@@ -20,6 +20,7 @@ public class HelloWorld {
 	public static void main(String[] args) {
 		System.out.println("Hello World, Meta/Z Erik-Jan!");
 		System.out.println("Hello World, Meta/Z Lars!");
+		System.out.println("Hello World, Meta/Z Erik!");
 	}
 
 }
