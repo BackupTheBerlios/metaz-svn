@@ -2,6 +2,8 @@ package org.metaz.util;
 
 import org.apache.log4j.*; // log4j stuff
  
+// @author Falco Paul, Open University Netherlands, OTO Meta/Z project
+
 public class LoggingExample { 
 
   private static Logger logger = MetaZ.getLogger(LoggingExample.class);
