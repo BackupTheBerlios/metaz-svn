@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 /**
+ * @author Falco Paul, Open University Netherlands, OTO Meta/Z project
  * Meta/Z application instance (implemented as a singleton object)
  * This class offers "global" services to application modules
  * The singleton pattern assures that only one instance will exist in the VM
@@ -17,8 +18,8 @@ import java.net.URLClassLoader;
  */
 public class MetaZ { 
 
-  public  static final String METAZ_PROPERTIES_FILE = "metaz.props";
-  public  static final String METAZ_CONFIG_FILE_PATH = "config/metaz";
+  public static final String METAZ_PROPERTIES_FILE = "metaz.props";
+  public static final String METAZ_CONFIG_FILE_PATH = "config/metaz";
   
   public static final String PROP_LOG4J_CONFIG_FILE = "log4j.config.file";
   public static final String PROP_ROOT_DIR = "root.dir";
@@ -42,7 +43,6 @@ public class MetaZ {
     // file loading errors
 
     PatternLayout layout = new PatternLayout(); 
-    
     layout.setConversionPattern("%d{dd/mm/yy HH:mm:ss} %-5p[%t]: %m%n");
 
     ConsoleAppender appender = new ConsoleAppender(layout);
