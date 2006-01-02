@@ -230,7 +230,7 @@ public class MetaZ {
    * Seeds the Meta/Z application properties object
    * @return Properties the seeded Meta/Z application properties object
    */
-  public Properties readProperties() 
+  private Properties readProperties() 
   {
   
     Properties properties = new Properties(System.getProperties());
