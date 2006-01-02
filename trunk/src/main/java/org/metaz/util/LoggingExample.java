@@ -4,7 +4,7 @@ import org.apache.log4j.*; // log4j stuff
  
 public class LoggingExample { 
 
-  private static Logger logger = MetaZ.getLogger(Test.class);
+  private static Logger logger = MetaZ.getLogger(LoggingExample.class);
 
   public static void main(String []args) {
   
