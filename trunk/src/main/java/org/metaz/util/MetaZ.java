@@ -1,3 +1,5 @@
+package org.metaz.util;
+
 import java.io.File;
 import org.apache.log4j.*; // log4j stuff
 import java.util.Properties;

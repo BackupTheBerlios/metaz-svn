@@ -1,3 +1,5 @@
+package org.metaz.util;
+
 import org.apache.log4j.*; // log4j stuff
  
 public class LoggingExample { 
