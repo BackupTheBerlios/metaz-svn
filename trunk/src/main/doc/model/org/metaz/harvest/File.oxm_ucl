@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<?Oracle-JDeveloper Artifact = '1.1'?>
+<artifact xmlns="http://xmlns.oracle.com/jdeveloper/modeler/artifact" name="File" type="UMLClass" cid="907f7344-0108-1000-8011-c0a87b904951::org.metaz.harvest.File::UMLClass">
+   <property xmlns="">
+      <cid name="NAMESPACE_REFERENCE" key="7dc9dea3-0108-1000-8027-c0a87b90746a::org.metaz.harvest::UMLPackage"/>
+      <null name="COMMENT"/>
+      <null name="IMAGE"/>
+      <text name="IS_ABSTRACT">FALSE</text>
+      <text name="IS_LEAF">FALSE</text>
+      <text name="IS_ROOT">TRUE</text>
+      <text name="COMPLETE_LIBRARY">FALSE</text>
+      <text name="VISIBILITY">PUBLIC</text>
+      <text name="IS_ACTIVE">FALSE</text>
+   </property>
+   <backreference xmlns="">
+      <reference type="AssociationEnd" property="CLASSIFIER_REFERENCE" ownedCid="9082e6b0-0108-1000-801b-c0a87b904951::org.metaz.harvest.HarvestAgent has a File 1::AssociationEnd" ownerCid="9082e6b0-0108-1000-8019-c0a87b904951::org.metaz.harvest.HarvestAgent has a File 1::Association"/>
+   </backreference>
+   <children xmlns=""/>
+</artifact>

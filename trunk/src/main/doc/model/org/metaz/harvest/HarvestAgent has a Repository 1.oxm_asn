@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<?Oracle-JDeveloper Artifact = '1.1'?>
+<artifact xmlns="http://xmlns.oracle.com/jdeveloper/modeler/artifact" name="HarvestAgent has a Repository 1" type="Association" cid="90818664-0108-1000-8013-c0a87b904951::org.metaz.harvest.HarvestAgent has a Repository 1::Association">
+   <property xmlns="">
+      <cid name="NAMESPACE_REFERENCE" key="7dc9dea3-0108-1000-8027-c0a87b90746a::org.metaz.harvest::UMLPackage"/>
+      <null name="COMMENT"/>
+      <null name="IMAGE"/>
+      <text name="IS_ABSTRACT">FALSE</text>
+      <text name="IS_LEAF">FALSE</text>
+      <text name="IS_ROOT">FALSE</text>
+   </property>
+   <backreference xmlns=""/>
+   <children xmlns="">
+      <child type="AssociationEnd" reference="ASSOCIATION_REFERENCE">
+         <artifact name="" type="AssociationEnd" cid="90818664-0108-1000-8014-c0a87b904951::org.metaz.harvest.HarvestAgent has a Repository 1::AssociationEnd">
+            <property>
+               <null name="NAMESPACE_REFERENCE"/>
+               <null name="COMMENT"/>
+               <null name="IMAGE"/>
+               <number name="SEQUENCE" value="0"/>
+               <text name="VISIBILITY">PROTECTED</text>
+               <text name="IS_NAVIGABLE">FALSE</text>
+               <text name="AGGREGATION">NONE</text>
+               <text name="SCOPE">INSTANCE</text>
+               <text name="CHANGEABILITY">CHANGEABLE</text>
+               <cid name="CLASSIFIER_REFERENCE" key="907e8eef-0108-1000-8010-c0a87b904951::org.metaz.harvest.HarvestAgent::UMLClass"/>
+               <text name="MULTIPLICITY">ONE</text>
+               <null name="INITIAL_VALUE"/>
+            </property>
+            <backreference/>
+            <children/>
+         </artifact>
+         <artifact name="" type="AssociationEnd" cid="90818664-0108-1000-8015-c0a87b904951::org.metaz.harvest.HarvestAgent has a Repository 1::AssociationEnd">
+            <property>
+               <null name="NAMESPACE_REFERENCE"/>
+               <null name="COMMENT"/>
+               <null name="IMAGE"/>
+               <number name="SEQUENCE" value="10"/>
+               <text name="VISIBILITY">PROTECTED</text>
+               <text name="IS_NAVIGABLE">TRUE</text>
+               <text name="AGGREGATION">NONE</text>
+               <text name="SCOPE">INSTANCE</text>
+               <text name="CHANGEABILITY">CHANGEABLE</text>
+               <cid name="CLASSIFIER_REFERENCE" key="907cc4ae-0108-1000-800f-c0a87b904951::org.metaz.harvest.Repository::UMLInterface"/>
+               <text name="MULTIPLICITY">ONE</text>
+               <null name="INITIAL_VALUE"/>
+            </property>
+            <backreference/>
+            <children/>
+         </artifact>
+      </child>
+   </children>
+</artifact>

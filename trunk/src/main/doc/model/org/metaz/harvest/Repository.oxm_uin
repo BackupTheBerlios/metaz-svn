@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<?Oracle-JDeveloper Artifact = '1.1'?>
+<artifact xmlns="http://xmlns.oracle.com/jdeveloper/modeler/artifact" name="Repository" type="UMLInterface" cid="907cc4ae-0108-1000-800f-c0a87b904951::org.metaz.harvest.Repository::UMLInterface">
+   <property xmlns="">
+      <cid name="NAMESPACE_REFERENCE" key="7dc9dea3-0108-1000-8027-c0a87b90746a::org.metaz.harvest::UMLPackage"/>
+      <null name="COMMENT"/>
+      <null name="IMAGE"/>
+      <text name="IS_ABSTRACT">TRUE</text>
+      <text name="IS_LEAF">FALSE</text>
+      <text name="IS_ROOT">TRUE</text>
+      <text name="COMPLETE_LIBRARY">FALSE</text>
+      <text name="VISIBILITY">PUBLIC</text>
+   </property>
+   <backreference xmlns="">
+      <reference type="AssociationEnd" property="CLASSIFIER_REFERENCE" ownedCid="90818664-0108-1000-8015-c0a87b904951::org.metaz.harvest.HarvestAgent has a Repository 1::AssociationEnd" ownerCid="90818664-0108-1000-8013-c0a87b904951::org.metaz.harvest.HarvestAgent has a Repository 1::Association"/>
+   </backreference>
+   <children xmlns=""/>
+</artifact>
