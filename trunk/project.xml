@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+ * Copyright 2001-2004 The Apache Software Foundation.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ -->
+<project>
+    <!-- the version of maven's project object model -->
+    <pomVersion>3</pomVersion>
+    <!-- a unique name for this project -->
+    <artifactId>metaz</artifactId>
+    <groupId>metaz-core</groupId>
+    <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4991</issueTrackingUrl>
+    <id>MetaZ</id>
+    <!-- a short but descriptive name for the project -->
+    <name>MetaZ</name>
+    <!-- The version of the project under development, e.g.
+       1.1, 1.2, 2.0-SNAPSHOT -->
+    <currentVersion>0.1</currentVersion>
+    <!-- details about the organization that 'owns' the project -->
+    <organization>
+        <name>MetaZ team Open Universiteit Ontwerpproject</name>
+        <url>http://www.open.ou.nl/otonet/</url>
+    </organization>
+    <!-- the year the project started -->
+    <inceptionYear>2005</inceptionYear>
+    <package>org.metaz</package>
+    <!-- a short description of what the project does -->
+    <shortDescription>Meta/Z is een software engineering team of the Open University, The Netherlands. We are developing software that will act as an aggregating web front-end to retrieve information from several content databases. The web application offers its users an efficient way of searching and accessing the content. The content is organized with metadata.</shortDescription>
+    <!-- the project home page -->
+    <url>http://metaz.berlios.de/</url>
+    <siteAddress>metaz.berlios.de</siteAddress>
+    <!-- the version control repository and http url for online access
+       the connection element has the form:
+       scm:<system>:<system specific connection string> -->
+    <repository>
+        <connection>scm:svn:https://svn.berlios.de/svn/root/module</connection>
+        <url>http://svn.berlios.de/wvsn/metaz</url>
+    </repository>
+    <!-- any mailing lists for the project -->
+    <!-- who the developers are for the project -->
+    <developers>
+        <developer>
+            <id>EJS</id>
+            <name>Erik-Jan Spaans</name>
+            <email>E.J.Spaans@inter.NL.net</email>
+            <organization>OTO Meta/Z</organization>
+            <roles>
+                <role>Ontwikkel manager</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>ES</id>
+            <name>Erik Schouten</name>
+            <email>l.erik.j.schouten@wanadoo.nl</email>
+            <organization>OTO Meta/Z</organization>
+            <roles>
+                <role>Ontwikkelaar</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>JG</id>
+            <name>Jurgen Goelen</name>
+            <email>jurgen.goelen@telenet.be</email>
+            <organization>OTO Meta/Z</organization>
+            <roles>
+                <role>Ontwikkelaar</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>LO</id>
+            <name>Lars Oosterloo</name>
+            <email>l.oosterloo@hccnet.nl</email>
+            <organization>OTO Meta/Z</organization>
+            <roles>
+                <role>Ontwikkelaar</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>PD</id>
+            <name>Peter van Dorp</name>
+            <email>peter.van.dorp@philologos.nl</email>
+            <organization>OTO Meta/Z</organization>
+            <roles>
+                <role>Ontwikkelaar</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>SD</id>
+            <name>Sammy Dalewyn</name>
+            <email>sammy.dalewyn@pandora.be</email>
+            <organization>OTO Meta/Z</organization>
+            <roles>
+                <role>Ontwikkelaar</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <id>FP</id>
+            <name>Falco Paul</name>
+            <email>falco@cigma.nl</email>
+            <organization>OTO Meta/Z</organization>
+            <roles>
+                <role>Ontwikkelaar</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+    <!-- jar files the project is dependent on -->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+    </dependencies>
+    <!-- build information for the project -->
+    <build>
+        <nagEmailAddress>turbine-maven-dev@jakarta.apache.org</nagEmailAddress>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+            <excludes>
+                <exclude>**/NaughtyTest.java</exclude>
+            </excludes>
+        </unitTest>
+        <resources>
+            <resource>
+                <directory>src/conf</directory>
+                <includes>
+                    <include>*.properties</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
+
