@@ -46,7 +46,8 @@
        the connection element has the form:
        scm:<system>:<system specific connection string> -->
     <repository>
-        <connection>scm:svn:https://svn.berlios.de/svn/root/module</connection>
+        <connection>scm:svn:http://svn.berlios.de/svnroot/repos/metaz</connection>
+        <developerConnection>scm:svn:https://svn.berlios.de/svnroot/repos/metaz</developerConnection>
         <url>http://svn.berlios.de/wvsn/metaz</url>
     </repository>
     <!-- any mailing lists for the project -->
