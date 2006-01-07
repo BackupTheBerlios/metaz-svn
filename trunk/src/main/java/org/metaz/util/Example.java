@@ -30,7 +30,7 @@ public class Example extends Object {
      
      return Equals.test(this.property_1, that.property_1) &&
             Equals.test(this.property_2, that.property_2) &&
-          Arrays.equals(this.property_3, this.property_3);
+          Arrays.equals(this.property_3, that.property_3);
   
   }
   
