@@ -58,7 +58,9 @@ public final class Equals {
     
     // we now both a and b are not null...
 
-    if (b.getClass() != a.getClass()) return false;
+    if (a.getClass() != b.getClass()) return false;
+
+    // the test passes, we conclude a and b are both not null, and of the same class
     
     return true;
 
