@@ -26,7 +26,7 @@ package org.metaz.util;
  *          ..
  *          Equals.test(this.property_x, that.property_x) &&
  *          Equals.test(this.property_y, that.property_y) &&
- *        Arrays.equals(this.property_z, this.property_z);
+ *        Arrays.equals(this.property_z, that.property_z);
  *
  * }
  *
