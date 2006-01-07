@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Example extends Object { 
 
-  private static Logger logger = MetaZ.getLogger(LoggingExample.class);
+  private static Logger logger = MetaZ.getLogger(Example.class);
   
   // some fake properties for usage in equals() and hashCode() demonstrations
   
