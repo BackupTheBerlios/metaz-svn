@@ -1,4 +1,4 @@
-package org.metaz.repository;
+package org.metaz.domain;
 
 /**
  * FIXME define further methods

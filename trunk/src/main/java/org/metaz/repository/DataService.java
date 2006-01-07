@@ -4,6 +4,8 @@ import java.net.URI;
 
 import java.util.List;
 
+import org.metaz.domain.Record;
+
 /**
  * @authors Jurgen Goelen
  * @version 0.1 

@@ -2,6 +2,8 @@ package org.metaz.repository;
 
 import java.util.List;
 
+import org.metaz.domain.Record;
+
 
 /**
  * The public interface for the Repository package.

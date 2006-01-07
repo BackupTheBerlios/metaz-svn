@@ -2,6 +2,8 @@ package org.metaz.repository;
 
 import java.util.List;
 
+import org.metaz.domain.Record;
+
 /**
  * Interface to be extended by all services in the repository.
  * 
