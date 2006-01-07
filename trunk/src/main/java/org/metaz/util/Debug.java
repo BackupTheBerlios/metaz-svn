@@ -71,11 +71,11 @@ public class Debug extends Object {
   
   public static void printObject(Object obj) {
    
-    logger.info("Printing Information on: " + obj);
+    logger.debug("Printing Information on: " + obj);
     
     Method[] ms = obj.getClass().getMethods();
           
-    logger.info(" Class: " + obj.getClass().getName());
+    logger.debug(" Class: " + obj.getClass().getName());
     
     for (int i = 0; i < ms.length; i++)
     {
@@ -100,7 +100,7 @@ public class Debug extends Object {
             value = e.toString() + ":" + e.getMessage();
           }
           
-          logger.info("  " + ms[i].getName() + ": " + value);
+          logger.debug("  " + ms[i].getName() + ": " + value);
           
         }
         
