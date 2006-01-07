@@ -16,7 +16,7 @@ import java.net.URLClassLoader;
  * And yes, I know there are some exceptions... 
  * See http://www.javaworld.com/javaworld/jw-01-2001/jw-0112-singleton.html for a discussion
  */
-public class MetaZ { 
+public class MetaZ implements java.io.Serializable { 
 
   public static final String METAZ_PROPERTIES_FILE = "metaz.props";
   public static final String METAZ_CONFIG_FILE_PATH = "config/metaz";
@@ -87,7 +87,7 @@ public class MetaZ {
 
   /**
    * Gets a logger instance and initializes the logger look and feel
-   * @param Clazz classname where you would like a logger for
+   * @param clazz classname where you would like a logger for
    * @return Logger a fully configured logger object
    */
   public static Logger getLogger(Class clazz)
@@ -108,7 +108,7 @@ public class MetaZ {
   /**
    * Returns a nice string describing an object, to be used in logging strings
    * Works better than calling toString() as that will print actual content in a lot of cases...
-   * @param Object  the object to be stringified
+   * @param object  the object to be stringified
    * @return String stringified object
    */
   public static String format(Object object)
@@ -299,7 +299,7 @@ public class MetaZ {
    * 
    * This method WILL find resources located within JAR files
    * 
-   * @param name a resource name somewhere available in the classpath [may not be null]
+   * @param resourceName a resource name somewhere available in the classpath [may not be null]
    * @param loader classloader through which to load the resource [null
    * is equivalent to the application loader]
    * @return InputStream the located resoruce
@@ -334,8 +334,8 @@ public class MetaZ {
   /**
    * A convenience overload of getProperties(String, ClassLoader)
    * that uses the current thread's context classloader.
-   * @param name The property file name
-   * @return     A Properties object seeded with the properties from the supplied file name
+   * @param   resourceName The property file name
+   * @return  A Properties object seeded with the properties from the supplied file name
    */
    
   public static InputStream getResourceStream(String resourceName)
@@ -369,7 +369,7 @@ public class MetaZ {
   /**
    * Returns the classpath as a platform specific string
    * Simply call getClassPathString(getClassPath()) to get the current (stringified ) classpath
-   * @param ClassPath an array of URL's representing a class path 
+   * @param classPath an array of URL's representing a class path 
    * @return Stringified classpath
    */
   public static String getClassPathString (URL[] classPath)
