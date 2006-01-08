@@ -3,11 +3,12 @@ package org.metaz.domain;
 /**
  * @author E.J. Spaans
  * 
- * Represents boolean MetaData.
+ * Represents hyperlink MetaData.
  *
  */
-public class BooleanMetaData extends MetaData{
-	private Boolean value;
+public class HyperlinkMetaData extends MetaData {
+	
+	private String value;
 
 	@Override
 	public Object getValue() {
@@ -16,8 +17,8 @@ public class BooleanMetaData extends MetaData{
 
 	@Override
 	public void setValue(Object value) {
-		this.value = (Boolean)value;
+		this.value = (String) value;
+
 	}
-	
 
 }

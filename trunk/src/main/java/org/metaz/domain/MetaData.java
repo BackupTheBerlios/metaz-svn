@@ -3,6 +3,7 @@ package org.metaz.domain;
 /**
  * @author E.J. Spaans
  * Base class for MetaData used in @see org.metaz.domain.Record
+ * See document Koppelingsspecificatie.doc
  *
  */
 public abstract class MetaData {
