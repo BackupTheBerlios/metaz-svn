@@ -139,6 +139,18 @@
             <version>1.2.8</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>lucene</groupId>
+            <artifactId>lucene</artifactId>
+            <version>1.4.3</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <!-- build information for the project -->
     <build>
