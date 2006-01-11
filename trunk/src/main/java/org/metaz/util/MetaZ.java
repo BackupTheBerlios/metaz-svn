@@ -55,7 +55,7 @@ public class MetaZ implements java.io.Serializable {
     // attempt to load the log4j properties file
 
     properties = readProperties();
-    log4JConfigFile = properties.getProperty(PROP_LOG4J_CONFIG_FILE);
+    log4JConfigFile = getRelativeFileSpec(getProperties().getProperty(PROP_LOG4J_CONFIG_FILE));
       
     if (log4JConfigFile == null)
       logger.warn("Could not seed log4J with a configuration file, using default output settings");
@@ -189,7 +189,12 @@ public class MetaZ implements java.io.Serializable {
    */
   public String getRelativeFileSpec(String relativeFileName) 
   {
+  
+    if (relativeFileName == null)
+      return null;
+      
     return getPath(getRoot()) + File.separator + relativeFileName;
+    
   }
 
   /**
@@ -199,6 +204,9 @@ public class MetaZ implements java.io.Serializable {
    */
   public File getRelativeFile(String relativeFileName) 
   {
+
+    if (relativeFileName == null)
+      return null;
 
     File fileObject  = new File(getRelativeFileSpec(relativeFileName));
     String file = null;

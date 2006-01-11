@@ -60,7 +60,7 @@ public class Example extends Object {
     System.out.println("Config file dir = " + app.getPath(app.getConfigFilePath()));
     System.out.println("ClassPath = " + app.getClassPathString(app.getClassPath()));
     
-    File testFile = app.getRelativeFile("subdir1/testfile.dat");
+    File testFile = app.getRelativeFile("data/testfile.dat");
 
     try {
       System.out.println("My file = " + testFile.getCanonicalPath());
@@ -69,6 +69,8 @@ public class Example extends Object {
     {
       // does nothing
     }
+
+    File someFile = app.getRelativeFile(app.getProperties().getProperty("SOME_PROPERTY"));
     
     // Make sure we actually see DEBUG output
     
