@@ -8,7 +8,7 @@ import org.metaz.domain.Record;
 
 /**
  * @authors Jurgen Goelen
- * @version 0.1 
+ * @version 0.2 
  */
 public interface DataService extends RepositoryService {
     
@@ -21,6 +21,6 @@ public interface DataService extends RepositoryService {
       * @throws Exception
       *      The records could not be retrieved.
       */
-    public List<Result<Record>> getRecords(List<URI> ids) throws Exception;    
+    public List<Record> getRecords(List<URI> ids) throws Exception;    
            
 }
