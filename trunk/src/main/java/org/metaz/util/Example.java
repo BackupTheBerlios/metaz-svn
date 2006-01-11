@@ -1,5 +1,7 @@
 package org.metaz.util;
 
+import java.io.File;
+
 import org.apache.log4j.*; // log4j stuff
 import java.util.Arrays;
  
@@ -52,14 +54,26 @@ public class Example extends Object {
   
     logger.info("Hello, logging world");
 
-    System.out.println("Root dir = " + app.getPath(app.getRoot()));
+    System.out.println("Java home dir = " + System.getProperty("user.home"));
+    System.out.println("Root = " + app.getRoot());
+    System.out.println("Root dir path = " + app.getPath(app.getRoot()));
     System.out.println("Config file dir = " + app.getPath(app.getConfigFilePath()));
     System.out.println("ClassPath = " + app.getClassPathString(app.getClassPath()));
+    
+    File testFile = app.getRelativeFile("subdir1/testfile.dat");
+
+    try {
+      System.out.println("My file = " + testFile.getCanonicalPath());
+    }
+    catch (Exception e)
+    {
+      // does nothing
+    }
     
     // Make sure we actually see DEBUG output
     
     Logger rootLogger = Logger.getRootLogger();
-    rootLogger.setLevel((Level) Level.DEBUG);
+    logger.setLevel((Level) Level.DEBUG);
     
     Debug.printException(new Exception("Test 1"));
     Debug.printExceptionAndTrace(new Exception("Test 2"));

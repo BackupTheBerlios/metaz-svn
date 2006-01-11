@@ -236,7 +236,7 @@ public class MetaZ implements java.io.Serializable {
     Properties properties = new Properties(System.getProperties());
     
     String defaultFileName = System.getProperty("user.home") + 
-                             File.pathSeparator + 
+                             File.separator + 
                              METAZ_PROPERTIES_FILE;
                              
     InputStream propStream = null;
