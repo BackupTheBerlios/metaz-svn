@@ -1,5 +1,6 @@
 package org.metaz.repository;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.net.URI;
@@ -33,7 +34,7 @@ import org.metaz.util.MetaZ;
 public class SearchServiceImpl implements SearchService{
 
     private static Logger logger = MetaZ.getLogger(SearchServiceImpl.class); 
-    private final static String indexPath = "searchindex"; // to be updated with correct path
+    private final static String INDEXPATH = "repository/searchindex"; 
     
     /**
      * Empty constructor
@@ -46,7 +47,9 @@ public class SearchServiceImpl implements SearchService{
      */
     public void doPurge() {
        try{
-           Directory directory = FSDirectory.getDirectory(indexPath, false);
+           MetaZ app = MetaZ.getInstance();
+           File f = app.getRelativeFile(INDEXPATH);
+           Directory directory = FSDirectory.getDirectory(f, false);
            IndexReader reader = IndexReader.open(directory);
            
            for (int i = 0; i < reader.maxDoc(); i++)
@@ -58,7 +61,7 @@ public class SearchServiceImpl implements SearchService{
            directory.close();
        }
        catch(IOException ex){
-           logger.info(ex.getMessage());
+           logger.error(ex.getMessage());
        }
     }
     
@@ -66,9 +69,11 @@ public class SearchServiceImpl implements SearchService{
      * Updates the search index.
      * @param records the records to be added to the search index
      */
-    public void doUpdate(List<Record> records) {
+    public void doUpdate(List<Record> records) throws Exception {
         try{
-            IndexWriter writer = new IndexWriter(indexPath, new StandardAnalyzer(), true);
+            MetaZ app = MetaZ.getInstance();
+            File f = app.getRelativeFile(INDEXPATH);
+            IndexWriter writer = new IndexWriter(f, new StandardAnalyzer(), true);
             
             if (records!=null){
                 for(int i=0; i<records.size(); i++)
@@ -79,8 +84,8 @@ public class SearchServiceImpl implements SearchService{
             writer.optimize();
             writer.close();
         }
-        catch(IOException ex){
-            logger.info(ex.getMessage());
+        catch(Exception ex){
+            logger.error(ex.getMessage());
         }
     }
     
@@ -91,31 +96,32 @@ public class SearchServiceImpl implements SearchService{
      */
     public List<Result<URI>> doSearch(String query) {
         try {
-            Searcher searcher = new IndexSearcher(indexPath);
+            MetaZ app = MetaZ.getInstance();
+            File f = app.getRelativeFile(INDEXPATH);
+            Searcher searcher = new IndexSearcher(f.getCanonicalPath());
             Analyzer analyzer = new StandardAnalyzer();
             Query q = QueryParser.parse(query,"title",analyzer);
             logger.info("Searching for: " + q.toString("title"));
             Hits hits = searcher.search(q);
             logger.info(hits.length() + " total matching records");
-            List resultList = new Vector();
+            List<Result<URI>> resultList = new Vector<Result<URI>> ();
             for (int i=0; i<hits.length(); i++) {
                 Document doc = hits.doc(i);
                 String suri = doc.get("uri");
                 URI uri = URI.create(suri);
+                float score = hits.score(i);
                 if(uri!=null) {
-                    resultList.add(uri);
-                    logger.info(i+1 + ": " + suri);
+                    Result<URI> result = new Result<URI>(uri,score);
+                    resultList.add(result);
+                    logger.info(i+1 + ": " + suri +":" + score);
                 }
             }
             searcher.close();
             logger.info("resultList contains "+resultList.size()+" elements");
             return resultList;
         }
-        catch (IOException ex) {
-            logger.info(ex.getMessage());
-        }
-        catch (ParseException ex) {
-            logger.info(ex.getMessage());
+        catch (Exception ex) {
+            logger.error(ex.getMessage());
         }
         return null;
     }

@@ -2,12 +2,15 @@ package org.metaz.repository;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.Date;
 
 import junit.framework.TestCase;
 import junit.swingui.TestRunner;
 
 import org.metaz.domain.BooleanMetaData;
+import org.metaz.domain.DateMetaData;
 import org.metaz.domain.HyperlinkMetaData;
+import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 
@@ -54,8 +57,14 @@ public class SearchServiceImplTest extends TestCase {
         HyperlinkMetaData uri = new HyperlinkMetaData();
         uri.setName("URI");
         uri.setValue("http://www.ou.nl/stories/ruuddemoor.pdf");
+        
+        DateMetaData creationDate = new DateMetaData();
+        creationDate.setName("creationdate");
+        Date date = new Date(20060112);
+        creationDate.setValue(date);
 
         Record rec1 = new Record(title, secured, fileFormat, didacticalFunction, productType, uri);
+        rec1.addOptionalMetaData(creationDate);
                         
         //record 2
         title = new TextMetaData();
@@ -86,8 +95,13 @@ public class SearchServiceImplTest extends TestCase {
         uri = new HyperlinkMetaData();
         uri.setName("URI");
         uri.setValue("http://www.ou.nl/logo.jpg");
+        
+        NumericMetaData playTime = new NumericMetaData();
+        playTime.setName("playtime");
+        playTime.setValue(360);
 
         Record rec2 = new Record(title, secured, fileFormat, didacticalFunction, productType, uri);
+        rec2.addOptionalMetaData(playTime);
         
         // record 3
         title = new TextMetaData();
@@ -118,8 +132,14 @@ public class SearchServiceImplTest extends TestCase {
         uri = new HyperlinkMetaData();
         uri.setName("URI");
         uri.setValue("http://www.ou.nl/song.mp3");
+        
+        playTime = new NumericMetaData();
+        playTime.setName("playtime");
+        playTime.setValue(120);
 
         Record rec3 = new Record(title, secured, fileFormat, didacticalFunction, productType, uri);
+        rec3.addOptionalMetaData(playTime);
+        rec3.addOptionalMetaData(creationDate);
                         
         // record list
         l = new Vector();
@@ -135,7 +155,7 @@ public class SearchServiceImplTest extends TestCase {
     /**
      * @see SearchServiceImpl#doUpdate(List)
      */
-    public void testDoUpdate() {
+    public void testDoUpdate() throws Exception {
         ssi.doUpdate(l);
     }
 
@@ -146,14 +166,14 @@ public class SearchServiceImplTest extends TestCase {
         ssi.doPurge();
     }
     
-    public void testCombined() {
+    public void testCombined() throws Exception {
         ssi.doUpdate(l);
         ssi.doPurge();
         ssi.doUpdate(l);
         ssi.doUpdate(l);
     }
     
-    public void testDoSearch() {
+    public void testDoSearch() throws Exception {
         ssi.doUpdate(l);
         assertEquals(1,(ssi.doSearch("another")).size());
         assertEquals(1,(ssi.doSearch("ANOTHER")).size());
