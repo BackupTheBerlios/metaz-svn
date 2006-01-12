@@ -174,5 +174,19 @@
             </resource>
         </resources>
     </build>
+    <reports>
+    	<report>maven-junit-report-plugin</report>
+    	<!-- clover requires commercial license 
+    	<report>maven-clover-plugin</report>
+    	-->
+    	<report>maven-changelog-plugin</report>
+		<report>maven-file-activity-plugin</report>
+		<report>maven-developer-activity-plugin</report>
+    	<report>maven-checkstyle-plugin</report>
+    	<report>maven-pmd-plugin</report>
+    	<!-- comment out until errors fixed 
+    	<report>maven-findbugs-plugin</report>
+    	-->
+    </reports>
 </project>
 
