@@ -23,6 +23,11 @@
     <artifactId>metaz</artifactId>
     <groupId>metaz-core</groupId>
     <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4991</issueTrackingUrl>
+    <mailingLists>
+        <mailingList>
+            <name>metaz-developer@lists.berlios.de</name>
+        </mailingList>
+    </mailingLists>
     <id>MetaZ</id>
     <!-- a short but descriptive name for the project -->
     <name>MetaZ</name>
@@ -175,16 +180,16 @@
         </resources>
     </build>
     <reports>
-    	<report>maven-junit-report-plugin</report>
-    	<!-- clover requires commercial license 
+        <report>maven-junit-report-plugin</report>
+        <!-- clover requires commercial license 
     	<report>maven-clover-plugin</report>
     	-->
-    	<report>maven-changelog-plugin</report>
-		<report>maven-file-activity-plugin</report>
-		<report>maven-developer-activity-plugin</report>
-    	<report>maven-checkstyle-plugin</report>
-    	<report>maven-pmd-plugin</report>
-    	<!-- comment out until errors fixed 
+        <report>maven-changelog-plugin</report>
+        <report>maven-file-activity-plugin</report>
+        <report>maven-developer-activity-plugin</report>
+        <report>maven-checkstyle-plugin</report>
+        <report>maven-pmd-plugin</report>
+        <!-- comment out until errors fixed 
     	<report>maven-findbugs-plugin</report>
     	-->
     </reports>
