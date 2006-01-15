@@ -5,6 +5,9 @@ import org.apache.log4j.*; // log4j stuff
 import java.util.Properties;
 import java.io.InputStream;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -243,27 +246,46 @@ public class MetaZ implements java.io.Serializable {
   
     Properties properties = new Properties(System.getProperties());
     
-    String defaultFileName = System.getProperty("user.home") + 
-                             File.separator + 
-                             METAZ_PROPERTIES_FILE;
+    String fileName = System.getProperty("user.home") + 
+                      File.separator + 
+                      METAZ_PROPERTIES_FILE;
                              
     InputStream propStream = null;
     
-    // try to load from the default location
+    // try to load from the user home
     
     try {    
 
-      propStream = new FileInputStream(defaultFileName);
+      propStream = new FileInputStream(fileName);
 
     } catch (Exception e)
     {
-      logger.info("Could not open properties resource file from default location <" + defaultFileName + ">");
+      logger.info("Could not open properties resource file from the user home <" + fileName + ">");
     }
+    
+    if (propStream == null) {
 
-    // try to load from somewhere in the classpath
+      // try to load from the current directory
+      
+     fileName = System.getProperty("user.dir") + 
+                           File.separator + 
+                           METAZ_PROPERTIES_FILE;
+      
+      try {    
+
+        propStream = new FileInputStream(fileName);
+
+      } catch (Exception e)
+      {
+        logger.info("Could not open properties resource file from the current directory <" + fileName + ">");
+      }
+      
+    }
 
     if (propStream == null)
     {
+
+      // try to load from somewhere in the classpath
     
       propStream = getResourceStream(METAZ_PROPERTIES_FILE);
       
@@ -282,6 +304,14 @@ public class MetaZ implements java.io.Serializable {
         
         properties.load(propStream);
         propertyStream = propStream;
+        
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        properties.list(pw);
+        pw.close();
+        logger.info("About to list Meta/Z properties");
+        logger.info(sw.toString());
+        sw.close();
 
       } catch (Exception e)
       {
