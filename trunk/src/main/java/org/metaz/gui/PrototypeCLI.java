@@ -2,8 +2,6 @@ package org.metaz.gui;
 
 import org.apache.commons.cli.*;
 
-import testcli.Testapp;
-
 public class PrototypeCLI {
     public PrototypeCLI() {
     }
