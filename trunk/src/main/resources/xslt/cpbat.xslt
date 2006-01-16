@@ -12,6 +12,7 @@
 	<xsl:value-of select="artifactId"/>
 	<xsl:text>\jars\</xsl:text>
     <xsl:value-of select="artifactId"/>
+	<xsl:text>-</xsl:text>
     <xsl:value-of select="version"/>
     <xsl:text>.jar;</xsl:text>
   </xsl:template>
