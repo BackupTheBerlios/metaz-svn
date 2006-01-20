@@ -17,238 +17,237 @@
  */
  -->
 <project>
-    <!-- the version of maven's project object model -->
-    <pomVersion>3</pomVersion>
-    <!-- a unique name for this project -->
-    <artifactId>metaz</artifactId>
-    <groupId>metaz-core</groupId>
-    <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4991</issueTrackingUrl>
-    <mailingLists>
-        <mailingList>
-            <name>metaz-developer@lists.berlios.de</name>
-            <subscribe>https://lists.berlios.de/mailman/listinfo/metaz-developer</subscribe>
-            <archive>https://lists.berlios.de/pipermail/metaz-developer/</archive>
-        </mailingList>
-    </mailingLists>
-    <id>MetaZ</id>
-    <!-- a short but descriptive name for the project -->
-    <name>MetaZ</name>
-    <!-- The version of the project under development, e.g.
+   <!-- the version of maven's project object model -->
+   <pomVersion>3</pomVersion>
+   <!-- a unique name for this project -->
+   <artifactId>metaz</artifactId>
+   <groupId>metaz-core</groupId>
+   <issueTrackingUrl>http://metaz.berlios.de/mantis</issueTrackingUrl>
+   <mailingLists>
+      <mailingList>
+         <name>metaz-developer@lists.berlios.de</name>
+         <subscribe>https://lists.berlios.de/mailman/listinfo/metaz-developer</subscribe>
+         <archive>https://lists.berlios.de/pipermail/metaz-developer/</archive>
+      </mailingList>
+   </mailingLists>
+   <id>MetaZ</id>
+   <!-- a short but descriptive name for the project -->
+   <name>MetaZ</name>
+   <!-- The version of the project under development, e.g.
        1.1, 1.2, 2.0-SNAPSHOT -->
-    <currentVersion>0.1</currentVersion>
-    <!-- details about the organization that 'owns' the project -->
-    <organization>
-        <name>MetaZ team Open Universiteit Ontwerpproject</name>
-        <url>http://www.open.ou.nl/otonet/</url>
-    </organization>
-    <!-- the year the project started -->
-    <inceptionYear>2005</inceptionYear>
-    <package>org.metaz</package>
-    <!-- a short description of what the project does -->
-    <shortDescription>Meta/Z is een software engineering team of the Open University, The Netherlands. We are developing software that will act as an aggregating web front-end to retrieve information from several content databases. The web application offers its users an efficient way of searching and accessing the content. The content is organized with metadata.</shortDescription>
-    <!-- the project home page -->
-    <url>http://metaz.berlios.de/</url>
-    <siteAddress>metaz.berlios.de</siteAddress>
-    <!-- the version control repository and http url for online access
+   <currentVersion>0.1</currentVersion>
+   <!-- details about the organization that 'owns' the project -->
+   <organization>
+      <name>MetaZ team Open Universiteit Ontwerpproject</name>
+      <url>http://www.open.ou.nl/otonet/</url>
+   </organization>
+   <!-- the year the project started -->
+   <inceptionYear>2005</inceptionYear>
+   <package>org.metaz</package>
+   <!-- a short description of what the project does -->
+   <shortDescription>Meta/Z is een software engineering team of the Open University, The Netherlands. We are developing software that will act as an aggregating web front-end to retrieve information from several content databases. The web application offers its users an efficient way of searching and accessing the content. The content is organized with metadata.</shortDescription>
+   <!-- the project home page -->
+   <url>http://metaz.berlios.de/</url>
+   <siteAddress>metaz.berlios.de</siteAddress>
+   <!-- the version control repository and http url for online access
        the connection element has the form:
        scm:<system>:<system specific connection string> -->
-    <repository>
-        <connection>scm:svn:http://svn.berlios.de/svnroot/repos/metaz</connection>
-        <developerConnection>scm:svn:https://svn.berlios.de/svnroot/repos/metaz</developerConnection>
-        <url>http://svn.berlios.de/wsvn/metaz</url>
-    </repository>
-    <!-- any mailing lists for the project -->
-    <!-- who the developers are for the project -->
-    <developers>
-        <developer>
-            <id>EJS</id>
-            <name>Erik-Jan Spaans</name>
-            <email>xxxx</email>
-            <organization>OTO Meta/Z</organization>
-            <roles>
-                <role>Ontwikkel manager</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>ES</id>
-            <name>Erik Schouten</name>
-            <email>xxxx</email>
-            <organization>OTO Meta/Z</organization>
-            <roles>
-                <role>Ontwikkelaar</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>JG</id>
-            <name>Jurgen Goelen</name>
-            <email>xxxx</email>
-            <organization>OTO Meta/Z</organization>
-            <roles>
-                <role>Ontwikkelaar</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>LO</id>
-            <name>Lars Oosterloo</name>
-            <email>xxxx</email>
-            <organization>OTO Meta/Z</organization>
-            <roles>
-                <role>Ontwikkelaar</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>PD</id>
-            <name>Peter van Dorp</name>
-            <email>xxxx</email>
-            <organization>OTO Meta/Z</organization>
-            <roles>
-                <role>Ontwikkelaar</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>SD</id>
-            <name>Sammy Dalewyn</name>
-            <email>xxxx</email>
-            <organization>OTO Meta/Z</organization>
-            <roles>
-                <role>Ontwikkelaar</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-        <developer>
-            <id>FP</id>
-            <name>Falco Paul</name>
-            <email>xxxx</email>
-            <organization>OTO Meta/Z</organization>
-            <roles>
-                <role>Ontwikkelaar</role>
-            </roles>
-            <timezone>+1</timezone>
-        </developer>
-    </developers>
-    <!-- jar files the project is dependent on -->
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.8</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>lucene</groupId>
-            <artifactId>lucene</artifactId>
-            <version>1.4.3</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>1.8.0.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-            <version>3.0.5</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xerces</artifactId>
-            <version>2.4.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>isorelax</groupId>
-            <artifactId>isorelax</artifactId>
-            <version>20030108</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>msv</groupId>
-            <artifactId>msv</artifactId>
-            <version>20030225</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>commons-cli</groupId>
-            <artifactId>commons-cli</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.0.4</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>2.1.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>2.1_3</version>
-            <type>jar</type>
-        </dependency>
-    </dependencies>
-    <!-- build information for the project -->
-    <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
-        <unitTest>
+   <repository>
+      <connection>scm:svn:http://svn.berlios.de/svnroot/repos/metaz</connection>
+      <developerConnection>scm:svn:https://svn.berlios.de/svnroot/repos/metaz</developerConnection>
+      <url>http://svn.berlios.de/wsvn/metaz</url>
+   </repository>
+   <!-- any mailing lists for the project -->
+   <!-- who the developers are for the project -->
+   <developers>
+      <developer>
+         <id>EJS</id>
+         <name>Erik-Jan Spaans</name>
+         <email>xxxx</email>
+         <organization>OTO Meta/Z</organization>
+         <roles>
+            <role>Ontwikkel manager</role>
+         </roles>
+         <timezone>+1</timezone>
+      </developer>
+      <developer>
+         <id>ES</id>
+         <name>Erik Schouten</name>
+         <email>xxxx</email>
+         <organization>OTO Meta/Z</organization>
+         <roles>
+            <role>Ontwikkelaar</role>
+         </roles>
+         <timezone>+1</timezone>
+      </developer>
+      <developer>
+         <id>JG</id>
+         <name>Jurgen Goelen</name>
+         <email>xxxx</email>
+         <organization>OTO Meta/Z</organization>
+         <roles>
+            <role>Ontwikkelaar</role>
+         </roles>
+         <timezone>+1</timezone>
+      </developer>
+      <developer>
+         <id>LO</id>
+         <name>Lars Oosterloo</name>
+         <email>xxxx</email>
+         <organization>OTO Meta/Z</organization>
+         <roles>
+            <role>Ontwikkelaar</role>
+         </roles>
+         <timezone>+1</timezone>
+      </developer>
+      <developer>
+         <id>PD</id>
+         <name>Peter van Dorp</name>
+         <email>xxxx</email>
+         <organization>OTO Meta/Z</organization>
+         <roles>
+            <role>Ontwikkelaar</role>
+         </roles>
+         <timezone>+1</timezone>
+      </developer>
+      <developer>
+         <id>SD</id>
+         <name>Sammy Dalewyn</name>
+         <email>xxxx</email>
+         <organization>OTO Meta/Z</organization>
+         <roles>
+            <role>Ontwikkelaar</role>
+         </roles>
+         <timezone>+1</timezone>
+      </developer>
+      <developer>
+         <id>FP</id>
+         <name>Falco Paul</name>
+         <email>xxxx</email>
+         <organization>OTO Meta/Z</organization>
+         <roles>
+            <role>Ontwikkelaar</role>
+         </roles>
+         <timezone>+1</timezone>
+      </developer>
+   </developers>
+   <!-- jar files the project is dependent on -->
+   <dependencies>
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>3.8.1</version>
+         <type>jar</type>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>1.2.8</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>lucene</groupId>
+         <artifactId>lucene</artifactId>
+         <version>1.4.3</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>hsqldb</groupId>
+         <artifactId>hsqldb</artifactId>
+         <version>1.8.0.1</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>hibernate</groupId>
+         <artifactId>hibernate</artifactId>
+         <version>3.0.5</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>xerces</groupId>
+         <artifactId>xerces</artifactId>
+         <version>2.4.0</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>dom4j</groupId>
+         <artifactId>dom4j</artifactId>
+         <version>1.6.1</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>isorelax</groupId>
+         <artifactId>isorelax</artifactId>
+         <version>20030108</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>msv</groupId>
+         <artifactId>msv</artifactId>
+         <version>20030225</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>commons-cli</groupId>
+         <artifactId>commons-cli</artifactId>
+         <version>1.0</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>commons-logging</groupId>
+         <artifactId>commons-logging</artifactId>
+         <version>1.0.4</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>commons-collections</groupId>
+         <artifactId>commons-collections</artifactId>
+         <version>2.1.1</version>
+         <type>jar</type>
+      </dependency>
+      <dependency>
+         <groupId>cglib</groupId>
+         <artifactId>cglib</artifactId>
+         <version>2.1_3</version>
+         <type>jar</type>
+      </dependency>
+   </dependencies>
+   <!-- build information for the project -->
+   <build>
+      <sourceDirectory>src/main/java</sourceDirectory>
+      <unitTestSourceDirectory>src/test/java</unitTestSourceDirectory>
+      <unitTest>
+         <includes>
+            <include>**/*Test.java</include>
+         </includes>
+         <excludes>
+            <exclude>**/NaughtyTest.java</exclude>
+         </excludes>
+      </unitTest>
+      <resources>
+         <resource>
+            <directory>src/main/config</directory>
             <includes>
-                <include>**/*Test.java</include>
+               <include>*.properties</include>
             </includes>
-            <excludes>
-                <exclude>**/NaughtyTest.java</exclude>
-            </excludes>
-        </unitTest>
-        <resources>
-            <resource>
-                <directory>src/main/config</directory>
-                <includes>
-                    <include>*.properties</include>
-                </includes>
-                <filtering>false</filtering>
-            </resource>
-        </resources>
-    </build>
-    <reports>
-        <report>maven-junit-report-plugin</report>
-        <!-- clover requires commercial license 
+            <filtering>false</filtering>
+         </resource>
+      </resources>
+   </build>
+   <reports>
+      <report>maven-junit-report-plugin</report>
+      <!-- clover requires commercial license 
     	<report>maven-clover-plugin</report>
     	-->
-    	<report>maven-jdepend-plugin</report>
-        <report>maven-changelog-plugin</report>
-        <report>maven-file-activity-plugin</report>
-        <report>maven-developer-activity-plugin</report>
-        <report>maven-checkstyle-plugin</report>
-        <report>maven-pmd-plugin</report>
-        <!-- comment out until errors fixed 
+      <report>maven-jdepend-plugin</report>
+      <report>maven-changelog-plugin</report>
+      <report>maven-file-activity-plugin</report>
+      <report>maven-developer-activity-plugin</report>
+      <report>maven-checkstyle-plugin</report>
+      <report>maven-pmd-plugin</report>
+      <!-- comment out until errors fixed 
     	<report>maven-findbugs-plugin</report>
     	-->
-    </reports>
+   </reports>
 </project>
-
