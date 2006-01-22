@@ -10,185 +10,189 @@ import java.util.List;
  */
 public class Record {
 
-	// Mandatory MetaData.
-	// See document Koppelingsspecificatie.doc
 	private TextMetaData title;
-
-	private BooleanMetaData secured;
-
-	private TextMetaData fileFormat;
-
-	private TextMetaData didacticalFunction;
-
-	private TextMetaData productType;
-
-	private HyperlinkMetaData uri;
-
-	// Optional MetaData uses a list for
-	// maximum flexibility.
-	private List<MetaData> optionalMetaData;
-
+        private TextMetaData subject;
+        private HtmlTextMetaData description;
+        private TextMetaData keywords;
+        private HierarchicalStructuredTextMetaData targetEndUser;
+        private HierarchicalStructuredTextMetaDataSet schoolType;
+        private HierarchicalStructuredTextMetaData schoolDiscipline;
+        private TextMetaData didacticFunction;
+        private TextMetaData productType;
+        private HierarchicalStructuredTextMetaData professionalSituation;
+        private TextMetaData competence;
+        private BooleanMetaData secured;
+        private TextMetaData fileFormat;
+        private HyperlinkMetaData uri;
+        private TextMetaData aggregationLevel;
+        private TextMetaData didacticScenario;
+        private NumericMetaData requiredTime;
+        private TextMetaData rights;
+        private NumericMetaData fileSize;
+        private NumericMetaData playingTime;
+        private TextMetaData technicalRequirements;
+        private DateMetaData creationDate;
+        private DateMetaData lastChangedDate;
+        private TextMetaData version;
+        private TextMetaData status;
+        private TextMetaData roleName;
+        
 	/**
 	 * Creates a new Record. This constructor ensures only valid Records (that
 	 * is, Records with all required MetaData) are used. Optional metadata may
-	 * be added by adding a List<MetaData> of MetaData, or adding a single
-	 * MetaData object to the optionalMetaData list.
+	 * be added by using one of the setters.
 	 * 
 	 * @param title the mandatory title meta data.
 	 * @param isSecured the mandatory isSecured meta data.
 	 * @param fileFormat the mandatory fileFormat meta data.
-	 * @param didacticalFunction the mandatory didacticalFunction meta data.
+	 * @param didacticFunction the mandatory didacticFunction meta data.
 	 * @param productType the mandatory productType meta data.
 	 * @param uri the mandatory uri meta data.
 	 */
 	public Record(TextMetaData title, BooleanMetaData isSecured,
-			TextMetaData fileFormat, TextMetaData didacticalFunction,
+			TextMetaData fileFormat, TextMetaData didacticFunction,
 			TextMetaData productType, HyperlinkMetaData uri) {
-		this.title = title;
+                this.title = title;
 		this.secured = isSecured;
 		this.fileFormat = fileFormat;
-		this.didacticalFunction = didacticalFunction;
+		this.didacticFunction = didacticFunction;
 		this.productType = productType;
 		this.uri = uri;
-		
-		this.optionalMetaData = new ArrayList<MetaData>();
 	}
 
-	/**
-	 * Getter.
-	 * 
-	 * @return
-	 */
-	public TextMetaData getDidacticalFunction() {
-		return didacticalFunction;
-	}
-
-	/**
-	 * Setter.
-	 * 
-	 * @param didacticalFunction
-	 */
-	public void setDidacticalFunction(TextMetaData didacticalFunction) {
-		this.didacticalFunction = didacticalFunction;
-	}
-
-	/**
-	 * Getter.
-	 * 
-	 * @return
-	 */
-	public TextMetaData getFileFormat() {
-		return fileFormat;
-	}
-
-	/**
-	 * Setter.
-	 * 
-	 * @param fileFormat
-	 */
-	public void setFileFormat(TextMetaData fileFormat) {
-		this.fileFormat = fileFormat;
-	}
-
-	/**
-	 * Getter.
-	 * 
-	 * @return
-	 */
-	public BooleanMetaData getSecured() {
-		return secured;
-	}
-
-	/**
-	 * Setter.
-	 * 
-	 * @param isSecured
-	 */
-	public void setSecured(BooleanMetaData isSecured) {
-		this.secured = isSecured;
-	}
-
-	/**
-	 * Getter.
-	 * 
-	 * @return
-	 */
-	public List<MetaData> getOptionalMetaData() {
-		return optionalMetaData;
-	}
-
-	/**
-	 * Setter. Note that adding a List<MetaData> will overwrite any previously
-	 * added MetaData using the
-	 * 
-	 * @see #addOptionalMetaData(MetaData) method!
-	 * 
-	 * @param optionalMetaData
-	 */
-	public void setOptionalMetaData(List<MetaData> optionalMetaData) {
-		this.optionalMetaData = optionalMetaData;
-	}
-
-	/**
-	 * Setter.
-	 * 
-	 * @param metaData
-	 */
-	public void addOptionalMetaData(MetaData metaData) {
-		this.optionalMetaData.add(metaData);
-	}
-
-	/**
-	 * Getter.
-	 * 
-	 * @return
-	 */
-	public TextMetaData getProductType() {
-		return productType;
-	}
-
-	/**
-	 * Setter.
-	 * 
-	 * @param productType
-	 */
-	public void setProductType(TextMetaData productType) {
-		this.productType = productType;
-	}
-
-	/**
-	 * Getter.
-	 * 
-	 * @return
-	 */
-	public TextMetaData getTitle() {
-		return title;
-	}
-
-	/**
-	 * Setter.
-	 * 
-	 * @param title
-	 */
-	public void setTitle(TextMetaData title) {
-		this.title = title;
-	}
-
-	/**
-	 * Getter.
-	 * 
-	 * @return
-	 */
-	public HyperlinkMetaData getUri() {
-		return uri;
-	}
-
-	/**
-	 * Setter.
-	 * 
-	 * @param uri
-	 */
-	public void setUri(HyperlinkMetaData uri) {
-		this.uri = uri;
-	}
+    public TextMetaData getTitle() {
+        return title;
+    }
+    public TextMetaData getSubject() {
+        return subject;
+    }
+    public void setSubject(TextMetaData subject) {
+        this.subject = subject;
+    }
+    public HtmlTextMetaData getDescription() {
+        return description;
+    }
+    public void setDescription (HtmlTextMetaData description) {
+        this.description = description;
+    }
+    public TextMetaData getKeywords() {
+        return keywords;
+    }
+    public void setKeywords(TextMetaData keywords) {
+        this.keywords = keywords;
+    }
+    public HierarchicalStructuredTextMetaData getTargetEndUser() {
+        return targetEndUser;
+    }
+    public void setTargetEndUser(HierarchicalStructuredTextMetaData targetEndUser) {
+        this.targetEndUser = targetEndUser;
+    }
+    public HierarchicalStructuredTextMetaDataSet getSchoolType() {
+        return schoolType;
+    }
+    public void setSchoolType(HierarchicalStructuredTextMetaDataSet schoolTypes) {
+        this.schoolType = schoolTypes;
+    }
+    public HierarchicalStructuredTextMetaData getSchoolDiscipline() {
+        return schoolDiscipline;
+    }
+    public void setSchoolDiscipline(HierarchicalStructuredTextMetaData schoolDiscipline) {
+        this.schoolDiscipline = schoolDiscipline;
+    }
+    public TextMetaData getDidacticFunction() {
+        return didacticFunction;
+    }
+    public HierarchicalStructuredTextMetaData getProfessionalSituation() {
+        return professionalSituation;
+    }
+    public void setProfessionalSituation(HierarchicalStructuredTextMetaData professionalSituation) {
+        this.professionalSituation = professionalSituation;
+    }
+    public TextMetaData getCompetence(){
+        return competence;
+    }
+    public void setCompetence(TextMetaData competence) {
+        this.competence = competence;
+    }
+    public BooleanMetaData getSecured(){
+        return secured;
+    }
+    public TextMetaData getFileFormat() {
+        return fileFormat;
+    }
+    public HyperlinkMetaData getURI() {
+        return uri;
+    }
+    public TextMetaData getAggregationLevel() {
+        return aggregationLevel;
+    }
+    public void setAggregationLevel(TextMetaData aggregationLevel) {
+        this.aggregationLevel = aggregationLevel;
+    }
+    public TextMetaData getDidacticScenario(){
+        return didacticScenario;
+    }
+    public void setDidacticScenario(TextMetaData didacticScenario) {
+        this.didacticScenario = didacticScenario;
+    }
+    public NumericMetaData getRequiredTime() {
+        return requiredTime;
+    }
+    public void setRequiredTime(NumericMetaData requiredTime) {
+        this.requiredTime = requiredTime;
+    }
+    public TextMetaData getRights () {
+        return rights;
+    }
+    public void setRights(TextMetaData rights) {
+        this.rights = rights;
+    }
+    public NumericMetaData getFileSize() {
+        return fileSize;
+    }
+    public void setFileSize(NumericMetaData fileSize) {
+        this.fileSize = fileSize;
+    }
+    public NumericMetaData getPlayingTime() {
+        return playingTime;
+    }
+    public void setPlayingTime(NumericMetaData playingTime) {
+        this.playingTime = playingTime;
+    }
+    public TextMetaData getTechnicalRequirements(){
+        return technicalRequirements;
+    }
+    public void setTechnicalRequirements(TextMetaData technicalRequirements){
+        this.technicalRequirements = technicalRequirements;
+    }
+    public DateMetaData getCreationDate() {
+        return creationDate;
+    }
+    public void setCreationData(DateMetaData Date) {
+        this.creationDate = Date;
+    }
+    public DateMetaData getLastChangedDate(){
+        return lastChangedDate;
+    }
+    public void setLastChangedDate(DateMetaData date) {
+        this.lastChangedDate = date;
+    }
+    public TextMetaData getVersion() {
+        return version;
+    }
+    public void setVersion(TextMetaData version){
+        this.version = version;
+    }
+    public TextMetaData getStatus() {
+        return status;
+    }
+    public void setStatus(TextMetaData status){
+        this.status = status;
+    }
+    public TextMetaData getRoleName() {
+        return roleName;
+    }
+    public void setRoleName(TextMetaData roleName) {
+        this.roleName = roleName;
+    }
 }

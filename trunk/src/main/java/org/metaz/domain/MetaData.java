@@ -8,7 +8,108 @@ package org.metaz.domain;
  */
 public abstract class MetaData {
 	
-	private String name;
+	/**
+         * Metadata field name constant
+         */
+        public final static String TITLE = "titel";
+        /**
+         * Metadata field name constant
+         */
+        public final static String SUBJECT = "onderwerp";
+        /**
+        * Metadata field name constant
+        */
+        public final static String DESCRIPTION = "omschrijving";
+        /**
+        * Metadata field name constant
+        */
+        public final static String KEYWORDS ="sleutelwoorden";
+        /**
+        * Metadata field name constant
+        */
+        public final static String TARGETENDUSER = "beoogdeEindgebruiker";
+    /**
+    * Metadata field name constant
+    */
+        public final static String SCHOOLTYPE = "schooltype";
+    /**
+    * Metadata field name constant
+    */
+        public final static String SCHOOLDISCIPLINE = "vakleergebied";
+    /**
+    * Metadata field name constant
+    */
+        public final static String DIDACTICFUNCTION = "didactischeFunctie";
+    /**
+    * Metadata field name constant
+    */
+        public final static String PROFESSIONALSITUATION = "beroepssituatie";
+    /**
+    * Metadata field name constant
+    */
+        public final static String COMPETENCE = "competentie";
+    /**
+    * Metadata field name constant
+    */
+        public final static String SECURED = "beveiligd";
+    /**
+    * Metadata field name constant
+    */
+        public final static String FILEFORMAT ="bestandsformaat";
+    /**
+    * Metadata field name constant
+    */
+        public final static String URI = "uri";
+    /**
+    * Metadata field name constant
+    */
+        public final static String AGGREGATIONLEVEL = "aggregatieniveau";
+    /**
+    * Metadata field name constant
+    */
+        public final static String DIDACTICSCENARIO = "didactischScenario";
+    /**
+    * Metadata field name constant
+    */
+        public final static String REQUIREDTIME = "benodigdeTijd";
+    /**
+    * Metadata field name constant
+    */
+        public final static String RIGHTS = "rechten";
+    /**
+    * Metadata field name constant
+    */
+        public final static String FILESIZE = "bestandsgrootte";
+    /**
+    * Metadata field name constant
+    */
+        public final static String PLAYINGTIME = "afspeelduur";
+    /**
+    * Metadata field name constant
+    */
+        public final static String TECHNICALREQUIREMENTS = "technische vereiste";
+    /**
+    * Metadata field name constant
+    */
+        public final static String CREATIONDATE = "datumCreatie";
+    /**
+    * Metadata field name constant
+    */
+        public final static String LASTCHANGEDDATE = "datumLaatsteWijziging";
+    /**
+    * Metadata field name constant
+    */
+        public final static String VERSION = "versie";
+    /**
+    * Metadata field name constant
+    */
+        public final static String STATUS = "status";
+    /**
+    * Metadata field name constant
+    */
+        public final static String ROLENAME = "rolEnNaam";
+        
+        private String name;
 	private String description;
 	private boolean mandatory;
 	private boolean optional;
