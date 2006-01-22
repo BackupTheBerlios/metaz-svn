@@ -1,15 +1,21 @@
 package org.metaz.util;
 
 import java.io.File;
-import org.apache.log4j.*; // log4j stuff
-import java.util.Properties;
-import java.io.InputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Properties;
+
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.PropertyConfigurator;
+import org.metaz.repository.Facade;
+import org.metaz.repository.FacadeFactory;
 
 /**
  * @author Falco Paul, Open University Netherlands, OTO Meta/Z project
@@ -30,14 +36,17 @@ public class MetaZ implements java.io.Serializable {
   /**
    * Global Meta/Z application instance, private and static to force singleton pattern
    */
-  private static MetaZ instance; 
- 
+  private static MetaZ instance;
+     
   private static Logger logger = Logger.getLogger(MetaZ.class); // logger instance for this class
+
+  private static Facade facadeInst; //Facade object of the Repository
   
   private InputStream propertyStream = null; // a stream pointing to the actual property file we use
   private Properties properties = null;      // application properties loaded from the above stream
   private String log4JConfigFile = null;     // log4J configuration file
 
+  
   // private constructor
 
   private MetaZ() {
@@ -67,7 +76,7 @@ public class MetaZ implements java.io.Serializable {
       PropertyConfigurator.configure(log4JConfigFile);
       logger.info("Seeded log4J with configuration file <" + log4JConfigFile + ">");
     }
-    
+            	    
     logger.info("Constructed Meta-Z application singleton instance <" + format(this) + ">");
 
   } 
@@ -427,6 +436,16 @@ public class MetaZ implements java.io.Serializable {
       
     return path.toString();
 
+  }
+    
+  /**   
+   * @return Returns the Facade instance of the Repository. 
+   */
+  public synchronized Facade getRepositoryFacade(){
+	  if(facadeInst==null){
+		  facadeInst = FacadeFactory.createFacade();
+	  }
+	  return facadeInst;
   }
 
 }
