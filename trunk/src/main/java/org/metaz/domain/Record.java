@@ -102,6 +102,9 @@ public class Record {
     public TextMetaData getDidacticFunction() {
         return didacticFunction;
     }
+    public TextMetaData getProductType() {
+        return productType;
+    }
     public HierarchicalStructuredTextMetaData getProfessionalSituation() {
         return professionalSituation;
     }

@@ -41,6 +41,10 @@ public abstract class MetaData {
     */
         public final static String DIDACTICFUNCTION = "didactischeFunctie";
     /**
+     * Metadata field name constant
+     */
+        public final static String PRODUCTTYPE = "producttype";
+    /**
     * Metadata field name constant
     */
         public final static String PROFESSIONALSITUATION = "beroepssituatie";
