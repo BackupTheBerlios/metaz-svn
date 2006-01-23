@@ -4,15 +4,21 @@ import java.util.List;
 import java.util.Vector;
 import java.util.Date;
 
+import java.util.HashMap;
+
 import junit.framework.TestCase;
 import junit.swingui.TestRunner;
 
 import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.DateMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
+import org.metaz.domain.HtmlTextMetaData;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
+import org.metaz.domain.MetaData;
 
 public class SearchServiceImplTest extends TestCase {
     List l;
@@ -28,159 +34,74 @@ public class SearchServiceImplTest extends TestCase {
     }
 
     public void setUp() throws Exception {
-        // record 1
-        TextMetaData title = new TextMetaData();
-        title.setName("titel");
-        title.setValue("someValue");
-        title.setMandatory(true);
-
-        BooleanMetaData secured = new BooleanMetaData();
-        secured.setName("beveiligd");
-        secured.setValue(false);
-        secured.setMandatory(true);
-
-        TextMetaData fileFormat = new TextMetaData();
-        fileFormat.setName("bestandsformaat");
-        fileFormat.setValue("application/pdf");
-        fileFormat.setMandatory(true);
-
-        TextMetaData didacticalFunction = new TextMetaData();
-        didacticalFunction.setName("didactischeFunctie");
-        didacticalFunction.setValue("bla");
-        didacticalFunction.setMandatory(true);
-
-        TextMetaData productType = new TextMetaData();
-        productType.setName("producttype");
-        productType.setValue("instructie");
-        productType.setMandatory(true);
-
-        HyperlinkMetaData uri = new HyperlinkMetaData();
-        uri.setName("URI");
-        uri.setValue("http://www.ou.nl/stories/ruuddemoor.pdf");
+    //record 1   
+        //mandatory metadata
+        TextMetaData title1 = new TextMetaData();
+        title1.setValue("Geschiedenis van het Koninkrijk der Nederlanden");
+        TextMetaData didacticFunction1 = new TextMetaData();
+        didacticFunction1.setValue("Leestekst");
+        TextMetaData productType1 = new TextMetaData();
+        productType1.setValue("Document");
+        BooleanMetaData secured1 = new BooleanMetaData();
+        secured1.setValue(false);
+        TextMetaData fileFormat1 = new TextMetaData();
+        fileFormat1.setValue("text/plain");
+        HyperlinkMetaData uri1 = new HyperlinkMetaData();
+        uri1.setValue("http://nl.wikipedia.org/wiki/Geschiedenis_van_Nederland");
+        Record rec1 = new Record(title1,secured1,fileFormat1,didacticFunction1,productType1,uri1);
+        // optional metadata profession situation
+        TextMetaData profSit1Level1 = new TextMetaData();
+        profSit1Level1.setValue("Omgaan met een groep");
+        TextMetaData profSit1Level2 = new TextMetaData();
+        profSit1Level2.setValue("Leiding geven aan groepsprocessen");
+        HierarchicalStructuredTextMetaData hstmd1 = new HierarchicalStructuredTextMetaData();
+        hstmd1.addChild(profSit1Level1);
+        hstmd1.addChild(profSit1Level2);
+        rec1.setProfessionalSituation(hstmd1);
+        // optional metadata school type
+        TextMetaData vo = new TextMetaData();
+        vo.setValue("Voortgezet onderwijs");
+        TextMetaData havo = new TextMetaData();
+        havo.setValue("HAVO");
+        TextMetaData vbo = new TextMetaData();
+        vbo.setValue("VBO");
+        TextMetaData vmbo = new TextMetaData();
+        vmbo.setValue("VMBO");
+        HierarchicalStructuredTextMetaData hstmd2 = new HierarchicalStructuredTextMetaData();
+        hstmd2.addChild(vo);
+        hstmd2.addChild(havo);
+        HierarchicalStructuredTextMetaData hstmd3 = new HierarchicalStructuredTextMetaData();
+        hstmd3.addChild(vo);
+        hstmd3.addChild(vbo);
+        hstmd3.addChild(vmbo);
+        HierarchicalStructuredTextMetaDataSet hstmds1 = new HierarchicalStructuredTextMetaDataSet();
+        hstmds1.addHierarchy(hstmd2);
+        hstmds1.addHierarchy(hstmd3);
+        rec1.setSchoolType(hstmds1);
+        // optional metadata keywords
+        TextMetaData keywords1 = new TextMetaData();
+        keywords1.setValue("19de eeuw, Willem I, Nederland, België, Luxemburg");
+        rec1.setKeywords(keywords1);
+        // optional metadata description
+        HtmlTextMetaData description1 = new HtmlTextMetaData();
+        description1.setValue("<p>Nederland werd een <a href=\"/wiki/Monarchie\" title=\"Monarchie\">monarchie</a> met Willem Frederik als koning <a href=\"/wiki/Willem_I_der_Nederlanden\" title=\"Willem I der Nederlanden\">Willem I</a>. Zijn <a href=\"/wiki/Verenigd_Koninkrijk_der_Nederlanden\" title=\"Verenigd Koninkrijk der Nederlanden\">Verenigd Koninkrijk der Nederlanden</a> omvatte oorspronkelijk het huidige Nederland, België en <a href=\"/wiki/Groothertogdom_Luxemburg\" title=\"Groothertogdom Luxemburg\">Luxemburg</a>. Willem pakte de 'wederopbouw' krachtig aan en stimuleerde vooral handel en industrie. Zo liet hij talrijke kanalen graven en wegen verbeteren. Vooral de zware industrie in België profiteerde hiervan. Maar de Belgen voelden zich spoedig tweedeklas burgers: in bestuur en hoge legerposten waren de Belgen zwaar ondervertegenwoordigd hoewel ze een veel groter deel van de bevolking en het leger uitmaakten. Bovendien waren er grote religieuze verschillen (het <a href=\"/wiki/Katholicisme\" title=\"Katholicisme\">katholieke</a> zuiden tegenover het <a href=\"/wiki/Protestantisme\" title=\"Protestantisme\">protestantse</a> noorden), economische verschillen (het zuiden industrialiseerde, het noorden bleef een handelsnatie) en taalkundige verschillen (niet alleen <a href=\"/wiki/Wallonie\" title=\"Wallonie\">Wallonië</a> was in die tijd <a href=\"/wiki/Frans\" title=\"Frans\">Franssprekend</a>, maar ook de <a href=\"/wiki/Bourgeoisie\" title=\"Bourgeoisie\">bourgeoisie</a> in <a href=\"/wiki/Vlaanderen\" title=\"Vlaanderen\">Vlaanderen</a>) . Bovendien werden deze verschillen geaccentueerd en aangewakkerd door Frankrijk, dat moest immers niets hebben van de sterke bufferstaat aan zijn grens, en meende bovendien recht te hebben op de <a href=\"/wiki/Zuidelijke_Nederlanden\" title=\"Zuidelijke Nederlanden\">Zuidelijke Nederlanden</a>. En ook de Katholieke kerk wilde haar bevoorrechte positie in het katholieke zuiden behouden zodat de katholieke prelaten eveneens eerder tegenwerkten dan samenwerkten met Willem.</p>\n" + 
+        "<div class=\"editsection\" style=\"float:right;margin-left:5px;\">[<a href=\"/w/index.php?title=Geschiedenis_van_Nederland&amp;action=edit&amp;section=13\" title=\"Geschiedenis van Nederland\">bewerk</a>]</div>\n" + 
+        "<p><a name=\"De_Belgische_opstand\" id=\"De_Belgische_opstand\"></a></p>");
+        rec1.setDescription(description1);
         
-        DateMetaData creationDate = new DateMetaData();
-        creationDate.setName("creationdate");
-        Date date = new Date(20060112);
-        creationDate.setValue(date);
-
-        Record rec1 = new Record(title, secured, fileFormat, didacticalFunction, productType, uri);
-        rec1.addOptionalMetaData(creationDate);
-                        
-        //record 2
-        title = new TextMetaData();
-        title.setName("titel");
-        title.setValue("anotherValue");
-        title.setMandatory(true);
-
-        secured = new BooleanMetaData();
-        secured.setName("beveiligd");
-        secured.setValue(true);
-        secured.setMandatory(true);
-
-        fileFormat = new TextMetaData();
-        fileFormat.setName("bestandsformaat");
-        fileFormat.setValue("jpg");
-        fileFormat.setMandatory(true);
-
-        didacticalFunction = new TextMetaData();
-        didacticalFunction.setName("didactischeFunctie");
-        didacticalFunction.setValue("noIdea");
-        didacticalFunction.setMandatory(true);
-
-        productType = new TextMetaData();
-        productType.setName("producttype");
-        productType.setValue("plaatje");
-        productType.setMandatory(true);
-
-        uri = new HyperlinkMetaData();
-        uri.setName("URI");
-        uri.setValue("http://www.ou.nl/logo.jpg");
-        
-        NumericMetaData playTime = new NumericMetaData();
-        playTime.setName("playtime");
-        playTime.setValue(360);
-
-        Record rec2 = new Record(title, secured, fileFormat, didacticalFunction, productType, uri);
-        rec2.addOptionalMetaData(playTime);
-        
-        // record 3
-        title = new TextMetaData();
-        title.setName("titel");
-        title.setValue("another one bites the dust");
-        title.setMandatory(true);
-
-        secured = new BooleanMetaData();
-        secured.setName("beveiligd");
-        secured.setValue(true);
-        secured.setMandatory(true);
-
-        fileFormat = new TextMetaData();
-        fileFormat.setName("bestandsformaat");
-        fileFormat.setValue("mp3");
-        fileFormat.setMandatory(true);
-
-        didacticalFunction = new TextMetaData();
-        didacticalFunction.setName("didactischeFunctie");
-        didacticalFunction.setValue("none");
-        didacticalFunction.setMandatory(true);
-
-        productType = new TextMetaData();
-        productType.setName("producttype");
-        productType.setValue("audio");
-        productType.setMandatory(true);
-
-        uri = new HyperlinkMetaData();
-        uri.setName("URI");
-        uri.setValue("http://www.ou.nl/song.mp3");
-        
-        playTime = new NumericMetaData();
-        playTime.setName("playtime");
-        playTime.setValue(120);
-
-        Record rec3 = new Record(title, secured, fileFormat, didacticalFunction, productType, uri);
-        rec3.addOptionalMetaData(playTime);
-        rec3.addOptionalMetaData(creationDate);
-                        
-        // record list
+    //record 2   
+    
+    //index creation
         l = new Vector();
         l.add(rec1);
-        l.add(rec2);
-        l.add(rec3);
+        ssi.doUpdate(l);
     }
 
     public void tearDown() throws Exception {
         
     }
-
-    /**
-     * @see SearchServiceImpl#doUpdate(List)
-     */
-    public void testDoUpdate() throws Exception {
-        ssi.doUpdate(l);
-    }
-
-    /**
-     * @see SearchServiceImpl#doPurge()
-     */
-    public void testDoPurge() {
-        ssi.doPurge();
-    }
-    
-    public void testCombined() throws Exception {
-        ssi.doUpdate(l);
-        ssi.doPurge();
-        ssi.doUpdate(l);
-        ssi.doUpdate(l);
-    }
     
     public void testDoSearch() throws Exception {
-        ssi.doUpdate(l);
-        assertEquals(1,(ssi.doSearch("another")).size());
-        assertEquals(1,(ssi.doSearch("ANOTHER")).size());
-        assertEquals(2,(ssi.doSearch("another*")).size());
-        assertEquals(1,(ssi.doSearch("anotherValue")).size());
-        assertEquals(0,(ssi.doSearch("value")).size());
-        assertEquals(1,(ssi.doSearch("a*e")).size());
-        assertEquals(3,(ssi.doSearch("anotherValue OR someValue OR 'another one bites the dust'")).size());
+        
     }
 }

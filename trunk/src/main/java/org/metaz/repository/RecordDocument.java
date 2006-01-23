@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Date;
 
+import java.util.Set;
+
+import org.apache.lucene.document.DateField;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
@@ -19,6 +22,9 @@ import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 
 public class RecordDocument {
+
+    public final static String MERGED = "merged";
+    private final static String LEVELSEPARATOR = "/";
     /**
      * Makes a Lucene document for a MetaZ record.
      * <p>The document contains the mandatory metadata elements:
@@ -29,71 +35,134 @@ public class RecordDocument {
      * <li>productType,
      * <li>uri.
      * </p>
-     * <p>Some may contain some optional metadata as well 
+     * <p>A document may contain some optional metadata as well 
      * @param r the MetaZ record
+     * @param light flag indicating light document (no stored fields except for uri)
      * @return a Lucene document
      */
-    public static Document toDocument(Record r) throws Exception{
+    public static Document toDocument(Record r, boolean light) throws Exception{
         Document doc = new Document();
-        //mandatory metadata
-        doc.add(Field.Text("title",(String)r.getTitle().getValue()));//full text searchable
-        doc.add(Field.UnIndexed("secured",r.getSecured().getValue().toString()));//not searchable
-        doc.add(Field.UnIndexed("fileFormat",(String)r.getFileFormat().getValue()));//not searchable
-        doc.add(Field.Keyword("didacticalFunction",(String)r.getDidacticalFunction().getValue()));//searchable keyword
-        doc.add(Field.Keyword("productType",(String)r.getProductType().getValue()));//searchable keyword
-        doc.add(Field.UnIndexed("uri",(String)r.getUri().getValue()));//not searchable
-        //optional metadata
-        List<MetaData> l = r.getOptionalMetaData();
-        Iterator<MetaData> it = l.iterator();
-        while(it.hasNext()) {
-            MetaData m = it.next();
-            //Object o = m.getValue();
-            String value = "";
-            String name = m.getName();
-            if (m instanceof TextMetaData) {
-                value = (String) m.getValue();
+        String merged = "";
+        
+    //full text searchable metadata
+        doc.add(Field.Text(MetaData.TITLE,(String)r.getTitle().getValue()));
+        merged = merged + (String)r.getTitle().getValue();
+        MetaData subject = r.getSubject();
+        if(subject!=null) {
+            doc.add(Field.Text(MetaData.SUBJECT,(String)subject.getValue()));
+        }
+        MetaData description = r.getDescription();
+        if(description!=null) {
+            doc.add(Field.Text(MetaData.DESCRIPTION,(String)description.getValue()));
+            merged = merged+(String)description.getValue();
+        }
+        MetaData keywords = r.getKeywords();
+        if(keywords!=null) {
+            doc.add(Field.Text(MetaData.KEYWORDS,(String)keywords.getValue()));
+            merged = merged+(String)keywords.getValue();
+        }
+        doc.add(Field.UnStored(MERGED,merged));
+        
+    //keyword searchable metadata
+        MetaData targetEndUser = r.getTargetEndUser();
+        if(targetEndUser!=null){
+            String[] targetEndUserLevels = targetEndUser.toString().split(LEVELSEPARATOR);
+            for(int i=0; i<targetEndUserLevels.length; i++) {
+                doc.add(Field.Keyword(MetaData.TARGETENDUSER,targetEndUserLevels[i]));
             }
-            else if (m instanceof BooleanMetaData){
-                Boolean bool = (Boolean) m.getValue();
-                value = bool.toString();
+        }
+        MetaData schoolType = r.getSchoolType();
+        if(schoolType!=null) {
+            Set schoolTypes = (Set)schoolType.getValue();
+            Iterator it = schoolTypes.iterator();
+            while(it.hasNext()){
+                String schType = it.next().toString();
+                String[] schoolTypeLevels = schType.split(LEVELSEPARATOR);
+                for(int j=1; j<schoolTypeLevels.length; j++) {
+                    doc.add(Field.Keyword(MetaData.SCHOOLTYPE,schoolTypeLevels[j]));
+                }
             }
-            else if (m instanceof DateMetaData) {
-                Date date = (Date) m.getValue();
-                value = date.toString();
+        }
+        MetaData schoolDiscipline = r.getSchoolDiscipline();
+        if(schoolDiscipline!=null) {
+            String[] schoolDisciplineLevels = schoolDiscipline.toString().split(LEVELSEPARATOR);
+            for(int i=0; i<schoolDisciplineLevels.length; i++) {
+                doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE,schoolDisciplineLevels[i]));
             }
-            else if (m instanceof HierarchicalStructuredTextMetaData) {
-                value = (String) m.getValue();
+        }
+        String didacticFunction = (String)r.getDidacticFunction().getValue();
+        doc.add(Field.Keyword(MetaData.DIDACTICFUNCTION,didacticFunction));
+        String productType = (String)r.getProductType().getValue();
+        doc.add(Field.Keyword(MetaData.PRODUCTTYPE,productType));
+        MetaData professionalSituation = r.getProfessionalSituation();
+        if(professionalSituation!=null) {
+            String[] professionalSituationLevels = professionalSituation.toString().split(LEVELSEPARATOR);
+            for(int i=0; i<professionalSituationLevels.length; i++) {
+                doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION,professionalSituationLevels[i]));
             }
-            else if (m instanceof HyperlinkMetaData) {
-                value = (String) m.getValue();
+        }
+        MetaData competence = r.getCompetence();
+        if(competence!=null) {
+            doc.add(Field.Keyword(MetaData.COMPETENCE,(String)competence.getValue()));
+        }
+        
+    //stored metadata (not searchable)
+        doc.add(Field.UnIndexed(MetaData.URI,(String)r.getURI().getValue()));
+        if(!light){
+            doc.add(Field.UnIndexed(MetaData.SECURED,r.getSecured().getValue().toString()));
+            doc.add(Field.UnIndexed(MetaData.FILEFORMAT,(String)r.getFileFormat().getValue()));
+            MetaData aggregationLevel = r.getAggregationLevel();
+            if(aggregationLevel!=null){
+                doc.add(Field.UnIndexed(MetaData.AGGREGATIONLEVEL,(String)aggregationLevel.getValue()));
             }
-            else if (m instanceof NumericMetaData) {
-                Integer integer = (Integer) m.getValue();
-                value = integer.toString();
+            MetaData didacticScenario = r.getDidacticScenario();
+            if(didacticScenario!=null){
+                doc.add(Field.UnIndexed(MetaData.DIDACTICSCENARIO,(String)didacticScenario.getValue()));
             }
-            else if (m instanceof HtmlTextMetaData) {
-                value = (String) m.getValue();
+            MetaData requiredTime = r.getRequiredTime();
+            if(requiredTime!=null){
+                doc.add(Field.UnIndexed(MetaData.REQUIREDTIME,requiredTime.getValue().toString()));
             }
-            else {
-                throw new Exception("No valid MetaData type found.");
+            MetaData rights = r.getRights();
+            if(rights!=null){
+                doc.add(Field.UnIndexed(MetaData.RIGHTS,(String)rights.getValue()));
             }
-            // UPDATE WITH ENGLISH METADATA NAMES
-            // full text searchable
-            if (name.equalsIgnoreCase("onderwerp") || name.equalsIgnoreCase("omschrijving") || name.equalsIgnoreCase("sleutelwoorden")) {
-                doc.add(Field.Text(name,value));
+            MetaData fileSize = r.getFileSize();
+            if(fileSize!=null){
+                doc.add(Field.UnIndexed(MetaData.FILESIZE,fileSize.getValue().toString()));
             }
-            // searchable keyword
-            else if (name.equalsIgnoreCase("beoogde eindgebruiker") || name.equalsIgnoreCase("schooltype") || name.equalsIgnoreCase("vakleergebied")
-                    || name.equalsIgnoreCase("beroepssituatie") || name.equalsIgnoreCase("competentie")) {
-                doc.add(Field.Keyword(name,value));        
+            MetaData playingTime = r.getPlayingTime();
+            if(playingTime!=null){
+                doc.add(Field.UnIndexed(MetaData.PLAYINGTIME,playingTime.getValue().toString()));
             }
-            else {
-                doc.add(Field.UnIndexed(name,value));
+            MetaData technicalRequirements = r.getTechnicalRequirements();
+            if(technicalRequirements!=null){
+                doc.add(Field.UnIndexed(MetaData.TECHNICALREQUIREMENTS,(String)technicalRequirements.getValue()));
+            }
+            MetaData creationDate = r.getCreationDate();
+            if(creationDate!=null){
+                doc.add(Field.UnIndexed(MetaData.CREATIONDATE,DateField.dateToString((Date)creationDate.getValue())));
+            }
+            MetaData lastChangedDate = r.getLastChangedDate();
+            if(lastChangedDate!=null){
+                doc.add(Field.UnIndexed(MetaData.LASTCHANGEDDATE,DateField.dateToString((Date)lastChangedDate.getValue())));
+            }
+            MetaData version = r.getVersion();
+            if(version!=null){
+                doc.add(Field.UnIndexed(MetaData.VERSION,(String)version.getValue()));
+            }
+            MetaData status = r.getStatus();
+            if(status!=null){
+                doc.add(Field.UnIndexed(MetaData.STATUS,(String)version.getValue()));
+            }
+            MetaData roleName = r.getRoleName();
+            if(roleName!=null){
+                doc.add(Field.UnIndexed(MetaData.ROLENAME,(String)roleName.getValue()));
             }
         }
         return doc;
     }
-    
+       
     /**
      * Empty constructor
      */
