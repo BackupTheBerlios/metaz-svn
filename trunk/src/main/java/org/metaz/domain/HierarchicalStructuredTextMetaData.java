@@ -40,7 +40,7 @@ public class HierarchicalStructuredTextMetaData extends MetaData {
             StringBuffer sb = new StringBuffer();
             Iterator i = value.iterator();
             while (i.hasNext()) {
-                sb.append("/" + i.toString());
+                sb.append("/" + (String)((TextMetaData)i.next()).getValue());
             }
             return sb.toString();
         }
