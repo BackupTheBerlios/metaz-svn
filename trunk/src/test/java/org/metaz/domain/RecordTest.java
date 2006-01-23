@@ -52,24 +52,23 @@ public class RecordTest extends TestCase {
 		assertNotNull("Expected isSecured metadata", rec.getSecured());
 		assertNotNull("Expected fileFormat metadata", rec.getFileFormat());
 		assertNotNull("Expected didacticalFunction metadata", rec
-				.getDidacticalFunction());
+				.getDidacticFunction());
 		assertNotNull("Expected productType metadata", rec.getProductType());
-		assertNotNull("Expected uri metadata", rec.getUri());
+		assertNotNull("Expected uri metadata", rec.getURI());
 	}
 
 	public void testAddingOptionalMetaData() {
 		DateMetaData lastChangeDate = new DateMetaData();
-		lastChangeDate.setName("datumLaatsteWijziging");
+		lastChangeDate.setName(MetaData.LASTCHANGEDDATE);
 		try {
 			lastChangeDate.setDateValue("28-01-2005");
 		} catch (ParseException e) {
 			lastChangeDate.setValue(new Date());
 		}
-		rec.addOptionalMetaData(lastChangeDate);
-		assertEquals("Wrong number of optional metadata", 1, rec
-				.getOptionalMetaData().size());
-		assertEquals("Wrong name optional metadata", "datumLaatsteWijziging",
-				rec.getOptionalMetaData().get(0).getName());
+		rec.setLastChangedDate(lastChangeDate);
+		assertNotNull("Expected lastChangedDate metadata",rec.getLastChangedDate());
+		assertEquals("Wrong name optional metadata", MetaData.LASTCHANGEDDATE,
+				rec.getLastChangedDate().getName());
 	}
 
 }

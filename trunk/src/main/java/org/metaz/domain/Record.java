@@ -171,7 +171,7 @@ public class Record {
     public DateMetaData getCreationDate() {
         return creationDate;
     }
-    public void setCreationData(DateMetaData Date) {
+    public void setCreationDate(DateMetaData Date) {
         this.creationDate = Date;
     }
     public DateMetaData getLastChangedDate(){
