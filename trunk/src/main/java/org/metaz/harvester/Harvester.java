@@ -17,6 +17,9 @@ import org.iso_relax.verifier.Schema;
 import org.iso_relax.verifier.Verifier;
 import org.iso_relax.verifier.VerifierFactory;
 import org.iso_relax.verifier.VerifierHandler;
+import com.sun.msv.grammar.relaxng.datatype.*;
+
+
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
