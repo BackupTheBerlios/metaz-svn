@@ -42,23 +42,8 @@ public class SearchServiceImpl implements SearchService {
     private static final String INDEXPATH =
         "repository/searchservice/searchindex";
 
-    private static final String LIGHTINDEXPATH =
-        "repository/searchservice/lightsearchindex";
-
     private String[] keywords =
         new String[] {MetaData.TARGETENDUSER, MetaData.SCHOOLTYPE, MetaData.SCHOOLDISCIPLINE, MetaData.DIDACTICFUNCTION, MetaData.PRODUCTTYPE, MetaData.PROFESSIONALSITUATION, MetaData.COMPETENCE};
-
-    private String[] fullTextFields =
-        new String[] {MetaData.TITLE, MetaData.SUBJECT, MetaData.DESCRIPTION, MetaData.KEYWORDS};
-
-    private int[] fullTextFieldFlags =
-    { MultiFieldQueryParser.NORMAL_FIELD, MultiFieldQueryParser.NORMAL_FIELD,
-                                         MultiFieldQueryParser.NORMAL_FIELD,
-                                         MultiFieldQueryParser.NORMAL_FIELD };
-
-    private String[] fullResultFields =
-        new String[] {MetaData.TITLE, MetaData.DESCRIPTION, MetaData.KEYWORDS, MetaData.PRODUCTTYPE, MetaData.SECURED, MetaData.FILEFORMAT, MetaData.AGGREGATIONLEVEL, 
-        MetaData.DIDACTICSCENARIO, MetaData.REQUIREDTIME, MetaData.RIGHTS, MetaData.FILESIZE, MetaData.PLAYINGTIME, MetaData.TECHNICALREQUIREMENTS, MetaData.LASTCHANGEDDATE};
 
     private static final String TERMDELIMITER = ":";
 
@@ -120,7 +105,7 @@ public class SearchServiceImpl implements SearchService {
 
             if (records != null) {
                 for (int i = 0; i < records.size(); i++) {
-                    writer.addDocument(RecordDocument.toDocument(records.get(i),false));
+                    writer.addDocument(RecordDocument.toDocument(records.get(i)));
                 }
             }
 
@@ -128,32 +113,11 @@ public class SearchServiceImpl implements SearchService {
             writer.optimize();
             writer.close();
             IndexReader reader = IndexReader.open(f);
-            for (int i = 0; i < reader.numDocs(); i++) {
-                logger.info(((Document)reader.document(i)).toString());
-            }
-        } catch (Exception ex) {
-            logger.error(ex.getMessage());
-        }
-    }
-
-    /**
-     * Updates the light search index.
-     * <p>The index does not contain any stored fields except for uri.</p>
-     * @param records the records to be added to the light search index
-     */
-    public void doLightUpdate(List<Record> records) throws Exception {
-        try {
-            File f = app.getRelativeFile(LIGHTINDEXPATH);
-            IndexWriter writer = new IndexWriter(f, analyzer, true);
-
-            if (records != null) {
-                for (int i = 0; i < records.size(); i++)
-                    writer.addDocument(RecordDocument.toDocument(records.get(i),true));
-            }
-
-            logger.info("" + writer.docCount() + " records added to Light Search Index");
-            writer.optimize();
-            writer.close();
+            // for testing purposes
+            //for (int i = 0; i < reader.numDocs(); i++) {
+            //    logger.info(((Document)reader.document(i)).toString());
+            //}
+            reader.close();
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
@@ -165,14 +129,14 @@ public class SearchServiceImpl implements SearchService {
      * <code>Query ::= (Clause)+<br>
      * Clause ::= [&lt;FULLTEXTSEARCHPHRASE&gt;] || [&lt;TERM&gt;:&lt;VALUE&gt;]+</code>
      * <br><code>&lt;FULLTEXTSEARCHPHRASE&gt;</code> should always precede term-value combinations and shall not contain any
-     * term descriptor.
+     * semicolon.
      * @param query the search query
      * @return A list of URI's and scores assorted in a Result List
      */
     public List<Result<URI>> doSearch(String query) {
         try {
             HashMap queryHashMap = new HashMap();
-            int endOfFullText = query.length() - 1;
+            int endOfFullText = query.length();
 
             for (int i = 0; i < keywords.length; i++) {
                 int keyword = query.indexOf(keywords[i] + TERMDELIMITER);
@@ -183,21 +147,24 @@ public class SearchServiceImpl implements SearchService {
                     char afterSemicolon = query.charAt(semicolon + 1);
                     String keywordValue;
                     if (afterSemicolon == DOUBLEQUOTE) {
-                        int nextSemicolon =
-                            query.indexOf(DOUBLEQUOTE, afterSemicolon + 1);
-                        keywordValue = query.substring(afterSemicolon + 1, nextSemicolon - 1);
+                        int nextDoubleQuote =
+                            query.indexOf(DOUBLEQUOTE, semicolon + 2);
+                        keywordValue = query.substring(semicolon + 2, nextDoubleQuote);
                     } else {
-                        int nextWhiteSpace = query.indexOf(WHITESPACE, afterSemicolon);
-                        keywordValue = query.substring(afterSemicolon + 1, nextWhiteSpace - 1);
+                        int nextWhiteSpace = query.indexOf(WHITESPACE, semicolon+1);
+                        if(nextWhiteSpace==-1) {
+                            nextWhiteSpace = query.length();
+                        }
+                        keywordValue = query.substring(semicolon + 1, nextWhiteSpace);
                     }
                     queryHashMap.put(keywords[i], keywordValue);
                 }
             }
             if (endOfFullText > 0) {
-                String fullTextValue = query.substring(0, endOfFullText + 1);
+                String fullTextValue = query.substring(0, endOfFullText);
                 queryHashMap.put(EMPTYSTRING, fullTextValue);
             }
-            return doSearch(queryHashMap, false, true, false);
+            return doSearch(queryHashMap);
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
@@ -209,33 +176,17 @@ public class SearchServiceImpl implements SearchService {
      * <p>The query is a hashmap containing the term-value combinations
      * to search for.</p>
      * @param hmquery the search query hashmap
-     * @param light indicates whether or not the search should be performed on the Light Search Index
-     * @param mergedFullText indicates whether or not the full text search should be performed on the merged field instead of the four seperate fields
-     * @param fullResult indicates whether or not all presentation fields should be returned instead of only the uri<p>NOTE: if set in combination with <code>light</code> this will return no elements but uri</p>
      * @return A list of URI's and scores assorted in a Result List
      */
-    public List<Result<URI>> doSearch(HashMap hmquery, boolean light,
-                                      boolean mergedFullText,
-                                      boolean fullResult) {
+    public List<Result<URI>> doSearch(HashMap hmquery) {
         try {
-            File f;
-            if (light) {
-                f = app.getRelativeFile(LIGHTINDEXPATH);
-            } else {
-                f = app.getRelativeFile(INDEXPATH);
-            }
+            File f = app.getRelativeFile(INDEXPATH);
             Searcher searcher = new IndexSearcher(f.getCanonicalPath());
 
             BooleanQuery q = new BooleanQuery();
             String fullText = (String)hmquery.get(EMPTYSTRING);
             if (fullText != null) {
-                Query fullTextQuery;
-                if (mergedFullText)
-                    fullTextQuery = QueryParser.parse(fullText, RecordDocument.MERGED, analyzer);
-                else
-                    fullTextQuery = MultiFieldQueryParser.parse(fullText, fullTextFields, 
-                                                                fullTextFieldFlags,
-                                                                analyzer);
+                Query fullTextQuery = QueryParser.parse(fullText, RecordDocument.MERGED, analyzer);
                 q.add(fullTextQuery, true, false);
             }
             for (int i = 0; i < keywords.length; i++) {
@@ -243,10 +194,7 @@ public class SearchServiceImpl implements SearchService {
                 if (keywordValue != null) {
                     Term keyword = new Term(keywords[i], keywordValue);
                     Query keywordQuery = new TermQuery(keyword);
-                    if (keywords[i].equals(MetaData.PRODUCTTYPE))
-                        q.add(keywordQuery, false, true);
-                    else
-                        q.add(keywordQuery, true, true);
+                    q.add(keywordQuery, true, false);
                 }
             }
 
@@ -260,12 +208,7 @@ public class SearchServiceImpl implements SearchService {
                 URI uri = URI.create(suri);
                 float score = hits.score(i);
                 if (uri != null) {
-                    Result<URI> result;
-                    if (fullResult) {
-                        //NOT YET IMPLEMENTED
-                        result = new Result<URI>(uri, score);
-                    } else
-                        result = new Result<URI>(uri, score);
+                    Result<URI> result = new Result<URI>(uri, score);
                     resultList.add(result);
                     logger.info(i + 1 + ": " + suri + ":" + score);
                 }

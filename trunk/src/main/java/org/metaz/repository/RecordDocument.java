@@ -27,20 +27,11 @@ public class RecordDocument {
     private final static String LEVELSEPARATOR = "/";
     /**
      * Makes a Lucene document for a MetaZ record.
-     * <p>The document contains the mandatory metadata elements:
-     * <li>title,
-     * <li>secured,
-     * <li>fileFormat,
-     * <li>didacticalFunction,
-     * <li>productType,
-     * <li>uri.
-     * </p>
-     * <p>A document may contain some optional metadata as well 
+     * <p>The document contains the searchable metadata elements plus the uri.</p>
      * @param r the MetaZ record
-     * @param light flag indicating light document (no stored fields except for uri)
      * @return a Lucene document
      */
-    public static Document toDocument(Record r, boolean light) throws Exception{
+    public static Document toDocument(Record r) throws Exception{
         Document doc = new Document();
         String merged = "";
         
@@ -108,58 +99,7 @@ public class RecordDocument {
         
     //stored metadata (not searchable)
         doc.add(Field.UnIndexed(MetaData.URI,(String)r.getURI().getValue()));
-        if(!light){
-            doc.add(Field.UnIndexed(MetaData.SECURED,r.getSecured().getValue().toString()));
-            doc.add(Field.UnIndexed(MetaData.FILEFORMAT,(String)r.getFileFormat().getValue()));
-            MetaData aggregationLevel = r.getAggregationLevel();
-            if(aggregationLevel!=null){
-                doc.add(Field.UnIndexed(MetaData.AGGREGATIONLEVEL,(String)aggregationLevel.getValue()));
-            }
-            MetaData didacticScenario = r.getDidacticScenario();
-            if(didacticScenario!=null){
-                doc.add(Field.UnIndexed(MetaData.DIDACTICSCENARIO,(String)didacticScenario.getValue()));
-            }
-            MetaData requiredTime = r.getRequiredTime();
-            if(requiredTime!=null){
-                doc.add(Field.UnIndexed(MetaData.REQUIREDTIME,requiredTime.getValue().toString()));
-            }
-            MetaData rights = r.getRights();
-            if(rights!=null){
-                doc.add(Field.UnIndexed(MetaData.RIGHTS,(String)rights.getValue()));
-            }
-            MetaData fileSize = r.getFileSize();
-            if(fileSize!=null){
-                doc.add(Field.UnIndexed(MetaData.FILESIZE,fileSize.getValue().toString()));
-            }
-            MetaData playingTime = r.getPlayingTime();
-            if(playingTime!=null){
-                doc.add(Field.UnIndexed(MetaData.PLAYINGTIME,playingTime.getValue().toString()));
-            }
-            MetaData technicalRequirements = r.getTechnicalRequirements();
-            if(technicalRequirements!=null){
-                doc.add(Field.UnIndexed(MetaData.TECHNICALREQUIREMENTS,(String)technicalRequirements.getValue()));
-            }
-            MetaData creationDate = r.getCreationDate();
-            if(creationDate!=null){
-                doc.add(Field.UnIndexed(MetaData.CREATIONDATE,DateField.dateToString((Date)creationDate.getValue())));
-            }
-            MetaData lastChangedDate = r.getLastChangedDate();
-            if(lastChangedDate!=null){
-                doc.add(Field.UnIndexed(MetaData.LASTCHANGEDDATE,DateField.dateToString((Date)lastChangedDate.getValue())));
-            }
-            MetaData version = r.getVersion();
-            if(version!=null){
-                doc.add(Field.UnIndexed(MetaData.VERSION,(String)version.getValue()));
-            }
-            MetaData status = r.getStatus();
-            if(status!=null){
-                doc.add(Field.UnIndexed(MetaData.STATUS,(String)version.getValue()));
-            }
-            MetaData roleName = r.getRoleName();
-            if(roleName!=null){
-                doc.add(Field.UnIndexed(MetaData.ROLENAME,(String)roleName.getValue()));
-            }
-        }
+
         return doc;
     }
        
