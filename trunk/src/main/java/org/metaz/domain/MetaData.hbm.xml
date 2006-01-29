@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping
+    PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.metaz.domain.MetaData" table="metadata" abstract="true">
+		<id name="id" type="string" unsaved-value="null">
+			<column name="id" sql-type="char(32)" not-null="true"/>
+			<generator class="uuid.hex"/>
+		</id>
+		<discriminator column="metadata_type" type="string"/>
+		<property name="name" column="metadata_name" type="string"/>
+		<property name="description" column="metadata_description" type="string"/>
+		<property name="mandatory" column="metadata_mandatory" type="yes_no"/>
+		<property name="optional" column="metadata_optional" type="yes_no"/>
+		
+		<subclass name="org.metaz.domain.BooleanMetaData" discriminator-value="BMD">
+			<property name="value" column="BMD_metadata_value" type="boolean"/>
+		</subclass>
+		<subclass name="org.metaz.domain.DateMetaData" discriminator-value="DMD">
+			<property name="value" column="DMD_metadata_value" type="date"/>
+		</subclass>
+		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaData" discriminator-value="HSTM">
+			<property name="value" column="HSTM_metadata_value" type="string"/>
+		</subclass>
+		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" discriminator-value="HSTMS">
+			<set name="value" table="HIERARCHICAL_METADATA_ITEMS">
+				<key column="ID"/>
+				<element type="string" column="METADATA_ITEM"/>
+			</set>
+		</subclass>
+		<subclass name="org.metaz.domain.HtmlTextMetaData" discriminator-value="HTMD">
+			<property name="value" column="HTMD_metadata_value" type="string"/>
+		</subclass>
+		<subclass name="org.metaz.domain.HyperlinkMetaData" discriminator-value="HMD">
+			<property name="value" column="HMD_metadata_value" type="string"/>
+		</subclass>
+		<subclass name="org.metaz.domain.NumericMetaData" discriminator-value="NMD">
+			<property name="value" column="NMD_metadata_value" type="int"/>
+		</subclass>
+		<subclass name="org.metaz.domain.TextMetaData" discriminator-value="TMD">
+			<property name="value" column="TMD_metadata_value" type="string"/>
+		</subclass>
+	</class>
+</hibernate-mapping>
