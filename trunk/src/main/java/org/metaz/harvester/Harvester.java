@@ -2,20 +2,22 @@ package org.metaz.harvester;
 
 import org.apache.log4j.Logger;
 import org.metaz.domain.BooleanMetaData;
+import org.metaz.domain.DateMetaData;
 import org.metaz.domain.HyperlinkMetaData;
+import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 import org.metaz.util.MetaZ;
 
 import java.io.*;
 import java.util.*;
+import java.text.*;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.SAXWriter;
-import org.dom4j.io.DOMReader;
 
 import org.iso_relax.verifier.Schema;
 import org.iso_relax.verifier.Verifier;
@@ -138,6 +140,76 @@ public class Harvester {
 				bln.setValue(Boolean.valueOf(element.element("beveiligd").getText()));
 				Record rec = new org.metaz.domain.Record(tmdt1,bln,tmdt2,tmdt3,tmdt4,hper);
 				logger.info("record created" + element.attributeValue("URI"));
+				tmdt1.setValue(element.element("aggregatieniveau").getText());
+				rec.setAggregationLevel(tmdt1);
+				logger.info("aggregatieniveau");
+				tmdt1.setValue(element.element("didactischScenario").getText());
+				rec.setAggregationLevel(tmdt1);
+				logger.info("didactischScenario");
+				tmdt1.setValue(element.element("competentie").getText());
+				rec.setCompetence(tmdt1);
+				tmdt1.setValue(element.element("onderwerp").getText());
+				rec.setSubject(tmdt1);
+				tmdt1.setValue(element.element("rechten").getText());
+				rec.setRights(tmdt1);
+				logger.info("rechten");
+				tmdt1.setValue(element.element("technischeVereiste").getText());
+				rec.setTechnicalRequirements(tmdt1);
+				logger.info("technischeVereiste");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				DateMetaData dmdt = new DateMetaData();
+				Date d = sdf.parse(element.element("datumCreatie").getText());
+				dmdt.setValue(d);
+				rec.setCreationDate(dmdt);
+				logger.info("datumCreatie");
+				d = sdf.parse(element.element("datumLaatsteWijziging").getText());
+				dmdt.setValue(d);
+				rec.setLastChangedDate(dmdt);
+				logger.info("datumLaatsteWijziging");
+				NumericMetaData nmdt=new NumericMetaData();
+				nmdt.setValue(Long.getLong(element.element("bestandsgrootte").getText()));
+				rec.setFileSize(nmdt);
+				nmdt.setValue(Long.getLong(element.element("benodigdeTijd").getText()));
+				rec.setRequiredTime(nmdt);
+				nmdt.setValue(Long.getLong(element.element("afspeelduur").getText()));
+				rec.setPlayingTime(nmdt);
+				logger.info("afspeelduur");
+				tmdt1.setValue(element.element("versie").getText());
+				rec.setVersion(tmdt1);
+				tmdt1.setValue(element.element("status").getText());
+				rec.setStatus(tmdt1);
+				tmdt1.setValue(element.element("bestandsformaat").getText());
+				rec.setStatus(tmdt1);
+				logger.info("bestandsformaat");
+				//sleutelwoorden
+				String keywords="";
+				for (Iterator j=element.element("sleutelwoorden").elementIterator();j.hasNext();){
+					Element keyword = (Element) j.next();
+					keywords= keyword.element("sleutelwoord").getText() + ";";					
+				}
+				tmdt1.setValue(keywords);
+				rec.setKeywords(tmdt1);
+				logger.info("sleutelwoorden");
+				//rolEnNaam
+				String rolenames="";
+				for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
+						Element rolename = (Element) k.next();
+						rolenames= "Rol: " + rolename.element("rol").getText() + "\n Naam:" + rolename.element("naam").getText() + ";";					
+				}
+				tmdt1.setValue(rolenames);
+				rec.setRoleName(tmdt1);
+				logger.info("rolEnNaam");
+				//to do
+				//beoogdeEindgebruiker
+				//schooltype
+				//vakleergebied
+				//beroepssituatie
+				//omschrijving
+				
+				
+				
+				
+				
 			}			
 		}
 		//
