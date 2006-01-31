@@ -1,5 +1,5 @@
 // A class to describe a row list result that has been retrieved
-// Author: Falco Paul
+// @author Falco Paul
 
 package org.metaz.repository;
 

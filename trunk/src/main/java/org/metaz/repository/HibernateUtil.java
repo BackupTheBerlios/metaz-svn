@@ -1,5 +1,5 @@
 // This is a class that encapsulates a lot of the nasty Hibernate transaction details
-// Author: Falco Paul
+// @author Falco Paul
 
 package org.metaz.repository;
 
@@ -48,7 +48,7 @@ public class HibernateUtil implements Serializable {
     
       hibernateSession = factory.openSession();
       hibernateTransaction = hibernateSession.beginTransaction();
-      dbSession = new DatabaseSession(hibernateSession);
+      dbSession = new HibernateDatabaseSession(hibernateSession);
       
       ActionResult result = interaction.execute(dbSession);
       if (dbResult instanceof ErrorResult)
@@ -104,7 +104,7 @@ public class HibernateUtil implements Serializable {
     
   }
 
-  public static ActionResult objectForId(DatabaseSession dbSession, 
+  public static ActionResult objectForId(HibernateDatabaseSession dbSession, 
                                          String objectName, String id) throws Exception {
 
     Object obj;

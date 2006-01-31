@@ -1,5 +1,5 @@
 // This is an abstract helper class that supplies a mimimum implementation of DatabaseInteraction
-// Author: Falco Paul
+// @author Falco Paul
 
 package org.metaz.repository;
 

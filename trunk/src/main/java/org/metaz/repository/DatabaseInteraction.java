@@ -1,5 +1,5 @@
 // This is an abstract class that defines an abstract "database conversation"
-// Author: Falco Paul
+// @author Falco Paul
 
 package org.metaz.repository;
 

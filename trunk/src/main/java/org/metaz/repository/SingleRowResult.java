@@ -1,5 +1,5 @@
-// A class that describers a single row result that has been retrieved
-// Author: Falco Paul
+// A class that describes a single row result that has been retrieved
+// @author Falco Paul
 
 package org.metaz.repository;
 

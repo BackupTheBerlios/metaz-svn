@@ -1,6 +1,6 @@
 // This is an abstract class that defines an abstract "transaction"
-// Works for both BpServer and Hibernate
-// Author: Falco Paul
+// Independent from persistence technologies such as Hibernate, etc
+// @author Falco Paul
 
 package org.metaz.repository;
 

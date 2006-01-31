@@ -1,6 +1,5 @@
 // A "error result" class to describe outcomes of "actions"
-
-// Author: Falco Paul
+// @author Falco Paul
 
 package org.metaz.repository;
 

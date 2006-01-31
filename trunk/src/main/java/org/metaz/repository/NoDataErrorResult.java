@@ -1,6 +1,5 @@
 // A "no data error result" class to describe outcomes of "actions"
-
-// Author: Falco Paul
+// @uthor: Falco Paul
 
 package org.metaz.repository;
 
