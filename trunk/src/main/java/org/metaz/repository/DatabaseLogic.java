@@ -1,4 +1,5 @@
-// This is an abstract helper class that supplies a mimimum implementation of DatabaseInteraction
+// This is an abstract helper class that defines a minimal form of database interaction
+// Independent from persistence technologies such as Hibernate, etc
 // @author Falco Paul
 
 package org.metaz.repository;

@@ -1,21 +1,19 @@
-/**
- *
+/*
  * The environment class that controls the Hibernate configuration.
- * <p>
+ *
  * The configuration parameters are loaded from a property file:
- * <code>"hibernate.properties"</code>, which must be placed in the
+ * <"hibernate.properties", which must be placed in the
  * classpath.  
- * <p> 
+ *
  * This is a singleton implementation. The whole
  * application uses one HibernateEnvironment instance, and one Session
  * Factory.
- * </p>
- * <p>
+ * 
  * Example:
  *   <code>
  *    SessionFactory factory = HibernateEnvironment.getInstance().getSessionFactory();
  *   </code>
- * </p>
+ *
  * @author Falco Paul
  */
 

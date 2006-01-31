@@ -1,4 +1,4 @@
-// A database session class that encapsulates a Hibernate database sessions
+// A database session class that encapsulates a Hibernate database session
 // @author Falco Paul
 
 package org.metaz.repository;
