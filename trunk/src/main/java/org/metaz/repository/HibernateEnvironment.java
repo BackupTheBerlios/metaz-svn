@@ -32,7 +32,31 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.apache.log4j.Logger;
 
-public class HibernateEnvironment {
+import org.metaz.util.MetaZ;
+
+/**
+ *
+ * The environment class that controls the Hibernate configuration.
+ * <p>
+ * The configuration parameters are loaded from a property file:
+ * <code>"hibernate.properties"</code>, which must be placed in the
+ * classpath.  
+ * <p> 
+ * This is a singleton implementation. The whole
+ * application uses one HibernateEnvironment instance, and one Session
+ * Factory.
+ * </p>
+ * <p>
+ * Example:
+ *   <code>
+ *    SessionFactory factory = HibernateEnvironment.getInstance().getSessionFactory();
+ *   </code>
+ * </p>
+ * @author Falco Paul
+ */
+public class
+
+HibernateEnvironment {
 
   /**
    * All the persistent classes of the application.
@@ -40,21 +64,21 @@ public class HibernateEnvironment {
    */
   private static Class[] applicationClasses = null;
 
-  /** The one and only instance. */
+  /** The one and only instance */
   private static HibernateEnvironment theInstance;
 
-  /** The hibernate property file name. */
+  /** The hibernate property file name */
   private static String HiberatePropertiesFileName = "hibernate.properties";
 
-  /** The logger of this class. */
-  private static final Logger logger = Logger.getLogger(HibernateEnvironment.class.getName());
+  /** The logger of this class */
+  private static Logger logger = Logger.getLogger(HibernateEnvironment.class);
 
-  /** The Hibernate configuration. */
+  /** The Hibernate configuration */
   private Configuration configuration;
 
-  /** The Hibernate session factory. */
+  /** The Hibernate session factory */
   private SessionFactory sessionFactory;
-  
+ 
   /** Creates a new instance of HibernateEnvironment */
   
   private HibernateEnvironment() {

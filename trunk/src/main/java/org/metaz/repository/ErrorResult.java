@@ -79,7 +79,7 @@ public class ErrorResult extends ActionResult  {
     
     // Now we must find the first entry that's not originating from this class!
     
-    while (trace[index].getClass() == this.getClass())
+    while (trace[index].getClass().equals(this.getClass()))
       index++;
     
     setCaller(trace[index]);

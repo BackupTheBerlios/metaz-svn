@@ -7,10 +7,12 @@ import java.io.Serializable;
 
 import java.util.Iterator;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.Query;
 
 public class HibernateUtil implements Serializable {
 
@@ -100,6 +102,29 @@ public class HibernateUtil implements Serializable {
     
     return dbResult;
     
+  }
+
+  public static ActionResult objectForId(DatabaseSession dbSession, 
+                                         String objectName, String id) throws Exception {
+
+    Object obj;
+    Iterator i;
+    
+    i = dbSession.getHibernateSession()
+        .createQuery ("from " + objectName +  " as object where object.id = :id")
+        .setParameter("id", id)
+        .iterate();
+    
+    if (i.hasNext())
+      obj = (Object) i.next();
+    else
+      return new NoDataErrorResult();
+      
+    if (i.hasNext())
+      return new ErrorResult("More than one row found");
+      
+    return new SingleRowResult(obj);
+        
   }
  
 }
