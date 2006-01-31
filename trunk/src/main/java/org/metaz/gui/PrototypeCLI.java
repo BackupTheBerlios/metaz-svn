@@ -1,11 +1,16 @@
 package org.metaz.gui;
 
-import org.apache.commons.cli.*;
+import java.util.List;
+
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
 
 import org.metaz.domain.MetaData;
-import org.metaz.repository.*;
-
-//import java.util.List;
+import org.metaz.repository.Facade;
+import org.metaz.repository.FacadeFactory;
 
 
 public class PrototypeCLI {
@@ -18,7 +23,7 @@ public class PrototypeCLI {
         Options options = new Options();
 
         Option tOpt = new Option("t", "trefwoorden", false, "Trefwoorden");
-        tOpt.setArgs(1);
+        tOpt.setArgs(10);
         tOpt.setType(new String());
         tOpt.setRequired(false);
         options.addOption(tOpt);
@@ -72,7 +77,8 @@ public class PrototypeCLI {
         cOpt.setRequired(false);
         options.addOption(cOpt);
 
-        Option hOpt = new Option("h", "help", false, "Laat de helptekst zien");
+        Option hOpt =
+            new Option("h", "help", false, "Laat deze helptekst zien");
         hOpt.setArgs(0);
         hOpt.setType(new String());
         hOpt.setRequired(false);
@@ -96,73 +102,62 @@ public class PrototypeCLI {
             java.lang.System.exit(0);
         }
 
-
-        String searchStr = "";
-        // Nog doen: koppeling met MetaData klasse!
+        String[] ss = new String[options.getOptions().size()];
+        // Onderstaande kan vast efficienter...
+        int j = 0;
         if (cmd.hasOption("t")) {
-            String[]trefwrds = cmd.getOptionValues(tOpt.getOpt());
-            String optTrefwoorden = "";
-            for (int i=0;i<trefwrds.length;i++) 
-              optTrefwoorden+= trefwrds[i]+" ";
-            searchStr += optTrefwoorden;
+            ss[j] = "t";
+            j++;
         }
         if (cmd.hasOption("g")) {
-            String optGebruiker =
-                MetaData.TARGETENDUSER + ":" + cmd.getOptionValue(gOpt.getOpt()) +
-                " ";
-            searchStr += optGebruiker;
+            ss[j] = "g";
+            j++;
         }
         if (cmd.hasOption("s")) {
-            String optSchool =
-                MetaData.SCHOOLTYPE + ":" + cmd.getOptionValue(sOpt.getOpt()) +
-                " ";
-            searchStr += optSchool;
+            ss[j] = "s";
+            j++;
         }
         if (cmd.hasOption("v")) {
-            String optVakleergebied =
-                MetaData.SCHOOLDISCIPLINE + ":" + cmd.getOptionValue(vOpt
-                                                                                           .getOpt()) +
-                " ";
-            searchStr += optVakleergebied;
+            ss[j] = "v";
+            j++;
         }
         if (cmd.hasOption("d")) {
-            String optDidactischeFunctie =
-                MetaData.DIDACTICFUNCTION + ":" + cmd
-                .getOptionValue(dOpt.getOpt()) + " ";
-            searchStr += optDidactischeFunctie;
+            ss[j] = "d";
+            j++;
         }
         if (cmd.hasOption("p")) {
-            String optProducttype =
-                MetaData.PRODUCTTYPE + ":" + cmd.getOptionValue(pOpt
-                                                                                    .getOpt()) +
-                " ";
-            searchStr += optProducttype;
+            ss[j] = "p";
+            j++;
         }
         if (cmd.hasOption("b")) {
-            String optBeroepsituatie =
-                MetaData.PROFESSIONALSITUATION + ":" + cmd
-                .getOptionValue(bOpt.getOpt()) + " ";
-            searchStr += optBeroepsituatie;
+            ss[j] = "b";
+            j++;
         }
         if (cmd.hasOption("c")) {
-            String optCompetentie =
-                MetaData.COMPETENCE + ":" + cmd.getOptionValue(cOpt.getOpt()) +
-                " ";
-            searchStr += optCompetentie;
+            ss[j] = "c";
+            j++;
         }
-        if (checkQuery(searchStr))
-            performSearch(searchStr);
+
+        String searchString = printClausule(cmd, options, ss);
+
+        if (checkQuery(searchString))
+            ;
+        //performSearch(searchString);
+        else
+            System.out.println("fout in checkQuery");
     }
+
 
     public static void performSearch(String searchString) {
         System.out.println();
-        System.out.println(searchString);
-        System.out.println();
         Facade myFacade = FacadeFactory.createFacade();
         try {
-            myFacade.doSearch(searchString);
+            List list = myFacade.doSearch(searchString);
+            System.out.println(list.toString());
+
         } catch (Exception e) {
             // TODO
+            System.out.println("niet gelukt");
         }
     }
 
@@ -177,6 +172,31 @@ public class PrototypeCLI {
         if (searchString == "")
             return false;
         return true;
+    }
+
+    private static String printClausule(CommandLine cl, Options options,
+                                        String[] ss) {
+
+
+        String clausule = "";
+        Option o;
+
+        // the freetext searchstring
+        if (ss[0] == "t") {
+            o = options.getOption(ss[0]);
+            clausule = cl.getOptionValue(o.getValue(ss[0])) + " ";
+        }
+
+        // metadata valuepairs
+        for (int i = 1; ((ss[i] != null) && (i < ss.length)); i++) {
+            o = options.getOption(ss[i]);
+            clausule +=
+                o.getLongOpt() + ":" + cl.getOptionValue(o.getValue(ss[i])) +
+                " ";
+        }
+        System.out.println(clausule);
+        return clausule;
+
     }
 
 
