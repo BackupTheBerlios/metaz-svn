@@ -21,7 +21,7 @@ public class DataServiceImplTest extends TestCase {
 	/*
 	 * Test method for 'org.metaz.repository.DataServiceImpl.getRecords(List<URI>)'
 	 */
-	public void testGetRecords() {
+	public void testAddRecord() {
 		BasicConfigurator.configure();
 		LOG.debug("Testing");
 		TextMetaData title = new TextMetaData();
@@ -59,9 +59,9 @@ public class DataServiceImplTest extends TestCase {
 		Configuration cfg = new Configuration().configure("org/metaz/hibernate.cfg.xml");
 		SessionFactory sf = cfg.buildSessionFactory();
 		Session sess = sf.openSession();
-		Transaction t = sess.beginTransaction();
+		//Transaction t = sess.beginTransaction();
 		sess.save(rec);
-		t.commit();
+		//t.commit();
 		sess.close();
 	}
 
