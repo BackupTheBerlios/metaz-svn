@@ -1,25 +1,13 @@
 package org.metaz.repository;
 
 import java.util.Iterator;
-import java.util.List;
-import java.util.Date;
-
 import java.util.Set;
 
-import org.apache.lucene.document.DateField;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
-import org.metaz.domain.BooleanMetaData;
-import org.metaz.domain.DateMetaData;
-import org.metaz.domain.HierarchicalStructuredTextMetaData;
-import org.metaz.domain.HtmlTextMetaData;
-import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.MetaData;
-
-import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
-import org.metaz.domain.TextMetaData;
 
 public class RecordDocument {
 
