@@ -1,7 +1,7 @@
 // A "no data error result" class to describe outcomes of "actions"
 // @uthor: Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 public class NoDataErrorResult extends ErrorResult  {
 

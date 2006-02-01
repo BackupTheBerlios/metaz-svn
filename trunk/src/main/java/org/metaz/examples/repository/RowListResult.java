@@ -1,7 +1,7 @@
 // A class to describe a row list result that has been retrieved
 // @author Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 import java.util.List;
 

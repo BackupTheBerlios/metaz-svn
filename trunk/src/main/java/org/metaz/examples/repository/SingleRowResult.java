@@ -1,7 +1,7 @@
 // A class that describes a single row result that has been retrieved
 // @author Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 public class SingleRowResult extends SuccessResult  {
 

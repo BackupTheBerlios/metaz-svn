@@ -2,7 +2,7 @@
 // Independent from persistence technologies such as Hibernate, etc
 // @author Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 public interface DatabaseTransaction extends DatabaseInteraction {
 

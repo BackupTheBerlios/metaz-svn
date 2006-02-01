@@ -1,7 +1,7 @@
 // A "no data result" class to describe outcomes of "actions"
 // @author: Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 public class NoDataResult extends SuccessResult  {
 

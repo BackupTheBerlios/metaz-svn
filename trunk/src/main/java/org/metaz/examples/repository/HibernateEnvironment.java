@@ -17,7 +17,7 @@
  * @author Falco Paul
  */
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,7 +1,7 @@
 // This is a class that encapsulates a lot of the nasty Hibernate transaction details
 // @author Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 import java.io.Serializable;
 

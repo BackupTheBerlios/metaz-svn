@@ -1,7 +1,7 @@
 // A database session class that encapsulates a Hibernate database session
 // @author Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 import org.hibernate.Session;
 
