@@ -23,6 +23,7 @@ private static String syntax = "PrototypeCLI -option [goal] [[-option goal][..]"
     public static void main(String[] args) {
         //PrototypeCLI prototypeCLI = new PrototypeCLI();
 
+        // Definition of the CLI options
         Options options = new Options();
 
         Option tOpt = new Option("t", "trefwoorden", false, "Trefwoorden");
@@ -90,6 +91,7 @@ private static String syntax = "PrototypeCLI -option [goal] [[-option goal][..]"
         BasicParser parser = new BasicParser();
         CommandLine cmd = null;
 
+        // Reading of the input
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("h")) {
@@ -108,6 +110,7 @@ private static String syntax = "PrototypeCLI -option [goal] [[-option goal][..]"
             java.lang.System.exit(0);
         }
 
+        // Ordering of the CLI options
         String[] shortOpts = new String[options.getOptions().size()];
         // Onderstaande kan waarschijnlijk efficienter...
         int j = 0;
@@ -143,9 +146,11 @@ private static String syntax = "PrototypeCLI -option [goal] [[-option goal][..]"
             shortOpts[j] = "c";
             j++;
         }
-
+        
+        // The searchString given to the searchservice should have the correct syntax.
         String searchString = printClauses(cmd, options, shortOpts);
 
+        // If all is right, send the searchString to the searchService.
         if (checkQuery(searchString))
             performSearch(searchString);
         else
