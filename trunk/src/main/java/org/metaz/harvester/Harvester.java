@@ -181,11 +181,16 @@ public class Harvester {
 				tmdt1.setValue(element.element("bestandsformaat").getText());
 				rec.setStatus(tmdt1);
 				logger.info("bestandsformaat");
+				tmdt1.setValue(element.element("omschrijving").getText());
+				rec.setStatus(tmdt1);
+				logger.info("omschrijving" + tmdt1.getValue());
 				//sleutelwoorden
 				String keywords="";
 				for (Iterator j=element.element("sleutelwoorden").elementIterator();j.hasNext();){
 					Element keyword = (Element) j.next();
-					keywords= keyword.element("sleutelwoord").getText() + ";";					
+					keywords= keyword.getText() + ";";
+					//.element("sleutelwoord")
+					logger.info(keywords);
 				}
 				tmdt1.setValue(keywords);
 				rec.setKeywords(tmdt1);
@@ -194,7 +199,8 @@ public class Harvester {
 				String rolenames="";
 				for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
 						Element rolename = (Element) k.next();
-						rolenames= "Rol: " + rolename.element("rol").getText() + "\n Naam:" + rolename.element("naam").getText() + ";";					
+						rolenames= "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
+						logger.info(rolenames);
 				}
 				tmdt1.setValue(rolenames);
 				rec.setRoleName(tmdt1);
@@ -204,7 +210,6 @@ public class Harvester {
 				//schooltype
 				//vakleergebied
 				//beroepssituatie
-				//omschrijving
 				
 				
 				
@@ -276,6 +281,8 @@ public class Harvester {
         Verifier verifier = schema.newVerifier();
         logger.info("verifier created");
         verifier.setErrorHandler(
+        		//when error occurs add code to move file to error directory
+        		//and stop processing....
             new ErrorHandler() {
                 public void error(SAXParseException e) {
                     logger.error( e.getMessage() );
