@@ -1,13 +1,12 @@
-// This is an abstract class that defines an abstract "database conversation"
-// Independent from persistence technologies such as Hibernate, etc
-// @author Falco Paul
+// A database interaction (transaction, query, etc) abstraction, independend from any persistence engine
+// Author: Falco Paul
 
-package org.metaz.examples.repository;
+package org.metaz.repository;
 
 public interface DatabaseInteraction {
 
-  public ActionResult execute(DatabaseSession dbSession) throws Exception;
+  public ActionResult execute() throws Exception;
   
-  public void sessionCloseFailed(DatabaseSession dbSession);
+  public void sessionCloseFailed();
    
 }

@@ -1,16 +1,8 @@
-// A database session class that is independent of any particular persistence engine
-// @author Falco Paul
+// A database session abstraction, independend from any persistence engine
+// Author: Falco Paul
 
-package org.metaz.examples.repository;
+package org.metaz.repository;
 
-import org.hibernate.Session;
-
-public class DatabaseSession {
-
-  // constructors
-
-  public DatabaseSession() {
-
-  }
-
+public interface DatabaseSession {
+   
 }

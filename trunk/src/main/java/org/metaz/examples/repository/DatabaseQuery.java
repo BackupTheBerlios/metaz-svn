@@ -1,9 +1,8 @@
-// This is an abstract class that defines an abstract "query"
-// Independent from persistence technologies such as Hibernate, etc
-// @author Falco Paul
+// A database query abstraction, independend from any persistence engine
+// Author: Falco Paul
 
-package org.metaz.examples.repository;
+package org.metaz.repository;
 
-public interface DatabaseQuery extends DatabaseInteraction {
+public interface DatabaseQuery {
   
 }

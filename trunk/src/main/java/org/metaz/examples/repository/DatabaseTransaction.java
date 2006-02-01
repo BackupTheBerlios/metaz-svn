@@ -1,13 +1,12 @@
-// This is an abstract class that defines an abstract "transaction"
-// Independent from persistence technologies such as Hibernate, etc
-// @author Falco Paul
+// A database transaction abstraction, independend from any persistence engine
+// Author: Falco Paul
 
-package org.metaz.examples.repository;
+package org.metaz.repository;
 
-public interface DatabaseTransaction extends DatabaseInteraction {
+public interface DatabaseTransaction {
 
-  public void rolledBack(DatabaseSession dbSession);
+  public void rolledBack();
 
-  public void rollBackFailed(DatabaseSession dbSession);
+  public void rollBackFailed();
    
 }

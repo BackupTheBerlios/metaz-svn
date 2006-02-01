@@ -1,20 +1,13 @@
-// A database session class that encapsulates a Hibernate database session
-// @author Falco Paul
+// A Hibernate session
+// Author: Falco Paul
 
-package org.metaz.examples.repository;
+package org.metaz.repository;
 
 import org.hibernate.Session;
 
-public class HibernateDatabaseSession extends DatabaseSession {
+public class HibernateDatabaseSession implements DatabaseSession {
 
   Session hibernateSession = null;
-
-  // constructors
-  
-  public HibernateDatabaseSession(Session hibernateSession)
-  {
-    this.hibernateSession = hibernateSession;
-  }
 
   public void setHibernateSession(Session hibernateSession)
   {
@@ -25,5 +18,5 @@ public class HibernateDatabaseSession extends DatabaseSession {
   {
     return hibernateSession;
   }
-
+   
 }
