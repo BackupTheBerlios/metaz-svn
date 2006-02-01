@@ -16,7 +16,7 @@ import org.metaz.util.MetaZ;
 public class PrototypeCLI {
 
     private static String syntax =
-        "PrototypeCLI -option [goal] [[-option goal][..]";
+        "PrototypeCLI -option [goal] [[-option goal][..]]";
 
     public PrototypeCLI() {
     }
@@ -106,56 +106,56 @@ public class PrototypeCLI {
 
         Option gOpt =
             new Option("g", MetaData.TARGETENDUSER, false, "Docent, Begeleider, Manager");
-        gOpt.setArgs(1);
+        gOpt.setArgs(5);
         gOpt.setType(new String());
         gOpt.setRequired(false);
         options.addOption(gOpt);
 
         Option sOpt =
             new Option("s", MetaData.SCHOOLTYPE, false, "Pre-primair onderwijs, Primair onderwijs, Voortgezet onderwijs");
-        sOpt.setArgs(1);
+        sOpt.setArgs(5);
         sOpt.setType(new String());
         sOpt.setRequired(false);
         options.addOption(sOpt);
 
         Option vOpt =
             new Option("v", MetaData.SCHOOLDISCIPLINE, false, "Toepasselijke vakkenlijst");
-        vOpt.setArgs(1);
+        vOpt.setArgs(5);
         vOpt.setType(new String());
         vOpt.setRequired(false);
         options.addOption(vOpt);
 
         Option dOpt =
             new Option("d", MetaData.DIDACTICFUNCTION, false, "Oefening, Simulatie, enz");
-        dOpt.setArgs(1);
+        dOpt.setArgs(5);
         dOpt.setType(new String());
         dOpt.setRequired(false);
         options.addOption(dOpt);
 
         Option pOpt =
             new Option("p", MetaData.PRODUCTTYPE, false, "Document, Afbeelding, Video, enz");
-        pOpt.setArgs(1);
+        pOpt.setArgs(5);
         pOpt.setType(new String());
         pOpt.setRequired(false);
         options.addOption(pOpt);
 
         Option bOpt =
             new Option("b", MetaData.PROFESSIONALSITUATION, false, "...een zeer lange lijst...");
-        bOpt.setArgs(1);
+        bOpt.setArgs(5);
         bOpt.setType(new String());
         bOpt.setRequired(false);
         options.addOption(bOpt);
 
         Option cOpt =
             new Option("c", MetaData.COMPETENCE, false, "Interpersoonlijk, Pedagogisch, enz..");
-        cOpt.setArgs(1);
+        cOpt.setArgs(5);
         cOpt.setType(new String());
         cOpt.setRequired(false);
         options.addOption(cOpt);
 
         Option hOpt =
             new Option("h", "help", false, "Laat deze helptekst zien");
-        hOpt.setArgs(0);
+        hOpt.setArgs(5);
         hOpt.setType(new String());
         hOpt.setRequired(false);
         options.addOption(hOpt);
@@ -173,7 +173,7 @@ public class PrototypeCLI {
     private static String printClauses(CommandLine cl, Options options) {
         String clausule = "";
         Option o;
-        int j = 0;
+        int j = 0; 
 
         // Ordering of the CLI options
         String[] shortOpts = new String[options.getOptions().size()];
@@ -215,8 +215,8 @@ public class PrototypeCLI {
         if (shortOpts[j] == "t") {
             o = options.getOption(shortOpts[0]);
             String[] keywords = cl.getOptionValues(shortOpts[j]);
-            for (int i = 0; i < keywords.length; i++)
-                clausule += keywords[i] + " ";
+            for (int n = 0; n < keywords.length; n++)
+                clausule += keywords[n] + " ";
             j = 1;
         }
 
@@ -224,8 +224,14 @@ public class PrototypeCLI {
         for (int i = j; ((shortOpts[i] != null) && (i < shortOpts.length));
              i++) {
             o = options.getOption(shortOpts[i]);
-            clausule +=
-                o.getLongOpt() + ":" + cl.getOptionValue(shortOpts[i]) + " ";
+            String[] valueStr = cl.getOptionValues(shortOpts[i]);
+            String value = valueStr[0];
+            if (valueStr.length > 1) {
+                for (int n = 1; n < valueStr.length; n++)
+                    value += " " + valueStr[n];
+                value = "\"" + value + "\"";
+            }
+            clausule += o.getLongOpt() + ":" + value + " ";
         }
         System.out.println();
         System.out.println("ZOEKSTRING: " + clausule);
