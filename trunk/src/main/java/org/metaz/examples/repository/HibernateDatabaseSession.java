@@ -1,7 +1,7 @@
 // A Hibernate session
 // Author: Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 import org.hibernate.Session;
 

@@ -1,7 +1,7 @@
 // A Hibernate interaction (transaction, query, etc)
 // Author: Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 public abstract class HibernateDatabaseInteraction extends HibernateDatabaseSession implements DatabaseInteraction {
  

@@ -1,7 +1,7 @@
 // A Hibernate transaction
 // Author: Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 public abstract class HibernateDatabaseTransaction extends HibernateDatabaseInteraction implements DatabaseTransaction {
 

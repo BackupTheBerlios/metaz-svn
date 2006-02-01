@@ -1,7 +1,7 @@
 // A database interaction (transaction, query, etc) abstraction, independend from any persistence engine
 // Author: Falco Paul
 
-package org.metaz.repository;
+package org.metaz.examples.repository;
 
 public interface DatabaseInteraction {
 
