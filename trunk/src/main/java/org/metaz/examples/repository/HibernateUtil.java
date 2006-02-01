@@ -1,7 +1,7 @@
 // This is a class that encapsulates a lot of the nasty Hibernate transaction details
-// @author Falco Paul
+// Author: Falco Paul
 
-package org.metaz.examples.repository;
+package org.metaz.repository;
 
 import java.io.Serializable;
 
@@ -12,7 +12,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.Query;
 
 public class HibernateUtil implements Serializable {
 
@@ -24,7 +23,7 @@ public class HibernateUtil implements Serializable {
 
   // conveinience method that aquires a factory object prior to calling the transaction method
   
-  public static ActionResult managedSession(DatabaseInteraction interaction) {
+  public static ActionResult managedSession(HibernateDatabaseInteraction interaction) {
    
     SessionFactory factory = HibernateEnvironment.getInstance().getSessionFactory();
   
@@ -37,22 +36,21 @@ public class HibernateUtil implements Serializable {
   
   // transaction abstraction
 
-  public static ActionResult managedSession(SessionFactory factory, DatabaseInteraction interaction) {
+  public static ActionResult managedSession(SessionFactory factory, HibernateDatabaseInteraction interaction) {
 
     Session hibernateSession = null;
-    DatabaseSession dbSession = null;
     Transaction hibernateTransaction = null;
-    ActionResult dbResult = new SuccessResult();
+    ActionResult result = new SuccessResult();
  
     try {
     
       hibernateSession = factory.openSession();
       hibernateTransaction = hibernateSession.beginTransaction();
-      dbSession = new HibernateDatabaseSession(hibernateSession);
+      interaction.setHibernateSession(hibernateSession);
       
-      ActionResult result = interaction.execute(dbSession);
-      if (dbResult instanceof ErrorResult)
-        throw new HibernateException( ((ErrorResult) dbResult).getMessage());
+      result = interaction.execute();
+      if (result instanceof ErrorResult)
+        throw new HibernateException( ((ErrorResult) result).getMessage());
 
       hibernateSession.flush();
       
@@ -61,7 +59,7 @@ public class HibernateUtil implements Serializable {
       
     } catch (Exception e) {
 
-      dbResult = new ErrorResult(e.getClass().toString() + " : " + e.getMessage());
+      result = new ErrorResult(e.getClass().toString() + " : " + e.getMessage());
       
       e.printStackTrace();
       
@@ -71,14 +69,14 @@ public class HibernateUtil implements Serializable {
         if (hibernateTransaction != null)        
           hibernateTransaction.rollback();
 
-        ((DatabaseTransaction) interaction).rolledBack(dbSession);
+        ((DatabaseTransaction) interaction).rolledBack();
         
         
       } catch (Exception e2) {
         
         // already fatal now...
 
-        ((DatabaseTransaction) interaction).rollBackFailed(dbSession);
+        ((DatabaseTransaction) interaction).rollBackFailed();
         
       }
     
@@ -94,25 +92,26 @@ public class HibernateUtil implements Serializable {
 
         // not a fatal error, so we don't change dbResult
 
-        interaction.sessionCloseFailed(dbSession);
+        interaction.sessionCloseFailed();
 
       }
       
     }
     
-    return dbResult;
+    return result;
     
   }
 
-  public static ActionResult objectForId(HibernateDatabaseSession dbSession, 
-                                         String objectName, String id) throws Exception {
+  // conveinience method that returns a CRD object for a given UUID
+  
+  public static ActionResult objectForUuId(HibernateDatabaseQuery query, String objectName, String uuId) throws Exception {
 
     Object obj;
     Iterator i;
     
-    i = dbSession.getHibernateSession()
-        .createQuery ("from " + objectName +  " as object where object.id = :id")
-        .setParameter("id", id)
+    i = query.getHibernateSession()
+        .createQuery("from " + objectName +  " as object where object.uuID = :oid")
+        .setParameter("oid", uuId)
         .iterate();
     
     if (i.hasNext())
