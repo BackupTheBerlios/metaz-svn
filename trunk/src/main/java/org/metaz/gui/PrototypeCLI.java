@@ -14,6 +14,9 @@ import org.metaz.repository.FacadeFactory;
 
 
 public class PrototypeCLI {
+
+private static String syntax = "PrototypeCLI -option [goal] [[-option goal][..]";
+
     public PrototypeCLI() {
     }
 
@@ -91,58 +94,60 @@ public class PrototypeCLI {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("h")) {
                 HelpFormatter f = new HelpFormatter();
-                f.printHelp("ApplicatieZ", options);
+                System.out.println();                
+                f.printHelp(syntax, options);
                 java.lang.System.exit(0);
             }
         } catch (Exception e) {
+            System.out.println();
             System.out.println("Command line option parsing failed");
             System.out.println("Option error: " + e.toString());
+            System.out.println();
             HelpFormatter f = new HelpFormatter();
-            f.printHelp("ApplicatieZ", options);
+            f.printHelp(syntax, options);
             java.lang.System.exit(0);
         }
 
-        String[] ss = new String[options.getOptions().size()];
-        // Onderstaande kan vast efficienter...
+        String[] shortOpts = new String[options.getOptions().size()];
+        // Onderstaande kan waarschijnlijk efficienter...
         int j = 0;
         if (cmd.hasOption("t")) {
-            ss[j] = "t";
+            shortOpts[j] = "t";
             j++;
         }
         if (cmd.hasOption("g")) {
-            ss[j] = "g";
+            shortOpts[j] = "g";
             j++;
         }
         if (cmd.hasOption("s")) {
-            ss[j] = "s";
+            shortOpts[j] = "s";
             j++;
         }
         if (cmd.hasOption("v")) {
-            ss[j] = "v";
+            shortOpts[j] = "v";
             j++;
         }
         if (cmd.hasOption("d")) {
-            ss[j] = "d";
+            shortOpts[j] = "d";
             j++;
         }
         if (cmd.hasOption("p")) {
-            ss[j] = "p";
+            shortOpts[j] = "p";
             j++;
         }
         if (cmd.hasOption("b")) {
-            ss[j] = "b";
+            shortOpts[j] = "b";
             j++;
         }
         if (cmd.hasOption("c")) {
-            ss[j] = "c";
+            shortOpts[j] = "c";
             j++;
         }
 
-        String searchString = printClausule(cmd, options, ss);
+        String searchString = printClauses(cmd, options, shortOpts);
 
         if (checkQuery(searchString))
-            ;
-        //performSearch(searchString);
+            performSearch(searchString);
         else
             System.out.println("fout in checkQuery");
     }
@@ -154,7 +159,6 @@ public class PrototypeCLI {
         try {
             List list = myFacade.doSearch(searchString);
             System.out.println(list.toString());
-
         } catch (Exception e) {
             // TODO
             System.out.println("niet gelukt");
@@ -174,29 +178,32 @@ public class PrototypeCLI {
         return true;
     }
 
-    private static String printClausule(CommandLine cl, Options options,
-                                        String[] ss) {
-
-
+    private static String printClauses(CommandLine cl, Options options,
+                                        String[] opts) {
         String clausule = "";
         Option o;
+        int j = 0;
 
         // the freetext searchstring
-        if (ss[0] == "t") {
-            o = options.getOption(ss[0]);
-            clausule = cl.getOptionValue(o.getValue(ss[0])) + " ";
+        if (opts[j] == "t") {
+            o = options.getOption(opts[0]);
+            String[] keywords = cl.getOptionValues(opts[j]);
+            String optTrefwoorden = "";
+            for (int i = 0; i < keywords.length; i++)
+                clausule += keywords[i] + " ";            
+            j = 1;
         }
 
         // metadata valuepairs
-        for (int i = 1; ((ss[i] != null) && (i < ss.length)); i++) {
-            o = options.getOption(ss[i]);
+        for (int i = j; ((opts[i] != null) && (i < opts.length)); i++) {
+            o = options.getOption(opts[i]);
             clausule +=
-                o.getLongOpt() + ":" + cl.getOptionValue(o.getValue(ss[i])) +
+                o.getLongOpt() + ":" + cl.getOptionValue(opts[i]) +
                 " ";
         }
-        System.out.println(clausule);
+        System.out.println();
+        System.out.println("ZOEKSTRING: "+clausule);
         return clausule;
-
     }
 
 
