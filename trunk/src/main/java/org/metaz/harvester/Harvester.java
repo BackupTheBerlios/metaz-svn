@@ -4,9 +4,11 @@ import org.apache.log4j.Logger;
 import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.DateMetaData;
 import org.metaz.domain.HyperlinkMetaData;
+import org.metaz.domain.MetaData;
 import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
+import org.metaz.repository.Facade;
 import org.metaz.util.MetaZ;
 
 import java.io.*;
@@ -120,6 +122,7 @@ public class Harvester {
 		Element root = doc.getRootElement();
 		if (root.getName()=="leerobjecten"){
 			logger.info("before iterating");
+			List<Record> leerobjecten = new Vector<Record>();
 			for (Iterator i = root.elementIterator(); i.hasNext(); )
 			{
 				
@@ -208,14 +211,19 @@ public class Harvester {
 				//to do
 				//beoogdeEindgebruiker
 				//schooltype
+				
+				
 				//vakleergebied
 				//beroepssituatie
 				
+				leerobjecten.add(rec);
 				
 				
 				
-				
-			}			
+			}
+			MetaZ app = MetaZ.getInstance();
+			Facade facade = app.getRepositoryFacade();
+			facade.doUpdate(leerobjecten);
 		}
 		//
 		// iterate through child elements of root
