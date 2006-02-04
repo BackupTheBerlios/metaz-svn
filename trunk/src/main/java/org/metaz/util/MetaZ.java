@@ -45,6 +45,9 @@ public class MetaZ implements java.io.Serializable {
   private InputStream propertyStream = null; // a stream pointing to the actual property file we use
   private Properties properties = null;      // application properties loaded from the above stream
   private String log4JConfigFile = null;     // log4J configuration file
+  
+  // set true if logging does not work
+  private boolean verboseOutput = false;
 
   
   // private constructor
@@ -269,7 +272,8 @@ public class MetaZ implements java.io.Serializable {
 
     } catch (Exception e)
     {
-      logger.info("Could not open properties resource file from the user home <" + fileName + ">");
+      if (verboseOutput)
+        logger.info("Could not open properties resource file from the user home <" + fileName + ">");
     }
     
     if (propStream == null) {
@@ -286,8 +290,9 @@ public class MetaZ implements java.io.Serializable {
 
       } catch (Exception e)
       {
-        logger.info("Could not open properties resource file from the current directory <" + fileName + ">");
-      }
+        if (verboseOutput)      
+          logger.info("Could not open properties resource file from the current directory <" + fileName + ">");
+      } 
       
     }
 
@@ -314,13 +319,16 @@ public class MetaZ implements java.io.Serializable {
         properties.load(propStream);
         propertyStream = propStream;
         
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        properties.list(pw);
-        pw.close();
-        logger.info("About to list Meta/Z properties");
-        logger.info(sw.toString());
-        sw.close();
+        if (verboseOutput)
+        {
+          StringWriter sw = new StringWriter();
+          PrintWriter pw = new PrintWriter(sw);
+          properties.list(pw);
+          pw.close();
+          logger.info("About to list Meta/Z properties");
+          logger.info(sw.toString());
+          sw.close();
+        }
 
       } catch (Exception e)
       {
