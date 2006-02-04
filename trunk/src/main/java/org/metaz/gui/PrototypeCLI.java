@@ -7,22 +7,33 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import org.metaz.domain.MetaData;
 import org.metaz.repository.Facade;
 import org.metaz.util.MetaZ;
 
+import org.apache.log4j.Logger;
 
+/**
+ *  This class provide a command line interface to Application Z, an application 
+ *  that provides a search facility within multiple CMS's of the Ruud de Moor 
+ *  Centrum.
+ */
 public class PrototypeCLI {
 
     private static String syntax =
         "PrototypeCLI -option [goal] [[-option goal][..]]";
 
+    private static Logger logger = MetaZ.getLogger(PrototypeCLI.class);
+
+
     public PrototypeCLI() {
     }
 
     public static void main(String[] args) {
-        //PrototypeCLI prototypeCLI = new PrototypeCLI();
+
+        String searchString = "";
 
         // Definition of the possible CLI options
         Options options = defineOptions();
@@ -34,29 +45,39 @@ public class PrototypeCLI {
         try {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("h")) {
-                HelpFormatter f = new HelpFormatter();
-                System.out.println();
-                f.printHelp(syntax, options);
-                java.lang.System.exit(0);
+                printHelp(options);
+                System.out.println("test");
+
             }
         } catch (Exception e) {
             System.out.println();
             System.out.println("Command line option parsing failed");
             System.out.println("Option error: " + e.toString());
-            System.out.println();
-            HelpFormatter f = new HelpFormatter();
-            f.printHelp(syntax, options);
-            java.lang.System.exit(0);
+            logger.error(e.getMessage());
+            printHelp(options);
         }
 
         // The searchString should have the correct syntax.
-        String searchString = printClauses(cmd, options);
+        try {
+            searchString = printClauses(cmd, options);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
+            printHelp(options);
+        }
 
         // If all is right, send the searchString to the searchService.
-        if (checkQuery(searchString))
+        if (checkQuery(searchString)) {
+            System.out.println();
+            System.out.println("ZOEKSTRING: " + searchString);
+            logger.info("ZOEKSTRING: " + searchString);
             performSearch(searchString);
-        else
-            System.out.println("fout in checkQuery");
+        } else {
+            System.out.println();
+            System.out.println("Please use the correct syntax.");
+            logger.error("Please use the correct syntax.");
+            printHelp(options);
+        }
     }
 
     /**
@@ -70,10 +91,12 @@ public class PrototypeCLI {
         Facade myFacade = MetaZ.getInstance().getRepositoryFacade();
         try {
             List list = myFacade.doSearch(searchString);
+            // Printing of the URI list is not yet implemented.
             System.out.println(list.toString());
         } catch (Exception e) {
-            // TODO
-            System.out.println("niet gelukt");
+            System.out
+            .println("Error in result presentation: " + e.toString());
+            logger.error("Error in result presentation: " + e.getMessage());
         }
     }
 
@@ -89,6 +112,18 @@ public class PrototypeCLI {
             return false;
         return true;
     }
+
+    /**
+     * p>Prints the helpmessage.<br>
+     * @param options
+     */
+    public static void printHelp(Options options) {
+        System.out.println();
+        HelpFormatter f = new HelpFormatter();
+        f.printHelp(syntax, options);
+        java.lang.System.exit(0);
+    }
+
 
     /**
      * Defines the possible CLI options
@@ -155,7 +190,7 @@ public class PrototypeCLI {
 
         Option hOpt =
             new Option("h", "help", false, "Laat deze helptekst zien");
-        hOpt.setArgs(5);
+        hOpt.setArgs(0);
         hOpt.setType(new String());
         hOpt.setRequired(false);
         options.addOption(hOpt);
@@ -170,10 +205,11 @@ public class PrototypeCLI {
      * @param options
      * @return String
      */
-    private static String printClauses(CommandLine cl, Options options) {
+    private static String printClauses(CommandLine cl,
+                                       Options options) throws ParseException {
         String clausule = "";
         Option o;
-        int j = 0; 
+        int j = 0;
 
         // Ordering of the CLI options
         String[] shortOpts = new String[options.getOptions().size()];
@@ -215,8 +251,12 @@ public class PrototypeCLI {
         if (shortOpts[j] == "t") {
             o = options.getOption(shortOpts[0]);
             String[] keywords = cl.getOptionValues(shortOpts[j]);
-            for (int n = 0; n < keywords.length; n++)
+            for (int n = 0; n < keywords.length; n++) {
+                if (keywords[n].startsWith("-"))
+                    throw new ParseException("Unrecognised option \"" +
+                                             keywords[n] + "\"");
                 clausule += keywords[n] + " ";
+            }
             j = 1;
         }
 
@@ -227,14 +267,16 @@ public class PrototypeCLI {
             String[] valueStr = cl.getOptionValues(shortOpts[i]);
             String value = valueStr[0];
             if (valueStr.length > 1) {
-                for (int n = 1; n < valueStr.length; n++)
+                for (int n = 1; n < valueStr.length; n++) {
                     value += " " + valueStr[n];
+                    if (valueStr[n].startsWith("-"))
+                        throw new ParseException("Unrecognised option \"" +
+                                                 valueStr[n] + "\"");
+                }
                 value = "\"" + value + "\"";
             }
             clausule += o.getLongOpt() + ":" + value + " ";
         }
-        System.out.println();
-        System.out.println("ZOEKSTRING: " + clausule);
         return clausule;
     }
 
