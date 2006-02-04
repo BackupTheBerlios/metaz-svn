@@ -1,5 +1,7 @@
 package org.metaz.gui;
 
+import java.net.URI;
+
 import java.util.List;
 
 import org.apache.commons.cli.BasicParser;
@@ -11,9 +13,17 @@ import org.apache.commons.cli.ParseException;
 
 import org.metaz.domain.MetaData;
 import org.metaz.repository.Facade;
+import org.metaz.repository.Result;
 import org.metaz.util.MetaZ;
 
 import org.apache.log4j.Logger;
+
+import java.util.List;
+
+import java.net.URI;
+
+import org.metaz.domain.HyperlinkMetaData;
+import org.metaz.domain.Record;
 
 /**
  *  This class provide a command line interface to Application Z, an application 
@@ -46,14 +56,12 @@ public class PrototypeCLI {
             cmd = parser.parse(options, args);
             if (cmd.hasOption("h")) {
                 printHelp(options);
-                System.out.println("test");
-
             }
         } catch (Exception e) {
             System.out.println();
             System.out.println("Command line option parsing failed");
             System.out.println("Option error: " + e.toString());
-            logger.error(e.getMessage());
+            logger.error("Option error: " + e.getMessage());
             printHelp(options);
         }
 
@@ -90,9 +98,12 @@ public class PrototypeCLI {
 
         Facade myFacade = MetaZ.getInstance().getRepositoryFacade();
         try {
-            List list = myFacade.doSearch(searchString);
-            // Printing of the URI list is not yet implemented.
-            System.out.println(list.toString());
+            List<Result<Record>> resultList = myFacade.doSearch(searchString);
+            // Printing of the record list is not yet tested!!!
+            for (int i = 0; i < resultList.size(); i++) {
+                resultList.remove(i).getObject().getURI().getValue()
+                .toString();
+            }
         } catch (Exception e) {
             System.out
             .println("Error in result presentation: " + e.toString());
