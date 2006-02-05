@@ -62,6 +62,7 @@ public class DataServiceImplTest extends TestCase {
 		//Transaction t = sess.beginTransaction();
 		sess.save(rec);
 		//t.commit();
+		sess.flush(); //JGO: flush session to force an update of the DB
 		sess.close();
 	}
 
