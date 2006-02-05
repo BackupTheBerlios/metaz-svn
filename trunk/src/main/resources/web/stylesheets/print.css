@@ -1,0 +1,53 @@
+/* print.css */
+
+body {
+  font-size: 12pt;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, td, th, div {
+  font-family: georgia, times new roman, serif;
+}
+
+a:link, a:visited, a:hover, a:focus, a:active {
+  color: #000000;
+  text-decoration: underline;
+}
+
+#content {
+  margin: 10px 10px 10px 10px;
+  border: 0px;
+}
+
+#main {
+  padding-top: 0px;
+}
+
+#header, #menu, #breadcrumb, .topLink, .noprint {
+  display: none;
+}
+
+img {
+  filter: gray;
+}
+
+.divAlignLeft, .divAlignRight {
+  border: 0px;
+}
+
+#footnote {
+  border-top: 1px solid #000000;
+}
+
+#footnote h6 {
+  margin: 0px;
+}
+
+#footnote ol {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#footer, #footer a:link, #footer a:visited, #footer a:hover, #footer a:focus, #footer a:active {
+  background-color: #ffffff;
+  color: #000000;
+}
