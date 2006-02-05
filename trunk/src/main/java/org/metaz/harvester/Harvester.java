@@ -3,6 +3,8 @@ package org.metaz.harvester;
 import org.apache.log4j.Logger;
 import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.DateMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.MetaData;
 import org.metaz.domain.NumericMetaData;
@@ -211,6 +213,11 @@ public class Harvester {
 				//to do
 				//beoogdeEindgebruiker
 				//schooltype
+				//for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
+				//		Element schooltype = (Element) k.next();
+				//		schooltypen= "Rol: " + schooltype.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
+				//		logger.info(schooltypen);
+				//}
 				
 				
 				//vakleergebied
@@ -328,4 +335,43 @@ public class Harvester {
 	
 //}
 	
-}
+    private void addNodeRecursive(Element e, Element root, HierarchicalStructuredTextMetaDataSet hSet){
+		for (Iterator i = e.elementIterator(); i.hasNext(); )
+		{
+			
+			//get first/next leerobject
+			Element element = (Element) i.next();
+			//isleaf then add branch to hSet
+			if (element.elements().size()==0){
+				List<TextMetaData> branch = new Vector<TextMetaData>();
+				Element etemp=element;
+				while (!etemp.equals(root)){
+					//get TextMetaData
+					TextMetaData tmtdt = new TextMetaData();
+					tmtdt.setValue(etemp.getText());
+					//add to list
+					branch.add(tmtdt);
+					//get parent en set in etemp
+					etemp = etemp.getParent();
+				}
+				//reverselist
+				HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData(); 
+				for (int j=branch.size();j>0;j--){
+					//add listelements to HierarchicalMetaDataText
+					hMetaData.addChild(branch.get(j-1));
+				}
+				//add HierarchicalMetaDataText to hSet
+				hSet.addHierarchy(hMetaData);
+				//next branch
+			}
+			else {
+				//if not leaf make recursive call
+				addNodeRecursive(element, root, hSet);				
+			}
+			    	
+		}
+		return;
+	}
+   }
+
+    
