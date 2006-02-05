@@ -6,7 +6,6 @@ import org.metaz.domain.DateMetaData;
 import org.metaz.domain.HierarchicalStructuredTextMetaData;
 import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
 import org.metaz.domain.HyperlinkMetaData;
-import org.metaz.domain.MetaData;
 import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
@@ -213,6 +212,9 @@ public class Harvester {
 				//to do
 				//beoogdeEindgebruiker
 				//schooltype
+				HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
+				//todo, check if it is the correct root and start node
+				addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),element.element("schooltype").element("hoofdwaarden"),hSet);
 				//for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
 				//		Element schooltype = (Element) k.next();
 				//		schooltypen= "Rol: " + schooltype.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
