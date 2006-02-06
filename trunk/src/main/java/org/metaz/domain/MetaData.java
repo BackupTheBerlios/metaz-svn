@@ -113,7 +113,9 @@ public abstract class MetaData {
     */
         public final static String ROLENAME = "rolEnNaam";
         
-        private String name;
+    private String id;
+        
+    private String name;
 	private String description;
 	private boolean mandatory;
 	private boolean optional;
@@ -195,5 +197,13 @@ public abstract class MetaData {
 	 */
 	public void setOptional(boolean optional) {
 		this.optional = optional;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }
