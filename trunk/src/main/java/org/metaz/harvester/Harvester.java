@@ -144,89 +144,196 @@ public class Harvester {
 				bln.setValue(Boolean.valueOf(element.element("beveiligd").getText()));
 				Record rec = new org.metaz.domain.Record(tmdt1,bln,tmdt2,tmdt3,tmdt4,hper);
 				logger.info("record created" + element.attributeValue("URI"));
-				tmdt1.setValue(element.element("aggregatieniveau").getText());
-				rec.setAggregationLevel(tmdt1);
-				logger.info("aggregatieniveau");
-				tmdt1.setValue(element.element("didactischScenario").getText());
-				rec.setAggregationLevel(tmdt1);
-				logger.info("didactischScenario");
-				tmdt1.setValue(element.element("competentie").getText());
-				rec.setCompetence(tmdt1);
-				tmdt1.setValue(element.element("onderwerp").getText());
-				rec.setSubject(tmdt1);
-				tmdt1.setValue(element.element("rechten").getText());
-				rec.setRights(tmdt1);
-				logger.info("rechten");
-				tmdt1.setValue(element.element("technischeVereiste").getText());
-				rec.setTechnicalRequirements(tmdt1);
-				logger.info("technischeVereiste");
+				//next are optional, should be done via iterator
+				try{
+					tmdt1.setValue(element.element("aggregatieniveau").getText());
+					rec.setAggregationLevel(tmdt1);
+					logger.info("aggregatieniveau");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+				}
+				try{
+					tmdt1.setValue(element.element("didactischScenario").getText());
+					rec.setAggregationLevel(tmdt1);
+					logger.info("didactischScenario");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("competentie").getText());
+					rec.setCompetence(tmdt1);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("onderwerp").getText());
+					rec.setSubject(tmdt1);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("rechten").getText());
+					rec.setRights(tmdt1);
+					logger.info("rechten");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("technischeVereiste").getText());
+					rec.setTechnicalRequirements(tmdt1);
+					logger.info("technischeVereiste");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				DateMetaData dmdt = new DateMetaData();
-				Date d = sdf.parse(element.element("datumCreatie").getText());
-				dmdt.setValue(d);
-				rec.setCreationDate(dmdt);
-				logger.info("datumCreatie");
-				d = sdf.parse(element.element("datumLaatsteWijziging").getText());
-				dmdt.setValue(d);
-				rec.setLastChangedDate(dmdt);
-				logger.info("datumLaatsteWijziging");
-				NumericMetaData nmdt=new NumericMetaData();
-				nmdt.setValue(Long.getLong(element.element("bestandsgrootte").getText()));
-				rec.setFileSize(nmdt);
-				nmdt.setValue(Long.getLong(element.element("benodigdeTijd").getText()));
-				rec.setRequiredTime(nmdt);
-				nmdt.setValue(Long.getLong(element.element("afspeelduur").getText()));
-				rec.setPlayingTime(nmdt);
-				logger.info("afspeelduur");
-				tmdt1.setValue(element.element("versie").getText());
-				rec.setVersion(tmdt1);
-				tmdt1.setValue(element.element("status").getText());
-				rec.setStatus(tmdt1);
-				tmdt1.setValue(element.element("bestandsformaat").getText());
-				rec.setStatus(tmdt1);
-				logger.info("bestandsformaat");
-				tmdt1.setValue(element.element("omschrijving").getText());
-				rec.setStatus(tmdt1);
-				logger.info("omschrijving" + tmdt1.getValue());
-				//sleutelwoorden
-				String keywords="";
-				for (Iterator j=element.element("sleutelwoorden").elementIterator();j.hasNext();){
-					Element keyword = (Element) j.next();
-					keywords= keyword.getText() + ";";
-					//.element("sleutelwoord")
-					logger.info(keywords);
+				try{
+					Date d = sdf.parse(element.element("datumCreatie").getText());
+					dmdt.setValue(d);
+					rec.setCreationDate(dmdt);
+					logger.info("datumCreatie");
 				}
-				tmdt1.setValue(keywords);
-				rec.setKeywords(tmdt1);
-				logger.info("sleutelwoorden");
-				//rolEnNaam
-				String rolenames="";
-				for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
-						Element rolename = (Element) k.next();
-						rolenames= "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
-						logger.info(rolenames);
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
 				}
-				tmdt1.setValue(rolenames);
-				rec.setRoleName(tmdt1);
-				logger.info("rolEnNaam");
-				//to do
-				//beoogdeEindgebruiker
-					//zelfde als schooltype?
-				//schooltype
-				HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
-				addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),element.element("schooltype").element("hoofdwaarden"),hSet);
-				rec.setSchoolType(hSet);
-				//todo, check if it is the correct root and start node
+				try{
+					Date d = sdf.parse(element.element("datumLaatsteWijziging").getText());
+					dmdt.setValue(d);
+					rec.setLastChangedDate(dmdt);
+					logger.info("datumLaatsteWijziging");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
 
-				//another possibility, less code but slower
-				//select all waarde nodes within the schooltype node
-				//X-path //schooltype/descendant::waarde "//leerobject[@uri='" + hper.getText() + "']/schooltype//*/waarde"
-				//List list = doc.selectNodes( "//leerobject[@uri='" + hper.getValue() + "']/schooltype//*/waarde");
-			
-				//vakleergebied
-					//zelfde als schooltype?
-				//beroepssituatie
-					//zelfde als schooltype?
+				}
+				NumericMetaData nmdt=new NumericMetaData();
+				try{
+					nmdt.setValue(Long.getLong(element.element("bestandsgrootte").getText()));
+					rec.setFileSize(nmdt);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					nmdt.setValue(Long.getLong(element.element("benodigdeTijd").getText()));
+					rec.setRequiredTime(nmdt);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					nmdt.setValue(Long.getLong(element.element("afspeelduur").getText()));
+					rec.setPlayingTime(nmdt);
+					logger.info("afspeelduur");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("versie").getText());
+					rec.setVersion(tmdt1);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("status").getText());
+					rec.setStatus(tmdt1);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("bestandsformaat").getText());
+					rec.setStatus(tmdt1);
+					logger.info("bestandsformaat");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					tmdt1.setValue(element.element("omschrijving").getText());
+					rec.setStatus(tmdt1);
+					logger.info("omschrijving" + tmdt1.getValue());
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					//sleutelwoorden
+					String keywords="";
+					for (Iterator j=element.element("sleutelwoorden").elementIterator();j.hasNext();){
+						Element keyword = (Element) j.next();
+						keywords= keyword.getText() + ";";
+						//.element("sleutelwoord")
+						logger.info(keywords);
+					}
+					tmdt1.setValue(keywords);
+					rec.setKeywords(tmdt1);
+					logger.info("sleutelwoorden");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					//rolEnNaam
+					String rolenames="";
+					for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
+							Element rolename = (Element) k.next();
+							rolenames= "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
+							logger.info(rolenames);
+					}
+					tmdt1.setValue(rolenames);
+					rec.setRoleName(tmdt1);
+					logger.info("rolEnNaam");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					//to do
+					//beoogdeEindgebruiker
+						//zelfde als schooltype?
+					//schooltype
+					HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
+					addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),element.element("schooltype").element("hoofdwaarden"),hSet);
+					rec.setSchoolType(hSet);
+					//todo, check if it is the correct root and start node
+	
+					//another possibility, less code but slower
+					//select all waarde nodes within the schooltype node
+					//X-path //schooltype/descendant::waarde "//leerobject[@uri='" + hper.getText() + "']/schooltype//*/waarde"
+					//List list = doc.selectNodes( "//leerobject[@uri='" + hper.getValue() + "']/schooltype//*/waarde");
+				
+					//vakleergebied
+						//zelfde als schooltype?
+					//beroepssituatie
+						//zelfde als schooltype?
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());					
+				}
 				
 				leerobjecten.add(rec);
 				
