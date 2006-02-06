@@ -211,19 +211,22 @@ public class Harvester {
 				logger.info("rolEnNaam");
 				//to do
 				//beoogdeEindgebruiker
+					//zelfde als schooltype?
 				//schooltype
 				HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
-				//todo, check if it is the correct root and start node
 				addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),element.element("schooltype").element("hoofdwaarden"),hSet);
-				//for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
-				//		Element schooltype = (Element) k.next();
-				//		schooltypen= "Rol: " + schooltype.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
-				//		logger.info(schooltypen);
-				//}
-				
-				
+				rec.setSchoolType(hSet);
+				//todo, check if it is the correct root and start node
+
+				//another possibility, less code but slower
+				//select all waarde nodes within the schooltype node
+				//X-path //schooltype/descendant::waarde "//leerobject[@uri='" + hper.getText() + "']/schooltype//*/waarde"
+				//List list = doc.selectNodes( "//leerobject[@uri='" + hper.getValue() + "']/schooltype//*/waarde");
+			
 				//vakleergebied
+					//zelfde als schooltype?
 				//beroepssituatie
+					//zelfde als schooltype?
 				
 				leerobjecten.add(rec);
 				
@@ -283,9 +286,8 @@ public class Harvester {
 /**
  * Validate document using MSV
  * 
- * @param document
- * @param schemaURI
- * @throws Exception
+ * @param document xml document to validate
+ * @throws Exception progresses any exception 
  */	
     protected void processValidation(Document document) throws Exception {
     	MetaZ app = MetaZ.getInstance();
@@ -322,21 +324,14 @@ public class Harvester {
         writer.write( document );
         logger.info("Wrote verifier to xml");
     }
-//private void getRecords(Element el, Record rec){
-//	for (Iterator i = el.elementIterator(); i.hasNext(); )
-//	{
-//		Element element = (Element) i.next();
-//		// do something
-//		if (element.elementIterator().hasNext()== false){
-//			System.out.println("Element Name:"+element.getQualifiedName() );
-//			System.out.println("Element Value:"+element.getText());
-//		}
-//		//getRecord(element);
-//		//return new Record();
-//	}
-	
-//}
-	
+
+	/**
+	 * Recursive function to get paths of hierarchical data
+	 * @param e current element in xml document
+	 * @param root document element that is the starting reference 
+	 *        point for the Hierarchy
+	 * @param hSet Hierarchical set of MetaData
+	 */
     private void addNodeRecursive(Element e, Element root, HierarchicalStructuredTextMetaDataSet hSet){
 		for (Iterator i = e.elementIterator(); i.hasNext(); )
 		{
@@ -344,23 +339,28 @@ public class Harvester {
 			//get first/next leerobject
 			Element element = (Element) i.next();
 			//isleaf then add branch to hSet
-			if (element.elements().size()==0){
+			if (element.elements().size()==0 && !(element.getParent().elements().size()>1)){
 				List<TextMetaData> branch = new Vector<TextMetaData>();
 				Element etemp=element;
-				while (!etemp.equals(root)){
-					//get TextMetaData
-					TextMetaData tmtdt = new TextMetaData();
-					tmtdt.setValue(etemp.getText());
-					//add to list
-					branch.add(tmtdt);
-					//get parent en set in etemp
-					etemp = etemp.getParent();
+				while (!etemp.equals(root) && !etemp.getParent().equals(root)){
+						if (!etemp.getName().equals("waarde")){
+							etemp=etemp.getParent().element("waarde");
+						}
+						//get TextMetaData
+						TextMetaData tmtdt = new TextMetaData();
+						tmtdt.setValue(etemp.getText());
+						logger.info(etemp.getParent().getName() + ": " + etemp.getText());
+						//add to list
+						branch.add(tmtdt);
+						//get parents parent en set in etemp
+						etemp = etemp.getParent();
 				}
 				//reverselist
 				HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData(); 
 				for (int j=branch.size();j>0;j--){
 					//add listelements to HierarchicalMetaDataText
 					hMetaData.addChild(branch.get(j-1));
+					logger.info(j + "-branch: " + branch.get(j-1).getValue());
 				}
 				//add HierarchicalMetaDataText to hSet
 				hSet.addHierarchy(hMetaData);
