@@ -40,16 +40,19 @@ form fieldset div.subfieldset {
 	border-color: #000000;
 	padding: 10px;
 	margin: 0px 0px 0px -20px;
+	position: relative;
 }
 
-form fieldset div.subfieldset legend {
-  font-size: 100%;
-  font-weight: normal;
-  background-color: #FFCCCC;
-  color: #666666;
-  margin: 0px 0px 0px 0px;
-  padding: 0px 2px;
-  border: 1px solid #781351;
+form div.subfieldset h3{
+	background-color:#996600;
+	border-width:1px;
+	border-style:solid;
+	color:#FFFFFF;
+	font-size:100%;
+	font-weight:normal;
+	padding:3px 5px;
+	margin:2px -3px 1px -3px;
+	border-color: #996600;
 }
 
 label {
@@ -121,7 +124,7 @@ form div fieldset {
 	margin: 0px 0px 0px 142px;
 	padding: 0px 5px 5px 5px;
 	width: 197px;
-	background-color: #FFFFCC;
+	background-color: #FFFF99;
 }
 
 form div fieldset legend {
@@ -210,7 +213,7 @@ form div input, form div select, form div textarea {
 }
 
 form div input.inputFile {
-  width: 211px;
+  width: 200px;
 }
 
 form div select.selectOne, form div select.selectMultiple {
