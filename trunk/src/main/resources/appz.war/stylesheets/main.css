@@ -8,21 +8,6 @@ body {
 	padding: 0;
 }
 
-#bodyWrapper {
-	font-size: 1em;
-}
-
-img,
-hr,
-.sectionimg,
-.skipLinks,
-#quickMenu,
-#minorMenu,
-#globalMenu,
-#backToTop {
-	display: none;
-}
-
 a {
 	color: black;
 	font-weight: bold;
@@ -46,12 +31,4 @@ h3 {
 	font-size: 1.3em;
 	margin: 1em 0;
 	padding: 0;
-}
-
-#footer {
-	border-top: thin solid black;
-	font-size: .8em;
-	margin: 1em 0 0;
-	padding: .25em 0 0;
-	text-align: center;
 }

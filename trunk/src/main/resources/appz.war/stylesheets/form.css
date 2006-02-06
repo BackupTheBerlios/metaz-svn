@@ -6,7 +6,6 @@
 }
 
 form {
-  margin: 0px;
   padding: 0px;
   font-size: 100%;
   min-width: 560px;
@@ -78,7 +77,6 @@ form div {
 	clear: left;
 	display: block;
 	width: 354px;
-	height: expression('1%');
 	margin: 5px 0px 0px 0px;
 	padding: 1px 3px;
 }
@@ -157,7 +155,6 @@ form div label.labelCheckbox, form div label.labelRadio {
   float: none;
   display: block;
   width: 200px;
-  height: expression('1%');
   padding: 0px;
   margin: 0px 0px 5px 142px;
   text-align: left;
@@ -264,7 +261,6 @@ form div small {
   margin: 0px 0px 5px 142px;
   padding: 1px 3px;
   font-size: 88%;
-  height: expression('1%');
 }
 
 form fieldset legend {
