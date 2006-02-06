@@ -1,14 +1,14 @@
 package org.metaz.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Record that holds a number of MetaData for a 'LeerObject'.
- * From a Harvester component a Record instance will be created
- * for each 'leerobject' element in the recieved xml.
+ * Record that holds a number of MetaData for a 'LeerObject'. From a Harvester
+ * component a Record instance will be created for each 'leerobject' element in
+ * the recieved xml.
  */
 public class Record {
+	
+	private String id;
 
 	private TextMetaData title;
         private TextMetaData subject;
@@ -42,12 +42,18 @@ public class Record {
 	 * is, Records with all required MetaData) are used. Optional metadata may
 	 * be added by using one of the setters.
 	 * 
-	 * @param title the mandatory title meta data.
-	 * @param isSecured the mandatory isSecured meta data.
-	 * @param fileFormat the mandatory fileFormat meta data.
-	 * @param didacticFunction the mandatory didacticFunction meta data.
-	 * @param productType the mandatory productType meta data.
-	 * @param uri the mandatory uri meta data.
+	 * @param title
+	 *            the mandatory title meta data.
+	 * @param isSecured
+	 *            the mandatory isSecured meta data.
+	 * @param fileFormat
+	 *            the mandatory fileFormat meta data.
+	 * @param didacticFunction
+	 *            the mandatory didacticFunction meta data.
+	 * @param productType
+	 *            the mandatory productType meta data.
+	 * @param uri
+	 *            the mandatory uri meta data.
 	 */
 	public Record(TextMetaData title, BooleanMetaData isSecured,
 			TextMetaData fileFormat, TextMetaData didacticFunction,
@@ -58,6 +64,10 @@ public class Record {
 		this.didacticFunction = didacticFunction;
 		this.productType = productType;
 		this.uri = uri;
+	}
+	
+	public Record(){
+		super();
 	}
 
     public TextMetaData getTitle() {
@@ -102,8 +112,15 @@ public class Record {
     public TextMetaData getDidacticFunction() {
         return didacticFunction;
     }
+    public void setDidacticFunction(TextMetaData didacticFunction){
+    	this.didacticFunction = didacticFunction;
+    }
     public TextMetaData getProductType() {
         return productType;
+    }
+    
+    public void setProductType(TextMetaData productType){
+    	this.productType = productType;
     }
     public HierarchicalStructuredTextMetaData getProfessionalSituation() {
         return professionalSituation;
@@ -119,6 +136,9 @@ public class Record {
     }
     public BooleanMetaData getSecured(){
         return secured;
+    }
+    public void setSecured(BooleanMetaData secured){
+    	this.secured = secured;
     }
     public TextMetaData getFileFormat() {
         return fileFormat;
@@ -198,4 +218,28 @@ public class Record {
     public void setRoleName(TextMetaData roleName) {
         this.roleName = roleName;
     }
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public HyperlinkMetaData getUri() {
+		return uri;
+	}
+
+	public void setUri(HyperlinkMetaData uri) {
+		this.uri = uri;
+	}
+
+	public void setFileFormat(TextMetaData fileFormat) {
+		this.fileFormat = fileFormat;
+	}
+
+	public void setTitle(TextMetaData title) {
+		this.title = title;
+	}
 }
