@@ -35,20 +35,20 @@ form fieldset legend {
 }
 
 form fieldset div.subfieldset {
-  clear: both;
-  font-size: 100%;
-  border-color: #000000;
-  padding: 10px;
-  margin: 0px 0px 0px -20px;
+	clear: both;
+	font-size: 100%;
+	border-color: #000000;
+	padding: 10px;
+	margin: 0px 0px 0px -20px;
 }
 
 form fieldset div.subfieldset legend {
   font-size: 100%;
   font-weight: normal;
-  background-color: #FFFFFF;
+  background-color: #FFCCCC;
   color: #666666;
   margin: 0px 0px 0px 0px;
-  padding: 0px 5px;
+  padding: 0px 2px;
   border: 1px solid #781351;
 }
 
@@ -72,12 +72,12 @@ textarea {
 }
 
 form div {
-  clear: left;
-  display: block;
-  width: 354px;
-  height: expression('1%');
-  margin: 5px 0px 0px 0px;
-  padding: 1px 3px;
+	clear: left;
+	display: block;
+	width: 354px;
+	height: expression('1%');
+	margin: 5px 0px 0px 0px;
+	padding: 1px 3px;
 }
 
 form fieldset div.notes {
@@ -114,13 +114,14 @@ form fieldset div.notes p.last {
 }
 
 form div fieldset {
-  clear: none;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #666666;
-  margin: 0px 0px 0px 142px;
-  padding: 0px 5px 5px 5px;
-  width: 197px;
+	clear: none;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #666666;
+	margin: 0px 0px 0px 142px;
+	padding: 0px 5px 5px 5px;
+	width: 197px;
+	background-color: #FFFFCC;
 }
 
 form div fieldset legend {
@@ -160,8 +161,8 @@ form div label.labelCheckbox, form div label.labelRadio {
 }
 
 form div fieldset label.labelCheckbox, form div fieldset label.labelRadio {
-  margin: 0px 0px 5px 0px;
-  width: 170px;
+	margin: 0px 0px 5px 0px;
+	width: 170px;
 }
 
 form div img {
@@ -205,6 +206,7 @@ form div input, form div select, form div textarea {
 	padding: 1px 3px;
 	margin: 0px 0px 0px 0px;
 	border: 1px solid #666666;
+	background-color: #FFFF99;
 }
 
 form div input.inputFile {
@@ -260,4 +262,63 @@ form div small {
   padding: 1px 3px;
   font-size: 88%;
   height: expression('1%');
+}
+
+form fieldset legend {
+  line-height: 150%;
+}
+
+form input, form select, form textarea {
+  background-color: #ffffff;
+}
+
+form textarea.expanding {
+  overflow: auto;
+}
+  
+form div label.labelCheckbox, form div label.labelRadio, label.labelCheckbox, label.labelRadio {
+  display: block;
+  width: 190px;
+  padding: 4px 0px 0px 18px;
+  text-indent: -18px;
+  line-height: 120%;
+}
+
+form div label.labelCheckbox input.inputCheckbox, form div label.labelRadio input.inputRadio, label.labelCheckbox input.inputCheckbox, label.labelRadio input.inputRadio {
+  margin: 0px 0px 0px 0px;
+}
+
+form div fieldset input.inputText, form div fieldset input.inputPassword, form div fieldset input.inputFile, form div fieldset textarea.inputTextarea {
+  width: 160px;
+  margin: 0px 0px 0px 18px;
+}
+
+form div label.compact {
+  display: inline;
+  width: auto;
+  padding: 4px 10px 0px 0px;
+  text-indent: 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+form div.wide label {
+  float: none;
+  display: block;
+}
+
+form div label.wide {
+  width: 348px;
+}
+
+form div.wide input.inputText, form div.wide input.inputPassword, form div.wide input.inputFile, form div.wide select, form div.wide textarea {
+  width: 344px;
+  margin: 0px;
+}
+
+form div.notes p, form div small {
+  line-height: 125%;
+}
+
+form div.wide small {
+  margin: 0px 0px 5px 0px;
 }

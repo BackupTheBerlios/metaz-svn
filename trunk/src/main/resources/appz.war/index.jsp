@@ -22,8 +22,6 @@
   @import "stylesheets/main.css";
   @import "stylesheets/tabs.css";
   @import "stylesheets/form.css";
-  @import "stylesheets/form.import.css";
-.style1 {color: #FF0000}
 </style>
 
 </head>
@@ -67,11 +65,12 @@
         <input type="text" name="address_1" id="address_1" class="inputText" size="10" maxlength="100" value="" />
         <input type="text" name="address_2" id="address_2" class="inputText" size="10" maxlength="100" value="" />
       </div>
+
       <div class="optional">
-        
         <label for="city">City:</label>
         <input type="text" name="city" id="city" class="inputText" size="10" maxlength="100" value="" />
       </div>
+
       <div class="optional">
         
         <label for="state">State:</label>
@@ -121,16 +120,19 @@
         <input type="text" name="confirm_email" id="confirm_email" class="inputText" size="10" maxlength="250" value="" />
         <small>Must match the email address you just entered above.</small>
       </div>
+
       <div class="optional">
-        
         <label for="phone">Phone:</label>
         <input type="text" name="phone" id="phone" class="inputText" size="10" maxlength="50" value="" />
+        <small>We will never sell or disclose your email address to anyone.  Once your account is setup, you may add additional email addresses.</small>
       </div>
+
       <div class="optional">
-        
         <label for="fax">Fax:</label>
         <input type="text" name="fax" id="fax" class="inputText" size="10" maxlength="50" value="" />
+        <small>We will never sell or disclose your email address to anyone.  Once your account is setup, you may add additional email addresses.</small>
       </div>
+
       <div class="optional">
         
       <div class="subfieldset">
