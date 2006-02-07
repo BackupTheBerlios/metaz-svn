@@ -311,34 +311,54 @@ public class Harvester {
 					logger.error(ignore.toString());
 					
 				}
+				HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
+				HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData();
 				try{
-					//to do
 					//beoogdeEindgebruiker
-						//zelfde als schooltype?
+					addNodeRecursive(element.element("beoogdeEindgebruiker").element("hoofdwaarden"), element.element("beoogdeEindgebruiker").element("hoofdwaarden"),hMetaData);
+					rec.setTargetEndUser(hMetaData);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
 					//schooltype
-					HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
 					addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),element.element("schooltype").element("hoofdwaarden"),hSet);
 					rec.setSchoolType(hSet);
-					//todo, check if it is the correct root and start node
-	
+
 					//another possibility, less code but slower
 					//select all waarde nodes within the schooltype node
 					//X-path //schooltype/descendant::waarde "//leerobject[@uri='" + hper.getText() + "']/schooltype//*/waarde"
 					//List list = doc.selectNodes( "//leerobject[@uri='" + hper.getValue() + "']/schooltype//*/waarde");
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
 				
 					//vakleergebied
-						//zelfde als schooltype?
+					hMetaData = new HierarchicalStructuredTextMetaData();
+					addNodeRecursive(element.element("vakleergebied").element("hoofdwaarden"), element.element("vakleergebied").element("hoofdwaarden"),hMetaData);
+					rec.setSchoolDiscipline(hMetaData);
+				}
+				catch (Exception ignore){
+					logger.error(ignore.toString());
+					
+				}
+				try{
+					
 					//beroepssituatie
-						//zelfde als schooltype?
+					hMetaData = new HierarchicalStructuredTextMetaData();
+					addNodeRecursive(element.element("beroepssituatie").element("hoofdwaarden"),element.element("beroepssituatie").element("hoofdwaarden"),hMetaData);
+					rec.setProfessionalSituation(hMetaData);
 				}
 				catch (Exception ignore){
 					logger.error(ignore.toString());					
 				}
 				
 				leerobjecten.add(rec);
-				
-				
-				
 			}
 			MetaZ app = MetaZ.getInstance();
 			Facade facade = app.getRepositoryFacade();
@@ -435,11 +455,9 @@ public class Harvester {
 	/**
 	 * Recursive function to get paths of hierarchical data
 	 * @param e current element in xml document
-	 * @param root document element that is the starting reference 
-	 *        point for the Hierarchy
 	 * @param hSet Hierarchical set of MetaData
 	 */
-    private void addNodeRecursive(Element e, Element root, HierarchicalStructuredTextMetaDataSet hSet){
+    private void addNodeRecursive(Element e,Element root, HierarchicalStructuredTextMetaDataSet hSet){
 		for (Iterator i = e.elementIterator(); i.hasNext(); )
 		{
 			
@@ -475,12 +493,67 @@ public class Harvester {
 			}
 			else {
 				//if not leaf make recursive call
-				addNodeRecursive(element, root, hSet);				
+				addNodeRecursive(element,root, hSet);				
 			}
 			    	
 		}
 		return;
 	}
-   }
+
+	/**
+	 * Recursive function to get paths of hierarchical data
+	 * @param e current element in xml document
+	 * @param hMetaData Hierarchical MetaData sequence
+	 */
+    private void addNodeRecursive(Element e, Element root, HierarchicalStructuredTextMetaData hMetaData){
+		for (Iterator i = e.elementIterator(); i.hasNext(); )
+		{
+			
+			//get first/next leerobject
+			logger.info("next element");
+			Element element = (Element) i.next();
+			//isleaf then get branch
+			logger.info("isleaf? " + element.getName());
+			if (element.elements().size()==0 && !(element.getParent().elements().size()>1)){
+				List<TextMetaData> branch = new Vector<TextMetaData>();
+				Element etemp=element;
+				logger.info("temp element");
+				while (!etemp.equals(root) && !etemp.getParent().equals(root)){
+						if (!etemp.getName().equals("waarde") && !etemp.getName().equals("eindgebruikerwaarde")){
+							if (!etemp.getParent().getParent().getParent().getName().equals("beoogdeEindgebruiker")){
+								etemp=etemp.getParent().element("waarde");
+							}
+						else 
+							etemp=etemp.getParent().element("eindgebruikerwaarde");
+						}
+						//get TextMetaData
+						logger.info(etemp.getName());
+						TextMetaData tmtdt = new TextMetaData();
+						tmtdt.setValue(etemp.getText());
+						logger.info(etemp.getParent().getName() + ": " + etemp.getText());
+						//add to list
+						branch.add(tmtdt);
+						//get parents parent en set in etemp
+						etemp = etemp.getParent();
+				}
+				//reverselist 
+				for (int j=branch.size();j>0;j--){
+					//add listelements to HierarchicalMetaDataText
+					hMetaData.addChild(branch.get(j-1));
+					logger.info(j + "-branch: " + branch.get(j-1).getValue());
+				}
+			}
+			else {
+				//if not leaf make recursive call
+				logger.info("new call");
+				addNodeRecursive(element, root, hMetaData);				
+			}
+			    	
+		}
+		return;
+	}
+
+
+}
 
     
