@@ -24,12 +24,12 @@
 <body background="<portal:GetContent name="Background"/>">
 <table width="100%" border="0" cellspacing="0">
   <tr>
-    <td><center>
+    <td bgcolor="#FF0000"><center>
         <br/>
         <ul id="tablist">
 				  <portal:PortalTab/>
         </ul>
-      </center></td>
+    </center></td>
   </tr>
 </table>
 <table width="100%" border="0" cellspacing="0">
