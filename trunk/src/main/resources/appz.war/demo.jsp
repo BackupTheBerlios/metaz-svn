@@ -2,6 +2,8 @@
 
 <portal:SetContent name="ActiveTab"><% out.print(org.metaz.gui.portal.PortalTabTag.TAB_SIMPLE_SEARCH); %></portal:SetContent>
 
+<portal:SetContent name="Background">images/binocs.jpg</portal:SetContent>
+
 <portal:SetContent name="PageContent">
 	
 	<form action="/code/forms/" method="post" enctype="multipart/form-data">

@@ -21,10 +21,10 @@
 	@import "stylesheets/form.css";
 </style>
 </head>
-<body>
+<body background="<portal:GetContent name="Background"/>">
 <table width="100%" border="0" cellspacing="0">
   <tr>
-    <td bgcolor="#CC0000"><center>
+    <td><center>
         <br/>
         <ul id="tablist">
 				  <portal:PortalTab/>
@@ -34,8 +34,9 @@
 </table>
 <table width="100%" border="0" cellspacing="0">
   <tr>
-    <td width="10%" bordercolor="#CCCCFF" bgcolor="#FFFFFF">&nbsp;</td>
-    <td bordercolor="#CCCCFF" bgcolor="#FFFFFF"><table width="600px" border="0" align="center" cellspacing="0" bordercolor="#FFFFFF" bgcolor="#FFFFFF">
+    <td width="10%">&nbsp;</td>
+    <td>
+		  <table width="600px" border="0" align="center" cellspacing="0">
         <tr>
           <td>
 					  <%-- primary page content will be rendered here --%>
@@ -43,7 +44,7 @@
 					</td>
         </tr>
       </table></td>
-    <td width="10%" bordercolor="#CCCCFF" bgcolor="#FFFFFF">&nbsp;</td>
+    <td width="10%">&nbsp;</td>
   </tr>
 </table>
 </body>
