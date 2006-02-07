@@ -10,7 +10,7 @@
  
   <taglib> 
     <taglib-uri>http://portal.tag.metaz.org</taglib-uri> 
-    <taglib-location>/WEB-INF/tags/portal.tld</taglib-location>
+    <taglib-location>/WEB-INF/customtags/portal.tld</taglib-location>
   </taglib>
 
 </web-app>
