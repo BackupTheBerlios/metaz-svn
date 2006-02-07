@@ -10,7 +10,8 @@
 		<fieldset>
 		<legend>Persoonlijke informatie </legend>
 		<div class="notes">
-			<h4>Persoonlijke Informatie</h4>
+			<h4>Persoonlijke<br/>
+			Informatie</h4>
 			Vul de informatie in zoals het op uw bankafschrift voorkomt </div>
 		<div class="required">
 			<label for="first_name">Voornaam:</label>

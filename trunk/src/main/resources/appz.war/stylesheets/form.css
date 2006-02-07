@@ -1,10 +1,5 @@
 /* form.css */
 
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
 form {
   padding: 0px;
   font-size: 100%;
@@ -27,6 +22,7 @@ form fieldset legend {
   font-size: 100%;
   font-weight: normal;
   background-color: #FF9933;
+  line-height: 150%;
   color: #FFFFFF;
   margin: 0px 0px 0px 0px;
   padding: 0px 5px;
@@ -47,8 +43,8 @@ form div.subfieldset h3{
 	border-width:1px;
 	border-style:solid;
 	color:#FFFFFF;
-	font-size:100%;
-	font-weight:normal;
+	font-size:x-small;
+	font-weight:bold;
 	padding:3px 5px;
 	margin:2px -3px 1px -3px;
 	border-color: #996600;
@@ -88,26 +84,22 @@ form fieldset div.notes {
   margin: 0px 0px 10px 10px;
   padding: 5px;
   border: 1px solid #666666;
-  background-color: #ffffe1;
-  color: #666666;
-  font-size: 88%;
+  background-color: #FFCC33;
+  color: #000000;
+  font-size: 75%;
 }
 
 form fieldset div.notes h4 {
-  background-image: url(icon_info.gif);
-  background-repeat: no-repeat;
-  background-position: top left;
-  padding: 3px 0px 3px 27px;
-  border-width: 0px 0px 1px 0px;
-  border-style: solid;
-  border-color: #666666;
-  color: #666666;
-  font-size: 110%;
-}
-
-form fieldset div.notes p {
-  margin: 0em 0em 1.2em 0em;
-  color: #666666;
+	background-image: url(icon_info.gif);
+	background-repeat: no-repeat;
+	background-position: top right;
+	padding: 3px 0px 0px 3px;
+	border-width: 0px 0px 1px 0px;
+	border-style: solid;
+	border-color: #993300;
+	color: #993300;
+	font-size: 100%;
+	margin: 0px 0px 8px 0px;
 }
 
 form fieldset div.notes p.last {
@@ -214,9 +206,11 @@ form div input.inputFile {
 }
 
 form div select.selectOne, form div select.selectMultiple {
-  width: 200px;
-  border: 1px solid #666666;
-  padding: 1px 3px;
+	width: 200px;
+	border: 1px solid #666666;
+	padding: 1px 3px;
+	background-color: #FFFF99;
+	margin: 0px 0px 0px 0px;
 }
 
 form div input.inputCheckbox, form div input.inputRadio, input.inputCheckbox, input.inputRadio {
@@ -261,10 +255,6 @@ form div small {
   margin: 0px 0px 5px 142px;
   padding: 1px 3px;
   font-size: 80%;
-}
-
-form fieldset legend {
-  line-height: 150%;
 }
 
 form input, form select, form textarea {

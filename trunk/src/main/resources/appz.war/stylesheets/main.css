@@ -1,13 +1,16 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
 body {
 	background: white;
 	background-repeat: no-repeat;
 	background-position: center;
 	color: black;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-size: 10pt;
+	font-size: 8pt;
 	line-height: 1.2em;
-	margin: 0;
-	padding: 0;
 }
 
 a {
