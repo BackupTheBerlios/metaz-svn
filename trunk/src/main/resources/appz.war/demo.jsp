@@ -118,7 +118,7 @@
 			<input type="file" name="image" id="image" class="inputFile" />
 			<small>Een bestand invoegen... </small> </div>
 		<div class="required">
-			<label for="availability_select">Wat is uw huidige beschikbaarheid ?</label>
+			<label for="availability_select">Werktijden :</label>
 			<select name="availability_select" id="availability_select" class="selectMultiple" size="5" multiple="multiple">
 				<option value="Parttime">Part-tijd</option>
 				<option value="Fulltime">Volledig</option>

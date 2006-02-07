@@ -56,7 +56,7 @@
 							</div>
 							<div class="required">
 								<label for="last_name">Achternaam:</label>
-								<input type="text" name="last_name" id="last_name" class="inputText" size="10" maxlength="100" value="" />
+							  <input type="text" name="last_name" id="last_name" class="inputText" size="10" maxlength="100" value="" />
 							</div>
 							<div class="optional">
 								<label for="address_1">Addres:</label>
@@ -154,14 +154,14 @@
 								<input type="file" name="image" id="image" class="inputFile" />
 								<small>Een bestand invoegen... </small> </div>
 							<div class="required">
-								<label for="availability_select">Wat is uw huidige beschikbaarheid ?</label>
+								<label for="availability_select">Werktijden : </label>
 								<select name="availability_select" id="availability_select" class="selectMultiple" size="5" multiple="multiple">
-									<option value="Parttime">Part-tijd</option>
-									<option value="Fulltime">Volledig</option>
-									<option value="Sometimes">Soms</option>
-									<option value="Often">Vaak</option>
-									<option value="Weekends">Weekends</option>
-								</select>
+                  <option value="Parttime">Part-tijd</option>
+                  <option value="Fulltime">Volledig</option>
+                  <option value="Sometimes">Soms</option>
+                  <option value="Often">Vaak</option>
+                  <option value="Weekends">Weekends</option>
+                </select>
 								<small>Gebruik de <kbd>CTRL</kbd> toets om meerdere opties te kiezen </small> </div>
 							<div class="required">
 								<div class="subfieldset">
