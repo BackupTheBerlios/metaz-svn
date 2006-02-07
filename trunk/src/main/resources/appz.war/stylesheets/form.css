@@ -16,7 +16,6 @@ form {
 form fieldset {
   clear: both;
   font-size: 100%;
-  background-color: transparent;
   border-color: #000000;
   border-width: 1px 0px 0px 0px;
   border-style: solid none none none;
@@ -117,7 +116,6 @@ form fieldset div.notes p.last {
 
 form div fieldset {
 	clear: none;
-	background-color: transparent;
 	border-width: 1px;
 	border-style: solid;
 	border-color: #666666;
