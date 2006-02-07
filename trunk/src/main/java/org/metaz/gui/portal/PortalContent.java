@@ -1,3 +1,5 @@
+// @author: Falco Paul
+
 package org.metaz.gui.portal;
 
 import java.io.*;
@@ -12,7 +14,13 @@ import javax.servlet.jsp.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.tagext.*;
 
+import org.apache.log4j.Logger;
+
+import org.metaz.util.MetaZ;
+
 public class PortalContent {
+
+  private static Logger logger = Logger.getLogger(PortalContent.class); // logger instance for this class
 
   public final static String REQUEST_URL_KEY = "Request.Url";
 
@@ -146,6 +154,8 @@ public class PortalContent {
 
     } catch (Exception e)
     {
+    
+      logger.error(e);
 
       return null;
 

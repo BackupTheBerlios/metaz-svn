@@ -1,5 +1,5 @@
-// Author: Falco Paul
-
+// @author: Falco Paul
+ 
 package org.metaz.gui.portal;
 
 import java.io.*;
@@ -14,9 +14,9 @@ import org.apache.log4j.Logger;
 
 import org.metaz.util.MetaZ;
 
-public class PortalMenuTag extends TagSupport {
+public class PortalTabTag extends TagSupport {
 
-  private static Logger logger = Logger.getLogger(MetaZ.class); // logger instance for this class
+  private static Logger logger = Logger.getLogger(PortalTabTag.class); // logger instance for this class
     
   public int doStartTag() {
   

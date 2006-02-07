@@ -8,7 +8,11 @@ import javax.servlet.jsp.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.tagext.*;
 
+import org.apache.log4j.Logger;
+
 public class GetPortalContentTag extends TagSupport {
+
+  private static Logger logger = Logger.getLogger(GetPortalContentTag.class); // logger instance for this class
 
   private String name = "NoName";
   private String defaultValue = "";

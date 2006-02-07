@@ -1,5 +1,4 @@
-// This is an abstract class that is used to set "forward" content in a JSP page
-// Author: Falco Paul
+// @author: Falco Paul
 
 package org.metaz.gui.portal;
 
@@ -8,7 +7,11 @@ import javax.servlet.jsp.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.tagext.*;
 
+import org.apache.log4j.Logger;
+
 public class SetPortalContentTag extends BodyTagSupport {
+
+  private static Logger logger = Logger.getLogger(SetPortalContentTag.class); // logger instance for this class
 
   private String name = "NoName";
   
@@ -26,7 +29,7 @@ public class SetPortalContentTag extends BodyTagSupport {
   
     pageContext.getRequest().removeAttribute(getName()); 
   
-    return EVAL_BODY_TAG;
+    return EVAL_BODY_BUFFERED;
   
   }
   
