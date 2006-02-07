@@ -81,7 +81,7 @@ public class PortalTabTag extends TagSupport {
 
   public String url (String url)
   {
-    return PortalContent.getPortalBaseUrl ( (HttpServletRequest) pageContext.getRequest() ) + "/" + url;
+    return PortalUtil.getPortalBaseUrl ( (HttpServletRequest) pageContext.getRequest() ) + "/" + url;
   }
  
   public int doEndTag() throws JspException {

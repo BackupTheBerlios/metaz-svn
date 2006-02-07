@@ -226,7 +226,7 @@ public class PortalUtil {
 
   public static void setRequestUrl(HttpServletRequest request) {
 
-    setRequestObject(request, PortalContent.REQUEST_URL_KEY, request.getRequestURL().toString());
+    setRequestObject(request, PortalUtil.REQUEST_URL_KEY, request.getRequestURL().toString());
 
   }
  
