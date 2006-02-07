@@ -43,7 +43,7 @@ form div.subfieldset h3{
 	border-width:1px;
 	border-style:solid;
 	color:#FFFFFF;
-	font-size:x-small;
+	font-size:80%;
 	font-weight:bold;
 	padding:3px 5px;
 	margin:2px -3px 1px -3px;
@@ -111,7 +111,7 @@ form div fieldset {
 	border-width: 1px;
 	border-style: solid;
 	border-color: #666666;
-	margin: 0px 0px 0px 142px;
+	margin: 0px 0px 0px 144px;
 	padding: 0px 5px 5px 5px;
 	width: 197px;
 	background-color: #FFFF99;
