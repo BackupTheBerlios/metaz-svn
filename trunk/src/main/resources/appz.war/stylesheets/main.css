@@ -4,9 +4,8 @@
 }
 
 body {
-	background: white;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: top left;
 	color: black;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 8pt;

@@ -21,7 +21,7 @@
 	@import "stylesheets/form.css";
 </style>
 </head>
-<body background=images/binocs.jpg">
+<body background="images/binocs.jpg">
 <table width="100%" border="0" cellspacing="0">
   <tr>
     <td bgcolor="#FF0000"><center>
@@ -36,6 +36,7 @@
     </center></td>
   </tr>
 </table>
+<br/>
 <table width="100%" border="0" cellspacing="0">
   <tr>
     <td width="10%">&nbsp;</td>

@@ -51,7 +51,9 @@ form div.subfieldset h3{
 }
 
 label {
-  font-size: 80%;
+	font-size: 80%;
+	background-color: transparent;
+	font-weight: bold;
 }
 
 label u {
@@ -127,12 +129,13 @@ form div.required fieldset legend {
 }
 
 form div label {
-  display: block;
-  float: left;
-  width: 130px;
-  padding: 3px 5px;
-  margin: 0px 0px 5px 0px;
-  text-align: right;
+	display: block;
+	float: left;
+	width: 130px;
+	padding: 0px 6px 0px 0px;
+	margin: 1px 2px 8px 0px;
+	text-align: right;
+	border: none;
 }
 
 form div.optional label, label.optional {
@@ -140,7 +143,7 @@ form div.optional label, label.optional {
 }
 
 form div.required label, label.required {
-  color: #FF0000;
+	color: #FF0000;
 }
 
 form div label.labelCheckbox, form div label.labelRadio {
@@ -155,6 +158,8 @@ form div label.labelCheckbox, form div label.labelRadio {
 form div fieldset label.labelCheckbox, form div fieldset label.labelRadio {
 	margin: 0px 0px 5px 0px;
 	width: 170px;
+	background-color: #FFFF99;
+	font-weight: normal;
 }
 
 form div img {
@@ -267,11 +272,13 @@ form textarea.expanding {
 }
   
 form div label.labelCheckbox, form div label.labelRadio, label.labelCheckbox, label.labelRadio {
-  display: block;
-  width: 190px;
-  padding: 4px 0px 0px 18px;
-  text-indent: -18px;
-  line-height: 120%;
+	display: block;
+	width: 190px;
+	padding: 4px 0px 0px 18px;
+	text-indent: -18px;
+	line-height: 120%;
+	background-color: transparent;
+	font-weight: normal;
 }
 
 form div label.labelCheckbox input.inputCheckbox, form div label.labelRadio input.inputRadio, label.labelCheckbox input.inputCheckbox, label.labelRadio input.inputRadio {
