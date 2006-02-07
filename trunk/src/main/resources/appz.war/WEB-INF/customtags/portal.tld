@@ -55,11 +55,6 @@
     <tagclass>org.metaz.gui.portal.PortalTabTag</tagclass>
     <info>Renders the portal tab HTML</info>
     <bodycontent>empty</bodycontent>
-    <attribute>
-            <name>currentTab</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-    </attribute>
   </tag>
 
 </taglib>
