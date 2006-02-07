@@ -18,9 +18,9 @@ import org.apache.log4j.Logger;
 
 import org.metaz.util.MetaZ;
 
-public class PortalContent {
+public class PortalUtil {
 
-  private static Logger logger = Logger.getLogger(PortalContent.class); // logger instance for this class
+  private static Logger logger = Logger.getLogger(PortalUtil.class); // logger instance for this class
 
   public final static String REQUEST_URL_KEY = "Request.Url";
 
