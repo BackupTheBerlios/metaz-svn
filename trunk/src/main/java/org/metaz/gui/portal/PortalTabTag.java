@@ -16,25 +16,25 @@ import org.metaz.util.MetaZ;
 
 public class PortalTabTag extends TagSupport {
 
-  // Current tab determination ID to be used with setPortalContent JSP tag
+  // Active tab determination ID to be used with setPortalContent JSP tag
 
-  private static final String CURRENT_TAG_ATTRIBUTE = "Tab";
+  public static final String ACTIVE_TAG_ATTRIBUTE = "ActiveTab";
 
   // Tab ID's... explicitly not done using enums...
   //             we need to refer to these ID's from a JSP page
 
-  private static final String TAB_SIMPLE_SEARCH   = "SIMPLE";
-  private static final String TAB_ADVANCED_SEARCH = "ADVANCED";
-  private static final String TAB_HELP            = "HELP";
-  private static final String TAB_INFO            = "INFO";
-  private static final String TAB_GOOGLE          = "GOOGLE";
+  public static final String TAB_SIMPLE_SEARCH   = "SIMPLE";
+  public static final String TAB_ADVANCED_SEARCH = "ADVANCED";
+  public static final String TAB_HELP            = "HELP";
+  public static final String TAB_INFO            = "INFO";
+  public static final String TAB_GOOGLE          = "GOOGLE";
   
 
   private static Logger logger = Logger.getLogger(PortalTabTag.class); // logger instance for this class
   
-  public String getCurrentTabId() 
+  public String getActiveTabId() 
   {
-     return (String) pageContext.getRequest().getAttribute(CURRENT_TAG_ATTRIBUTE);
+    return (String) pageContext.getRequest().getAttribute(ACTIVE_TAG_ATTRIBUTE);
   }
     
   public int doStartTag() {
@@ -66,12 +66,12 @@ public class PortalTabTag extends TagSupport {
     if (tooltip == null)
       tooltip = new String(text);
       
-    String current = "";
+    String active = "";
     
-    if (getCurrentTabId() == tabId)
-      current = "class=\"current\" ";
+    if (getActiveTabId().equals(tabId))
+      active = "class=\"current\" ";
     
-    printHtml("<li><a " + current + 
+    printHtml("<li><a " + active + 
              "href=\"" + url + "\" " +
              "title=\"" + tooltip + "\"" +
              ">" + text +
