@@ -16,7 +16,22 @@ import org.metaz.util.MetaZ;
 
 public class PortalTabTag extends TagSupport {
 
+  public enum TabPage { SIMPLE_SEARCH, ADVANCED_SEARCH,
+                        HELP, INFO, GOOGLE };
+
   private static Logger logger = Logger.getLogger(PortalTabTag.class); // logger instance for this class
+
+   private TabPage currentTab = TabPage.SIMPLE_SEARCH;
+     
+   public void setCurrentTab(TabPage currentTab) 
+   {
+     this.currentTab = currentTab;
+   }
+   
+   public TabPage getCurrentTab() 
+   {
+     return currentTab;
+   }
     
   public int doStartTag() {
   
@@ -38,38 +53,25 @@ public class PortalTabTag extends TagSupport {
     
   }
   
-  public void addTab(String text, String url, String tooltip)
+  public void addTab(TabPage tabId, String text, String url, String tooltip)
   {
-
-    printHtml("<tr>");
-    printHtml("  <td height=\"1\" align=\"left\" valign=\"top\" bgcolor=\"#002C28\" class=\"NavBg1\">");
-    
-    if ((text != null) && (url != null))
-    {
   
-	    if (tooltip == null)
-    		tooltip = new String(text);
-                              
-      try {
-      
-        printHtml(PortalContent.linkHtml("&nbsp;" + text, tooltip, 
-                                         "Redirect" + 
-                                         "?target=" + URLEncoder.encode(url, "UTF-8") +
-                                         "?trail=reset", "MenuText", null));
-        
-      }
-      catch (Exception e) {
+    if ((text == null) || (url == null))
+      return;
 
-        logger.error(e);
-
-      }
+    if (tooltip == null)
+      tooltip = new String(text);
       
-    } else
+    String current = "";
     
-      printHtml("&nbsp;");
-      
-    printHtml("  </td>");
-    printHtml("</tr>");
+    if (currentTab == tabId)
+      current = "class=\"current\" ";
+    
+    printHtml("<li><a " + current + 
+             "href=\"" + url + "\" " +
+             "title=\"" + tooltip + "\"" +
+             ">" + text +
+             "</a></li>");
     
   }
 
@@ -79,12 +81,12 @@ public class PortalTabTag extends TagSupport {
   }
  
   public int doEndTag() throws JspException {
-    
-    addTab("Eenvoudig zoeken", "simple.jsp", "Zoeken naar leerobjecten");
-    addTab("Uitgebreid zoeken", "advanced.jsp", "Uitgebreid zoeken naar leerobjecten");
-    addTab("Help", "help.jsp", "Help");
-    addTab("Informatie", "info.jsp", "Informatie over deze portal en het Rdmc");
-    addTab("Google", "http://www.google.nl", "Naar google");
+
+    addTab(TabPage.SIMPLE_SEARCH, "Eenvoudig zoeken", "simple.jsp", "Zoeken naar leerobjecten");
+    addTab(TabPage.ADVANCED_SEARCH,"Uitgebreid zoeken", "advanced.jsp", "Uitgebreid zoeken naar leerobjecten");
+    addTab(TabPage.HELP, "Help", "help.jsp", "Help");
+    addTab(TabPage.INFO, "Informatie", "info.jsp", "Informatie over deze portal en het Rdmc");
+    addTab(TabPage.GOOGLE, "Google", "http://www.google.nl", "Naar google");
 
     return EVAL_PAGE;
     
