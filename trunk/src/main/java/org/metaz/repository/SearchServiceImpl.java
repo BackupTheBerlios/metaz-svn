@@ -194,7 +194,7 @@ public class SearchServiceImpl implements SearchService {
                 if (keywordValue != null) {
                     Term keyword = new Term(keywords[i], keywordValue);
                     Query keywordQuery = new TermQuery(keyword);
-                    q.add(keywordQuery, true, false);
+                    q.add(keywordQuery, false, false);
                 }
             }
 

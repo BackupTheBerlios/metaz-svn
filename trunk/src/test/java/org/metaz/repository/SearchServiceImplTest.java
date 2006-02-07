@@ -260,7 +260,7 @@ public class SearchServiceImplTest extends TestCase {
         assertEquals(1,((List)ssi.doSearch(MetaData.SCHOOLTYPE+FIELDDELIMITER+"\"Voortgezet onderwijs\"")).size());
         assertEquals(1,((List)ssi.doSearch("nederlands"+WHITESPACE+MetaData.PRODUCTTYPE+FIELDDELIMITER+"Document"+WHITESPACE+MetaData.SCHOOLTYPE+FIELDDELIMITER+"\"Voortgezet onderwijs\"")).size());
         assertEquals(1,((List)ssi.doSearch("Buisonjé")).size());
-        assertEquals(1,((List)ssi.doSearch(MetaData.DIDACTICFUNCTION+FIELDDELIMITER+"Leestekst"+WHITESPACE+MetaData.PRODUCTTYPE+FIELDDELIMITER+"Document"+WHITESPACE+MetaData.PROFESSIONALSITUATION+FIELDDELIMITER+"\"Leiding geven aan groepsprocessen\"")).size());
+        assertEquals(2,((List)ssi.doSearch(MetaData.DIDACTICFUNCTION+FIELDDELIMITER+"Leestekst"+WHITESPACE+MetaData.PRODUCTTYPE+FIELDDELIMITER+"Document"+WHITESPACE+MetaData.PROFESSIONALSITUATION+FIELDDELIMITER+"\"Leiding geven aan groepsprocessen\"")).size());
         assertEquals(0,((List)ssi.doSearch(MetaData.SCHOOLTYPE+FIELDDELIMITER+"onbestaand")).size());
         assertEquals(1,((List)ssi.doSearch("Ray*")).size()); //raymann //wildcard search
         assertEquals(2,((List)ssi.doSearch("h?ef")).size()); //href //wildcard search
