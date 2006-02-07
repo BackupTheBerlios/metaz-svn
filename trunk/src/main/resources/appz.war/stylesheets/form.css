@@ -51,7 +51,7 @@ form div.subfieldset h3{
 }
 
 label {
-  font-size: 100%;
+  font-size: 80%;
 }
 
 label u {
@@ -61,7 +61,7 @@ label u {
 
 input, select, textarea {
   font-family: Tahoma, Arial, sans-serif;
-  font-size: 100%;
+  font-size: 80%;
   color: #000000;
 }
 
@@ -111,9 +111,9 @@ form div fieldset {
 	border-width: 1px;
 	border-style: solid;
 	border-color: #666666;
-	margin: 0px 0px 0px 144px;
+	margin: 0px 0px 0px 143px;
 	padding: 0px 5px 5px 5px;
-	width: 197px;
+	width: 200px;
 	background-color: #FFFF99;
 }
 
@@ -251,10 +251,11 @@ form div.submit div input.inputSubmit, form div.submit div input.inputButton {
 }
 
 form div small {
-  display: block;
-  margin: 0px 0px 5px 142px;
-  padding: 1px 3px;
-  font-size: 80%;
+	display: block;
+	margin: 0px 18px 5px 142px;
+	padding: 1px 3px;
+	font-size: 80%;
+	color: #666666;
 }
 
 form input, form select, form textarea {
