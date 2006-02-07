@@ -16,22 +16,26 @@ import org.metaz.util.MetaZ;
 
 public class PortalTabTag extends TagSupport {
 
-  public enum TabPage { SIMPLE_SEARCH, ADVANCED_SEARCH,
-                        HELP, INFO, GOOGLE };
+  // Current tab determination ID to be used with setPortalContent JSP tag
+
+  private static final String CURRENT_TAG_ATTRIBUTE = "Tab";
+
+  // Tab ID's... explicitly not done using enums...
+  //             we need to refer to these ID's from a JSP page
+
+  private static final String TAB_SIMPLE_SEARCH   = "SIMPLE";
+  private static final String TAB_ADVANCED_SEARCH = "ADVANCED";
+  private static final String TAB_HELP            = "HELP";
+  private static final String TAB_INFO            = "INFO";
+  private static final String TAB_GOOGLE          = "GOOGLE";
+  
 
   private static Logger logger = Logger.getLogger(PortalTabTag.class); // logger instance for this class
-
-   private TabPage currentTab = TabPage.SIMPLE_SEARCH;
-     
-   public void setCurrentTab(TabPage currentTab) 
-   {
-     this.currentTab = currentTab;
-   }
-   
-   public TabPage getCurrentTab() 
-   {
-     return currentTab;
-   }
+  
+  public String getCurrentTabId() 
+  {
+     return (String) pageContext.getRequest().getAttribute(CURRENT_TAG_ATTRIBUTE);
+  }
     
   public int doStartTag() {
   
@@ -53,7 +57,7 @@ public class PortalTabTag extends TagSupport {
     
   }
   
-  public void addTab(TabPage tabId, String text, String url, String tooltip)
+  public void addTab(String tabId, String text, String url, String tooltip)
   {
   
     if ((text == null) || (url == null))
@@ -64,7 +68,7 @@ public class PortalTabTag extends TagSupport {
       
     String current = "";
     
-    if (currentTab == tabId)
+    if (getCurrentTabId() == tabId)
       current = "class=\"current\" ";
     
     printHtml("<li><a " + current + 
@@ -82,11 +86,11 @@ public class PortalTabTag extends TagSupport {
  
   public int doEndTag() throws JspException {
 
-    addTab(TabPage.SIMPLE_SEARCH, "Eenvoudig zoeken", "simple.jsp", "Zoeken naar leerobjecten");
-    addTab(TabPage.ADVANCED_SEARCH,"Uitgebreid zoeken", "advanced.jsp", "Uitgebreid zoeken naar leerobjecten");
-    addTab(TabPage.HELP, "Help", "help.jsp", "Help");
-    addTab(TabPage.INFO, "Informatie", "info.jsp", "Informatie over deze portal en het Rdmc");
-    addTab(TabPage.GOOGLE, "Google", "http://www.google.nl", "Naar google");
+    addTab(TAB_SIMPLE_SEARCH, "Eenvoudig zoeken", "simple.jsp", "Zoeken naar leerobjecten");
+    addTab(TAB_ADVANCED_SEARCH,"Uitgebreid zoeken", "advanced.jsp", "Uitgebreid zoeken naar leerobjecten");
+    addTab(TAB_HELP, "Help", "help.jsp", "Help");
+    addTab(TAB_INFO, "Informatie", "info.jsp", "Informatie over deze portal en het Rdmc");
+    addTab(TAB_GOOGLE, "Google", "http://www.google.nl", "Naar google");
 
     return EVAL_PAGE;
     
