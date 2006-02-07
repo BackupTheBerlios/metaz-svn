@@ -7,10 +7,5 @@
 
   <display-name>Applicatie-Z</display-name>
   <description>Ruud de Moor Centrum metadata zoekmachine</description>
- 
-  <taglib> 
-    <taglib-uri>http://portal.tag.metaz.org</taglib-uri> 
-    <taglib-location>/WEB-INF/customtags/portal.tld</taglib-location>
-  </taglib>
 
 </web-app>
