@@ -5,8 +5,8 @@
 		<p class="last">Beperkt het zoekresultaat tot leerobjecten die bestemd zijn voor een bepaalde rol</p>
 	</div>
 	<div class="optional">
-		<label for="role">Ik ben een:</label>
-		<select name="role" id="role" class="selectOne">
+		<label for="targetEndUser">Ik ben een:</label>
+		<select name="targetEndUser" id="targetEndUser" class="selectOne">
 			<option value="*">Alles</option>
 			<option value="D">Docent</option>
 			<option value="B">Begeleider</option>
@@ -20,8 +20,8 @@
 		<p class="last">Selecteer leerobjecten voor een bepaald schooltype</p>
 	</div>
 	<div class="optional">
-		<label for="schooltype">Mijn schooltype:</label>
-		<select name="schooltype" id="schooltype" class="selectOne">
+		<label for="schoolType">Mijn schooltype:</label>
+		<select name="schoolType" id="schoolType" class="selectOne">
 			<option value="*">Alles</option>
 			<option value="V">VBMO</option>
 			<option value="H">HAVO</option>
@@ -36,8 +36,8 @@
 	Vakleergebieden zijn afhankelijk van schooltypes</p>
 	</div>
 	<div class="optional">
-		<label for="schooltype">Vakleergebied:</label>
-		<select name="schooltype" id="schooltype" class="selectOne">
+		<label for="schoolDiscipline">Vakleergebied:</label>
+		<select name="schoolDiscipline" id="schoolDiscipline" class="selectOne">
 			<option value="*">Alles</option>
 			<option value="R">Rekenen</option>
 			<option value="L">Lezen</option>

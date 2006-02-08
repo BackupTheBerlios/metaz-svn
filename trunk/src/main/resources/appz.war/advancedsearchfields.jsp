@@ -4,8 +4,8 @@
 		<p class="last">Zoekt leerobjecten bestemd voor een bepaalde didactische functie of toepassing</p>
 	</div>
 	<div class="optional">
-		<label for="didacticfunction">Didactische functie:</label>
-		<select name="didacticfunction" id="didacticfunction" class="selectOne">
+		<label for="didacticFunction">Didactische functie:</label>
+		<select name="didacticFunction" id="didacticFunction" class="selectOne">
 			<option value="*">Alles</option>
 			<option value="O">Oefening</option>
 			<option value="S">Simulatie</option>
@@ -19,8 +19,8 @@
 		<p class="last">Beperk het resultaat tot een bepaald type leerobject (video, audio, etc)</p>
 	</div>
 	<div class="optional">
-		<label for="producttype">Mijn schooltype:</label>
-		<select name="producttype" id="producttype" class="selectOne">
+		<label for="productType">Mijn schooltype:</label>
+		<select name="productType" id="productType" class="selectOne">
 			<option value="*">Alles</option>
 			<option value="D">Document</option>
 			<option value="A">Afbeelding</option>
@@ -34,8 +34,8 @@
 		<p class="last">Zoek leerobjecten die relevant zijn voor uw specifieke situatie</p>
 	</div>
 	<div class="optional">
-		<label for="schooltype">Vakleergebied:</label>
-		<select name="schooltype" id="schooltype" class="selectOne">
+		<label for="professionalSituation">Vakleergebied:</label>
+		<select name="professionalSituation" id="professionalSituation" class="selectOne">
 			<option value="*">Alles</option>
 			<option value="G1">Groep: omgaan met een grote groep</option>
 			<option value="G2">Groep: omgaan met een kleine groep</option>
