@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -33,68 +33,83 @@ package org.metaz.gui.portal.forms;
 import java.util.Hashtable;
 import java.util.Enumeration;
 
- /**
+/**
  * This class is a typical implementation of <code>GroupValidator</code> interface.
  * The criteria of validation here is :
  *  fields that belong to this group are not required, but in case
- *  the user fills even one of them, then they all become required. 
+ *  the user fills even one of them, then they all become required.
  *
  * @see GroupValidator
  *
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public class SimpleGroup implements GroupValidator {
+public class SimpleGroup
+    implements GroupValidator
+{
 
   private String groupErrorMessage = "(this field has become required)";
 
- /**
-  * Implements the same method of <code>GroupValidator</code> interface.
-  * The default value of <code>groupErrorMessage</code> is : "(this field has become required)".
-  *
-  * @param  groupErrorMessage    an error message for all fields of this group.
-  */
-  public void setGroupErrorMessage(String groupErrorMessage) {
+  /**
+   * Implements the same method of <code>GroupValidator</code> interface.
+   * The default value of <code>groupErrorMessage</code> is : "(this field has become required)".
+   *
+   * @param  groupErrorMessage    an error message for all fields of this group.
+   */
+  public void setGroupErrorMessage(String groupErrorMessage)
+  {
     this.groupErrorMessage = groupErrorMessage;
   }
-    
- /**
-  * Implements the same method of <code>GroupValidator</code> interface.
-  *
-  * @param   nameValuePairs   name-value pairs to be tested.
-  * @return    a Hashtable of name-errormessage pairs.
-  */
-  public Hashtable getErrorMessages(Hashtable nameValuePairs) {
-    
-      Hashtable toReturn = new Hashtable();
-      Enumeration en = nameValuePairs.keys();
-      String value = null;
-      String name = null;
-      Object o = null;
-      boolean allEmpty = true;
-      boolean allFull = true;
-      
-        // looping through names
-      while (en.hasMoreElements()) {
-        name = (String)en.nextElement();
-        o = nameValuePairs.get(name);
-        if (o instanceof String[])
-          value = ((String[])o)[0];
-        else
-          value = (String)o;
-        
-        if ( value.equals("") ) { // no entry
-          allFull = false;
-          toReturn.put(name, groupErrorMessage);
-        }
-        else { // there is entry
-          allEmpty = false;
-        }
-      }
 
-      if (allEmpty || allFull)
-        return null;
-      else 
-        return toReturn;
+  /**
+   * Implements the same method of <code>GroupValidator</code> interface.
+   *
+   * @param   nameValuePairs   name-value pairs to be tested.
+   * @return    a Hashtable of name-errormessage pairs.
+   */
+  public Hashtable getErrorMessages(Hashtable nameValuePairs)
+  {
+
+    Hashtable toReturn = new Hashtable();
+    Enumeration en = nameValuePairs.keys();
+    String value = null;
+    String name = null;
+    Object o = null;
+    boolean allEmpty = true;
+    boolean allFull = true;
+
+    // looping through names
+    while (en.hasMoreElements())
+    {
+      name = (String) en.nextElement();
+      o = nameValuePairs.get(name);
+      if (o instanceof String[])
+      {
+        value = ( (String[]) o)[0];
+      }
+      else
+      {
+        value = (String) o;
+
+      }
+      if (value.equals(""))
+      { // no entry
+        allFull = false;
+        toReturn.put(name, groupErrorMessage);
+      }
+      else
+      { // there is entry
+        allEmpty = false;
+      }
+    }
+
+    if (allEmpty || allFull)
+    {
+      return null;
+    }
+    else
+    {
+      return toReturn;
+    }
   }
 }

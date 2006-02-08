@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -33,39 +33,44 @@ package org.metaz.gui.portal.forms;
 import java.util.Hashtable;
 import java.util.Enumeration;
 
- /**
+/**
  * This class is a typical implementation of <code>GroupValidator</code> interface.
  * The criteria of validation here is well known - two password fields must have the same value.
- * 
+ *
  * @see GroupValidator
  *
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public class PasswordGroup implements GroupValidator {
+public class PasswordGroup
+    implements GroupValidator
+{
 
   private String groupErrorMessage = "(passwords must be the same)";
- 
- /**
-  * Implements the same method of <code>GroupValidator</code> interface.
-  *
-  * @param  groupErrorMessage    an error message for both password fields of this group.
-  */
-  public void setGroupErrorMessage(String groupErrorMessage) {
+
+  /**
+   * Implements the same method of <code>GroupValidator</code> interface.
+   *
+   * @param  groupErrorMessage    an error message for both password fields of this group.
+   */
+  public void setGroupErrorMessage(String groupErrorMessage)
+  {
     this.groupErrorMessage = groupErrorMessage;
   }
 
- /**
-  * Implements the same method of <code>GroupValidator</code> interface.
-  *
-  * @param   nameValuePairs   name-value pairs to be tested.
-  * @return    a Hashtable of name-errormessage pairs.
-  */
-  public Hashtable getErrorMessages(Hashtable nameValuePairs) {
-  
+  /**
+   * Implements the same method of <code>GroupValidator</code> interface.
+   *
+   * @param   nameValuePairs   name-value pairs to be tested.
+   * @return    a Hashtable of name-errormessage pairs.
+   */
+  public Hashtable getErrorMessages(Hashtable nameValuePairs)
+  {
+
     Enumeration names = nameValuePairs.keys();
     Enumeration values = nameValuePairs.elements();
-    if (!((String)values.nextElement()).equals((String)values.nextElement()) ) {
+    if (! ( (String) values.nextElement()).equals( (String) values.nextElement()))
+    {
       Hashtable toReturn = new Hashtable();
       toReturn.put(names.nextElement(), groupErrorMessage);
       toReturn.put(names.nextElement(), groupErrorMessage);

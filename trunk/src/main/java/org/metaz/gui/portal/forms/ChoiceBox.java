@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -32,7 +32,7 @@ package org.metaz.gui.portal.forms;
 
 import java.util.Vector;
 
- /**
+/**
  * This abstract class is the superclass of classes representing Checkboxes,
  * Combo Boxes, List Boxes and RadioButtons.
  *
@@ -44,28 +44,34 @@ import java.util.Vector;
  * @author	Ilirjan Ostrovica
  */
 
-public abstract class ChoiceBox  extends FormElement {
-	
+public abstract class ChoiceBox
+    extends FormElement
+{
+
   private Vector values = new Vector();
-  
+
   /**
    * Adds a new value that can be checked or selected from this ChoiceBox.
-   * This method is used by com.codepassion.form.FormParser class. 
+   * This method is used by com.codepassion.form.FormParser class.
    *
    * @param    value   another value to this ChoiceBox.
    */
-  public void addToValues(String value)  {
+  public void addToValues(String value)
+  {
     if (!values.contains(value))
+    {
       values.addElement(value);
+    }
   }
-  
-  Vector getValues() { // used to generate xml form data
+
+  Vector getValues()
+  { // used to generate xml form data
     return values;
   }
-  
+
   /**
    * This method finds out whether the given value has been checked/selected.
-   * If the given value has been checked/selected respectively "checked" or "selected" 
+   * If the given value has been checked/selected respectively "checked" or "selected"
    * is returned. Otherwise an empty string is returned.
    * This method gets implemented by subclasses com.codepassion.form.MultipleChoiceBox
    * and com.codepassion.form.RadioButton.
@@ -73,6 +79,6 @@ public abstract class ChoiceBox  extends FormElement {
    * @param   value   the value of the ChoiceBox item whose status is returned by this method.
    * @return    "selected", "checked" or "".
    */
-  public abstract String chosen(String value); 
+  public abstract String chosen(String value);
 
 }

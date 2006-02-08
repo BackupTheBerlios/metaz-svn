@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -38,8 +38,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
 
- /**
- * This class is an implementation of <code>com.codepassion.form.view.ContentGenerator</code> 
+/**
+ * This class is an implementation of <code>com.codepassion.form.view.ContentGenerator</code>
  * intended for use with Java Server Pages.
  *
  * @see ContentGenerator
@@ -47,59 +47,72 @@ import java.io.IOException;
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public class SimpleContentGenerator implements ContentGenerator {
-  
- /**
-  * Implements the same method of <code>ContentGenerator</code> interface.
-  *
-  * @param     req        the HttpServletRequest object.
-  * @param     resp       the HttpServletResponse object.
-  * @param     form       the Form object going to be presented.
-  */
-  public void sendFormContent(HttpServletRequest req, 
-                              HttpServletResponse resp,
-                              Form form)
-                      throws ServletException, IOException {
-    HttpSession session = req.getSession(false);
-    if (form.isFirstime()) bound(session, form);
+public class SimpleContentGenerator
+    implements ContentGenerator
+{
 
+  /**
+   * Implements the same method of <code>ContentGenerator</code> interface.
+   *
+   * @param     req        the HttpServletRequest object.
+   * @param     resp       the HttpServletResponse object.
+   * @param     form       the Form object going to be presented.
+   */
+  public void sendFormContent(HttpServletRequest req,
+                              HttpServletResponse resp,
+                              Form form) throws ServletException, IOException
+  {
+    HttpSession session = req.getSession(false);
+    if (form.isFirstime())
+    {
+      bound(session, form);
+
+    }
     gotoPage(form.getFormPagePath(), req, resp);
   }
-  
- /**
-  * Implements the same method of <code>ContentGenerator</code> interface.
-  *
-  * @param     req        the HttpServletRequest object.
-  * @param     resp       the HttpServletResponse object.
-  * @param     form       the Form object that was presented.
-  */
-  public void forwardToFormAction(HttpServletRequest req, 
+
+  /**
+   * Implements the same method of <code>ContentGenerator</code> interface.
+   *
+   * @param     req        the HttpServletRequest object.
+   * @param     resp       the HttpServletResponse object.
+   * @param     form       the Form object that was presented.
+   */
+  public void forwardToFormAction(HttpServletRequest req,
                                   HttpServletResponse resp,
-                                  Form form)
-                      throws ServletException, IOException {
+                                  Form form) throws ServletException, IOException
+  {
     HttpSession session = req.getSession(false);
-    if (form.isUnboundBeforeActionPage()) unbound(session, form);
-    
+    if (form.isUnboundBeforeActionPage())
+    {
+      unbound(session, form);
+
+    }
     gotoPage(form.getFormActionPath(), req, resp);
   }
 
-  private void bound(HttpSession session, Form form) {
+  private void bound(HttpSession session, Form form)
+  {
     FormElement formElements[] = form.getFormElements();
-    for (int i=0;i<formElements.length;i++) {
+    for (int i = 0; i < formElements.length; i++)
+    {
       session.setAttribute(formElements[i].getName(), formElements[i]);
     }
   }
-  
-  private void unbound(HttpSession session, Form form) {
+
+  private void unbound(HttpSession session, Form form)
+  {
     FormElement formElements[] = form.getFormElements();
-    for (int i=0;i<formElements.length;i++) {
-        session.removeAttribute(formElements[i].getName());
+    for (int i = 0; i < formElements.length; i++)
+    {
+      session.removeAttribute(formElements[i].getName());
     }
     session.removeAttribute(form.getName());
   }
-  
-  private void gotoPage(String address, HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+
+  private void gotoPage(String address, HttpServletRequest request, HttpServletResponse response) throws
+      ServletException, IOException
+  {
     RequestDispatcher dispatcher = request.getRequestDispatcher(address);
     dispatcher.forward(request, response);
   }

@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -36,7 +36,7 @@ import javax.servlet.ServletException;
 
 import java.io.IOException;
 
- /**
+/**
  * Defines the interface for a class that will be responsible for <br>
  * a- generating form presentation<br>
  * b- forwarding the request to the form's "action"<br>
@@ -51,8 +51,9 @@ import java.io.IOException;
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public interface ContentGenerator {
-  
+public interface ContentGenerator
+{
+
   /**
    * This method is responsible for generating form presentation and sending it back
    * to client.
@@ -62,22 +63,20 @@ public interface ContentGenerator {
    * @param     resp       the HttpServletResponse object.
    * @param     form       the Form object going to be presented.
    */
-  public void sendFormContent(HttpServletRequest req, 
+  public void sendFormContent(HttpServletRequest req,
                               HttpServletResponse resp,
-                              Form form)
-     throws ServletException, IOException;
-     
+                              Form form) throws ServletException, IOException;
+
   /**
-   * This method is responsible for doing the clean up work and forwarding 
+   * This method is responsible for doing the clean up work and forwarding
    * the request to be processed.
    *
    * @param     req        the HttpServletRequest object.
    * @param     resp       the HttpServletResponse object.
    * @param     form       the Form object that was presented.
    */
-  public void forwardToFormAction(HttpServletRequest req, 
+  public void forwardToFormAction(HttpServletRequest req,
                                   HttpServletResponse resp,
-                                  Form form)
-     throws ServletException, IOException;
-     
+                                  Form form) throws ServletException, IOException;
+
 }

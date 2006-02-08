@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -30,19 +30,22 @@
 
 package org.metaz.gui.portal.forms;
 
- /**
+/**
  * This class extends TextBox and represents password fields.
  * A field of type PasswordBox is by default 'required' .
- * 
+ *
  * @see FormElement
  * @see TextBox
  *
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public class PasswordBox extends TextBox {
-	
-  public PasswordBox() {
+public class PasswordBox
+    extends TextBox
+{
+
+  public PasswordBox()
+  {
     setRequired(true);
   }
 }

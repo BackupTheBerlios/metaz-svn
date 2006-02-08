@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -32,9 +32,9 @@ package org.metaz.gui.portal.forms;
 
 import java.util.Vector;
 
- /**
- * This class represents textfields and textareas, as well as serves as 
- * the superclass of PasswordBox class. 
+/**
+ * This class represents textfields and textareas, as well as serves as
+ * the superclass of PasswordBox class.
  *
  * @see FormElement
  * @see PasswordBox
@@ -43,43 +43,66 @@ import java.util.Vector;
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public class TextBox extends FormElement {
-	
-	private Vector fieldValidators;
-	
-	public TextBox() {
-		setValue("");
-	}
-	
+public class TextBox
+    extends FormElement
+{
+
+  private Vector fieldValidators;
+
+  public TextBox()
+  {
+    setValue("");
+  }
+
   /**
    * Adds a <code>FieldValidator</code> object to the list of validators already registered with this TextBox.
    * No adding will take place in case the coming <code>fieldValidator</code> is already registered.
    *
    * @param    fieldValidator   FieldValidator object to be registered with this TextBox.
    */
-  public void addFieldValidator(FieldValidator fieldValidator) {
-    if (fieldValidators == null) fieldValidators = new Vector();
-    if (fieldValidators.contains(fieldValidator)) return;
+  public void addFieldValidator(FieldValidator fieldValidator)
+  {
+    if (fieldValidators == null)
+    {
+      fieldValidators = new Vector();
+    }
+    if (fieldValidators.contains(fieldValidator))
+    {
+      return;
+    }
     fieldValidators.addElement(fieldValidator);
   }
-	
-  String getError()  {
-    if ( isRequired() && getValue().equals("") ) return getErrorMessageForRequired();
+
+  String getError()
+  {
+    if (isRequired() && getValue().equals(""))
+    {
+      return getErrorMessageForRequired();
+    }
     return getErrMess();
   }
 
-  private String getErrMess() {
-    if ( getValue().equals("") && !isRequired() ) return "";
-    if (fieldValidators != null) {
+  private String getErrMess()
+  {
+    if (getValue().equals("") && !isRequired())
+    {
+      return "";
+    }
+    if (fieldValidators != null)
+    {
       FieldValidator fc = null;
       String err = null;
-      for (int i=0;i<fieldValidators.size();i++) {
-        fc = (FieldValidator)fieldValidators.elementAt(i);
+      for (int i = 0; i < fieldValidators.size(); i++)
+      {
+        fc = (FieldValidator) fieldValidators.elementAt(i);
         err = fc.getErrorMessage(getValue());
-        if ( !err.equals("") ) return err;
+        if (!err.equals(""))
+        {
+          return err;
+        }
       }
     }
     return "";
   }
-  
+
 }

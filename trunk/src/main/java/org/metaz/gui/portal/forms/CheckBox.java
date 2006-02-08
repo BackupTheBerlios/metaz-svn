@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -30,7 +30,7 @@
 
 package org.metaz.gui.portal.forms;
 
- /**
+/**
  * This class extends MultipleChoiceBox and represents the check boxes.
  *
  * @see ChoiceBox
@@ -41,10 +41,13 @@ package org.metaz.gui.portal.forms;
  * @author	Ilirjan Ostrovica
  */
 
-public class CheckBox  extends MultipleChoiceBox {
-	
-	public CheckBox () {
-		setCheckedOrSelected("checked");
-	}
+public class CheckBox
+    extends MultipleChoiceBox
+{
+
+  public CheckBox()
+  {
+    setCheckedOrSelected("checked");
+  }
 
 }

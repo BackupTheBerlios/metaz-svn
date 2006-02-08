@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -30,7 +30,7 @@
 
 package org.metaz.gui.portal.forms;
 
- /**
+/**
  * This class extends ChoiceBox and represents the radiobutton field.
  *
  * @see FormElement
@@ -39,13 +39,19 @@ package org.metaz.gui.portal.forms;
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public class RadioButton  extends ChoiceBox {
-	
-  String getError()	{
-		if ( isRequired() && getValue() == null ) return getErrorMessageForRequired();
-		return "";
-	}
-	
+public class RadioButton
+    extends ChoiceBox
+{
+
+  String getError()
+  {
+    if (isRequired() && getValue() == null)
+    {
+      return getErrorMessageForRequired();
+    }
+    return "";
+  }
+
   /**
    * Will return "checked" or "".
    * In case the choice represented by <code>value</code> is unchecked, the empty string
@@ -59,9 +65,16 @@ public class RadioButton  extends ChoiceBox {
    * @param   value   the value of the RadioButton item whose status is returned by this method.
    * @return    "checked" or "".
    */
-  public String chosen(String value) {
-    if ( value == null ) return "";
-    if (value.equals(getValue()) ) return "checked";
+  public String chosen(String value)
+  {
+    if (value == null)
+    {
+      return "";
+    }
+    if (value.equals(getValue()))
+    {
+      return "checked";
+    }
     return "";
   }
 

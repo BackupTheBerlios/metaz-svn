@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -30,24 +30,26 @@
 
 package org.metaz.gui.portal.forms;
 
- /**
-  * This abstract class is the superclass of all classes that represent
-  * form data input elements.
-  *
-  * @see TextBox
-  * @see PasswordBox
-  * @see ChoiceBox
-  * @see MultipleChoiceBox
-  * @see MenuBox
-  * @see RadioButton
-  * @see CheckBox
-  *
-  * @version 	2.0, 2001/06
-  * @author	Ilirjan Ostrovica
-  */
+/**
+ * This abstract class is the superclass of all classes that represent
+ * form data input elements.
+ *
+ * @see TextBox
+ * @see PasswordBox
+ * @see ChoiceBox
+ * @see MultipleChoiceBox
+ * @see MenuBox
+ * @see RadioButton
+ * @see CheckBox
+ *
+ * @version 	2.0, 2001/06
+ * @author	Ilirjan Ostrovica
+ */
 
-public abstract class FormElement implements java.io.Serializable {
-    
+public abstract class FormElement
+    implements java.io.Serializable
+{
+
   private String name;
   private String value;
   private String errorMessage;
@@ -56,15 +58,17 @@ public abstract class FormElement implements java.io.Serializable {
   private String messageForRequired = "(required)";
   private String errorMessageForRequired = "(required field)";
   private GroupValidator groupValidator;
-  
-  void setGroupValidator(GroupValidator groupValidator)  {
-      this.groupValidator = groupValidator;
+
+  void setGroupValidator(GroupValidator groupValidator)
+  {
+    this.groupValidator = groupValidator;
   }
-  
-  GroupValidator getGroupValidator() {
-      return groupValidator;
+
+  GroupValidator getGroupValidator()
+  {
+    return groupValidator;
   }
-    
+
   /**
    * Sets the initial value of this element.
    * By default this value is set to an empty string.
@@ -81,10 +85,11 @@ public abstract class FormElement implements java.io.Serializable {
    *
    * @param     value   the initial value for this element.
    */
-  public void setValue(String value)  {
-      this.value = value.trim();
+  public void setValue(String value)
+  {
+    this.value = value.trim();
   }
-    
+
   /**
    * Sets the name of this element. This name is used for bounding
    * this FormElement object to the HttpSession, as well as for naming
@@ -93,10 +98,11 @@ public abstract class FormElement implements java.io.Serializable {
    *
    * @param     name   the name of this element.
    */
-  void setName(String name) {
-      this.name = name;
+  void setName(String name)
+  {
+    this.name = name;
   }
-    
+
   /**
    * Sets the <code>required</code> boolean state of this element. The value <code>true</code>
    * indicates that user input is required. Otherwise an error message
@@ -105,28 +111,32 @@ public abstract class FormElement implements java.io.Serializable {
    *
    * @param     required   the new required state for this element.
    */
-  void setRequired(boolean required) {
-      this.required = required;
+  void setRequired(boolean required)
+  {
+    this.required = required;
   }
-    
-  void setFirstime(boolean firstime) {
-      this.firstime = firstime;
+
+  void setFirstime(boolean firstime)
+  {
+    this.firstime = firstime;
   }
-    
-  void setErrorMessage(String errorMessage) {
-      this.errorMessage = errorMessage;
+
+  void setErrorMessage(String errorMessage)
+  {
+    this.errorMessage = errorMessage;
   }
-    
+
   /**
    * Sets the message which lets the client know that this field is required.
    * The default value is <code>"(required)"</code>
    *
    * @param   messageForRequired   the message.
    */
-  void setMessageForRequired(String messageForRequired) {
-      this.messageForRequired = messageForRequired;
+  void setMessageForRequired(String messageForRequired)
+  {
+    this.messageForRequired = messageForRequired;
   }
-    
+
   /**
    * Sets the error message which lets the client know that he should have provided
    * some input for this element.
@@ -134,12 +144,13 @@ public abstract class FormElement implements java.io.Serializable {
    *
    * @param   errorMessageForRequired   the error message.
    */
-  void setErrorMessageForRequired(String errorMessageForRequired) {
+  void setErrorMessageForRequired(String errorMessageForRequired)
+  {
     this.errorMessageForRequired = errorMessageForRequired;
   }
-    
+
   /**
-   * Gets the name of this element. This is also the name of the 
+   * Gets the name of this element. This is also the name of the
    * corresponding request parameter.
    * The built-in JSP-Bean presentation solution bounds this <code>FormElement</code>
    * object to the HttpSession, using this name as a key.
@@ -148,10 +159,11 @@ public abstract class FormElement implements java.io.Serializable {
    *
    * @return    the name of this <code>FormElement</code> object.
    */
-  public String getName() {
+  public String getName()
+  {
     return name;
   }
-    
+
   /**
    * Gets the value of this element.
    * Subclasses of <code>MultipleChoiceBox</code> can have more than
@@ -160,39 +172,52 @@ public abstract class FormElement implements java.io.Serializable {
    *
    * @return    the value.
    */
-  public String getValue() {
+  public String getValue()
+  {
     return value;
   }
-    
-  boolean isRequired() {
+
+  boolean isRequired()
+  {
     return required;
   }
-  
-  String getMessageForRequired() {
-      return messageForRequired;
+
+  String getMessageForRequired()
+  {
+    return messageForRequired;
   }
-  
-  String getErrorMessageForRequired() {
-      return errorMessageForRequired;
+
+  String getErrorMessageForRequired()
+  {
+    return errorMessageForRequired;
   }
-    
+
   /**
    * Gets the error message generated by this object.
    * This error message shows what was wrong with the last client entry.
    *
    * @return    the error message.
    */
-  public String getErrorMessage() {
-      if (firstime)  {
-          if (isRequired())  return getMessageForRequired();
-          else return "";
+  public String getErrorMessage()
+  {
+    if (firstime)
+    {
+      if (isRequired())
+      {
+        return getMessageForRequired();
       }
-      return errorMessage;
+      else
+      {
+        return "";
+      }
+    }
+    return errorMessage;
   }
-    
+
   abstract String getError();
-    
-  void clear() {
-   // do nothing
+
+  void clear()
+  {
+    // do nothing
   }
 }

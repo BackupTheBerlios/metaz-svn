@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -30,7 +30,7 @@
 
 package org.metaz.gui.portal.forms;
 
- /**
+/**
  * This class extends MultipleChoiceBox and represents the Combo Boxes and List Boxes.
  *
  *
@@ -41,10 +41,13 @@ package org.metaz.gui.portal.forms;
  * @version 	2.0, 2001/06
  * @author	Ilirjan Ostrovica
  */
-public class MenuBox  extends MultipleChoiceBox {
-	
-	public MenuBox () {
-		setCheckedOrSelected("selected");
-	}
+public class MenuBox
+    extends MultipleChoiceBox
+{
+
+  public MenuBox()
+  {
+    setCheckedOrSelected("selected");
+  }
 
 }

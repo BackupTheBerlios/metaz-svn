@@ -14,7 +14,7 @@
  *    notice, this list of conditions and the following disclaimer in
  *    the documentation and/or other materials provided with the
  *    distribution.
- * 
+ *
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -32,7 +32,7 @@ package org.metaz.gui.portal.forms;
 
 import java.util.Vector;
 
- /**
+/**
  * This abstract class is the superclass of classes representing the
  * multiple choice input elements of a form, like Checkboxes, Combo Boxes
  * and List Boxes.
@@ -44,43 +44,53 @@ import java.util.Vector;
  * @version   2.0, 2001/06
  * @author  Ilirjan Ostrovica
  */
-public abstract class MultipleChoiceBox  extends ChoiceBox {
-  
+public abstract class MultipleChoiceBox
+    extends ChoiceBox
+{
+
   private Vector chosenValues = new Vector();
-  private String checkedOrSelected;  
+  private String checkedOrSelected;
 
   /**
    * Sets the initially selected value of this field.
    *
    * @param     value   the initially selected value.
    */
-  public void setValue(String value)  {
+  public void setValue(String value)
+  {
     chosenValues.addElement(value);
     super.setValue(value); // getValue() will then return this value
-                           // showing that a selection was made
+    // showing that a selection was made
   }
 
-  void setCheckedOrSelected(String checkedOrSelected)  {
+  void setCheckedOrSelected(String checkedOrSelected)
+  {
     this.checkedOrSelected = checkedOrSelected;
   }
-  
-  String getCheckedOrSelected() {
+
+  String getCheckedOrSelected()
+  {
     return checkedOrSelected;
   }
 
-  Vector getChosenValues() {
+  Vector getChosenValues()
+  {
     return chosenValues;
   }
-  
-  String getError()  {
-    if ( isRequired() && chosenValues.size() == 0 ) return getErrorMessageForRequired();
+
+  String getError()
+  {
+    if (isRequired() && chosenValues.size() == 0)
+    {
+      return getErrorMessageForRequired();
+    }
     return "";
   }
 
   /**
    * Will return "selected", "checked" or "".
    * In case the choice represented by <code>value</code> is unselected, the empty string
-   * will be returned. 
+   * will be returned.
    *
    * This method is used in the presentation layer of this API.
    * <p>
@@ -90,15 +100,21 @@ public abstract class MultipleChoiceBox  extends ChoiceBox {
    * @param   value   the value of the MultipleChoiceBox item whose status is returned by this method.
    * @return    "selected", "checked" or "".
    */
-  public String chosen(String value) { 
-    for ( int i = 0;i<chosenValues.size();i++ ) { // looping through all selected values
-      String checkedValue = (String)chosenValues.elementAt(i);
-      if ( checkedValue.equals(value) ) return getCheckedOrSelected();
+  public String chosen(String value)
+  {
+    for (int i = 0; i < chosenValues.size(); i++)
+    { // looping through all selected values
+      String checkedValue = (String) chosenValues.elementAt(i);
+      if (checkedValue.equals(value))
+      {
+        return getCheckedOrSelected();
+      }
     }
     return "";
   }
-  
-  void clear() {
+
+  void clear()
+  {
     chosenValues = new Vector();
     super.setValue("");
   }
