@@ -86,8 +86,8 @@ public class PortalTabTag extends TagSupport {
  
   public int doEndTag() throws JspException {
 
-    addTab(TAB_SIMPLE_SEARCH, "Eenvoudig zoeken", "simple.jsp", "Zoeken naar leerobjecten");
-    addTab(TAB_ADVANCED_SEARCH,"Uitgebreid zoeken", "advanced.jsp", "Uitgebreid zoeken naar leerobjecten");
+    addTab(TAB_SIMPLE_SEARCH, "Eenvoudig zoeken", "search.jsp", "Zoeken naar leerobjecten");
+    addTab(TAB_ADVANCED_SEARCH,"Uitgebreid zoeken", "advancedsearch.jsp", "Uitgebreid zoeken naar leerobjecten");
     addTab(TAB_HELP, "Help", "help.jsp", "Help");
     addTab(TAB_INFO, "Informatie", "info.jsp", "Informatie over deze portal en het Rdmc");
     addTab(TAB_GOOGLE, "Google", "http://www.google.nl", "Naar google");
