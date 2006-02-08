@@ -41,6 +41,7 @@
 		  <table width="600px" border="0" align="center" cellspacing="0">
         <tr>
           <td>
+					  <br/>
 					  <%-- primary page content will be rendered here --%>
 				    <portal:GetContent name="PageContent"/>
 					</td>
