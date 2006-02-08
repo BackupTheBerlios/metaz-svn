@@ -21,7 +21,9 @@
 	@import "stylesheets/form.css";
 </style>
 </head>
-<body background="<portal:GetContent name="Background"/>">
+<body 
+  background="<portal:GetContent name="Background"/>"
+>
 <table width="100%" border="0" cellspacing="0">
   <tr>
     <td bgcolor="#FF0000"><center>
