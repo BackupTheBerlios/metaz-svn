@@ -3,7 +3,8 @@ padding: 3px 0;
 margin-left: 0;
 margin-bottom: 0;
 margin-top: 0.1em;
-font: bold 12px Verdana;
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+font-size: 10pt;
 border-bottom: 1px solid gray;
 }
 
@@ -17,21 +18,19 @@ margin: 0;
 text-decoration: none;
 padding: 3px 0.5em;
 margin-right: 3px;
-border: 1px solid #778;
+border: 1px solid #000000;
 border-bottom: none;
-background: white;
+background-color: #CC9999;
 }
 
 #tablist li a:link, #tablist li a:visited{
-color: navy;
+color: #FFFFFF;
 }
 
 #tablist li a:hover{
-color: black;
-background: lightyellow;
-border-color: navy;
+background-color: #663366;
 }
 
 #tablist li a.current{
-background: lightyellow;
+background-color: #663333;
 }
