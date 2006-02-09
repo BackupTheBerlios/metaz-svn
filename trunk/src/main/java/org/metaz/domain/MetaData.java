@@ -116,7 +116,9 @@ public abstract class MetaData {
     private String id;
         
     private String name;
+    private String xmltagname;
 	private String description;
+	private String metadatatype;
 	private boolean mandatory;
 	private boolean optional;
 	
@@ -206,4 +208,37 @@ public abstract class MetaData {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	/**
+	 * Gets the XML tagname of this MetaData.
+	 * @return the xmltagname.
+	 */
+	public String getXMLTagName() {
+		return xmltagname;
+	}
+	
+	/**
+	 * Sets the xml tagname of this MetaData.
+	 * @param xmltagname the xml tagname.
+	 */
+	public void setXMLTagName(String xmltagname) {
+		this.xmltagname = xmltagname;
+	}
+
+	/**
+	 * Gets the XML tagname of this MetaData.
+	 * @return the xmltagname.
+	 */
+	public String getMetaDataType() {
+		return metadatatype;
+	}
+	
+	/**
+	 * Sets the xml tagname of this MetaData.
+	 * @param xmltagname the xml tagname.
+	 */
+	public void setMetaDataType(String metadatatype) {
+		this.metadatatype = metadatatype;
+	}
+
 }
