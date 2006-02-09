@@ -1,0 +1,1 @@
+java org.hsqldb.Server -database.0 metazdb -dbname.0 metaz

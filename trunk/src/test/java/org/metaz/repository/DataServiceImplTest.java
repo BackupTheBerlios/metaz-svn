@@ -2,26 +2,27 @@ package org.metaz.repository;
 
 import junit.framework.TestCase;
 
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.HyperlinkMetaData;
-import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 
 public class DataServiceImplTest extends TestCase {
-	
+
 	private static Logger LOG = Logger.getLogger(DataServiceImplTest.class);
 
 	/*
 	 * Test method for 'org.metaz.repository.DataServiceImpl.getRecords(List<URI>)'
 	 */
-	public void testAddRecord() {
+	public void testAddRecord(){
 		BasicConfigurator.configure();
 		LOG.debug("Testing");
 		TextMetaData title = new TextMetaData();
@@ -55,15 +56,23 @@ public class DataServiceImplTest extends TestCase {
 
 		Record rec = new Record(title, secured, fileFormat, didacticalFunction,
 				productType, uri);
-		
-		Configuration cfg = new Configuration().configure("org/metaz/hibernate.cfg.xml");
-		SessionFactory sf = cfg.buildSessionFactory();
-		Session sess = sf.openSession();
-		//Transaction t = sess.beginTransaction();
-		sess.save(rec);
-		//t.commit();
-		sess.flush(); //JGO: flush session to force an update of the DB
-		sess.close();
+
+		Configuration cfg;
+		SessionFactory sf;
+		Session sess;
+		try {
+			cfg = new Configuration().configure();
+			sf = cfg.buildSessionFactory();
+			sess = sf.openSession();
+			Transaction t = sess.beginTransaction();
+			sess.save(rec);
+			sess.flush();
+			t.commit();
+			sess.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

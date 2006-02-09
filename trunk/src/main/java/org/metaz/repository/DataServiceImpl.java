@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -32,7 +33,7 @@ public class DataServiceImpl implements DataService {
 	 * @see org.metaz.repository.RepositoryService#doUpdate(java.util.List)
 	 */
 	public void doUpdate(List<Record> records) throws Exception {
-		Configuration cfg = new Configuration().configure("org/metaz/hibernate.cfg.xml");
+		Configuration cfg = new Configuration().configure();
 		SessionFactory sf = cfg.buildSessionFactory();
 		Session sess = sf.openSession();
 		Transaction t = sess.beginTransaction();
