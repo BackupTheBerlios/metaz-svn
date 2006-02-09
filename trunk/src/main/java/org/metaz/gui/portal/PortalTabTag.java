@@ -25,9 +25,10 @@ public class PortalTabTag extends TagSupport {
 
   public static final String TAB_SIMPLE_SEARCH   = "SIMPLE";
   public static final String TAB_ADVANCED_SEARCH = "ADVANCED";
+  public static final String TAB_SEARCH_RESULTS  = "RESULTS";
   public static final String TAB_HELP            = "HELP";
   public static final String TAB_INFO            = "INFO";
-  public static final String TAB_GOOGLE          = "GOOGLE";
+  public static final String TAB_RDMC            = "RDMC";
   
 
   private static Logger logger = Logger.getLogger(PortalTabTag.class); // logger instance for this class
@@ -88,9 +89,10 @@ public class PortalTabTag extends TagSupport {
 
     addTab(TAB_SIMPLE_SEARCH, "Eenvoudig zoeken", "search.jsp", "Zoeken naar leerobjecten");
     addTab(TAB_ADVANCED_SEARCH,"Uitgebreid zoeken", "advancedsearch.jsp", "Uitgebreid zoeken naar leerobjecten");
+    addTab(TAB_SEARCH_RESULTS, "Results", "searchresults.jsp", "My last search results");
     addTab(TAB_HELP, "Help", "help.jsp", "Help");
-    addTab(TAB_INFO, "Informatie", "info.jsp", "Informatie over deze portal en het Rdmc");
-    addTab(TAB_GOOGLE, "Google", "http://www.google.nl", "Naar google");
+    addTab(TAB_INFO, "Informatie", "info.jsp", "Informatie over deze website");
+    addTab(TAB_RDMC, "RDMC", "http://www.ou.nl/eCache/DEF/4/991.html", "Ruud de Moor Centrum website");
 
     return EVAL_PAGE;
     
