@@ -1,5 +1,6 @@
 package org.metaz.domain;
 
+import java.util.*;
 
 /**
  * Record that holds a number of MetaData for a 'LeerObject'. From a Harvester
@@ -36,6 +37,8 @@ public class Record {
         private TextMetaData version;
         private TextMetaData status;
         private TextMetaData roleName;
+        
+        private List<MetaData> recordMetadata= new Vector<MetaData>();
         
 	/**
 	 * Creates a new Record. This constructor ensures only valid Records (that
@@ -241,5 +244,141 @@ public class Record {
 
 	public void setTitle(TextMetaData title) {
 		this.title = title;
+	}
+
+	public Iterator iterator(){
+		if (recordMetadata.size()==0){
+			title.setMandatory(true);
+			title.setXMLTagName(MetaData.TITLE);
+			title.setName("title");
+			title.setMetaDataType("TextMetaData");
+			recordMetadata.add(1,title);
+			subject.setXMLTagName(MetaData.SUBJECT);
+			subject.setName("subject");
+			subject.setMetaDataType("TextMetaData");
+			subject.setOptional(true);
+			recordMetadata.add(1,subject);
+			description.setXMLTagName(MetaData.DESCRIPTION);
+			description.setName("description");
+			description.setMetaDataType("HtmlTextMetaData ");
+			description.setOptional(true);
+			recordMetadata.add(1,description);
+			keywords.setXMLTagName(MetaData.KEYWORDS);
+			keywords.setName("keywords");
+			keywords.setMetaDataType("TextMetaData");
+			keywords.setOptional(true);
+			recordMetadata.add(1,keywords);
+			targetEndUser.setXMLTagName(MetaData.TARGETENDUSER);
+			targetEndUser.setName("targetEndUser");
+			targetEndUser.setMetaDataType("HierarchicalStructuredTextMetaData");
+			targetEndUser.setOptional(true);
+			recordMetadata.add(1,targetEndUser);
+			schoolType.setXMLTagName(MetaData.SCHOOLTYPE);
+			schoolType.setName("schoolType");
+			schoolType.setMetaDataType("HierarchicalStructuredTextMetaDataSet");
+			schoolType.setOptional(true);
+			recordMetadata.add(1,schoolType);
+			schoolDiscipline.setXMLTagName(MetaData.SCHOOLDISCIPLINE);
+			schoolDiscipline.setName("schoolDiscipline");
+			schoolDiscipline.setMetaDataType("HierarchicalStructuredTextMetaData");
+			schoolDiscipline.setOptional(true);
+			recordMetadata.add(1,schoolDiscipline);
+			didacticFunction.setMandatory(true);
+			didacticFunction.setXMLTagName(MetaData.DIDACTICFUNCTION);
+			didacticFunction.setName("didacticFunction");
+			didacticFunction.setMetaDataType("TextMetaData");
+			recordMetadata.add(1,didacticFunction);
+			productType.setMandatory(true);
+			productType.setXMLTagName(MetaData.PRODUCTTYPE);
+			productType.setName("productType");
+			productType.setMetaDataType("TextMetaData");
+			recordMetadata.add(1,productType);
+			professionalSituation.setXMLTagName(MetaData.PROFESSIONALSITUATION);
+			professionalSituation.setName("professionalSituation");
+			professionalSituation.setMetaDataType("HierarchicalStructuredTextMetaData");
+			professionalSituation.setOptional(true);
+			recordMetadata.add(1,professionalSituation);
+			competence.setXMLTagName(MetaData.COMPETENCE);
+			competence.setName("competence");
+			competence.setMetaDataType("TextMetaData");
+			competence.setOptional(true);
+			recordMetadata.add(1,competence);
+			secured.setMandatory(true);
+			secured.setXMLTagName(MetaData.SECURED);
+			secured.setName("secured");
+			secured.setMetaDataType("BooleanMetaData");
+			recordMetadata.add(1,secured);
+			fileFormat.setMandatory(true);
+			fileFormat.setXMLTagName(MetaData.FILEFORMAT);
+			fileFormat.setName("fileFormat");
+			fileFormat.setMetaDataType("TextMetaData");
+			recordMetadata.add(1,fileFormat);
+			uri.setMandatory(true);
+			uri.setXMLTagName(MetaData.URI);
+			uri.setName("uri");
+			uri.setMetaDataType("HyperlinkMetaData");
+			recordMetadata.add(1,uri);
+			aggregationLevel.setXMLTagName(MetaData.AGGREGATIONLEVEL);
+			aggregationLevel.setName("aggregationLevel");
+			aggregationLevel.setMetaDataType("TextMetaData");
+			aggregationLevel.setOptional(true);
+			recordMetadata.add(1,aggregationLevel);
+			didacticScenario.setXMLTagName(MetaData.DIDACTICSCENARIO);
+			didacticScenario.setName("didacticScenario");
+			didacticScenario.setMetaDataType("TextMetaData");
+			didacticScenario.setOptional(true);
+			recordMetadata.add(1,didacticScenario);
+			requiredTime.setXMLTagName(MetaData.REQUIREDTIME);
+			requiredTime.setName("requiredTime");
+			requiredTime.setMetaDataType("NumericMetaData");
+			requiredTime.setOptional(true);
+			recordMetadata.add(1,requiredTime);
+			rights.setXMLTagName(MetaData.RIGHTS);
+			rights.setName("rights");
+			rights.setMetaDataType("TextMetaData");
+			rights.setOptional(true);
+			recordMetadata.add(1,rights);
+			fileSize.setXMLTagName(MetaData.FILESIZE);
+			fileSize.setName("fileSize");
+			fileSize.setMetaDataType("NumericMetaData");
+			fileSize.setOptional(true);
+			recordMetadata.add(1,fileSize);
+			playingTime.setXMLTagName(MetaData.PLAYINGTIME);
+			playingTime.setName("playingTime");
+			playingTime.setMetaDataType("NumericMetaData");
+			playingTime.setOptional(true);
+			recordMetadata.add(1,playingTime);
+			technicalRequirements.setXMLTagName(MetaData.TECHNICALREQUIREMENTS);
+			technicalRequirements.setName("technicalRequirements");
+			technicalRequirements.setMetaDataType("TextMetaData");
+			technicalRequirements.setOptional(true);
+			recordMetadata.add(1,technicalRequirements);
+			creationDate.setXMLTagName(MetaData.CREATIONDATE);
+			creationDate.setName("creationDate");
+			creationDate.setMetaDataType("DateMetaData");
+			creationDate.setOptional(true);
+			recordMetadata.add(1,creationDate);
+			lastChangedDate.setXMLTagName(MetaData.LASTCHANGEDDATE);
+			lastChangedDate.setName("lastChangedDate");
+			lastChangedDate.setMetaDataType("DateMetaData");
+			lastChangedDate.setOptional(true);
+			recordMetadata.add(1,lastChangedDate);
+			version.setXMLTagName(MetaData.VERSION);
+			version.setName("version");
+			version.setMetaDataType("TextMetaData");
+			version.setOptional(true);
+			recordMetadata.add(1,version);
+			status.setXMLTagName(MetaData.STATUS);
+			status.setName("status");
+			status.setMetaDataType("TextMetaData");
+			status.setOptional(true);
+			recordMetadata.add(1,status);
+			roleName.setXMLTagName(MetaData.ROLENAME);
+			roleName.setName("roleName");
+			roleName.setMetaDataType("TextMetaData");
+			roleName.setOptional(true);
+			recordMetadata.add(1,roleName);
+		}
+		return recordMetadata.iterator();
 	}
 }
