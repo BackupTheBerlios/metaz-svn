@@ -7,10 +7,7 @@
 	<div class="optional">
 		<label for="targetEndUser">Ik ben een:</label>
 		<select name="targetEndUser" id="targetEndUser" class="selectOne">
-			<option value="*">Alles</option>
-			<option value="D">Docent</option>
-			<option value="B">Begeleider</option>
-			<option value="A">Manager</option>
+<% out.print(org.metaz.gui.portal.SelectOption.optionsHtml(searchBean.getTargetEndUserOptions())); %>
 		</select>
 	</div>
 </fieldset>
@@ -22,10 +19,7 @@
 	<div class="optional">
 		<label for="schoolType">Mijn schooltype:</label>
 		<select name="schoolType" id="schoolType" class="selectOne">
-			<option value="*">Alles</option>
-			<option value="V">VBMO</option>
-			<option value="H">HAVO</option>
-			<option value="V">VWO</option>
+<% out.print(org.metaz.gui.portal.SelectOption.optionsHtml(searchBean.getSchoolTypeOptions())); %>
 		</select>
 	</div>
 </fieldset>
@@ -38,10 +32,7 @@
 	<div class="optional">
 		<label for="schoolDiscipline">Vakleergebied:</label>
 		<select name="schoolDiscipline" id="schoolDiscipline" class="selectOne">
-			<option value="*">Alles</option>
-			<option value="R">Rekenen</option>
-			<option value="L">Lezen</option>
-			<option value="S">Schrijven</option>
+<% out.print(org.metaz.gui.portal.SelectOption.optionsHtml(searchBean.getSchoolDisciplineOptions())); %>
 		</select>
 	</div>
 </fieldset>
