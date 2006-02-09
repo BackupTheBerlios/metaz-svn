@@ -5,7 +5,7 @@
 <portal:SetContent name="Background">images/binocs.jpg</portal:SetContent>
 
 <portal:SetContent name="PageContent">
-	<form action="/code/forms/" method="post" enctype="multipart/form-data">
+	<form action="advancedsearchhandler.jsp" method="post" enctype="multipart/form-data">
 <%@ include file="basicsearchfields.jsp" %>
 <%@ include file="advancedsearchfields.jsp" %>
 <%@ include file="freetextsearchfields.jsp" %>
