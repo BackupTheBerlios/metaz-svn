@@ -19,7 +19,7 @@
 		<p class="last">Beperk het resultaat tot een bepaald type leerobject (video, audio, etc)</p>
 	</div>
 	<div class="optional">
-		<label for="productType">Mijn schooltype:</label>
+		<label for="productType">Product type:</label>
 		<select name="productType" id="productType" class="selectOne">
 			<option value="*">Alles</option>
 			<option value="D">Document</option>

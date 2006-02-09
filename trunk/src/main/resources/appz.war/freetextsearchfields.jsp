@@ -4,8 +4,8 @@
 		<p class="last">Zoekt naar specifieke trefwoorden</p>
 	</div>
 	<div class="optional">
-		<label for="textText">Trefwoorden:</label>
-		<input type="text" name="textText" id="textText" class="inputText" size="10" maxlength="100" value="" />
+		<label for="keywords">Trefwoorden:</label>
+		<input type="inputText" name="keywords" id="keywords" class="inputText" size="10" maxlength="100" value="<%=searchBean.getKeywords()%>" />
 		<small>Spaties scheiden trefwoorden</small> 
 	</div>
 </fieldset>

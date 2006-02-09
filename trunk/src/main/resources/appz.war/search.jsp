@@ -4,6 +4,8 @@
 
 <portal:SetContent name="Background">images/magnify.jpg</portal:SetContent>
 
+<jsp:useBean id="searchBean" class="org.metaz.gui.portal.SearchBean" scope="request"/>
+
 <portal:SetContent name="PageContent">
 	<form action="searchhandler.jsp" method="post" enctype="multipart/form-data">
 <%@ include file="basicsearchfields.jsp" %>

@@ -1,3 +1,18 @@
-<portal:SetContent name="OnErrorPage">search.jsp</portal:SetContent>
+<jsp:useBean id="searchBean" class="org.metaz.gui.portal.SearchBean" scope="request">
+  <jsp:setProperty name="searchBean" property="*"/>
+</jsp:useBean>
 
-<%@ include file="genericsearchhandler.jsp" %>
+<% 
+if (searchBean.process()) 
+{
+%>
+<jsp:forward page="searchresult.jsp"/>
+<%
+}
+else 
+{
+%>
+<jsp:forward page="advancedsearch.jsp"/>
+<%
+}
+%>
