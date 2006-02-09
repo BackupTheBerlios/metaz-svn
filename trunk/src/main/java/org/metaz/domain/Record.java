@@ -381,4 +381,86 @@ public class Record {
 		}
 		return recordMetadata.iterator();
 	}
+	
+	public void setValue(String metadatafield,Object value){
+		if (metadatafield.equals(MetaData.AGGREGATIONLEVEL)){
+			this.setAggregationLevel((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.COMPETENCE)){
+			this.setCompetence((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.CREATIONDATE)){
+			this.setCreationDate((DateMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.DESCRIPTION)){
+			this.setDescription((HtmlTextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.DIDACTICFUNCTION)){
+			this.setDidacticFunction((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.DIDACTICSCENARIO)){
+			this.setDidacticScenario((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.FILEFORMAT)){
+			this.setFileFormat((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.FILESIZE)){
+			this.setFileSize((NumericMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.KEYWORDS)){
+			this.setKeywords((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.LASTCHANGEDDATE)){
+			this.setLastChangedDate((DateMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.PLAYINGTIME)){
+			this.setPlayingTime((NumericMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.PRODUCTTYPE)){
+			this.setProductType((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.PROFESSIONALSITUATION)){
+			this.setProfessionalSituation((HierarchicalStructuredTextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.REQUIREDTIME)){
+			this.setRequiredTime((NumericMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.RIGHTS)){
+			this.setRights((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.ROLENAME)){
+			this.setRoleName((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.SCHOOLDISCIPLINE)){
+			this.setSchoolDiscipline((HierarchicalStructuredTextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.SCHOOLTYPE)){
+			this.setSchoolType((HierarchicalStructuredTextMetaDataSet)value);
+			
+		}
+		if (metadatafield.equals(MetaData.SECURED)){
+			this.setSecured((BooleanMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.STATUS)){
+			this.setStatus((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.SUBJECT)){
+			this.setSubject((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.TARGETENDUSER)){
+			this.setTargetEndUser((HierarchicalStructuredTextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.TECHNICALREQUIREMENTS)){
+			this.setTechnicalRequirements((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.TITLE)){
+			this.setTitle((TextMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.URI)){
+			this.setUri((HyperlinkMetaData)value);
+		}
+		if (metadatafield.equals(MetaData.VERSION)){
+			this.setVersion((TextMetaData)value);
+		}
+	}
 }
