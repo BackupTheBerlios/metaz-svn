@@ -6,7 +6,7 @@
 if (searchBean.process()) 
 {
 %>
-<jsp:forward page="searchresult.jsp"/>
+<jsp:forward page="searchresults.jsp"/>
 <%
 }
 else 
