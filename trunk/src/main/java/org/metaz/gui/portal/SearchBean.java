@@ -14,24 +14,17 @@ public class SearchBean {
   
   // internal representation of "select" options
   
-   private ArrayList <SelectOption> targetEndUserOptions;
-   private ArrayList <SelectOption> schoolTypeOptions;
-   private ArrayList <SelectOption> schoolDisciplineOptions;
-   private ArrayList <SelectOption> didacticFunctionOptions;
-   private ArrayList <SelectOption> productTypeOptions;
-   private ArrayList <SelectOption> professionalSituationOptions;
-   private ArrayList <SelectOption> competenceOptions;
+  private ArrayList <SelectOption> targetEndUserOptions;
+  private ArrayList <SelectOption> schoolTypeOptions;
+  private ArrayList <SelectOption> schoolDisciplineOptions;
+  private ArrayList <SelectOption> didacticFunctionOptions;
+  private ArrayList <SelectOption> productTypeOptions;
+  private ArrayList <SelectOption> professionalSituationOptions;
+  private ArrayList <SelectOption> competenceOptions;
   
-  // user entry returned from JSP
+  // text fields
   
-  private String[] targetEndUser;
-  private String[] schoolType;
-  private String[] schoolDiscipline;
-  private String[] didacticFunction;
-  private String[] productType;
-  private String[] professionalSituation;
-  private String[] competence;
-  private String   keywords;
+  private String keywords;
   
   // a error message we can return to the user;
   
@@ -55,10 +48,23 @@ public class SearchBean {
     
   }
 
+  // validate
+
+  public boolean validate() 
+  {
+
+    // validation goes here...
+    // return false if some error occurs
+    // set errorMessage to indicate error type
+
+    return true;
+    
+  }
+
   private void populateTargetEndUserOptions() {
   
     targetEndUserOptions = new ArrayList <SelectOption> ();
-    targetEndUserOptions.add(new SelectOption("Alles"));
+    targetEndUserOptions.add(new SelectOption("*", "Alles"));
     targetEndUserOptions.add(new SelectOption("Docent"));
     targetEndUserOptions.add(new SelectOption("Begeleider"));
     targetEndUserOptions.add(new SelectOption("Manager"));
@@ -68,7 +74,7 @@ public class SearchBean {
   private void populateSchoolTypeOptions() {
   
     schoolTypeOptions = new ArrayList <SelectOption> ();
-    schoolTypeOptions.add(new SelectOption("Alles"));
+    schoolTypeOptions.add(new SelectOption("*", "Alles"));
     schoolTypeOptions.add(new SelectOption("VMBO"));
     schoolTypeOptions.add(new SelectOption("HAVO"));
     schoolTypeOptions.add(new SelectOption("VWO"));
@@ -78,7 +84,7 @@ public class SearchBean {
   private void populateSchoolDisciplineOptions() {
   
     schoolDisciplineOptions = new ArrayList <SelectOption> ();
-    schoolDisciplineOptions.add(new SelectOption("Alles"));
+    schoolDisciplineOptions.add(new SelectOption("*", "Alles"));
     schoolDisciplineOptions.add(new SelectOption("Rekenen"));
     schoolDisciplineOptions.add(new SelectOption("Lezen"));
     schoolDisciplineOptions.add(new SelectOption("Schrijven"));
@@ -88,7 +94,7 @@ public class SearchBean {
   private void populateDidacticFunctionOptions() {
   
     didacticFunctionOptions = new ArrayList <SelectOption> ();
-    didacticFunctionOptions.add(new SelectOption("Alles"));
+    didacticFunctionOptions.add(new SelectOption("*", "Alles"));
     didacticFunctionOptions.add(new SelectOption("Oefening"));
     didacticFunctionOptions.add(new SelectOption("Simulatie"));
     didacticFunctionOptions.add(new SelectOption("Vragenlijst"));
@@ -98,7 +104,7 @@ public class SearchBean {
   private void populateProductTypeOptions() {
   
     productTypeOptions = new ArrayList <SelectOption> ();
-    productTypeOptions.add(new SelectOption("Alles"));
+    productTypeOptions.add(new SelectOption("*", "Alles"));
     productTypeOptions.add(new SelectOption("Document"));
     productTypeOptions.add(new SelectOption("Afbeelding"));
     productTypeOptions.add(new SelectOption("Video"));
@@ -108,7 +114,7 @@ public class SearchBean {
   private void populateProfessionalSituationOptions() {
   
     professionalSituationOptions = new ArrayList <SelectOption> ();
-    professionalSituationOptions.add(new SelectOption("Alles"));
+    professionalSituationOptions.add(new SelectOption("*", "Alles"));
     professionalSituationOptions.add(new SelectOption("Groep: omgaan met een grote groep"));
     professionalSituationOptions.add(new SelectOption("Groep: omgaan met een kleine groep"));
     professionalSituationOptions.add(new SelectOption("Groep: orde handhaven"));
@@ -124,26 +130,12 @@ public class SearchBean {
   private void populateCompetenceOptions() {
   
     competenceOptions = new ArrayList <SelectOption> ();
-    competenceOptions.add(new SelectOption("Alles"));
+    competenceOptions.add(new SelectOption("*", "Alles"));
     competenceOptions.add(new SelectOption("Interpersoonlijk"));
     competenceOptions.add(new SelectOption("Pedagogisch"));
     competenceOptions.add(new SelectOption("Didactisch"));
     
   }
-  
-  // process
-
-  public boolean process() 
-  {
-  
-    // validation goes here...
-    // return false if some error occurs
-    // set errorMessage to indicate error type
-
-    return true;
-    
-  }
-
 
   public void setTargetEndUserOptions(ArrayList<SelectOption> targetEndUserOptions) {
     this.targetEndUserOptions = targetEndUserOptions;
@@ -201,60 +193,16 @@ public class SearchBean {
     return competenceOptions;
   }
 
-  public void setTargetEndUser(String[] targetEndUser) {
-    this.targetEndUser = targetEndUser;
-  }
-
-  public String[] getTargetEndUser() {
-    return targetEndUser;
-  }
-
-  public void setSchoolType(String[] schoolType) {
-    this.schoolType = schoolType;
-  }
-
-  public String[] getSchoolType() {
-    return schoolType;
-  }
-
-  public void setSchoolDiscipline(String[] schoolDiscipline) {
-    this.schoolDiscipline = schoolDiscipline;
-  }
-
-  public String[] getSchoolDiscipline() {
-    return schoolDiscipline;
-  }
-
-  public void setDidacticFunction(String[] didacticFunction) {
-    this.didacticFunction = didacticFunction;
-  }
-
-  public String[] getDidacticFunction() {
-    return didacticFunction;
-  }
-
-  public void setProfessionalSituation(String[] professionalSituation) {
-    this.professionalSituation = professionalSituation;
-  }
-
-  public String[] getProfessionalSituation() {
-    return professionalSituation;
-  }
-
-  public void setCompetence(String[] competence) {
-    this.competence = competence;
-  }
-
-  public String[] getCompetence() {
-    return competence;
-  }
-
   public void setKeywords(String keywords) {
     this.keywords = keywords;
   }
 
   public String getKeywords() {
     return keywords;
+  }
+
+  public String getHtmlEscapedKeywords() {
+    return PortalUtil.htmlEscape(keywords);
   }
 
   public void setErrorMessage(String errorMessage) {

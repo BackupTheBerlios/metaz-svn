@@ -24,7 +24,7 @@ public final class SelectOption {
       if (option.selected)
         html.append(" selected");
         
-      html.append(">" + option.getDescription() + "</option>\n");
+      html.append(">" + PortalUtil.htmlEscape(option.getDescription()) + "</option>\n");
       
     }
     

@@ -8,4 +8,24 @@
   <display-name>Applicatie-Z</display-name>
   <description>Ruud de Moor Centrum metadata zoekmachine</description>
 
+  <servlet>
+    <servlet-name>SearchHandler</servlet-name>
+    <servlet-class>org.metaz.gui.portal.SearchHandler</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>AdvancedSearchHandler</servlet-name>
+    <servlet-class>org.metaz.gui.portal.AdvancedSearchHandler</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SearchHandler</servlet-name>
+    <url-pattern>/searchhandler.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>AdvancedSearchHandler</servlet-name>
+    <url-pattern>/advancedsearchuandler.jsp</url-pattern>
+  </servlet-mapping>
+
 </web-app>
