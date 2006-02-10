@@ -183,6 +183,13 @@
          <scope>test</scope>
       </dependency>
       <dependency>
+      	 <groupId>jwebunit</groupId>
+      	 <artifactId>jwebunit</artifactId>
+      	 <version>1.2</version>
+      	 <url>http://jwebunit.sourceforge.net</url>
+      	 <scope>test</scope>
+      </dependency>
+      <dependency>
          <groupId>log4j</groupId>
          <artifactId>log4j</artifactId>
          <version>1.2.8</version>
