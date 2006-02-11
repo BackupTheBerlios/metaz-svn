@@ -2,7 +2,15 @@
 
 package org.metaz.gui.portal;
 
+import java.io.IOException;
+
 import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
@@ -10,8 +18,12 @@ import org.metaz.util.MetaZ;
 
 public class SearchBean {
 
+  public final static String SEARCH_PAGE = "search.jsp";
+  public final static String ADVANCED_SEARCH_PAGE = "advancedsearch.jsp";
+  public final static String RESULTS_PAGE = "searchresults.jsp";
+
   private static Logger logger = Logger.getLogger(SearchBean.class); // logger instance for this class
-  
+
   // internal representation of "select" options
   
   private ArrayList <SelectOption> targetEndUserOptions;
@@ -45,6 +57,73 @@ public class SearchBean {
     keywords = new String("");
     
     errorMessage = new String("");
+    
+  }
+
+  // search
+
+  public void search(HttpServletRequest req, HttpServletResponse res) 
+         throws ServletException, IOException
+  {
+  
+    processPost(req);
+    
+    if (validate())
+      forward(req, res, RESULTS_PAGE);
+    else
+      forward(req, res, SEARCH_PAGE);
+    
+  }
+
+  // advanced search
+
+  public void advancedSearch(HttpServletRequest req, HttpServletResponse res) 
+        throws ServletException, IOException
+  {
+  
+   processPost(req);
+   
+   if (validate())
+     forward(req, res, RESULTS_PAGE);
+   else
+     forward(req, res, ADVANCED_SEARCH_PAGE);
+   
+  }
+  
+  // redirect ... does a roundtrip to the client... client will request
+  // and see the new URL
+  // flow WILL return to caller!
+
+  private void redirect(HttpServletResponse res, String page) 
+          throws IOException {
+      
+      String urlWithSessionID = res.encodeRedirectURL(page);
+      res.sendRedirect( urlWithSessionID );
+      
+  }
+  
+  // forward... server interal... client sees original URL
+  // flow WILL return to caller!
+
+  private void forward(HttpServletRequest req,  HttpServletResponse res, String page) 
+          throws ServletException, IOException {
+    
+    RequestDispatcher dispatcher = req.getRequestDispatcher(page);
+    dispatcher.forward(req, res);
+    
+  }
+  
+  // process post
+
+  public void processPost(HttpServletRequest req) 
+  {
+
+    System.out.println(req.getParameterMap());
+    System.out.println(req.getParameter("keywords"));
+
+    // validation goes here...
+    // return false if some error occurs
+    // set errorMessage to indicate error type
     
   }
 
