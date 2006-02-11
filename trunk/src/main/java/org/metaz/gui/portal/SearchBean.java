@@ -115,12 +115,29 @@ public class SearchBean {
   {
 
     // Print all form variables
+    
     System.out.println(req.getParameterMap());
     
-    // Print one
-    System.out.println(req.getParameter("targetEndUser"));
+    // Example processing... targetEndUser
     
-    // Print another one...
+    String userSelection = req.getParameter("targetEndUser");
+    SelectOption targetEndUser = targetEndUserOptions.getOption(userSelection);
+    
+    if (targetEndUser == null)
+      System.out.println("Could not establish target end user");
+    else
+    {
+    
+      // Smart screens... remember the last value!
+      // First make sure none of the others options are selected...
+      // Then mark the matched option as selected
+      targetEndUserOptions.setSelected(false);
+      targetEndUser.setSelected(true);
+      
+      System.out.println(targetEndUser);
+    }
+    
+    // Another example... keywords
     System.out.println(req.getParameter("keywords"));
     
   }
@@ -238,6 +255,14 @@ public class SearchBean {
     return schoolDisciplineOptions;
   }
 
+  public void setDidacticFunctionOptions(SelectOptionList didacticFunctionOptions) {
+    this.didacticFunctionOptions = didacticFunctionOptions;
+  }
+
+  public SelectOptionList getDidacticFunctionOptions() {
+    return didacticFunctionOptions;
+  }
+
   public void setProductTypeOptions(SelectOptionList productTypeOptions) {
     this.productTypeOptions = productTypeOptions;
   }
@@ -286,5 +311,5 @@ public class SearchBean {
     return PortalUtil.htmlEscape(getErrorMessage());
   
   }
-  
+
 }

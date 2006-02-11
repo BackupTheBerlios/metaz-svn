@@ -2,12 +2,12 @@
 
 package org.metaz.gui.portal;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
+import java.io.IOException;
 
-import javax.servlet.jsp.JspFactory;
-import javax.servlet.jsp.PageContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 public class AdvancedSearchHandler extends SearchHandler {
 

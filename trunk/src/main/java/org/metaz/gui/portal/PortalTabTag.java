@@ -2,17 +2,14 @@
  
 package org.metaz.gui.portal;
 
-import java.io.*;
-import java.net.InetAddress;
-import java.net.URL;
-import java.net.URLEncoder;
-import javax.servlet.jsp.*;
-import javax.servlet.http.*;
-import javax.servlet.jsp.tagext.*;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.log4j.Logger;
 
-import org.metaz.util.MetaZ;
 
 public class PortalTabTag extends TagSupport {
 

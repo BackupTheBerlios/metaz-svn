@@ -2,24 +2,22 @@
 
 package org.metaz.gui.portal;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+
 import java.net.InetAddress;
 import java.net.URL;
-import java.util.List;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.jsp.*;
-import javax.servlet.http.*;
-import javax.servlet.jsp.tagext.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import org.metaz.util.MetaZ;
 
 public class PortalUtil {
 

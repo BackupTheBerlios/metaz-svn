@@ -2,12 +2,11 @@
 
 package org.metaz.gui.portal;
 
-import java.io.*;
-import javax.servlet.jsp.*;
-import javax.servlet.http.*;
-import javax.servlet.jsp.tagext.*;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.apache.log4j.Logger;
+
 
 public class SetPortalContentTag extends BodyTagSupport {
 

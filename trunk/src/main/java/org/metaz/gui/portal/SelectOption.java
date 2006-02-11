@@ -1,15 +1,16 @@
 package org.metaz.gui.portal;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.UUID;
+
+// @author: Falco Paul
+
 
 public final class SelectOption {
 
   private boolean selected;
   private String  value;
   private String  description;
-  private Object  marker;
+  private Object  object;
 
   public static String toHtml(SelectOption option) {
   
@@ -33,12 +34,12 @@ public final class SelectOption {
   }
 
   public SelectOption(boolean selected, String value, 
-                      String description, Object marker) {
+                      String description, Object object) {
   
     this.selected = selected;
     this.value = value;
     this.description = description;
-    this.marker = marker;
+    this.object = object;
     
   }
 
@@ -58,6 +59,15 @@ public final class SelectOption {
   public SelectOption(String description) {
 
     this(UUID.randomUUID().toString(), description);
+    
+  }
+
+  public String toString() {
+  
+    return this.isSelected() + ":" +
+           this.getValue() + ":" +
+           this.getDescription() + ":" +
+           this.getObject();
     
   }
 
@@ -85,12 +95,13 @@ public final class SelectOption {
     return description;
   }
 
-  public void setMarker(Object marker) {
-    this.marker = marker;
+  public void setObject(Object object) {
+    this.object = object;
   }
 
-  public Object getMarker() {
-    return marker;
+  public Object getObject() {
+    return object;
   }
+  
 }
 
