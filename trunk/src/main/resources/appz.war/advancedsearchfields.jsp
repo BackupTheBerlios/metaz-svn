@@ -6,7 +6,7 @@
 	<div class="optional">
 		<label for="didacticFunction">Didactische functie:</label>
 		<select name="didacticFunction" id="didacticFunction" class="selectOne">
-<% out.print(org.metaz.gui.portal.SelectOption.optionsHtml(searchBean.getDidacticFunctionOptions())); %>
+<% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getDidacticFunctionOptions())); %>
 		</select>
 	</div>
 </fieldset>
@@ -18,7 +18,7 @@
 	<div class="optional">
 		<label for="productType">Product type:</label>
 		<select name="productType" id="productType" class="selectOne">
-<% out.print(org.metaz.gui.portal.SelectOption.optionsHtml(searchBean.getProductTypeOptions())); %>
+<% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getProductTypeOptions())); %>
 		</select>
 	</div>
 </fieldset>
@@ -30,7 +30,7 @@
 	<div class="optional">
 		<label for="professionalSituation">Vakleergebied:</label>
 		<select name="professionalSituation" id="professionalSituation" class="selectOne">
-<% out.print(org.metaz.gui.portal.SelectOption.optionsHtml(searchBean.getProfessionalSituationOptions())); %>
+<% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getProfessionalSituationOptions())); %>
 		</select>
 	</div>
 </fieldset>
@@ -42,7 +42,7 @@
 	<div class="optional">
 		<label for="competence">Competentie</label>
 		<select name="competence" id="competence" class="selectOne">
-<% out.print(org.metaz.gui.portal.SelectOption.optionsHtml(searchBean.getCompetenceOptions())); %>
+<% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getCompetenceOptions())); %>
 		</select>
 	</div>
 </fieldset>
