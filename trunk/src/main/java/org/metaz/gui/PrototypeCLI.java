@@ -1,7 +1,5 @@
 package org.metaz.gui;
 
-import java.net.URI;
-
 import java.util.List;
 
 import org.apache.commons.cli.BasicParser;
@@ -10,20 +8,14 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.log4j.Logger;
 
 import org.metaz.domain.MetaData;
+import org.metaz.domain.Record;
 import org.metaz.repository.Facade;
 import org.metaz.repository.Result;
 import org.metaz.util.MetaZ;
 
-import org.apache.log4j.Logger;
-
-import java.util.List;
-
-import java.net.URI;
-
-import org.metaz.domain.HyperlinkMetaData;
-import org.metaz.domain.Record;
 
 /**
  *  This class provide a command line interface to Application Z, an application 
@@ -100,9 +92,14 @@ public class PrototypeCLI {
         try {
             List<Result<Record>> resultList = myFacade.doSearch(searchString);
             // Printing of the record list is not yet tested!!!
+            System.out.println("Here are the results of your query:");
+            if (resultList.size()==0)
+            System.out.println("--> No records were found.");
             for (int i = 0; i < resultList.size(); i++) {
-                resultList.remove(i).getObject().getURI().getValue()
-                .toString();
+                Record record = resultList.get(i).getObject();
+                System.out
+                .println(i + ". " + record.getTitle().getValue() + " " +
+                                   record.getURI().getValue());
             }
         } catch (Exception e) {
             System.out
