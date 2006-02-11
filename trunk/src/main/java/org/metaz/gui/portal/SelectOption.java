@@ -11,25 +11,25 @@ public final class SelectOption {
   private String  description;
   private Object  marker;
 
-  public static String optionsHtml(ArrayList <SelectOption> options) {
+  public static String toHtml(SelectOption option) {
   
     StringBuffer html = new StringBuffer();
-    Iterator<SelectOption> i = options.iterator();
+
+    html.append("<option value=\"" + option.getValue() + "\"");
     
-    while (i.hasNext()) {
-    
-      SelectOption option = i.next();
-      html.append("<option value=\"" + option.getValue() + "\"");
+    if (option.selected)
+      html.append(" selected");
       
-      if (option.selected)
-        html.append(" selected");
-        
-      html.append(">" + PortalUtil.htmlEscape(option.getDescription()) + "</option>\n");
+    html.append(">" + PortalUtil.htmlEscape(option.getDescription()) + "</option>");
       
-    }
-    
     return html.toString();
 
+  }
+
+  public String toHtml() {
+  
+    return toHtml(this);
+    
   }
 
   public SelectOption(boolean selected, String value, 
@@ -39,6 +39,13 @@ public final class SelectOption {
     this.value = value;
     this.description = description;
     this.marker = marker;
+    
+  }
+
+  public SelectOption(boolean selected, String value, 
+                      String description) {
+
+    this(selected, value, description, null);
     
   }
 

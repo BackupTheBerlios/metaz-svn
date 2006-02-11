@@ -4,17 +4,13 @@ package org.metaz.gui.portal;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import org.metaz.util.MetaZ;
 
 public class SearchBean {
 
@@ -26,13 +22,13 @@ public class SearchBean {
 
   // internal representation of "select" options
   
-  private ArrayList <SelectOption> targetEndUserOptions;
-  private ArrayList <SelectOption> schoolTypeOptions;
-  private ArrayList <SelectOption> schoolDisciplineOptions;
-  private ArrayList <SelectOption> didacticFunctionOptions;
-  private ArrayList <SelectOption> productTypeOptions;
-  private ArrayList <SelectOption> professionalSituationOptions;
-  private ArrayList <SelectOption> competenceOptions;
+  private SelectOptionList targetEndUserOptions;
+  private SelectOptionList schoolTypeOptions;
+  private SelectOptionList schoolDisciplineOptions;
+  private SelectOptionList didacticFunctionOptions;
+  private SelectOptionList productTypeOptions;
+  private SelectOptionList professionalSituationOptions;
+  private SelectOptionList competenceOptions;
   
   // text fields
   
@@ -118,12 +114,14 @@ public class SearchBean {
   public void processPost(HttpServletRequest req) 
   {
 
+    // Print all form variables
     System.out.println(req.getParameterMap());
+    
+    // Print one
+    System.out.println(req.getParameter("targetEndUser"));
+    
+    // Print another one...
     System.out.println(req.getParameter("keywords"));
-
-    // validation goes here...
-    // return false if some error occurs
-    // set errorMessage to indicate error type
     
   }
 
@@ -142,8 +140,8 @@ public class SearchBean {
 
   private void populateTargetEndUserOptions() {
   
-    targetEndUserOptions = new ArrayList <SelectOption> ();
-    targetEndUserOptions.add(new SelectOption("*", "Alles"));
+    targetEndUserOptions = new SelectOptionList ();
+    targetEndUserOptions.add(new SelectOption(true, "*", "Alles"));
     targetEndUserOptions.add(new SelectOption("Docent"));
     targetEndUserOptions.add(new SelectOption("Begeleider"));
     targetEndUserOptions.add(new SelectOption("Manager"));
@@ -152,8 +150,8 @@ public class SearchBean {
 
   private void populateSchoolTypeOptions() {
   
-    schoolTypeOptions = new ArrayList <SelectOption> ();
-    schoolTypeOptions.add(new SelectOption("*", "Alles"));
+    schoolTypeOptions = new SelectOptionList ();
+    schoolTypeOptions.add(new SelectOption(true, "*", "Alles"));
     schoolTypeOptions.add(new SelectOption("VMBO"));
     schoolTypeOptions.add(new SelectOption("HAVO"));
     schoolTypeOptions.add(new SelectOption("VWO"));
@@ -162,8 +160,8 @@ public class SearchBean {
 
   private void populateSchoolDisciplineOptions() {
   
-    schoolDisciplineOptions = new ArrayList <SelectOption> ();
-    schoolDisciplineOptions.add(new SelectOption("*", "Alles"));
+    schoolDisciplineOptions = new SelectOptionList ();
+    schoolDisciplineOptions.add(new SelectOption(true, "*", "Alles"));
     schoolDisciplineOptions.add(new SelectOption("Rekenen"));
     schoolDisciplineOptions.add(new SelectOption("Lezen"));
     schoolDisciplineOptions.add(new SelectOption("Schrijven"));
@@ -172,8 +170,8 @@ public class SearchBean {
 
   private void populateDidacticFunctionOptions() {
   
-    didacticFunctionOptions = new ArrayList <SelectOption> ();
-    didacticFunctionOptions.add(new SelectOption("*", "Alles"));
+    didacticFunctionOptions = new SelectOptionList ();
+    didacticFunctionOptions.add(new SelectOption(true, "*", "Alles"));
     didacticFunctionOptions.add(new SelectOption("Oefening"));
     didacticFunctionOptions.add(new SelectOption("Simulatie"));
     didacticFunctionOptions.add(new SelectOption("Vragenlijst"));
@@ -182,8 +180,8 @@ public class SearchBean {
 
   private void populateProductTypeOptions() {
   
-    productTypeOptions = new ArrayList <SelectOption> ();
-    productTypeOptions.add(new SelectOption("*", "Alles"));
+    productTypeOptions = new SelectOptionList ();
+    productTypeOptions.add(new SelectOption(true, "*", "Alles"));
     productTypeOptions.add(new SelectOption("Document"));
     productTypeOptions.add(new SelectOption("Afbeelding"));
     productTypeOptions.add(new SelectOption("Video"));
@@ -192,8 +190,8 @@ public class SearchBean {
 
   private void populateProfessionalSituationOptions() {
   
-    professionalSituationOptions = new ArrayList <SelectOption> ();
-    professionalSituationOptions.add(new SelectOption("*", "Alles"));
+    professionalSituationOptions = new SelectOptionList ();
+    professionalSituationOptions.add(new SelectOption(true, "*", "Alles"));
     professionalSituationOptions.add(new SelectOption("Groep: omgaan met een grote groep"));
     professionalSituationOptions.add(new SelectOption("Groep: omgaan met een kleine groep"));
     professionalSituationOptions.add(new SelectOption("Groep: orde handhaven"));
@@ -208,67 +206,59 @@ public class SearchBean {
 
   private void populateCompetenceOptions() {
   
-    competenceOptions = new ArrayList <SelectOption> ();
-    competenceOptions.add(new SelectOption("*", "Alles"));
+    competenceOptions = new SelectOptionList ();
+    competenceOptions.add(new SelectOption(true, "*", "Alles"));
     competenceOptions.add(new SelectOption("Interpersoonlijk"));
     competenceOptions.add(new SelectOption("Pedagogisch"));
     competenceOptions.add(new SelectOption("Didactisch"));
     
   }
 
-  public void setTargetEndUserOptions(ArrayList<SelectOption> targetEndUserOptions) {
+  public void setTargetEndUserOptions(SelectOptionList targetEndUserOptions) {
     this.targetEndUserOptions = targetEndUserOptions;
   }
 
-  public ArrayList<SelectOption> getTargetEndUserOptions() {
+  public SelectOptionList getTargetEndUserOptions() {
     return targetEndUserOptions;
   }
 
-  public void setSchoolTypeOptions(ArrayList<SelectOption> schoolTypeOptions) {
+  public void setSchoolTypeOptions(SelectOptionList schoolTypeOptions) {
     this.schoolTypeOptions = schoolTypeOptions;
   }
 
-  public ArrayList<SelectOption> getSchoolTypeOptions() {
+  public SelectOptionList getSchoolTypeOptions() {
     return schoolTypeOptions;
   }
 
-  public void setSchoolDisciplineOptions(ArrayList<SelectOption> schoolDisciplineOptions) {
+  public void setSchoolDisciplineOptions(SelectOptionList schoolDisciplineOptions) {
     this.schoolDisciplineOptions = schoolDisciplineOptions;
   }
 
-  public ArrayList<SelectOption> getSchoolDisciplineOptions() {
+  public SelectOptionList getSchoolDisciplineOptions() {
     return schoolDisciplineOptions;
   }
 
-  public void setDidacticFunctionOptions(ArrayList<SelectOption> didacticFunctionOptions) {
-    this.didacticFunctionOptions = didacticFunctionOptions;
-  }
-
-  public ArrayList<SelectOption> getDidacticFunctionOptions() {
-    return didacticFunctionOptions;
-  }
-
-  public void setProductTypeOptions(ArrayList<SelectOption> productTypeOptions) {
+  public void setProductTypeOptions(SelectOptionList productTypeOptions) {
     this.productTypeOptions = productTypeOptions;
   }
 
-  public ArrayList<SelectOption> getProductTypeOptions() {
+  public SelectOptionList getProductTypeOptions() {
     return productTypeOptions;
   }
 
-  public void setProfessionalSituationOptions(ArrayList<SelectOption> professionalSituationOptions) {
+  public void setProfessionalSituationOptions(SelectOptionList professionalSituationOptions) {
     this.professionalSituationOptions = professionalSituationOptions;
   }
 
-  public ArrayList<SelectOption> getProfessionalSituationOptions() {
+  public SelectOptionList getProfessionalSituationOptions() {
     return professionalSituationOptions;
   }
 
-  public void setCompetenceOptions(ArrayList<SelectOption> competenceOptions) {
+  public void setCompetenceOptions(SelectOptionList competenceOptions) {
     this.competenceOptions = competenceOptions;
   }
 
-  public ArrayList<SelectOption> getCompetenceOptions() {
+  public SelectOptionList getCompetenceOptions() {
     return competenceOptions;
   }
 
@@ -281,7 +271,7 @@ public class SearchBean {
   }
 
   public String getHtmlEscapedKeywords() {
-    return PortalUtil.htmlEscape(keywords);
+    return PortalUtil.htmlEscape(getKeywords());
   }
 
   public void setErrorMessage(String errorMessage) {
@@ -291,4 +281,10 @@ public class SearchBean {
   public String getErrorMessage() {
     return errorMessage;
   }
+  
+  public String getHtmlEscapedErrorMessage() {
+    return PortalUtil.htmlEscape(getErrorMessage());
+  
+  }
+  
 }
