@@ -24,7 +24,7 @@ public class SearchBean {
   
   // example result list
   
-  private ArrayList resultList;
+  private ResultList resultList;
 
   // internal representation of "select" options
   
@@ -248,11 +248,11 @@ public class SearchBean {
     
   }
 
-  public void setResultList(ArrayList resultList) {
+  public void setResultList(ResultList resultList) {
     this.resultList = resultList;
   }
 
-  public ArrayList getResultList() {
+  public ResultList getResultList() {
     return resultList;
   }
 
