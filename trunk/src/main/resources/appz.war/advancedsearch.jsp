@@ -1,10 +1,8 @@
-<%@ taglib uri="/WEB-INF/customtags/portal.tld" prefix="portal" %>
+<%@ include file="includes.jsp" %>
 
 <portal:SetContent name="ActiveTab"><% out.print(org.metaz.gui.portal.PortalTabTag.TAB_ADVANCED_SEARCH); %></portal:SetContent>
 
 <portal:SetContent name="Background">images/binocs.jpg</portal:SetContent>
-
-<jsp:useBean id="searchBean" class="org.metaz.gui.portal.SearchBean" scope="session"/>
 
 <portal:SetContent name="PageContent">
 	<form action="advancedsearchhandler.jsp" method="post"">
