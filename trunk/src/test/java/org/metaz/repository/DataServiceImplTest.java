@@ -1,28 +1,43 @@
 package org.metaz.repository;
 
-import junit.framework.TestCase;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
+import junit.framework.TestCase;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 
+/**
+ * Tests methods of the DataServiceImpl.
+ * Note this test is actually an integration test.
+ * Note also that the order of methods matters (hmmm)
+ * because you can't get a record before it's added.
+ * Note that having too many Records in the db with
+ * the same uri will fail the test.
+ * But at least it's some test!
+ * @author E.J. Spaans
+ *
+ */
 public class DataServiceImplTest extends TestCase {
 
 	private static Logger LOG = Logger.getLogger(DataServiceImplTest.class);
+	private DataServiceImpl dataService;
+	
+	@Override
+	protected void setUp() throws Exception {
+		dataService = new DataServiceImpl();
+	}
 
 	/*
 	 * Test method for 'org.metaz.repository.DataServiceImpl.getRecords(List<URI>)'
 	 */
-	public void testAddRecord(){
+	public void testAddRecord() throws Exception{
 		BasicConfigurator.configure();
 		LOG.debug("Testing");
 		TextMetaData title = new TextMetaData();
@@ -56,23 +71,24 @@ public class DataServiceImplTest extends TestCase {
 
 		Record rec = new Record(title, secured, fileFormat, didacticalFunction,
 				productType, uri);
+		List<Record> l = new ArrayList<Record>();
+		l.add(rec);
+		dataService.doUpdate(l);
+	}
 
-		Configuration cfg;
-		SessionFactory sf;
-		Session sess;
-		try {
-			cfg = new Configuration().configure();
-			sf = cfg.buildSessionFactory();
-			sess = sf.openSession();
-			Transaction t = sess.beginTransaction();
-			sess.save(rec);
-			sess.flush();
-			t.commit();
-			sess.close();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-
+	public void testGetRecord() throws Exception{
+		URI uri = new URI("http://www.ou.nl/stories/ruuddemoor.pdf");
+		Record rec = dataService.getRecord(uri);
+		assertNotNull(rec);
+		// TODO: [EJS] figure out how to deal with detachment after session closed.
+		//assertEquals("Wrong value", "http://www.ou.nl/stories/ruuddemoor.pdf", rec.getUri().getValue());
+	}
+	
+	public void testDoPurge() throws Exception {
+		dataService.doPurge();
+		URI uri = new URI("http://www.ou.nl/stories/ruuddemoor.pdf");
+		Record rec = dataService.getRecord(uri);
+		assertNull(rec);
 	}
 
 }
