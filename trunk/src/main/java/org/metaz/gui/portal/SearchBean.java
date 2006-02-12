@@ -4,6 +4,8 @@ package org.metaz.gui.portal;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,10 @@ public class SearchBean {
   public final static String RESULTS_PAGE = "searchresults.jsp";
 
   private static Logger logger = Logger.getLogger(SearchBean.class); // logger instance for this class
+  
+  // example result list
+  
+  private ArrayList resultList;
 
   // internal representation of "select" options
   
@@ -41,6 +47,8 @@ public class SearchBean {
   public SearchBean() {
   
     // anything we need for initialization goes here...
+
+    populateResultList();
     
     populateTargetEndUserOptions();
     populateSchoolTypeOptions();
@@ -155,6 +163,15 @@ public class SearchBean {
     
   }
 
+  private void populateResultList() {
+  
+    resultList = new ResultList ();
+    resultList.add(new Result("Object 1", "Video", "Get into Learning!"));
+    resultList.add(new Result("Object 2", "Picture", "The teacher is cool"));
+    resultList.add(new Result("Object 3", "Word document", "Why we all love teachers"));
+    
+  }
+
   private void populateTargetEndUserOptions() {
   
     targetEndUserOptions = new SelectOptionList ();
@@ -229,6 +246,14 @@ public class SearchBean {
     competenceOptions.add(new SelectOption("Pedagogisch"));
     competenceOptions.add(new SelectOption("Didactisch"));
     
+  }
+
+  public void setResultList(ArrayList resultList) {
+    this.resultList = resultList;
+  }
+
+  public ArrayList getResultList() {
+    return resultList;
   }
 
   public void setTargetEndUserOptions(SelectOptionList targetEndUserOptions) {
