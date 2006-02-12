@@ -166,6 +166,9 @@ public class SearchBean {
   private void populateResultList() {
   
     resultList = new ResultList ();
+
+    // some example dummy records to see the displaytag library in action
+
     resultList.add(new Result("Object 1", "Video", "Get into Learning!"));
     resultList.add(new Result("Object 2", "Picture", "The teacher is cool"));
     resultList.add(new Result("Object 3", "Word document", "Why we all love teachers"));
