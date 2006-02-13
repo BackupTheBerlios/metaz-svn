@@ -81,8 +81,16 @@ public class RepositoryFacadeTest extends TestCase {
 	public void testDoSearch() {
 		//FIXME: extend test criteria
 		try {
-			List<Result<Record>> hits = facade.doSearch("*");
+			List<Result<Record>> hits = facade.doSearch("titel:someValue");
 			assertNotNull(hits.get(0));
+			
+			hits = facade.doSearch("producttype:instructie");
+			assertNotNull(hits.get(0));
+			
+			hits = facade.doSearch("producttype:jjjjjjjj");
+			assertEquals(0,hits.size());
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
