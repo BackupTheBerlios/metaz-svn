@@ -5,8 +5,6 @@
 
 <portal:SetContent name="PageContent">
 
-<%@ taglib prefix="log" uri="http://jakarta.apache.org/taglibs/log-1.0" %>
-
 Er is helaas een (interne) applicatie fout opgetreden.
 Mail de webmaster als het onderstaande probleem nogmaals wordt gerapporteerd:
 
