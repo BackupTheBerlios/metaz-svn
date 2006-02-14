@@ -8,7 +8,7 @@
 <portal:SetContent name="PageContent">
 
 	<center>
-		<display:table name="${searchBean.recordDetailsList}" class="results" export="true" sort="list" pagesize="8">
+		<display:table name="${searchBean.recordDetailsList}" class="results" export="true" sort="list">
 			<display:column property="name" title="Eigenchap" group="1" sortable="true" headerClass="sortable" />
 			<display:column property="value" title="Waarde" group="2" sortable="true" headerClass="sortable" />
 		</display:table>
