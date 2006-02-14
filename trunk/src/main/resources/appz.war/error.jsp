@@ -13,6 +13,8 @@
             <font color="red"> Er is helaas een (interne) applicatie fout opgetreden. <br/>
             Mail de webmaster als het onderstaande probleem herhaaldelijk wordt waargenomen: </font> <br/>
             <br/>
+            <font color="blue">U kunt proberen om met de <b>back</b> knop terug te surfen en de actie nogmaals uit te voeren.</font> <br/>
+            <br/>
             <b>Datum/tijd</b> <br/>
             ${now} <br/>
             <br/>
@@ -28,8 +30,42 @@
             <b>Fout code</b> <br/>
             ${pageContext.errorData.throwable} <br/>
             <br/>
+            <b>"Stack trace"</b> <br/>
+  <%
+  ErrorData errorData = pageContext.getErrorData() ;
+  Throwable throwable = errorData.getThrowable() ;
+  StackTraceElement[] stackTrace = throwable.getStackTrace() ;
+  for ( int i = 0 ; i < stackTrace.length ; ++i ) {
+  %>
+            <%= stackTrace[i] %>
+  <%
+  }
+  %>
             <br/>
-            <b>U kunt proberen om met de <u>back</u> knop terug te surfen en de actie nogmaals uit te voeren.</b> </td>
+            <br/>
+            <b>"Root cause"</b> <br/>
+  <%
+  errorData = pageContext.getErrorData() ;
+  throwable = errorData.getThrowable().getCause() ;
+	if (throwable != null)
+	{
+    stackTrace = throwable.getStackTrace() ;
+    for ( int i = 0 ; i < stackTrace.length ; ++i ) {
+  %>
+            <%= stackTrace[i] %>
+  <%
+    }
+	}
+	else
+	{
+  %>
+            Geen root cause
+  <%
+	}
+  %>
+            <br/>
+            <br/>
+          </td>
         </tr>
       </table></td>
     <td width="10%">&nbsp;</td>
