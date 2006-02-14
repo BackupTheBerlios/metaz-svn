@@ -10,7 +10,9 @@
     <td width="80%"><center>
         <table border="0" cellspacing="0">
           <tr>
-            <td><br/>
+            <td>
+						  <center>
+						  <br/>
               <font color="red"> Er is helaas een (interne) applicatie fout opgetreden. <br/>
               Mail de webmaster als het onderstaande probleem herhaaldelijk wordt waargenomen: </font> <br/>
               <br/>
@@ -66,8 +68,8 @@
 <%
 	}
 %>
-              </small> <br/>
-              <br/>
+              </small>
+              </center>
             </td>
           </tr>
         </table>
