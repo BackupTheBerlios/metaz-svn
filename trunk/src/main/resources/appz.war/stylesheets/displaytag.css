@@ -30,6 +30,7 @@ table.results th a:hover {
 }
 
 table.results th.sorted a,th.sortable a {
+	background-repeat: no-repeat;
 	background-position: right;
 	display: block;
 	width: 100%;
@@ -65,9 +66,11 @@ div.exportlinks {
 
 span.export {
 	padding: 0 4px 1px 20px;
-	display: inline;
+	display: inline-block;
 	display: inline-block;
 	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: left;
 }
 
 span.excel {
