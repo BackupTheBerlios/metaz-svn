@@ -69,7 +69,7 @@ public class PortalTabTag extends TagSupport {
     if (getActiveTabId().trim().equals(tabId))
     {
       active = "class=\"current\" ";
-      text   = "> " + text;
+      text   = ">" + text;
     }
     
     printHtml("<li><a " + active + 
