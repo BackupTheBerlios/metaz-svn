@@ -16,54 +16,56 @@
             <font color="blue">U kunt proberen om met de <b>back</b> knop terug te surfen en de actie nogmaals uit te voeren.</font> <br/>
             <br/>
             <b>Datum/tijd</b> <br/>
-            ${now} <br/>
-            <br/>
+            <small> ${now} <br/>
+            </small> <br/>
             <b>Verzoek</b> <br/>
-            ${pageContext.errorData.requestURI} <br/>
-            <br/>
+            <small> ${pageContext.errorData.requestURI} <br/>
+            </small> <br/>
             <b>Status code</b> <br/>
-            ${pageContext.errorData.statusCode} <br/>
-            <br/>
+            <small> ${pageContext.errorData.statusCode} <br/>
+            </small> <br/>
             <b>Servlet</b> <br/>
-            ${pageContext.errorData.servletName} <br/>
-            <br/>
+            <small> ${pageContext.errorData.servletName} <br/>
+            </small> <br/>
             <b>Fout code</b> <br/>
-            ${pageContext.errorData.throwable} <br/>
-            <br/>
+            <small> ${pageContext.errorData.throwable} <br/>
+            </small> <br/>
             <b>"Stack trace"</b> <br/>
-  <%
+            <small>
+<%
   ErrorData errorData = pageContext.getErrorData() ;
   Throwable throwable = errorData.getThrowable() ;
   StackTraceElement[] stackTrace = throwable.getStackTrace() ;
   for ( int i = 0 ; i < stackTrace.length ; ++i ) {
-  %>
+%>
             <%= stackTrace[i] %>
-  <%
+<%
   }
-  %>
-            <br/>
+%>
+            </small> <br/>
             <br/>
             <b>"Root cause"</b> <br/>
-  <%
+            <small>
+<%
   errorData = pageContext.getErrorData() ;
   throwable = errorData.getThrowable().getCause() ;
 	if (throwable != null)
 	{
     stackTrace = throwable.getStackTrace() ;
     for ( int i = 0 ; i < stackTrace.length ; ++i ) {
-  %>
+%>
             <%= stackTrace[i] %>
-  <%
+<%
     }
 	}
 	else
 	{
-  %>
+%>
             Geen root cause
-  <%
+<%
 	}
-  %>
-            <br/>
+%>
+            </small> <br/>
             <br/>
           </td>
         </tr>
