@@ -169,9 +169,18 @@ public class SearchBean {
 
     // some example dummy records to see the displaytag library in action
 
-    resultList.add(new Result("Object 1", "Video", "Get into Learning!"));
-    resultList.add(new Result("Object 2", "Picture", "The teacher is cool"));
-    resultList.add(new Result("Object 3", "Word document", "Why we all love teachers"));
+    resultList.add(new Result("Object 01", "Video", "Het nieuwe leren"));
+    resultList.add(new Result("Object 02", "Video", "Rekenen"));
+    resultList.add(new Result("Object 03", "Video", "De nieuwe universiteit"));
+    resultList.add(new Result("Object 04", "Video", "De schoolorganisatie"));
+    resultList.add(new Result("Object 05", "Video", "Aardrijkskunde"));
+    resultList.add(new Result("Object 06", "Picture", "Biologie 1"));
+    resultList.add(new Result("Object 07", "Picture", "Op afstand leren"));
+    resultList.add(new Result("Object 08", "Picture", "Leren is weten, weten is leren"));
+    resultList.add(new Result("Object 09", "Picture", "De meester weet het beter"));
+    resultList.add(new Result("Object 10", "Word document", "Wiskunde voor de wereld"));
+    resultList.add(new Result("Object 11", "Word document", "Rekenonderwijs"));
+    resultList.add(new Result("Object 12", "Word document", "Orde houden in de klas"));
     
   }
 

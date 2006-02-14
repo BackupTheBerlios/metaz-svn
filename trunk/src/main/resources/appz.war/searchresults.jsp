@@ -6,6 +6,14 @@
 </portal:SetContent>
 <portal:SetContent name="Background">images/binocs.jpg</portal:SetContent>
 <portal:SetContent name="PageContent">
-  <display:table name="${searchBean.resultList}" />
+
+	<center>
+		<display:table name="${searchBean.resultList}" class="results" export="true" sort="list" pagesize="8">
+			<display:column property="productType" title="PRODUCTTYPE" group="1" sortable="true" headerClass="sortable" />
+			<display:column property="name" title="NAAM" group="2" sortable="true" headerClass="sortable" />
+			<display:column property="description" title="OMSCHRIJVING" />
+		</display:table>
+	</center>
+
 </portal:SetContent>
 <%@ include file="template.jsp" %>

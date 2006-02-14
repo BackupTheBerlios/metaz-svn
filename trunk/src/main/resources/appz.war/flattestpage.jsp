@@ -19,6 +19,7 @@
 	@import "stylesheets/main.css";
 	@import "stylesheets/tabs.css";
 	@import "stylesheets/form.css";
+	@import "stylesheets/displaytag.css";
 </style>
 </head>
 <body background="images/binocs.jpg">
