@@ -10,7 +10,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.log4j.Logger;
 
-
 public class PortalTabTag extends TagSupport {
 
   // Active tab determination ID to be used with setPortalContent JSP tag
