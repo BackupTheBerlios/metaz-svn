@@ -12,10 +12,17 @@ body {
 	line-height: 12px;
 }
 
-a {
-	color: black;
-	font-weight: bold;
-	text-decoration: none;
+a:link {
+	color: #666666;
+	text-decoration: underline;
+}
+
+a:hover, a:active {
+	color: #663333;
+}
+
+a:visited {
+	color: #666666;
 }
 
 h1 {

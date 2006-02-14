@@ -11,7 +11,7 @@
 		<display:table name="${searchBean.resultList}" class="results" export="true" sort="list" pagesize="8">
 			<display:column property="productType" title="PRODUCTTYPE" group="1" sortable="true" headerClass="sortable" />
 			<display:column property="name" title="NAAM" group="2" sortable="true" headerClass="sortable" />
-			<display:column property="description" title="OMSCHRIJVING" />
+			<display:column property="description" title="OMSCHRIJVING" sortable="true" headerClass="sortable" />
 		</display:table>
 	</center>
 
