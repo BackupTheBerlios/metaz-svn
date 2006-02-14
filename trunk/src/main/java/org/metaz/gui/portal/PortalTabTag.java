@@ -66,8 +66,11 @@ public class PortalTabTag extends TagSupport {
       
     String active = "";
     
-    if (getActiveTabId().equals(tabId))
+    if (getActiveTabId().trim().equals(tabId))
+    {
       active = "class=\"current\" ";
+      text   = "> " + text;
+    }
     
     printHtml("<li><a " + active + 
              "href=\"" + url + "\" " +
