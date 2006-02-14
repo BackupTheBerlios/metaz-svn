@@ -4,7 +4,7 @@ package org.metaz.gui.portal;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
+import org.metaz.domain.Record;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +22,13 @@ public class SearchBean {
 
   private static Logger logger = Logger.getLogger(SearchBean.class); // logger instance for this class
   
-  // example result list
+  // current available result list
   
   private ResultList resultList;
+
+  // current available record details
+  
+  private RecordDetailsList recordDetailsList;
 
   // internal representation of "select" options
   
@@ -46,9 +50,13 @@ public class SearchBean {
   
   public SearchBean() {
   
+    resultList = new ResultList();
+    recordDetailsList = new RecordDetailsList();
+  
     // anything we need for initialization goes here...
 
-    populateResultList();
+    demoResultList();
+    demoRecordDetailsList();
     
     populateTargetEndUserOptions();
     populateSchoolTypeOptions();
@@ -163,101 +171,12 @@ public class SearchBean {
     
   }
 
-  private void populateResultList() {
-  
-    resultList = new ResultList ();
-
-    // some example dummy records to see the displaytag library in action
-
-    resultList.add(new Result("Object 01", "Video", "Het nieuwe leren"));
-    resultList.add(new Result("Object 02", "Video", "Rekenen"));
-    resultList.add(new Result("Object 03", "Video", "De nieuwe universiteit"));
-    resultList.add(new Result("Object 04", "Video", "De schoolorganisatie"));
-    resultList.add(new Result("Object 05", "Video", "Aardrijkskunde"));
-    resultList.add(new Result("Object 06", "Picture", "Biologie 1"));
-    resultList.add(new Result("Object 07", "Picture", "Op afstand leren"));
-    resultList.add(new Result("Object 08", "Picture", "Leren is weten, weten is leren"));
-    resultList.add(new Result("Object 09", "Picture", "De meester weet het beter"));
-    resultList.add(new Result("Object 10", "Word document", "Wiskunde voor de wereld"));
-    resultList.add(new Result("Object 11", "Word document", "Rekenonderwijs"));
-    resultList.add(new Result("Object 12", "Word document", "Orde houden in de klas"));
-    
+  public void setLogger(Logger logger) {
+    this.logger = logger;
   }
 
-  private void populateTargetEndUserOptions() {
-  
-    targetEndUserOptions = new SelectOptionList ();
-    targetEndUserOptions.add(new SelectOption(true, "*", "Alles"));
-    targetEndUserOptions.add(new SelectOption("Docent"));
-    targetEndUserOptions.add(new SelectOption("Begeleider"));
-    targetEndUserOptions.add(new SelectOption("Manager"));
-    
-  }
-
-  private void populateSchoolTypeOptions() {
-  
-    schoolTypeOptions = new SelectOptionList ();
-    schoolTypeOptions.add(new SelectOption(true, "*", "Alles"));
-    schoolTypeOptions.add(new SelectOption("VMBO"));
-    schoolTypeOptions.add(new SelectOption("HAVO"));
-    schoolTypeOptions.add(new SelectOption("VWO"));
-    
-  }
-
-  private void populateSchoolDisciplineOptions() {
-  
-    schoolDisciplineOptions = new SelectOptionList ();
-    schoolDisciplineOptions.add(new SelectOption(true, "*", "Alles"));
-    schoolDisciplineOptions.add(new SelectOption("Rekenen"));
-    schoolDisciplineOptions.add(new SelectOption("Lezen"));
-    schoolDisciplineOptions.add(new SelectOption("Schrijven"));
-    
-  }
-
-  private void populateDidacticFunctionOptions() {
-  
-    didacticFunctionOptions = new SelectOptionList ();
-    didacticFunctionOptions.add(new SelectOption(true, "*", "Alles"));
-    didacticFunctionOptions.add(new SelectOption("Oefening"));
-    didacticFunctionOptions.add(new SelectOption("Simulatie"));
-    didacticFunctionOptions.add(new SelectOption("Vragenlijst"));
-    
-  }
-
-  private void populateProductTypeOptions() {
-  
-    productTypeOptions = new SelectOptionList ();
-    productTypeOptions.add(new SelectOption(true, "*", "Alles"));
-    productTypeOptions.add(new SelectOption("Document"));
-    productTypeOptions.add(new SelectOption("Afbeelding"));
-    productTypeOptions.add(new SelectOption("Video"));
-    
-  }
-
-  private void populateProfessionalSituationOptions() {
-  
-    professionalSituationOptions = new SelectOptionList ();
-    professionalSituationOptions.add(new SelectOption(true, "*", "Alles"));
-    professionalSituationOptions.add(new SelectOption("Groep: omgaan met een grote groep"));
-    professionalSituationOptions.add(new SelectOption("Groep: omgaan met een kleine groep"));
-    professionalSituationOptions.add(new SelectOption("Groep: orde handhaven"));
-    professionalSituationOptions.add(new SelectOption("Lessen: voorbereiden van een les"));
-    professionalSituationOptions.add(new SelectOption("Lessen: start van de les"));
-    professionalSituationOptions.add(new SelectOption("Lessen: uitvoering"));
-    professionalSituationOptions.add(new SelectOption("Opvoeden op school: schoolregels"));
-    professionalSituationOptions.add(new SelectOption("Opvoeden op school: toezicht in de gangen en pauzes"));
-    professionalSituationOptions.add(new SelectOption("Opvoeden op school: veiligheid op school"));
-    
-  }
-
-  private void populateCompetenceOptions() {
-  
-    competenceOptions = new SelectOptionList ();
-    competenceOptions.add(new SelectOption(true, "*", "Alles"));
-    competenceOptions.add(new SelectOption("Interpersoonlijk"));
-    competenceOptions.add(new SelectOption("Pedagogisch"));
-    competenceOptions.add(new SelectOption("Didactisch"));
-    
+  public Logger getLogger() {
+    return logger;
   }
 
   public void setResultList(ResultList resultList) {
@@ -266,6 +185,14 @@ public class SearchBean {
 
   public ResultList getResultList() {
     return resultList;
+  }
+
+  public void setRecordDetailsList(RecordDetailsList recordDetailsList) {
+    this.recordDetailsList = recordDetailsList;
+  }
+
+  public RecordDetailsList getRecordDetailsList() {
+    return recordDetailsList;
   }
 
   public void setTargetEndUserOptions(SelectOptionList targetEndUserOptions) {
@@ -347,6 +274,113 @@ public class SearchBean {
   public String getHtmlEscapedErrorMessage() {
     return PortalUtil.htmlEscape(getErrorMessage());
   
+  }
+
+  // just some fake data here to demonstrate usage
+
+  private void demoResultList() {
+  
+    resultList = new ResultList ();
+
+    // some example dummy records to see the displaytag library in action
+
+    resultList.add(new Result("Object 01", "Video", "Het nieuwe leren"));
+    resultList.add(new Result("Object 02", "Video", "Rekenen"));
+    resultList.add(new Result("Object 03", "Video", "De nieuwe universiteit"));
+    resultList.add(new Result("Object 04", "Video", "De schoolorganisatie"));
+    resultList.add(new Result("Object 05", "Video", "Aardrijkskunde"));
+    resultList.add(new Result("Object 06", "Picture", "Biologie 1"));
+    resultList.add(new Result("Object 07", "Picture", "Op afstand leren"));
+    resultList.add(new Result("Object 08", "Picture", "Leren is weten, weten is leren"));
+    resultList.add(new Result("Object 09", "Picture", "De meester weet het beter"));
+    resultList.add(new Result("Object 10", "Word document", "Wiskunde voor de wereld"));
+    resultList.add(new Result("Object 11", "Word document", "Rekenonderwijs"));
+    resultList.add(new Result("Object 12", "Word document", "Orde houden in de klas"));
+    
+  }
+
+  // just some fake data here to demonstrate usage
+
+  private void demoRecordDetailsList() {
+  
+    recordDetailsList = new RecordDetailsList (new Record());
+    
+  }
+
+  private void populateTargetEndUserOptions() {
+  
+    targetEndUserOptions = new SelectOptionList ();
+    targetEndUserOptions.add(new SelectOption(true, "*", "Alles"));
+    targetEndUserOptions.add(new SelectOption("Docent"));
+    targetEndUserOptions.add(new SelectOption("Begeleider"));
+    targetEndUserOptions.add(new SelectOption("Manager"));
+    
+  }
+
+  private void populateSchoolTypeOptions() {
+  
+    schoolTypeOptions = new SelectOptionList ();
+    schoolTypeOptions.add(new SelectOption(true, "*", "Alles"));
+    schoolTypeOptions.add(new SelectOption("VMBO"));
+    schoolTypeOptions.add(new SelectOption("HAVO"));
+    schoolTypeOptions.add(new SelectOption("VWO"));
+    
+  }
+
+  private void populateSchoolDisciplineOptions() {
+  
+    schoolDisciplineOptions = new SelectOptionList ();
+    schoolDisciplineOptions.add(new SelectOption(true, "*", "Alles"));
+    schoolDisciplineOptions.add(new SelectOption("Rekenen"));
+    schoolDisciplineOptions.add(new SelectOption("Lezen"));
+    schoolDisciplineOptions.add(new SelectOption("Schrijven"));
+    
+  }
+
+  private void populateDidacticFunctionOptions() {
+  
+    didacticFunctionOptions = new SelectOptionList ();
+    didacticFunctionOptions.add(new SelectOption(true, "*", "Alles"));
+    didacticFunctionOptions.add(new SelectOption("Oefening"));
+    didacticFunctionOptions.add(new SelectOption("Simulatie"));
+    didacticFunctionOptions.add(new SelectOption("Vragenlijst"));
+    
+  }
+
+  private void populateProductTypeOptions() {
+  
+    productTypeOptions = new SelectOptionList ();
+    productTypeOptions.add(new SelectOption(true, "*", "Alles"));
+    productTypeOptions.add(new SelectOption("Document"));
+    productTypeOptions.add(new SelectOption("Afbeelding"));
+    productTypeOptions.add(new SelectOption("Video"));
+    
+  }
+
+  private void populateProfessionalSituationOptions() {
+  
+    professionalSituationOptions = new SelectOptionList ();
+    professionalSituationOptions.add(new SelectOption(true, "*", "Alles"));
+    professionalSituationOptions.add(new SelectOption("Groep: omgaan met een grote groep"));
+    professionalSituationOptions.add(new SelectOption("Groep: omgaan met een kleine groep"));
+    professionalSituationOptions.add(new SelectOption("Groep: orde handhaven"));
+    professionalSituationOptions.add(new SelectOption("Lessen: voorbereiden van een les"));
+    professionalSituationOptions.add(new SelectOption("Lessen: start van de les"));
+    professionalSituationOptions.add(new SelectOption("Lessen: uitvoering"));
+    professionalSituationOptions.add(new SelectOption("Opvoeden op school: schoolregels"));
+    professionalSituationOptions.add(new SelectOption("Opvoeden op school: toezicht in de gangen en pauzes"));
+    professionalSituationOptions.add(new SelectOption("Opvoeden op school: veiligheid op school"));
+    
+  }
+
+  private void populateCompetenceOptions() {
+  
+    competenceOptions = new SelectOptionList ();
+    competenceOptions.add(new SelectOption(true, "*", "Alles"));
+    competenceOptions.add(new SelectOption("Interpersoonlijk"));
+    competenceOptions.add(new SelectOption("Pedagogisch"));
+    competenceOptions.add(new SelectOption("Didactisch"));
+    
   }
 
 }

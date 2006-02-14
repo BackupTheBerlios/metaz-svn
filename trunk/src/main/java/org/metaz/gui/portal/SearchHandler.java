@@ -2,6 +2,8 @@
 
 package org.metaz.gui.portal;
 
+import org.metaz.domain.Record;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;

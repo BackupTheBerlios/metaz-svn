@@ -1,7 +1,8 @@
 package org.metaz.gui.portal;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
+import org.metaz.domain.Record;
 
 // @author: Falco Paul
 
@@ -9,6 +10,11 @@ import java.util.Iterator;
 // Represents the result list
 
 public final class ResultList extends ArrayList <Result> {
+
+  // empty constructor
+
+  public ResultList() {
+  }
 
 }
 

@@ -1,7 +1,5 @@
 package org.metaz.gui.portal;
 
-import java.util.UUID;
-
 // @author: Falco Paul
 // Just an example to show the workings of the displaytag library
 // Real implementation will be different

@@ -8,10 +8,9 @@
 <portal:SetContent name="PageContent">
 
 	<center>
-		<display:table name="${searchBean.resultList}" class="results" export="true" sort="list" pagesize="8">
-			<display:column property="productType" title="Product type" group="1" sortable="true" headerClass="sortable" />
-			<display:column property="name" title="Naam" group="2" sortable="true" headerClass="sortable" />
-			<display:column property="description" title="Omschrijving" sortable="true" headerClass="sortable" />
+		<display:table name="${searchBean.recordDetailsList}" class="results" export="true" sort="list" pagesize="8">
+			<display:column property="name" title="Eigenchap" group="1" sortable="true" headerClass="sortable" />
+			<display:column property="value" title="Waarde" group="2" sortable="true" headerClass="sortable" />
 		</display:table>
 	</center>
 
