@@ -4,7 +4,7 @@
 <portal:SetContent name="ActiveTab">
   <% out.print(org.metaz.gui.portal.PortalTabTag.TAB_SEARCH_RESULTS); %>
 </portal:SetContent>
-<portal:SetContent name="Background">images/binocs.jpg</portal:SetContent>
+<portal:SetContent name="Background">images/results.jpg</portal:SetContent>
 <portal:SetContent name="PageContent">
 
 	<center>
