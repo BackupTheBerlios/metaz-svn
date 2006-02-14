@@ -1,0 +1,60 @@
+<!-- Rdmc App/Z portal tag library descriptor -->
+
+<taglib>
+
+  <!-- The version number of this tag library -->
+  <tlibversion>1.0</tlibversion>
+
+  <!-- The JSP specification version required to function -->
+  <jspversion>1.1</jspversion>
+
+  <!-- The short name of this tag library (used mainly to benefit authoring tools) -->
+  <shortname>appz</shortname>
+
+  <!-- General information about this tag library -->
+  <info>
+        A tag library to support the App/Z portal "page generation"
+  </info>
+
+  <!-- Some uniquely (mockup) identifying URI (used mainly to benefit authoring tools) -->
+  <uri>http://portal.tag.metaz.org</uri>
+
+  <!-- ******************** Defined Custom Tags *************************** -->
+
+  <tag>
+    <name>SetContent</name>
+    <tagclass>org.metaz.gui.portal.SetPortalContentTag</tagclass>
+    <info>Sets content in the JSP page context</info>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>GetContent</name>
+    <tagclass>org.metaz.gui.portal.GetPortalContentTag</tagclass>
+    <info>Gets content from the JSP page context</info>
+    <bodycontent>empty</bodycontent>
+    <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+            <name>default</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>PortalTab</name>
+    <tagclass>org.metaz.gui.portal.PortalTabTag</tagclass>
+    <info>Renders the portal tab HTML</info>
+    <bodycontent>empty</bodycontent>
+  </tag>
+
+</taglib>
