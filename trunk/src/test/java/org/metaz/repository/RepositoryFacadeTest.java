@@ -81,6 +81,12 @@ public class RepositoryFacadeTest extends TestCase {
 	public void testDoSearch() {
 		//FIXME: extend test criteria
 		try {
+			
+			List<Record> records= new Vector<Record>();
+			records.add(rec);
+			
+			facade.doUpdate(records);
+			
 			List<Result<Record>> hits = facade.doSearch("titel:someValue");
 			assertNotNull(hits.get(0));
 			
