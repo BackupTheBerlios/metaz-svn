@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="leerobjecten">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="leerobject">
+          <xs:annotation>
+            <xs:documentation>
+              A sample element
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="didactischeFunctie" type="xs:string" />
+              <xs:element name="producttype" type="xs:string" />
+              <xs:element minOccurs="0" name="beoogdeEindgebruiker" type="eindgebruikerGelaagdeWaarde" />
+              <xs:element minOccurs="0" name="schooltype" type="meervoudigeGelaagdeWaarde" />
+              <xs:element minOccurs="0" name="vakleergebied" type="gelaagdeWaarde" />
+              <xs:element minOccurs="0" name="didactischScenario" type="xs:string" />
+              <xs:element minOccurs="0" name="aggregatieniveau" type="xs:string" />
+              <xs:element minOccurs="0" name="beroepssituatie" type="gelaagdeWaarde" />
+              <xs:element minOccurs="0" name="competentie" type="xs:string" />
+              <xs:element minOccurs="0" name="onderwerp" type="xs:string" />
+              <xs:element minOccurs="0" name="rolEnNaam">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="rolNaamParen" type="rolNaamPaar" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="rechten" type="xs:string" />
+              <xs:element minOccurs="0" name="sleutelwoorden">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="sleutelwoord" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="technischeVereiste" type="xs:string" />
+              <xs:element name="titel" type="xs:string" />
+              <xs:element maxOccurs="1" name="beveiligd" type="xs:boolean" />
+              <xs:element minOccurs="0" maxOccurs="1" name="datumCreatie" type="xs:date" />
+              <xs:element minOccurs="0" name="datumLaatsteWijziging" type="xs:date" />
+              <xs:element minOccurs="0" name="bestandsgrootte" type="xs:integer" />
+              <xs:element minOccurs="0" name="benodigdeTijd" type="xs:time" />
+              <xs:element minOccurs="0" name="afspeelduur" type="xs:time" />
+              <xs:element minOccurs="0" name="versie" type="xs:string" />
+              <xs:element minOccurs="0" name="status" type="xs:string" />
+              <xs:element name="omschrijving" type="omschrijvingType" />
+              <xs:element maxOccurs="1" name="bestandsformaat" type="xs:string" />
+            </xs:all>
+            <xs:attribute name="URI" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="simpelopvolger">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="waarde" />
+        <xs:element minOccurs="0" maxOccurs="1" ref="simpelopvolger" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="gelaagdeWaarde">
+    <xs:sequence minOccurs="1" maxOccurs="1">
+      <xs:element name="hoofdwaarden">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element name="hoofdwaarde">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="1" maxOccurs="1" name="waarde" type="xs:string" />
+                  <xs:element minOccurs="0" maxOccurs="1" ref="simpelopvolger" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="rolNaamPaar">
+    <xs:sequence>
+      <xs:element name="rol" type="xs:string" />
+      <xs:element name="naam" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="eindgebruikerwaarde">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="docent" />
+        <xs:enumeration value="begeleider" />
+        <xs:enumeration value="manager" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:complexType name="eindgebruikerGelaagdeWaarde">
+    <xs:sequence minOccurs="1" maxOccurs="1">
+      <xs:element name="hoofdwaarden">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element name="hoofdwaarde">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="1" maxOccurs="1" ref="eindgebruikerwaarde" />
+                  <xs:element minOccurs="0" maxOccurs="1" ref="simpelopvolger" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="omschrijvingType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="b" type="xs:string" />
+      <xs:element name="i" type="xs:string" />
+      <xs:element name="u" type="xs:string" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="opvolger">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="waarde" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="opvolger" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="meervoudigeGelaagdeWaarde">
+    <xs:sequence minOccurs="1" maxOccurs="1">
+      <xs:element name="hoofdwaarden">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="hoofdwaarde">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="1" maxOccurs="1" name="waarde" type="xs:string" />
+                  <xs:element minOccurs="0" maxOccurs="unbounded" ref="opvolger" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
