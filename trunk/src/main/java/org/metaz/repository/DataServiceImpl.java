@@ -119,9 +119,11 @@ public class DataServiceImpl implements DataService {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
+			/*
 			if (sess != null) {
 				sess.close();
 			}
+			*/
 		}
 		return rec;
 	}
