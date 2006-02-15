@@ -10,6 +10,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.HyperlinkMetaData;
+import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 
@@ -80,8 +81,10 @@ public class DataServiceImplTest extends TestCase {
 		URI uri = new URI("http://www.ou.nl/stories/ruuddemoor.pdf");
 		Record rec = dataService.getRecord(uri);
 		assertNotNull(rec);
+		MetaData m = rec.getUri();
+		assertNotNull(m);
 		// TODO: [EJS] figure out how to deal with detachment after session closed.
-		//assertEquals("Wrong value", "http://www.ou.nl/stories/ruuddemoor.pdf", rec.getUri().getValue());
+		assertEquals("Wrong value", "http://www.ou.nl/stories/ruuddemoor.pdf", rec.getUri().getValue());
 	}
 	
 	public void testDoPurge() throws Exception {
