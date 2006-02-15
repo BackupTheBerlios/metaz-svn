@@ -3,7 +3,7 @@
     PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="org.metaz.domain.MetaData" table="metadata" abstract="true">
+	<class name="org.metaz.domain.MetaData" table="metadata" abstract="true" lazy="false">
 		<id name="id" type="string" unsaved-value="null">
 			<column name="id" sql-type="char(32)" not-null="true"/>
 			<generator class="uuid.hex"/>
