@@ -33,19 +33,22 @@
         <tox-list name="rol_list" readFrom="test/toxgene/input/rollen.xml">
             <element name="rol" type="string"/>
         </tox-list>
+        <tox-list name="naam_list" readFrom="test/toxgene/input/namen.xml">
+            <element name="naam" type="string"/>
+        </tox-list>
         <tox-list name="status_list" readFrom="test/toxgene/input/status.xml">
             <element name="status" type="string"/>
         </tox-list>
         <tox-list name="bestandsformaat_list" readFrom="test/toxgene/input/bestandsformaten.xml">
             <element name="bestandsformaat" type="string"/>
         </tox-list>
-        <tox-list name="htmlOpmaakElement_list" readFrom="test/toxgene/input/htmlOpmaakElementen.xml">
+        <!--<tox-list name="htmlOpmaakElement_list" readFrom="test/toxgene/input/htmlOpmaakElementen.xml">
             <element name="htmlOpmaakElement" type="string"/>
-        </tox-list>
+        </tox-list>-->
         <tox-list name="omschrijving_list">
             <element name="omschrijving" minOccurs="100" maxOccurs="100">
                 <complexType>
-                    <element name="htmlOpmaakElement">
+                    <!--<element name="htmlOpmaakElement">
                         <simpleType>
                             <restriction base="string">
                                 <tox-sample path="[htmlOpmaakElement_list/htmlOpmaakElement]">
@@ -53,7 +56,7 @@
 		    		</tox-sample>
                             </restriction>
                         </simpleType>
-                    </element>
+                    </element>-->
                     <element name="zin">
                         <simpleType>
                             <restriction base="string">
@@ -75,6 +78,39 @@
                         <tox-string type="tekst"/>
                     </restriction>
                 </simpleType>
+            </element>
+        </tox-list>
+        <tox-list name="vakleergebied_list" readFrom="test/toxgene/input/vakleergebieden.xml">
+            <element name="vakleergebied">
+                <complexType>
+                    <element name="vak" type="string"/>
+                    <element name="onderdeel" type="string"/>
+                </complexType>
+            </element>
+        </tox-list>
+        <tox-list name="beroepssituatie_list" readFrom="test/toxgene/input/beroepssituaties.xml">
+            <element name="beroepssituatie">
+                <complexType>
+                    <element name="groep" type="string"/>
+                    <element name="situatie" type="string"/>
+                </complexType>
+            </element>
+        </tox-list>
+        <tox-list name="beoogdeEindgebruiker_list" readFrom="test/toxgene/input/beoogdeEindgebruikers.xml">
+            <element name="beoogdeEindgebruiker">
+                <complexType>
+                    <element name="groep" type="string"/>
+                    <element name="eindgebruiker" type="string"/>
+                </complexType>
+            </element>
+        </tox-list>
+        <tox-list name="schooltype_list" readFrom="test/toxgene/input/schooltypes.xml">
+            <element name="schooltype">
+                <complexType>
+                    <element name="niveau1" type="string"/>
+                    <element name="niveau2" type="string"/>
+                    <element name="niveau3" type="string"/>
+                </complexType>
             </element>
         </tox-list>
 	
@@ -163,7 +199,7 @@
 						</restriction>
 		  			</simpleType>
 				</element>
-                                <element name="rolNaamParen" minOccurs="0" maxOccurs="5">
+                                <element name="rolNaamParen" minOccurs="1" maxOccurs="5">
                                     <complexType>
                                         <element name="rol">
                                             <simpleType>
@@ -177,9 +213,9 @@
                                         <element name="naam">
                                             <simpleType>
                                                 <restriction base="string">
-                                                    <minLength value="1"/>
-                                                    <maxLength value="1"/>
-                                                    <tox-string type="tekst"/>
+                                                    <tox-sample path="[naam_list/naam]">
+                                                        <tox-expr value="[!]"/>
+                                                    </tox-sample>
                                                 </restriction>
                                             </simpleType>
                                         </element>
@@ -262,7 +298,7 @@
                                         </restriction>
                                     </simpleType>
                                 </element>
-                                <element name="omschrijving">
+                                <!--<element name="omschrijving">
                                     <simpleType>
                                         <restriction base="string">
                                             <tox-sample path="[omschrijving_list/omschrijving]">
@@ -270,125 +306,177 @@
                                             </tox-sample>
                                         </restriction>
                                     </simpleType>
-                                </element>
-                                <element name="beoogdeEindgebruiker">
+                                </element>-->
+                                <element name="omschrijving">
                                     <complexType>
-                                        <element name="hoogsteNiveauEindgebruiker">
+                                        <element name="zin1" minOccurs="1">
                                             <simpleType>
                                                 <restriction base="string">
-                                                    <tox-value>Docent</tox-value>
+                                                    <tox-sample path="[omschrijving_list/omschrijving]">
+                                                        <tox-expr value="[zin]"/>
+                                                    </tox-sample>
                                                 </restriction>
                                             </simpleType>
                                         </element>
-                                        <element name="lagereNiveausEindgebruiker">
-                                            <complexType>
-                                                <element name="hoofdwaarde">
-                                                    <simpleType>
-                                                        <restriction base="string">
-                                                            <tox-value>subdocent</tox-value>
-                                                        </restriction>
-                                                    </simpleType>
-                                                </element>
-                                                <element name="opvolgers">
-                                                    <simpleType>
-                                                        <restriction base="string">
-                                                            <tox-value>subsubdocent</tox-value>
-                                                        </restriction>
-                                                    </simpleType>
-                                                </element>
-                                            </complexType>
+                                        <element name="B" minOccurs="1">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <minLength value="1"/>
+                                                    <maxLength value="20"/>
+                                                    <tox-string type="tekst"/>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                        <element name="zin2" minOccurs="1">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <tox-sample path="[omschrijving_list/omschrijving]">
+                                                        <tox-expr value="[zin]"/>
+                                                    </tox-sample>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                        <element name="I" minOccurs="1">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <minLength value="1"/>
+                                                    <maxLength value="20"/>
+                                                    <tox-string type="tekst"/>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                        <element name="zin3" minOccurs="1">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <tox-sample path="[omschrijving_list/omschrijving]">
+                                                        <tox-expr value="[zin]"/>
+                                                    </tox-sample>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                        <element name="U" minOccurs="1">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <minLength value="1"/>
+                                                    <maxLength value="20"/>
+                                                    <tox-string type="tekst"/>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                        <element name="zin4" minOccurs="1">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <tox-sample path="[omschrijving_list/omschrijving]">
+                                                        <tox-expr value="[zin]"/>
+                                                    </tox-sample>
+                                                </restriction>
+                                            </simpleType>
                                         </element>
                                     </complexType>
                                 </element>
-                                <element name="schooltype">
+                                <element name="beoogdeEindgebruiker">
                                     <complexType>
-                                        <element name="hoofdwaarden">
-                                            <complexType>
-                                                <element name="hoofdwaarde" minOccurs="1" maxOccurs="3">
-                                                    <complexType>
-                                                        <element name="waarde">
-                                                            <simpleType>
-                                                                <restriction base="string">
-                                                                    <tox-value>Voortgezet onderwijs</tox-value>
-                                                                </restriction>
-                                                            </simpleType>
-                                                        </element>
-                                                        <element name="opvolger">
-                                                            <complexType>
-                                                                <element name="waarde">
-                                                                    <simpleType>
-                                                                        <restriction base="string">
-                                                                            <tox-value>VBO</tox-value>
-                                                                        </restriction>
-                                                                    </simpleType>
-                                                                </element>
-                                                                <element name="opvolger">
-                                                                    <simpleType>
-                                                                        <restriction base="string">
-                                                                            <tox-value>VMBO</tox-value>
-                                                                        </restriction>
-                                                                    </simpleType>
-                                                                </element>
-                                                            </complexType>
-                                                        </element>
-                                                        <element name="opvolger">
-                                                            <complexType>
-                                                                <element name="waarde">
-                                                                    <simpleType>
-                                                                        <restriction base="string">
-                                                                            <tox-value>HAVO</tox-value>
-                                                                        </restriction>
-                                                                    </simpleType>
-                                                                </element>
-                                                                <element name="opvolger">
-                                                                    <simpleType>
-                                                                        <restriction base="string">
-                                                                            <tox-value>subHAVO</tox-value>
-                                                                        </restriction>
-                                                                    </simpleType>
-                                                                </element>
-                                                            </complexType>
-                                                        </element>
-                                                    </complexType>
-                                                </element>
-                                            </complexType>
-                                        </element>
+                                        <tox-sample path="[beoogdeEindgebruiker_list/beoogdeEindgebruiker]" name="beg">
+                                            <element name="groep">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$beg/groep]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                            <element name="eindgebruiker">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$beg/eindgebruiker]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                        </tox-sample>
+                                    </complexType>
+                                </element>
+                                <element name="schooltype" minOccurs="3" maxOccurs="3">
+                                    <complexType>
+                                        <tox-sample path="[schooltype_list/schooltype]" name="scht">
+                                            <element name="niveau1">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$scht/niveau1]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                            <element name="niveau2">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$scht/niveau2]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                            <element name="niveau3">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$scht/niveau3]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                        </tox-sample>
                                     </complexType>
                                 </element>
                                 <element name="vakleergebied">
                                     <complexType>
-                                        <element name="hoofdwaarde">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-value>Nederlands</tox-value>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="opvolgers">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-value>literatuur</tox-value>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
+                                        <tox-sample path="[vakleergebied_list/vakleergebied]" name="vlg">
+                                            <element name="vak">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$vlg/vak]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                            <element name="onderdeel">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$vlg/onderdeel]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                        </tox-sample>
                                     </complexType>
                                 </element>
                                 <element name="beroepssituatie">
                                     <complexType>
-                                        <element name="hoofwaarde">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-value>Omgaan met een groep</tox-value>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="opvolgers">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-value>leiding geven aan groepsprocessen</tox-value>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
+                                        <tox-sample path="[beroepssituatie_list/beroepssituatie]" name="brs">
+                                            <element name="groep">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$brs/groep]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                            <element name="situatie">
+                                                <simpleType>
+                                                    <restriction base="string">
+                                                        <tox-scan path="[$brs/situatie]">
+                                                            <tox-expr value="[!]"/>
+                                                        </tox-scan>
+                                                    </restriction>
+                                                </simpleType>
+                                            </element>
+                                        </tox-sample>
                                     </complexType>
                                 </element>
 			</complexType>
@@ -398,7 +486,7 @@
 	<tox-document name="test/toxgene/output/records">
 		<element name="leerobjecten" minOccurs="1" maxOccurs="1">
 			<complexType>
-				<element name="leerobject" minOccurs="10" maxOccurs="10">
+				<element name="leerobject" minOccurs="100" maxOccurs="100">
 					<complexType>
 						<tox-scan path="[leerobject_list/leerobject]" name="sc">
 							<attribute name="uri">
@@ -435,7 +523,17 @@
                                                             <tox-expr value="[rolNaamParen]"/>
                                                         </element>
                                                         <element name="sleutelwoorden" minOccurs="0">
-                                                            <tox-expr value="[sleutelwoorden]"/>
+                                                            <complexType>
+                                                                <element name="sleutelwoord" maxOccurs="unbounded">
+                                                                    <simpleType>
+                                                                        <restriction base="string">
+                                                                            <tox-scan path="[$sc/sleutelwoorden/sleutelwoord]">
+                                                                                <tox-expr value="[!]"/>
+                                                                            </tox-scan>
+                                                                        </restriction>
+                                                                    </simpleType>
+                                                                </element>
+                                                            </complexType>
                                                         </element>
                                                         <element name="technischeVereiste" minOccurs="0">
                                                             <tox-expr value="[technischeVereiste]"/>
@@ -464,21 +562,205 @@
                                                         <element name="bestandsformaat" minOccurs="0">
                                                             <tox-expr value="[bestandsformaat]"/>
                                                         </element>
-                                                        <element name="omschrijving" minOccurs="0">
+                                                        <!--<element name="omschrijving" minOccurs="0">
                                                             <tox-expr value="[omschrijving]"/>
+                                                        </element>-->
+                                                        <element name="omschrijving" minOccurs="0">
+                                                            <complexType mixed="true">
+                                                                <tox-scan path="[$sc/omschrijving/zin1]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                                <element name="B" minOccurs="0">
+                                                                    <tox-expr value="[omschrijving/B]"/>
+                                                                </element>
+                                                                <tox-scan path="[$sc/omschrijving/zin2]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                                <element name="I" minOccurs="0">
+                                                                    <tox-expr value="[omschrijving/I]"/>
+                                                                </element>
+                                                                <tox-scan path="[$sc/omschrijving/zin3]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                                <element name="U">
+                                                                    <tox-expr value="[omschrijving/U]"/>
+                                                                </element>
+                                                                <tox-scan path="[$sc/omschrijving/zin4]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </complexType>
                                                         </element>
                                                         <element name="beoogdeEindgebruiker" minOccurs="0">
+                                                            <complexType>
+                                                                <element name="hoofdwaarden">
+                                                                    <complexType>
+                                                                        <element name="hoofdwaarde">
+                                                                            <complexType>
+                                                                                <element name="eindgebruikerwaarde">
+                                                                                    <simpleType>
+                                                                                        <restriction base="string">
+                                                                                            <tox-scan path="[$sc/beoogdeEindgebruiker/groep]">
+                                                                                                <tox-expr value="[!]"/>
+                                                                                            </tox-scan>
+                                                                                        </restriction>
+                                                                                    </simpleType>
+                                                                                </element>
+                                                                                <element name="simpelopvolger" minOccurs="0">
+                                                                                    <complexType>
+                                                                                        <element name="waarde">
+                                                                                            <simpleType>
+                                                                                                <restriction base="string">
+                                                                                                    <tox-scan path="[$sc/beoogdeEindgebruiker/eindgebruiker]">
+                                                                                                        <tox-expr value="[!]"/>
+                                                                                                    </tox-scan>
+                                                                                                </restriction>
+                                                                                            </simpleType>
+                                                                                        </element>
+                                                                                    </complexType>
+                                                                                </element>
+                                                                            </complexType>
+                                                                        </element>
+                                                                    </complexType>
+                                                                </element>
+                                                            </complexType>
+                                                        </element>
+                                                        <!--<element name="beoogdeEindgebruiker" minOccurs="0">
                                                             <tox-expr value="[beoogdeEindgebruiker]"/>
-                                                        </element>
+                                                        </element>-->
                                                         <element name="schooltype" minOccurs="0">
+                                                            <complexType>
+                                                                <element name="hoofdwaarden">
+                                                                    <complexType>
+                                                                        <element name="hoofdwaarde" maxOccurs="3">
+                                                                            <complexType>
+                                                                                <tox-scan path="[$sc/schooltype]" name="st">
+                                                                                    <element name="waarde">
+                                                                                        <simpleType>
+                                                                                            <restriction base="string">
+                                                                                                <tox-scan path="[$st/niveau1]">
+                                                                                                    <tox-expr value="[!]"/>
+                                                                                                </tox-scan>
+                                                                                            </restriction>
+                                                                                        </simpleType>
+                                                                                    </element>
+                                                                                    <tox-if expr="DIF([$st/niveau2],'')">
+                                                                                        <tox-then>
+                                                                                            <element name="opvolger">
+                                                                                                <complexType>
+                                                                                                    <element name="waarde">
+                                                                                                        <simpleType>
+                                                                                                            <restriction base="string">
+                                                                                                                <tox-scan path="[$st/niveau2]">
+                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                </tox-scan>
+                                                                                                            </restriction>
+                                                                                                        </simpleType>
+                                                                                                    </element>
+                                                                                                    <tox-if expr="DIF([$st/niveau3],'')">
+                                                                                                        <tox-then>
+                                                                                                            <element name="opvolger">
+                                                                                                                <complexType>
+                                                                                                                    <element name="waarde">
+                                                                                                                        <simpleType>
+                                                                                                                            <restriction base="string">
+                                                                                                                                <tox-scan path="[$st/niveau3]">
+                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                </tox-scan>
+                                                                                                                            </restriction>
+                                                                                                                        </simpleType>
+                                                                                                                    </element>
+                                                                                                                </complexType>
+                                                                                                            </element>
+                                                                                                        </tox-then> 
+                                                                                                    </tox-if>
+                                                                                                </complexType>
+                                                                                            </element>
+                                                                                        </tox-then>
+                                                                                    </tox-if>
+                                                                                </tox-scan>
+                                                                            </complexType>    
+                                                                        </element>
+                                                                    </complexType>
+                                                                </element>
+                                                            </complexType>
+                                                        </element>
+                                                        <!--<element name="schooltype" minOccurs="0">
                                                             <tox-expr value="[schooltype]"/>
-                                                        </element>
+                                                        </element>-->
                                                         <element name="vakleergebied" minOccurs="0">
+                                                            <complexType>
+                                                                <element name="hoofdwaarden">
+                                                                    <complexType>
+                                                                        <element name="hoofdwaarde">
+                                                                            <complexType>
+                                                                                <element name="waarde">
+                                                                                    <simpleType>
+                                                                                        <restriction base="string">
+                                                                                            <tox-scan path="[$sc/vakleergebied/vak]">
+                                                                                                <tox-expr value="[!]"/>
+                                                                                            </tox-scan>
+                                                                                        </restriction>
+                                                                                    </simpleType>
+                                                                                </element>
+                                                                                <element name="simpelopvolger" minOccurs="0">
+                                                                                    <complexType>
+                                                                                        <element name="waarde">
+                                                                                            <simpleType>
+                                                                                                <restriction base="string">
+                                                                                                    <tox-scan path="[$sc/vakleergebied/onderdeel]">
+                                                                                                        <tox-expr value="[!]"/>
+                                                                                                    </tox-scan>
+                                                                                                </restriction>
+                                                                                            </simpleType>
+                                                                                        </element>
+                                                                                    </complexType>
+                                                                                </element>
+                                                                            </complexType>
+                                                                        </element>
+                                                                    </complexType>
+                                                                </element>
+                                                            </complexType>
+                                                        </element>
+                                                        <!--<element name="vakleergebied">
                                                             <tox-expr value="[vakleergebied]"/>
-                                                        </element>
+                                                        </element>-->
                                                         <element name="beroepssituatie" minOccurs="0">
-                                                            <tox-expr value="[beroepssituatie]"/>
+                                                            <complexType>
+                                                                <element name="hoofdwaarden">
+                                                                    <complexType>
+                                                                        <element name="hoofdwaarde">
+                                                                            <complexType>
+                                                                                <element name="waarde">
+                                                                                    <simpleType>
+                                                                                        <restriction base="string">
+                                                                                            <tox-scan path="[$sc/beroepssituatie/groep]">
+                                                                                                <tox-expr value="[!]"/>
+                                                                                            </tox-scan>
+                                                                                        </restriction>
+                                                                                    </simpleType>
+                                                                                </element>
+                                                                                <element name="simpelopvolger" minOccurs="0">
+                                                                                    <complexType>
+                                                                                        <element name="waarde">
+                                                                                            <simpleType>
+                                                                                                <restriction base="string">
+                                                                                                    <tox-scan path="[$sc/beroepssituatie/situatie]">
+                                                                                                        <tox-expr value="[!]"/>
+                                                                                                    </tox-scan>
+                                                                                                </restriction>
+                                                                                            </simpleType>
+                                                                                        </element>
+                                                                                    </complexType>
+                                                                                </element>
+                                                                            </complexType>
+                                                                        </element>
+                                                                    </complexType>
+                                                                </element>
+                                                            </complexType>
                                                         </element>
+                                                        <!--<element name="beroepssituatie" minOccurs="0">
+                                                            <tox-expr value="[beroepssituatie]"/>
+                                                        </element>-->
 						</tox-scan>
 					</complexType>
 				</element>

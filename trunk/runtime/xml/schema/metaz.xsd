@@ -11,43 +11,43 @@
           </xs:annotation>
           <xs:complexType>
             <xs:all>
-              <xs:element name="didactischeFunctie" type="xs:string" />
-              <xs:element name="producttype" type="xs:string" />
-              <xs:element minOccurs="0" name="beoogdeEindgebruiker" type="eindgebruikerGelaagdeWaarde" />
-              <xs:element minOccurs="0" name="schooltype" type="meervoudigeGelaagdeWaarde" />
-              <xs:element minOccurs="0" name="vakleergebied" type="gelaagdeWaarde" />
-              <xs:element minOccurs="0" name="didactischScenario" type="xs:string" />
-              <xs:element minOccurs="0" name="aggregatieniveau" type="xs:string" />
-              <xs:element minOccurs="0" name="beroepssituatie" type="gelaagdeWaarde" />
-              <xs:element minOccurs="0" name="competentie" type="xs:string" />
-              <xs:element minOccurs="0" name="onderwerp" type="xs:string" />
-              <xs:element minOccurs="0" name="rolEnNaam">
+              <xs:element minOccurs="1" maxOccurs="1" name="didactischeFunctie" type="xs:string" />
+              <xs:element minOccurs="1" maxOccurs="1" name="producttype" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="beoogdeEindgebruiker" type="eindgebruikerGelaagdeWaarde" />
+              <xs:element minOccurs="0" maxOccurs="1" name="schooltype" type="meervoudigeGelaagdeWaarde" />
+              <xs:element minOccurs="0" maxOccurs="1" name="vakleergebied" type="gelaagdeWaarde" />
+              <xs:element minOccurs="0" maxOccurs="1" name="didactischScenario" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="aggregatieniveau" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="beroepssituatie" type="gelaagdeWaarde" />
+              <xs:element minOccurs="0" maxOccurs="1" name="competentie" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="onderwerp" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="rolEnNaam">
                 <xs:complexType>
                   <xs:sequence minOccurs="0" maxOccurs="unbounded">
                     <xs:element name="rolNaamParen" type="rolNaamPaar" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element minOccurs="0" name="rechten" type="xs:string" />
-              <xs:element minOccurs="0" name="sleutelwoorden">
+              <xs:element minOccurs="0" maxOccurs="1" name="rechten" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="sleutelwoorden">
                 <xs:complexType>
                   <xs:sequence minOccurs="0" maxOccurs="unbounded">
                     <xs:element name="sleutelwoord" type="xs:string" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element minOccurs="0" name="technischeVereiste" type="xs:string" />
-              <xs:element name="titel" type="xs:string" />
-              <xs:element maxOccurs="1" name="beveiligd" type="xs:boolean" />
+              <xs:element minOccurs="0" maxOccurs="1" name="technischeVereiste" type="xs:string" />
+              <xs:element minOccurs="1" maxOccurs="1"  name="titel" type="xs:string" />
+              <xs:element minOccurs="1" maxOccurs="1" name="beveiligd" type="xs:boolean" />
               <xs:element minOccurs="0" maxOccurs="1" name="datumCreatie" type="xs:date" />
-              <xs:element minOccurs="0" name="datumLaatsteWijziging" type="xs:date" />
-              <xs:element minOccurs="0" name="bestandsgrootte" type="xs:integer" />
-              <xs:element minOccurs="0" name="benodigdeTijd" type="xs:time" />
-              <xs:element minOccurs="0" name="afspeelduur" type="xs:time" />
-              <xs:element minOccurs="0" name="versie" type="xs:string" />
-              <xs:element minOccurs="0" name="status" type="xs:string" />
-              <xs:element name="omschrijving" type="omschrijvingType" />
-              <xs:element maxOccurs="1" name="bestandsformaat" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="datumLaatsteWijziging" type="xs:date" />
+              <xs:element minOccurs="0" maxOccurs="1" name="bestandsgrootte" type="xs:integer" />
+              <xs:element minOccurs="0" maxOccurs="1" name="benodigdeTijd" type="xs:time" />
+              <xs:element minOccurs="0" maxOccurs="1" name="afspeelduur" type="xs:time" />
+              <xs:element minOccurs="0" maxOccurs="1" name="versie" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="status" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="omschrijving" type="omschrijvingType" />
+              <xs:element minOccurs="1" maxOccurs="1" name="bestandsformaat" type="xs:string" />
             </xs:all>
             <xs:attribute name="URI" use="required" />
           </xs:complexType>

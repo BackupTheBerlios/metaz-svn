@@ -1,0 +1,66 @@
+<schooltype_list>
+    <schooltype>
+        <niveau1>Pre-primair onderwijs</niveau1>
+        <niveau2></niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Primair onderwijs</niveau1>
+        <niveau2></niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Voortgezet onderwijs</niveau1>
+        <niveau2></niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Voortgezet onderwijs</niveau1>
+        <niveau2>HAVO</niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Voortgezet onderwijs</niveau1>
+        <niveau2>VWO</niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Voortgezet onderwijs</niveau1>
+        <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Voortgezet onderwijs</niveau1>
+        <niveau2>VBO</niveau2>
+        <niveau3>VMBO</niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Voortgezet onderwijs </niveau1>
+        <niveau2>VBO</niveau2>
+        <niveau3>Lwoo</niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Voortgezet onderwijs</niveau1>
+        <niveau2>Praktijkonderwijs</niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>BVE</niveau1>
+        <niveau2></niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Hoger onderwijs</niveau1>
+        <niveau2></niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+    <schooltype>
+        <niveau1>Speciaal onderwijs</niveau1>
+        <niveau2></niveau2>
+        <niveau3></niveau3>
+    </schooltype>
+</schooltype_list>
+
+
+
+

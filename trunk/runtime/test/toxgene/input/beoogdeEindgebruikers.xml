@@ -1,0 +1,14 @@
+<beoogdeEindgebruiker_list>
+    <beoogdeEindgebruiker>
+        <groep>Docent</groep>
+        <eindgebruiker>leraar</eindgebruiker>
+    </beoogdeEindgebruiker>
+    <beoogdeEindgebruiker>
+        <groep>Begeleider</groep>
+        <eindgebruiker>coach</eindgebruiker>
+    </beoogdeEindgebruiker>
+    <beoogdeEindgebruiker>
+        <groep>Manager</groep>
+        <eindgebruiker>directeur</eindgebruiker>
+    </beoogdeEindgebruiker>
+</beoogdeEindgebruiker_list>

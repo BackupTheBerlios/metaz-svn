@@ -1,0 +1,34 @@
+<vakleergebied_list>
+    <vakleergebied>
+        <vak>Nederlands</vak>
+        <onderdeel>woordenschat</onderdeel>
+    </vakleergebied>
+    <vakleergebied>
+        <vak>Nederlands</vak>
+        <onderdeel>grammatica</onderdeel>
+    </vakleergebied>
+    <vakleergebied>
+        <vak>Nederlands</vak>
+        <onderdeel>literatuur</onderdeel>
+    </vakleergebied>
+    <vakleergebied>
+        <vak>Nederlands</vak>
+        <onderdeel>spelling</onderdeel>
+    </vakleergebied>
+    <vakleergebied>
+        <vak>Biologie</vak>
+        <onderdeel>plantkunde</onderdeel>
+    </vakleergebied>
+    <vakleergebied>
+        <vak>Wiskunde</vak>
+        <onderdeel>goniometrie</onderdeel>
+    </vakleergebied>
+    <vakleergebied>
+        <vak>Wiskunde</vak>
+        <onderdeel>algebra</onderdeel>
+    </vakleergebied>
+    <vakleergebied>
+        <vak>Wiskunde</vak>
+        <onderdeel>meetkunde</onderdeel>
+    </vakleergebied>
+</vakleergebied_list>
