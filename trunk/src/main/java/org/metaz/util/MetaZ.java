@@ -52,7 +52,7 @@ public class MetaZ implements java.io.Serializable {
 
 	private static Facade facadeInst; // Facade object of the Repository
 
-	private SessionFactory hibernateSessionFactory;
+	private static SessionFactory hibernateSessionFactory;
 
 	private InputStream propertyStream = null; // a stream pointing to the
 
@@ -67,44 +67,6 @@ public class MetaZ implements java.io.Serializable {
 	// set true if logging does not work
 	private boolean verboseOutput = false;
 
-	// private constructor
-
-	private MetaZ() {
-
-		// set up a default logging style, to be used as a fallback style in
-		// case of property
-		// file loading errors
-
-		PatternLayout layout = new PatternLayout();
-		layout.setConversionPattern("%d{dd/mm/yy HH:mm:ss} %-5p[%t]: %m%n");
-
-		ConsoleAppender appender = new ConsoleAppender(layout);
-
-		Logger rootLogger = Logger.getRootLogger();
-		rootLogger.removeAllAppenders();
-		rootLogger.addAppender(appender);
-		rootLogger.setLevel((Level) Level.INFO);
-
-		// attempt to load the log4j properties file
-
-		properties = readProperties();
-		log4JConfigFile = getRelativeFileSpec(getProperties().getProperty(
-				PROP_LOG4J_CONFIG_FILE));
-
-		if (log4JConfigFile == null)
-			logger
-					.warn("Could not seed log4J with a configuration file, using default output settings");
-		else {
-			PropertyConfigurator.configure(log4JConfigFile);
-			logger.info("Seeded log4J with configuration file <"
-					+ log4JConfigFile + ">");
-		}
-
-		logger.info("Constructed Meta-Z application singleton instance <"
-				+ format(this) + ">");
-
-	}
-
 	/**
 	 * Retrieves the Meta/Z application instance (allows for lazy
 	 * initialization)
@@ -114,15 +76,94 @@ public class MetaZ implements java.io.Serializable {
 	public static synchronized MetaZ getInstance() {
 
 		if (instance == null) {
-			instance = new MetaZ();
-		}
 
-		logger.info("Returned Meta-Z application singleton instance: <"
-				+ format(instance) + ">");
+			instance = new MetaZ();
+
+		  logger.info("Created Meta-Z application singleton instance: <"
+		      + format(instance) + ">");
+
+		}
 
 		return instance;
 
 	}
+
+  /**
+   * @return Returns the Facade instance of the Repository.
+   */
+
+  public static synchronized Facade getRepositoryFacade() {
+  
+    if (facadeInst == null) {
+
+      facadeInst = FacadeFactory.createFacade();
+
+      logger.info("Created Meta-Z Facade singleton instance: <"
+          + format(facadeInst) + ">");
+
+    }
+    
+    return facadeInst;
+    
+  }
+
+  /**
+   * @return Returns the Hibernate Session Factory instance of the Repository.
+   */
+  
+  public static synchronized SessionFactory getHibernateSessionFactory() {
+  
+    if (hibernateSessionFactory == null) {
+    
+      Configuration cfg = new Configuration().configure();
+      hibernateSessionFactory = cfg.buildSessionFactory();
+
+      logger.info("Created Meta-Z SessionFactory singleton instance: <"
+          + format(hibernateSessionFactory) + ">");
+      
+    }
+    
+    return hibernateSessionFactory;
+    
+  }
+
+  // private constructor
+
+  private MetaZ() {
+
+    // set up a default logging style, to be used as a fallback style in
+    // case of property
+    // file loading errors
+
+    PatternLayout layout = new PatternLayout();
+    layout.setConversionPattern("%d{dd/mm/yy HH:mm:ss} %-5p[%t]: %m%n");
+
+    ConsoleAppender appender = new ConsoleAppender(layout);
+
+    Logger rootLogger = Logger.getRootLogger();
+    rootLogger.removeAllAppenders();
+    rootLogger.addAppender(appender);
+    rootLogger.setLevel((Level) Level.INFO);
+
+    // attempt to load the log4j properties file
+
+    properties = readProperties();
+    log4JConfigFile = getRelativeFileSpec(getProperties().getProperty(
+        PROP_LOG4J_CONFIG_FILE));
+
+    if (log4JConfigFile == null)
+      logger
+          .warn("Could not seed log4J with a configuration file, using default output settings");
+    else {
+      PropertyConfigurator.configure(log4JConfigFile);
+      logger.info("Seeded log4J with configuration file <"
+          + log4JConfigFile + ">");
+    }
+
+    logger.info("Constructed Meta-Z application singleton instance <"
+        + format(this) + ">");
+
+  }
 
 	/**
 	 * Gets a logger instance and initializes the logger look and feel
@@ -134,8 +175,7 @@ public class MetaZ implements java.io.Serializable {
 	public static Logger getLogger(Class clazz) {
 
 		// this next line actually forces initialization of the MetaZ singleton
-		// object
-		// which in turns sets up the logger properties
+		// object, which in turns sets up the logger properties
 
 		MetaZ metaz = getInstance();
 
@@ -490,24 +530,6 @@ public class MetaZ implements java.io.Serializable {
 
 		return path.toString();
 
-	}
-
-	/**
-	 * @return Returns the Facade instance of the Repository.
-	 */
-	public synchronized Facade getRepositoryFacade() {
-		if (facadeInst == null) {
-			facadeInst = FacadeFactory.createFacade();
-		}
-		return facadeInst;
-	}
-	
-	public synchronized SessionFactory getHibernateSessionFactory() {
-		if (hibernateSessionFactory == null) {
-			Configuration cfg = new Configuration().configure();
-			hibernateSessionFactory = cfg.buildSessionFactory();
-		}
-		return hibernateSessionFactory;
 	}
 
 }
