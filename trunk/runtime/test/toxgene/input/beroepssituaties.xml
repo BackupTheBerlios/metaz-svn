@@ -187,4 +187,8 @@
         <groep>Onderzoek en ontwikeling van eigen opvattingen en competenties</groep>
         <situatie>beroepshouding expliciteren (eigen visie, opvattingen etc.)</situatie>
     </beroepssituatie>
+    <beroepssituatie>
+        <groep></groep>
+        <situatie></situatie>
+    </beroepssituatie>
 </beroepssitutatie_list>

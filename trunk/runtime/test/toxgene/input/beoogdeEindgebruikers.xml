@@ -11,4 +11,8 @@
         <groep>Manager</groep>
         <eindgebruiker>directeur</eindgebruiker>
     </beoogdeEindgebruiker>
+    <beoogdeEindgebruiker>
+        <groep></groep>
+        <eindgebruiker></eindgebruiker>
+    </beoogdeEindgebruiker>
 </beoogdeEindgebruiker_list>

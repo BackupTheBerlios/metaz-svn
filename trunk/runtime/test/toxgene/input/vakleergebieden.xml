@@ -31,4 +31,8 @@
         <vak>Wiskunde</vak>
         <onderdeel>meetkunde</onderdeel>
     </vakleergebied>
+    <vakleergebied>
+        <vak></vak>
+        <onderdeel></onderdeel>
+    </vakleergebied>
 </vakleergebied_list>
