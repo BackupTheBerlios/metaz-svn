@@ -57,8 +57,11 @@ public final class SelectOption {
   }
 
   public SelectOption(String description) {
+  
+    // warning: hashcode() can be negative!!!
+    // to prevent "ugly" values I generate "Long" hexadecimal values
 
-    this(UUID.randomUUID().toString(), description);
+    this(Long.toHexString(description.hashCode()), description);
     
   }
 
