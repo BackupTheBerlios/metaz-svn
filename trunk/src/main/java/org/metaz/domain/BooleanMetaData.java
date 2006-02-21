@@ -1,23 +1,33 @@
 package org.metaz.domain;
 
 /**
- * @author E.J. Spaans
- * 
  * Represents boolean MetaData.
  *
+ * @author E.J. Spaans  
  */
-public class BooleanMetaData extends MetaData{
-	private Boolean value;
+public class BooleanMetaData extends MetaData
+{
+    private Boolean value;
 
-	@Override
-	public Object getValue() {
-		return this.value;
-	}
+    /**
+     * Returns the value
+     *
+     * @return boolean value
+     */
+    @Override
+    public Object getValue()
+    {
+        return this.value;
+    } // end getValue()
 
-	@Override
-	public void setValue(Object value) {
-		this.value = (Boolean)value;
-	}
-	
-
-}
+    /**
+     * Sets the value
+     *
+     * @param value the boolean value
+     */
+    @Override
+    public void setValue(Object value)
+    {
+        this.value = (Boolean) value;
+    } // end setValue()
+} // end BooleanMetaData

@@ -1,24 +1,33 @@
 package org.metaz.domain;
 
 /**
- * @author E.J. Spaans
- * 
  * Represents text MetaData.
  *
+ * @author E.J. Spaans  
  */
-public class TextMetaData extends MetaData {
-	
-	private String value;
+public class TextMetaData extends MetaData
+{
+    private String value;
 
-	@Override
-	public Object getValue() {
-		return this.value;
-	}
+    /**
+     * Returns the string value
+     *
+     * @return the string value
+     */
+    @Override
+    public Object getValue()
+    {
+        return this.value;
+    } // end getValue()
 
-	@Override
-	public void setValue(Object value) {
-		this.value = (String) value;
-
-	}
-
-}
+    /**
+     * Sets the string value
+     *
+     * @param value the string value
+     */
+    @Override
+    public void setValue(Object value)
+    {
+        this.value = (String) value;
+    } // end setValue()
+} // end TextMetaData

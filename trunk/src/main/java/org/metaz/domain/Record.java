@@ -2,465 +2,916 @@ package org.metaz.domain;
 
 import java.util.*;
 
+
 /**
- * Record that holds a number of MetaData for a 'LeerObject'. From a Harvester
- * component a Record instance will be created for each 'leerobject' element in
- * the recieved xml.
+ * Record that holds a number of MetaData for a 'LeerObject'. From a
+ * Harvester component a Record instance will be created for each 'leerobject'
+ * element in the recieved xml.
  */
-public class Record {
-	
-	private String id;
+public class Record
+{
+    private String id;
+    private TextMetaData title;
+    private TextMetaData subject;
+    private HtmlTextMetaData description;
+    private TextMetaData keywords;
+    private HierarchicalStructuredTextMetaData targetEndUser;
+    private HierarchicalStructuredTextMetaDataSet schoolType;
+    private HierarchicalStructuredTextMetaData schoolDiscipline;
+    private TextMetaData didacticFunction;
+    private TextMetaData productType;
+    private HierarchicalStructuredTextMetaData professionalSituation;
+    private TextMetaData competence;
+    private BooleanMetaData secured;
+    private TextMetaData fileFormat;
+    private HyperlinkMetaData uri;
+    private TextMetaData aggregationLevel;
+    private TextMetaData didacticScenario;
+    private NumericMetaData requiredTime;
+    private TextMetaData rights;
+    private NumericMetaData fileSize;
+    private NumericMetaData playingTime;
+    private TextMetaData technicalRequirements;
+    private DateMetaData creationDate;
+    private DateMetaData lastChangedDate;
+    private TextMetaData version;
+    private TextMetaData status;
+    private TextMetaData roleName;
+    private List<MetaData> recordMetadata = new Vector<MetaData>();
 
-	private TextMetaData title;
-        private TextMetaData subject;
-        private HtmlTextMetaData description;
-        private TextMetaData keywords;
-        private HierarchicalStructuredTextMetaData targetEndUser;
-        private HierarchicalStructuredTextMetaDataSet schoolType;
-        private HierarchicalStructuredTextMetaData schoolDiscipline;
-        private TextMetaData didacticFunction;
-        private TextMetaData productType;
-        private HierarchicalStructuredTextMetaData professionalSituation;
-        private TextMetaData competence;
-        private BooleanMetaData secured;
-        private TextMetaData fileFormat;
-        private HyperlinkMetaData uri;
-        private TextMetaData aggregationLevel;
-        private TextMetaData didacticScenario;
-        private NumericMetaData requiredTime;
-        private TextMetaData rights;
-        private NumericMetaData fileSize;
-        private NumericMetaData playingTime;
-        private TextMetaData technicalRequirements;
-        private DateMetaData creationDate;
-        private DateMetaData lastChangedDate;
-        private TextMetaData version;
-        private TextMetaData status;
-        private TextMetaData roleName;
-        
-        private List<MetaData> recordMetadata= new Vector<MetaData>();
-        
-	/**
-	 * Creates a new Record. This constructor ensures only valid Records (that
-	 * is, Records with all required MetaData) are used. Optional metadata may
-	 * be added by using one of the setters.
-	 * 
-	 * @param title
-	 *            the mandatory title meta data.
-	 * @param isSecured
-	 *            the mandatory isSecured meta data.
-	 * @param fileFormat
-	 *            the mandatory fileFormat meta data.
-	 * @param didacticFunction
-	 *            the mandatory didacticFunction meta data.
-	 * @param productType
-	 *            the mandatory productType meta data.
-	 * @param uri
-	 *            the mandatory uri meta data.
-	 */
-	public Record(TextMetaData title, BooleanMetaData isSecured,
-			TextMetaData fileFormat, TextMetaData didacticFunction,
-			TextMetaData productType, HyperlinkMetaData uri) {
-                this.title = title;
-		this.secured = isSecured;
-		this.fileFormat = fileFormat;
-		this.didacticFunction = didacticFunction;
-		this.productType = productType;
-		this.uri = uri;
-	}
-	
-	public Record(){
-		super();
-	}
+/**
+         * Creates a new Record. This constructor ensures only valid Records (that
+         * is, Records with all required MetaData) are used. Optional metadata may
+         * be added by using one of the setters.
+         * 
+         * @param title
+         *            the mandatory title meta data.
+         * @param isSecured
+         *            the mandatory isSecured meta data.
+         * @param fileFormat
+         *            the mandatory fileFormat meta data.
+         * @param didacticFunction
+         *            the mandatory didacticFunction meta data.
+         * @param productType
+         *            the mandatory productType meta data.
+         * @param uri
+         *            the mandatory uri meta data.
+         */
+    public Record(TextMetaData title, BooleanMetaData isSecured,
+        TextMetaData fileFormat, TextMetaData didacticFunction,
+        TextMetaData productType, HyperlinkMetaData uri)
+    {
+        this.title = title;
+        this.secured = isSecured;
+        this.fileFormat = fileFormat;
+        this.didacticFunction = didacticFunction;
+        this.productType = productType;
+        this.uri = uri;
+    } // end Record()
 
-    public TextMetaData getTitle() {
+    /**
+     * Creates a new Record object.
+     */
+    public Record()
+    {
+        super();
+    } // end Record()
+
+    /**
+     * Returns the title of the record
+     *
+     * @return the title
+     */
+    public TextMetaData getTitle()
+    {
         return title;
-    }
-    public TextMetaData getSubject() {
+    } // end getTitle()
+
+    /**
+     * Returns the subject of the record
+     *
+     * @return the subject
+     */
+    public TextMetaData getSubject()
+    {
         return subject;
-    }
-    public void setSubject(TextMetaData subject) {
+    } // end getSubject()
+
+    /**
+     * Sets the subject of the record
+     *
+     * @param subject the subject
+     */
+    public void setSubject(TextMetaData subject)
+    {
         this.subject = subject;
-    }
-    public HtmlTextMetaData getDescription() {
+    } // end setSubject()
+
+    /**
+     * Returns the description of the record
+     *
+     * @return the description
+     */
+    public HtmlTextMetaData getDescription()
+    {
         return description;
-    }
-    public void setDescription (HtmlTextMetaData description) {
+    } // end getDescription()
+
+    /**
+     * Sets the description of the record
+     *
+     * @param description the description
+     */
+    public void setDescription(HtmlTextMetaData description)
+    {
         this.description = description;
-    }
-    public TextMetaData getKeywords() {
+    } // end setDescription()
+
+    /**
+     * Returns the keywords of the record
+     *
+     * @return the keywords
+     */
+    public TextMetaData getKeywords()
+    {
         return keywords;
-    }
-    public void setKeywords(TextMetaData keywords) {
+    } // end getKeywords()
+
+    /**
+     * Sets the keywords of the record
+     *
+     * @param keywords the keywords
+     */
+    public void setKeywords(TextMetaData keywords)
+    {
         this.keywords = keywords;
-    }
-    public HierarchicalStructuredTextMetaData getTargetEndUser() {
+    } // end setKeywords()
+
+    /**
+     * Returns the target end users of the record
+     *
+     * @return the target end users
+     */
+    public HierarchicalStructuredTextMetaData getTargetEndUser()
+    {
         return targetEndUser;
-    }
-    public void setTargetEndUser(HierarchicalStructuredTextMetaData targetEndUser) {
+    } // end getTargetEndUser()
+
+    /**
+     * Sets the target end users of the record
+     *
+     * @param targetEndUser the target end users
+     */
+    public void setTargetEndUser(
+        HierarchicalStructuredTextMetaData targetEndUser)
+    {
         this.targetEndUser = targetEndUser;
-    }
-    public HierarchicalStructuredTextMetaDataSet getSchoolType() {
+    } // end setTargetEndUser()
+
+    /**
+     * Returns the school types of the records
+     *
+     * @return the school types
+     */
+    public HierarchicalStructuredTextMetaDataSet getSchoolType()
+    {
         return schoolType;
-    }
-    public void setSchoolType(HierarchicalStructuredTextMetaDataSet schoolTypes) {
+    } // end getSchoolType()
+
+    /**
+     * Sets the school types of the record
+     *
+     * @param schoolTypes the school types
+     */
+    public void setSchoolType(HierarchicalStructuredTextMetaDataSet schoolTypes)
+    {
         this.schoolType = schoolTypes;
-    }
-    public HierarchicalStructuredTextMetaData getSchoolDiscipline() {
+    } // end setSchoolType()
+
+    /**
+     * Returns the school disciplines of the record
+     *
+     * @return the school disciplines
+     */
+    public HierarchicalStructuredTextMetaData getSchoolDiscipline()
+    {
         return schoolDiscipline;
-    }
-    public void setSchoolDiscipline(HierarchicalStructuredTextMetaData schoolDiscipline) {
+    } // end getSchoolDiscipline()
+
+    /**
+     * Sets the school disciplines of the record
+     *
+     * @param schoolDiscipline the school disciplines
+     */
+    public void setSchoolDiscipline(
+        HierarchicalStructuredTextMetaData schoolDiscipline)
+    {
         this.schoolDiscipline = schoolDiscipline;
-    }
-    public TextMetaData getDidacticFunction() {
+    } // end setSchoolDiscipline()
+
+    /**
+     * Returns the didactic function of the record
+     *
+     * @return the didactic function
+     */
+    public TextMetaData getDidacticFunction()
+    {
         return didacticFunction;
-    }
-    public void setDidacticFunction(TextMetaData didacticFunction){
-    	this.didacticFunction = didacticFunction;
-    }
-    public TextMetaData getProductType() {
+    } // end getDidacticFunction()
+
+    /**
+     * Sets the didactic function of the record
+     *
+     * @param didacticFunction the didactic function
+     */
+    public void setDidacticFunction(TextMetaData didacticFunction)
+    {
+        this.didacticFunction = didacticFunction;
+    } // end setDidacticFunction()
+
+    /**
+     * Returns the product type of the record
+     *
+     * @return the product type
+     */
+    public TextMetaData getProductType()
+    {
         return productType;
-    }
-    
-    public void setProductType(TextMetaData productType){
-    	this.productType = productType;
-    }
-    public HierarchicalStructuredTextMetaData getProfessionalSituation() {
+    } // end getProductType()
+
+    /**
+     * Sets the product type of the record
+     *
+     * @param productType the product type
+     */
+    public void setProductType(TextMetaData productType)
+    {
+        this.productType = productType;
+    } // end setProductType()
+
+    /**
+     * Returns the professional situation of the record
+     *
+     * @return the professional situation
+     */
+    public HierarchicalStructuredTextMetaData getProfessionalSituation()
+    {
         return professionalSituation;
-    }
-    public void setProfessionalSituation(HierarchicalStructuredTextMetaData professionalSituation) {
+    } // end getProfessionalSituation()
+
+    /**
+     * Sets the professional situation of the record
+     *
+     * @param professionalSituation the professional situation
+     */
+    public void setProfessionalSituation(
+        HierarchicalStructuredTextMetaData professionalSituation)
+    {
         this.professionalSituation = professionalSituation;
-    }
-    public TextMetaData getCompetence(){
+    } // end setProfessionalSituation()
+
+    /**
+     * Returns the competence of the record
+     *
+     * @return the competence
+     */
+    public TextMetaData getCompetence()
+    {
         return competence;
-    }
-    public void setCompetence(TextMetaData competence) {
+    } // end getCompetence()
+
+    /**
+     * Sets the competence of the record
+     *
+     * @param competence the competence
+     */
+    public void setCompetence(TextMetaData competence)
+    {
         this.competence = competence;
-    }
-    public BooleanMetaData getSecured(){
+    } // end setCompetence()
+
+    /**
+     * Returns the secured status of the record
+     *
+     * @return the secured status
+     */
+    public BooleanMetaData getSecured()
+    {
         return secured;
-    }
-    public void setSecured(BooleanMetaData secured){
-    	this.secured = secured;
-    }
-    public TextMetaData getFileFormat() {
+    } // end getSecured()
+
+    /**
+     * Sets the secured status of the record
+     *
+     * @param secured the secured status
+     */
+    public void setSecured(BooleanMetaData secured)
+    {
+        this.secured = secured;
+    } // end setSecured()
+
+    /**
+     * Returns the file format of the record
+     *
+     * @return the file format
+     */
+    public TextMetaData getFileFormat()
+    {
         return fileFormat;
-    }
-    public HyperlinkMetaData getURI() {
+    } // end getFileFormat()
+
+    /**
+     * Returns the URI of the record
+     *
+     * @return the URI
+     */
+    public HyperlinkMetaData getURI()
+    {
         return uri;
-    }
-    public TextMetaData getAggregationLevel() {
+    } // end getURI()
+
+    /**
+     * Returns the aggregation level of the record
+     *
+     * @return the aggregation level
+     */
+    public TextMetaData getAggregationLevel()
+    {
         return aggregationLevel;
-    }
-    public void setAggregationLevel(TextMetaData aggregationLevel) {
+    } // end getAggregationLevel()
+
+    /**
+     * Sets the aggregation level of the record
+     *
+     * @param aggregationLevel the aggregation level
+     */
+    public void setAggregationLevel(TextMetaData aggregationLevel)
+    {
         this.aggregationLevel = aggregationLevel;
-    }
-    public TextMetaData getDidacticScenario(){
+    } // end setAggregationLevel()
+
+    /**
+     * Returns the didactic scenario of the record
+     *
+     * @return the didactic scenario
+     */
+    public TextMetaData getDidacticScenario()
+    {
         return didacticScenario;
-    }
-    public void setDidacticScenario(TextMetaData didacticScenario) {
+    } // end getDidacticScenario()
+
+    /**
+     * Sets the didactic scenario of the record
+     *
+     * @param didacticScenario the didactic scenario
+     */
+    public void setDidacticScenario(TextMetaData didacticScenario)
+    {
         this.didacticScenario = didacticScenario;
-    }
-    public NumericMetaData getRequiredTime() {
+    } // end setDidacticScenario()
+
+    /**
+     * Returns the required time of the record
+     *
+     * @return the required time
+     */
+    public NumericMetaData getRequiredTime()
+    {
         return requiredTime;
-    }
-    public void setRequiredTime(NumericMetaData requiredTime) {
+    } // end getRequiredTime()
+
+    /**
+     * Sets the required time of the record
+     *
+     * @param requiredTime the required time
+     */
+    public void setRequiredTime(NumericMetaData requiredTime)
+    {
         this.requiredTime = requiredTime;
-    }
-    public TextMetaData getRights () {
+    } // end setRequiredTime()
+
+    /**
+     * Returns the right settings of the record
+     *
+     * @return the right settings
+     */
+    public TextMetaData getRights()
+    {
         return rights;
-    }
-    public void setRights(TextMetaData rights) {
+    } // end getRights()
+
+    /**
+     * Sets the right settings of the record
+     *
+     * @param rights the right settings
+     */
+    public void setRights(TextMetaData rights)
+    {
         this.rights = rights;
-    }
-    public NumericMetaData getFileSize() {
+    } // end setRights()
+
+    /**
+     * Returns the file size of the record
+     *
+     * @return the file size
+     */
+    public NumericMetaData getFileSize()
+    {
         return fileSize;
-    }
-    public void setFileSize(NumericMetaData fileSize) {
+    } // end getFileSize()
+
+    /**
+     * Sets the file size of the record
+     *
+     * @param fileSize the file size
+     */
+    public void setFileSize(NumericMetaData fileSize)
+    {
         this.fileSize = fileSize;
-    }
-    public NumericMetaData getPlayingTime() {
+    } // end setFileSize()
+
+    /**
+     * Returns the playing time of the record
+     *
+     * @return the playing time
+     */
+    public NumericMetaData getPlayingTime()
+    {
         return playingTime;
-    }
-    public void setPlayingTime(NumericMetaData playingTime) {
+    } // end getPlayingTime()
+
+    /**
+     * Sets the playing time of the record
+     *
+     * @param playingTime the playing time
+     */
+    public void setPlayingTime(NumericMetaData playingTime)
+    {
         this.playingTime = playingTime;
-    }
-    public TextMetaData getTechnicalRequirements(){
+    } // end setPlayingTime()
+
+    /**
+     * Returns the technical requirements of the record
+     *
+     * @return the technical requirements
+     */
+    public TextMetaData getTechnicalRequirements()
+    {
         return technicalRequirements;
-    }
-    public void setTechnicalRequirements(TextMetaData technicalRequirements){
+    } // end getTechnicalRequirements()
+
+    /**
+     * Sets the technical requirements of the record
+     *
+     * @param technicalRequirements the technical requirements
+     */
+    public void setTechnicalRequirements(TextMetaData technicalRequirements)
+    {
         this.technicalRequirements = technicalRequirements;
-    }
-    public DateMetaData getCreationDate() {
+    } // end setTechnicalRequirements()
+
+    /**
+     * Returns the creation data of the record
+     *
+     * @return the creation date
+     */
+    public DateMetaData getCreationDate()
+    {
         return creationDate;
-    }
-    public void setCreationDate(DateMetaData Date) {
+    } // end getCreationDate()
+
+    /**
+     * Sets the creation date of the record
+     *
+     * @param Date the creation date
+     */
+    public void setCreationDate(DateMetaData Date)
+    {
         this.creationDate = Date;
-    }
-    public DateMetaData getLastChangedDate(){
+    } // end setCreationDate()
+
+    /**
+     * Returns the last change date of the record
+     *
+     * @return the last change date
+     */
+    public DateMetaData getLastChangedDate()
+    {
         return lastChangedDate;
-    }
-    public void setLastChangedDate(DateMetaData date) {
+    } // end getLastChangedDate()
+
+    /**
+     * Sets the last change date of the record
+     *
+     * @param date the last change date
+     */
+    public void setLastChangedDate(DateMetaData date)
+    {
         this.lastChangedDate = date;
-    }
-    public TextMetaData getVersion() {
+    } // end setLastChangedDate()
+
+    /**
+     * Returns the version of the record
+     *
+     * @return the version
+     */
+    public TextMetaData getVersion()
+    {
         return version;
-    }
-    public void setVersion(TextMetaData version){
+    } // end getVersion()
+
+    /**
+     * Sets the version of the record
+     *
+     * @param version the version
+     */
+    public void setVersion(TextMetaData version)
+    {
         this.version = version;
-    }
-    public TextMetaData getStatus() {
+    } // end setVersion()
+
+    /**
+     * Returns the status of the record
+     *
+     * @return the status
+     */
+    public TextMetaData getStatus()
+    {
         return status;
-    }
-    public void setStatus(TextMetaData status){
+    } // end getStatus()
+
+    /**
+     * Sets the status of the document
+     *
+     * @param status the status
+     */
+    public void setStatus(TextMetaData status)
+    {
         this.status = status;
-    }
-    public TextMetaData getRoleName() {
+    } // end setStatus()
+
+    /**
+     * Returns the role-name pairs of the record
+     *
+     * @return the role-name pairs
+     */
+    public TextMetaData getRoleName()
+    {
         return roleName;
-    }
-    public void setRoleName(TextMetaData roleName) {
+    } // end getRoleName()
+
+    /**
+     * Sets the role-name pairs of the document
+     *
+     * @param roleName the role-name pairs
+     */
+    public void setRoleName(TextMetaData roleName)
+    {
         this.roleName = roleName;
-    }
+    } // end setRoleName()
 
-	public String getId() {
-		return id;
-	}
+    /**
+     * Returns the id of the record
+     *
+     * @return the id
+     */
+    public String getId()
+    {
+        return id;
+    } // end getId()
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    /**
+     * Sets the id of the record
+     *
+     * @param id the id
+     */
+    public void setId(String id)
+    {
+        this.id = id;
+    } // end setId()
 
-	public HyperlinkMetaData getUri() {
-		return uri;
-	}
+    /**
+     * Returns the URI of the record
+     *
+     * @return the URI
+     */
+    public HyperlinkMetaData getUri()
+    {
+        return uri;
+    } // end getUri()
 
-	public void setUri(HyperlinkMetaData uri) {
-		this.uri = uri;
-	}
+    /**
+     * Sets the URI of the record
+     *
+     * @param uri the URI
+     */
+    public void setUri(HyperlinkMetaData uri)
+    {
+        this.uri = uri;
+    } // end setUri()
 
-	public void setFileFormat(TextMetaData fileFormat) {
-		this.fileFormat = fileFormat;
-	}
+    /**
+     * Sets the file format of the record
+     *
+     * @param fileFormat the file format
+     */
+    public void setFileFormat(TextMetaData fileFormat)
+    {
+        this.fileFormat = fileFormat;
+    } // end setFileFormat()
 
-	public void setTitle(TextMetaData title) {
-		this.title = title;
-	}
+    /**
+     * Sets the title of the record
+     *
+     * @param title the title
+     */
+    public void setTitle(TextMetaData title)
+    {
+        this.title = title;
+    } // end setTitle()
 
-	public Iterator iterator(){
-		if (recordMetadata.size()==0){
-			title.setMandatory(true);
-			title.setXMLTagName(MetaData.TITLE);
-			title.setName("title");
-			title.setMetaDataType("TextMetaData");
-			recordMetadata.add(1,title);
-			subject.setXMLTagName(MetaData.SUBJECT);
-			subject.setName("subject");
-			subject.setMetaDataType("TextMetaData");
-			subject.setOptional(true);
-			recordMetadata.add(1,subject);
-			description.setXMLTagName(MetaData.DESCRIPTION);
-			description.setName("description");
-			description.setMetaDataType("HtmlTextMetaData ");
-			description.setOptional(true);
-			recordMetadata.add(1,description);
-			keywords.setXMLTagName(MetaData.KEYWORDS);
-			keywords.setName("keywords");
-			keywords.setMetaDataType("TextMetaData");
-			keywords.setOptional(true);
-			recordMetadata.add(1,keywords);
-			targetEndUser.setXMLTagName(MetaData.TARGETENDUSER);
-			targetEndUser.setName("targetEndUser");
-			targetEndUser.setMetaDataType("HierarchicalStructuredTextMetaData");
-			targetEndUser.setOptional(true);
-			recordMetadata.add(1,targetEndUser);
-			schoolType.setXMLTagName(MetaData.SCHOOLTYPE);
-			schoolType.setName("schoolType");
-			schoolType.setMetaDataType("HierarchicalStructuredTextMetaDataSet");
-			schoolType.setOptional(true);
-			recordMetadata.add(1,schoolType);
-			schoolDiscipline.setXMLTagName(MetaData.SCHOOLDISCIPLINE);
-			schoolDiscipline.setName("schoolDiscipline");
-			schoolDiscipline.setMetaDataType("HierarchicalStructuredTextMetaData");
-			schoolDiscipline.setOptional(true);
-			recordMetadata.add(1,schoolDiscipline);
-			didacticFunction.setMandatory(true);
-			didacticFunction.setXMLTagName(MetaData.DIDACTICFUNCTION);
-			didacticFunction.setName("didacticFunction");
-			didacticFunction.setMetaDataType("TextMetaData");
-			recordMetadata.add(1,didacticFunction);
-			productType.setMandatory(true);
-			productType.setXMLTagName(MetaData.PRODUCTTYPE);
-			productType.setName("productType");
-			productType.setMetaDataType("TextMetaData");
-			recordMetadata.add(1,productType);
-			professionalSituation.setXMLTagName(MetaData.PROFESSIONALSITUATION);
-			professionalSituation.setName("professionalSituation");
-			professionalSituation.setMetaDataType("HierarchicalStructuredTextMetaData");
-			professionalSituation.setOptional(true);
-			recordMetadata.add(1,professionalSituation);
-			competence.setXMLTagName(MetaData.COMPETENCE);
-			competence.setName("competence");
-			competence.setMetaDataType("TextMetaData");
-			competence.setOptional(true);
-			recordMetadata.add(1,competence);
-			secured.setMandatory(true);
-			secured.setXMLTagName(MetaData.SECURED);
-			secured.setName("secured");
-			secured.setMetaDataType("BooleanMetaData");
-			recordMetadata.add(1,secured);
-			fileFormat.setMandatory(true);
-			fileFormat.setXMLTagName(MetaData.FILEFORMAT);
-			fileFormat.setName("fileFormat");
-			fileFormat.setMetaDataType("TextMetaData");
-			recordMetadata.add(1,fileFormat);
-			uri.setMandatory(true);
-			uri.setXMLTagName(MetaData.URI);
-			uri.setName("uri");
-			uri.setMetaDataType("HyperlinkMetaData");
-			recordMetadata.add(1,uri);
-			aggregationLevel.setXMLTagName(MetaData.AGGREGATIONLEVEL);
-			aggregationLevel.setName("aggregationLevel");
-			aggregationLevel.setMetaDataType("TextMetaData");
-			aggregationLevel.setOptional(true);
-			recordMetadata.add(1,aggregationLevel);
-			didacticScenario.setXMLTagName(MetaData.DIDACTICSCENARIO);
-			didacticScenario.setName("didacticScenario");
-			didacticScenario.setMetaDataType("TextMetaData");
-			didacticScenario.setOptional(true);
-			recordMetadata.add(1,didacticScenario);
-			requiredTime.setXMLTagName(MetaData.REQUIREDTIME);
-			requiredTime.setName("requiredTime");
-			requiredTime.setMetaDataType("NumericMetaData");
-			requiredTime.setOptional(true);
-			recordMetadata.add(1,requiredTime);
-			rights.setXMLTagName(MetaData.RIGHTS);
-			rights.setName("rights");
-			rights.setMetaDataType("TextMetaData");
-			rights.setOptional(true);
-			recordMetadata.add(1,rights);
-			fileSize.setXMLTagName(MetaData.FILESIZE);
-			fileSize.setName("fileSize");
-			fileSize.setMetaDataType("NumericMetaData");
-			fileSize.setOptional(true);
-			recordMetadata.add(1,fileSize);
-			playingTime.setXMLTagName(MetaData.PLAYINGTIME);
-			playingTime.setName("playingTime");
-			playingTime.setMetaDataType("NumericMetaData");
-			playingTime.setOptional(true);
-			recordMetadata.add(1,playingTime);
-			technicalRequirements.setXMLTagName(MetaData.TECHNICALREQUIREMENTS);
-			technicalRequirements.setName("technicalRequirements");
-			technicalRequirements.setMetaDataType("TextMetaData");
-			technicalRequirements.setOptional(true);
-			recordMetadata.add(1,technicalRequirements);
-			creationDate.setXMLTagName(MetaData.CREATIONDATE);
-			creationDate.setName("creationDate");
-			creationDate.setMetaDataType("DateMetaData");
-			creationDate.setOptional(true);
-			recordMetadata.add(1,creationDate);
-			lastChangedDate.setXMLTagName(MetaData.LASTCHANGEDDATE);
-			lastChangedDate.setName("lastChangedDate");
-			lastChangedDate.setMetaDataType("DateMetaData");
-			lastChangedDate.setOptional(true);
-			recordMetadata.add(1,lastChangedDate);
-			version.setXMLTagName(MetaData.VERSION);
-			version.setName("version");
-			version.setMetaDataType("TextMetaData");
-			version.setOptional(true);
-			recordMetadata.add(1,version);
-			status.setXMLTagName(MetaData.STATUS);
-			status.setName("status");
-			status.setMetaDataType("TextMetaData");
-			status.setOptional(true);
-			recordMetadata.add(1,status);
-			roleName.setXMLTagName(MetaData.ROLENAME);
-			roleName.setName("roleName");
-			roleName.setMetaDataType("TextMetaData");
-			roleName.setOptional(true);
-			recordMetadata.add(1,roleName);
-		}
-		return recordMetadata.iterator();
-	}
-	
-	public void setValue(String metadatafield,Object value){
-		if (metadatafield.equals(MetaData.AGGREGATIONLEVEL)){
-			this.setAggregationLevel((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.COMPETENCE)){
-			this.setCompetence((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.CREATIONDATE)){
-			this.setCreationDate((DateMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.DESCRIPTION)){
-			this.setDescription((HtmlTextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.DIDACTICFUNCTION)){
-			this.setDidacticFunction((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.DIDACTICSCENARIO)){
-			this.setDidacticScenario((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.FILEFORMAT)){
-			this.setFileFormat((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.FILESIZE)){
-			this.setFileSize((NumericMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.KEYWORDS)){
-			this.setKeywords((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.LASTCHANGEDDATE)){
-			this.setLastChangedDate((DateMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.PLAYINGTIME)){
-			this.setPlayingTime((NumericMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.PRODUCTTYPE)){
-			this.setProductType((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.PROFESSIONALSITUATION)){
-			this.setProfessionalSituation((HierarchicalStructuredTextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.REQUIREDTIME)){
-			this.setRequiredTime((NumericMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.RIGHTS)){
-			this.setRights((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.ROLENAME)){
-			this.setRoleName((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.SCHOOLDISCIPLINE)){
-			this.setSchoolDiscipline((HierarchicalStructuredTextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.SCHOOLTYPE)){
-			this.setSchoolType((HierarchicalStructuredTextMetaDataSet)value);
-			
-		}
-		if (metadatafield.equals(MetaData.SECURED)){
-			this.setSecured((BooleanMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.STATUS)){
-			this.setStatus((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.SUBJECT)){
-			this.setSubject((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.TARGETENDUSER)){
-			this.setTargetEndUser((HierarchicalStructuredTextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.TECHNICALREQUIREMENTS)){
-			this.setTechnicalRequirements((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.TITLE)){
-			this.setTitle((TextMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.URI)){
-			this.setUri((HyperlinkMetaData)value);
-		}
-		if (metadatafield.equals(MetaData.VERSION)){
-			this.setVersion((TextMetaData)value);
-		}
-	}
-}
+    /**
+     * Returns an iterator containing all metadata fields of the record object
+     *
+     * @return the record iterator
+     */
+    public Iterator iterator()
+    {
+        if (recordMetadata.size() == 0)
+        {
+            title.setMandatory(true);
+            title.setXMLTagName(MetaData.TITLE);
+            title.setName("title");
+            title.setMetaDataType("TextMetaData");
+            recordMetadata.add(1, title);
+            subject.setXMLTagName(MetaData.SUBJECT);
+            subject.setName("subject");
+            subject.setMetaDataType("TextMetaData");
+            subject.setOptional(true);
+            recordMetadata.add(1, subject);
+            description.setXMLTagName(MetaData.DESCRIPTION);
+            description.setName("description");
+            description.setMetaDataType("HtmlTextMetaData ");
+            description.setOptional(true);
+            recordMetadata.add(1, description);
+            keywords.setXMLTagName(MetaData.KEYWORDS);
+            keywords.setName("keywords");
+            keywords.setMetaDataType("TextMetaData");
+            keywords.setOptional(true);
+            recordMetadata.add(1, keywords);
+            targetEndUser.setXMLTagName(MetaData.TARGETENDUSER);
+            targetEndUser.setName("targetEndUser");
+            targetEndUser.setMetaDataType("HierarchicalStructuredTextMetaData");
+            targetEndUser.setOptional(true);
+            recordMetadata.add(1, targetEndUser);
+            schoolType.setXMLTagName(MetaData.SCHOOLTYPE);
+            schoolType.setName("schoolType");
+            schoolType.setMetaDataType("HierarchicalStructuredTextMetaDataSet");
+            schoolType.setOptional(true);
+            recordMetadata.add(1, schoolType);
+            schoolDiscipline.setXMLTagName(MetaData.SCHOOLDISCIPLINE);
+            schoolDiscipline.setName("schoolDiscipline");
+            schoolDiscipline.setMetaDataType(
+                "HierarchicalStructuredTextMetaData");
+            schoolDiscipline.setOptional(true);
+            recordMetadata.add(1, schoolDiscipline);
+            didacticFunction.setMandatory(true);
+            didacticFunction.setXMLTagName(MetaData.DIDACTICFUNCTION);
+            didacticFunction.setName("didacticFunction");
+            didacticFunction.setMetaDataType("TextMetaData");
+            recordMetadata.add(1, didacticFunction);
+            productType.setMandatory(true);
+            productType.setXMLTagName(MetaData.PRODUCTTYPE);
+            productType.setName("productType");
+            productType.setMetaDataType("TextMetaData");
+            recordMetadata.add(1, productType);
+            professionalSituation.setXMLTagName(MetaData.PROFESSIONALSITUATION);
+            professionalSituation.setName("professionalSituation");
+            professionalSituation.setMetaDataType(
+                "HierarchicalStructuredTextMetaData");
+            professionalSituation.setOptional(true);
+            recordMetadata.add(1, professionalSituation);
+            competence.setXMLTagName(MetaData.COMPETENCE);
+            competence.setName("competence");
+            competence.setMetaDataType("TextMetaData");
+            competence.setOptional(true);
+            recordMetadata.add(1, competence);
+            secured.setMandatory(true);
+            secured.setXMLTagName(MetaData.SECURED);
+            secured.setName("secured");
+            secured.setMetaDataType("BooleanMetaData");
+            recordMetadata.add(1, secured);
+            fileFormat.setMandatory(true);
+            fileFormat.setXMLTagName(MetaData.FILEFORMAT);
+            fileFormat.setName("fileFormat");
+            fileFormat.setMetaDataType("TextMetaData");
+            recordMetadata.add(1, fileFormat);
+            uri.setMandatory(true);
+            uri.setXMLTagName(MetaData.URI);
+            uri.setName("uri");
+            uri.setMetaDataType("HyperlinkMetaData");
+            recordMetadata.add(1, uri);
+            aggregationLevel.setXMLTagName(MetaData.AGGREGATIONLEVEL);
+            aggregationLevel.setName("aggregationLevel");
+            aggregationLevel.setMetaDataType("TextMetaData");
+            aggregationLevel.setOptional(true);
+            recordMetadata.add(1, aggregationLevel);
+            didacticScenario.setXMLTagName(MetaData.DIDACTICSCENARIO);
+            didacticScenario.setName("didacticScenario");
+            didacticScenario.setMetaDataType("TextMetaData");
+            didacticScenario.setOptional(true);
+            recordMetadata.add(1, didacticScenario);
+            requiredTime.setXMLTagName(MetaData.REQUIREDTIME);
+            requiredTime.setName("requiredTime");
+            requiredTime.setMetaDataType("NumericMetaData");
+            requiredTime.setOptional(true);
+            recordMetadata.add(1, requiredTime);
+            rights.setXMLTagName(MetaData.RIGHTS);
+            rights.setName("rights");
+            rights.setMetaDataType("TextMetaData");
+            rights.setOptional(true);
+            recordMetadata.add(1, rights);
+            fileSize.setXMLTagName(MetaData.FILESIZE);
+            fileSize.setName("fileSize");
+            fileSize.setMetaDataType("NumericMetaData");
+            fileSize.setOptional(true);
+            recordMetadata.add(1, fileSize);
+            playingTime.setXMLTagName(MetaData.PLAYINGTIME);
+            playingTime.setName("playingTime");
+            playingTime.setMetaDataType("NumericMetaData");
+            playingTime.setOptional(true);
+            recordMetadata.add(1, playingTime);
+            technicalRequirements.setXMLTagName(MetaData.TECHNICALREQUIREMENTS);
+            technicalRequirements.setName("technicalRequirements");
+            technicalRequirements.setMetaDataType("TextMetaData");
+            technicalRequirements.setOptional(true);
+            recordMetadata.add(1, technicalRequirements);
+            creationDate.setXMLTagName(MetaData.CREATIONDATE);
+            creationDate.setName("creationDate");
+            creationDate.setMetaDataType("DateMetaData");
+            creationDate.setOptional(true);
+            recordMetadata.add(1, creationDate);
+            lastChangedDate.setXMLTagName(MetaData.LASTCHANGEDDATE);
+            lastChangedDate.setName("lastChangedDate");
+            lastChangedDate.setMetaDataType("DateMetaData");
+            lastChangedDate.setOptional(true);
+            recordMetadata.add(1, lastChangedDate);
+            version.setXMLTagName(MetaData.VERSION);
+            version.setName("version");
+            version.setMetaDataType("TextMetaData");
+            version.setOptional(true);
+            recordMetadata.add(1, version);
+            status.setXMLTagName(MetaData.STATUS);
+            status.setName("status");
+            status.setMetaDataType("TextMetaData");
+            status.setOptional(true);
+            recordMetadata.add(1, status);
+            roleName.setXMLTagName(MetaData.ROLENAME);
+            roleName.setName("roleName");
+            roleName.setMetaDataType("TextMetaData");
+            roleName.setOptional(true);
+            recordMetadata.add(1, roleName);
+        } // end if
+
+        return recordMetadata.iterator();
+    } // end iterator()
+
+    /**
+     * Sets the value of the specified metadata field
+     *
+     * @param metadatafield the record metadata field
+     * @param value the value
+     */
+    public void setValue(String metadatafield, Object value)
+    {
+        if (metadatafield.equals(MetaData.AGGREGATIONLEVEL))
+        {
+            this.setAggregationLevel((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.COMPETENCE))
+        {
+            this.setCompetence((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.CREATIONDATE))
+        {
+            this.setCreationDate((DateMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.DESCRIPTION))
+        {
+            this.setDescription((HtmlTextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.DIDACTICFUNCTION))
+        {
+            this.setDidacticFunction((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.DIDACTICSCENARIO))
+        {
+            this.setDidacticScenario((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.FILEFORMAT))
+        {
+            this.setFileFormat((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.FILESIZE))
+        {
+            this.setFileSize((NumericMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.KEYWORDS))
+        {
+            this.setKeywords((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.LASTCHANGEDDATE))
+        {
+            this.setLastChangedDate((DateMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.PLAYINGTIME))
+        {
+            this.setPlayingTime((NumericMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.PRODUCTTYPE))
+        {
+            this.setProductType((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.PROFESSIONALSITUATION))
+        {
+            this.setProfessionalSituation((HierarchicalStructuredTextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.REQUIREDTIME))
+        {
+            this.setRequiredTime((NumericMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.RIGHTS))
+        {
+            this.setRights((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.ROLENAME))
+        {
+            this.setRoleName((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.SCHOOLDISCIPLINE))
+        {
+            this.setSchoolDiscipline((HierarchicalStructuredTextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.SCHOOLTYPE))
+        {
+            this.setSchoolType((HierarchicalStructuredTextMetaDataSet) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.SECURED))
+        {
+            this.setSecured((BooleanMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.STATUS))
+        {
+            this.setStatus((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.SUBJECT))
+        {
+            this.setSubject((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.TARGETENDUSER))
+        {
+            this.setTargetEndUser((HierarchicalStructuredTextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.TECHNICALREQUIREMENTS))
+        {
+            this.setTechnicalRequirements((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.TITLE))
+        {
+            this.setTitle((TextMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.URI))
+        {
+            this.setUri((HyperlinkMetaData) value);
+        } // end if
+
+        if (metadatafield.equals(MetaData.VERSION))
+        {
+            this.setVersion((TextMetaData) value);
+        } // end if
+    } // end setValue()
+} // end Record
