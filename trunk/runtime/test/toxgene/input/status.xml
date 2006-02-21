@@ -1,10 +1,10 @@
 <status_list>
-<status>status1</status>
-<status>status2</status>
-<status>status3</status>
-<status>status4</status>
-<status>status5</status>
-<status>status6</status>
-<status>status7</status>
+<status>concept</status>
+<status>ter review</status>
+<status>alfa</status>
+<status>beta</status>
+<status>RFC</status>
+<status>nieuw</status>
+<status>gereed</status>
 <status></status>
 </status_list>
