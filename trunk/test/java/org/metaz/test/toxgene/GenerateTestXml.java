@@ -51,9 +51,14 @@ public class GenerateTestXml
      */
     public static void main(String[] argv)
     {
+        if (argv.length == 0) {
+            System.out.println("Usage: GenerateTestXml <template file>\n");
+            System.exit(0);
+        }
         try
         {
-            template = "test/toxgene/records.tsl";
+            //template = "test/toxgene/records.tsl";
+            template = argv[0];
             app = MetaZ.getInstance();
 
             ToXgeneCdataDescriptor dutchDescriptor = new DutchWordsCdataDescriptor();
@@ -76,17 +81,18 @@ public class GenerateTestXml
             tgReporter = new ToXgeneReporterImpl(verbose, showWarnings);
 
             /*
+             *
+             * if (System.getProperty("TOXGENE_HOME") == null)
+             * {
+             *   System.out.println("\n***** WARNING: " +
+             *       "TOXGENE_HOME property is not set. " +
+             *       "ToXgene will attempt to load\n" +
+             *       "toxgene.jar/config/cdata.xml assuming" +
+             *       "toxgene.jar is in the current " +
+             *       "directory.\n\nUse java " + "-DToXgene_home=<path>... " +
+             *       "to override this.");
+             *} // end if
              */
-            if (System.getProperty("TOXGENE_HOME") == null)
-            {
-                System.out.println("\n***** WARNING: " +
-                    "TOXGENE_HOME property is not set. " +
-                    "ToXgene will attempt to load\n" +
-                    "toxgene.jar/config/cdata.xml assuming" +
-                    "toxgene.jar is in the current " +
-                    "directory.\n\nUse java " + "-DToXgene_home=<path>... " +
-                    "to override this.");
-            } // end if
 
             /*
              * The ToXgeneSession specifies all parameters the

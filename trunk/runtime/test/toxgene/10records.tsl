@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE tox-template SYSTEM 'http://www.cs.toronto.edu/tox/toxgene/ToXgene2.dtd'>
+
+<tox-template>
+	<simpleType name="uri_type">
+		<restriction base="string">
+	  		<pattern value="http://www.google.com/search?q=[0-9]{10}"></pattern>
+		</restriction>
+  	</simpleType>
+	<tox-list name="didactischeFunctie_list" readFrom="test/toxgene/input/didactischeFuncties.xml">
+		<element name="didactischeFunctie" type="string"/>
+	</tox-list>
+	<tox-list name="productType_list" readFrom="test/toxgene/input/productTypes.xml">
+		<element name="productType" type="string"/>
+	</tox-list>
+	<tox-list name="beveiligd_list" readFrom="test/toxgene/input/beveiligd.xml">
+		<element name="waarde" type="string"/>
+	</tox-list>
+        <tox-list name="bestandsformaat_list" readFrom="test/toxgene/input/bestandsformaten.xml">
+            <element name="bestandsformaat" type="string"/>
+        </tox-list>
+	
+	<tox-list name="leerobject_list" unique="leerobject/uri">
+		<element name="leerobject" minOccurs="10" maxOccurs="10">
+			<complexType>
+				<element name="uri" type="uri_type"/>
+				<element name="titel">
+		  			<simpleType>
+						<restriction base="string">
+                                                        <minLength value="1"/>
+                                                        <maxLength value="15"/>
+                                                        <tox-string type="tekst"/>
+						</restriction>
+		  			</simpleType>
+				</element>
+				<element name="didactischeFunctie">
+					<simpleType>
+		  				<restriction base="string">
+		    					<tox-sample path="[didactischeFunctie_list/didactischeFunctie]">
+		      					<tox-expr value="[!]"/>
+		    					</tox-sample>
+		  				</restriction>
+					</simpleType>
+                                </element>
+				<element name="productType">
+					<simpleType>
+		  				<restriction base="string">
+		    					<tox-sample path="[productType_list/productType]">
+		      					<tox-expr value="[!]"/>
+		    					</tox-sample>
+		  				</restriction>
+					</simpleType>
+                                </element>
+				<element name="beveiligd">
+					<simpleType>
+						<restriction base="string">
+							<tox-sample path="[beveiligd_list/waarde]">
+								<tox-expr value="[!]"/>
+							</tox-sample>
+						</restriction>
+					</simpleType>
+				</element>
+                                <element name="bestandsformaat">
+                                    <simpleType>
+                                        <restriction base="string">
+                                            <tox-sample path="[bestandsformaat_list/bestandsformaat]">
+                                                <tox-expr value="[!]"/>
+                                            </tox-sample>
+                                        </restriction>
+                                    </simpleType>
+                                </element>
+			</complexType>
+		</element>
+	</tox-list>
+
+	<tox-document name="test/toxgene/output/10Records">
+		<element name="leerobjecten" minOccurs="1" maxOccurs="1">
+			<complexType>
+				<element name="leerobject" minOccurs="10" maxOccurs="10">
+					<complexType>
+						<tox-scan path="[leerobject_list/leerobject]" name="sc">
+							<attribute name="uri">
+								<tox-expr value="[uri]"/>
+							</attribute>
+	  						<element name="title">
+								<tox-expr value="[titel]"/>
+			  				</element>
+                                                        <element name="didactischeFunctie">
+								<tox-expr value="[didactischeFunctie]"/>
+							</element>
+							<element name="productType">
+								<tox-expr value="[productType]"/>
+							</element>
+							<element name="beveiligd" maxOccurs="1">
+								<tox-expr value="[beveiligd]"/>
+							</element>
+                                                        <element name="bestandsformaat" minOccurs="0">
+                                                            <tox-expr value="[bestandsformaat]"/>
+                                                        </element>
+						</tox-scan>
+					</complexType>
+				</element>
+			</complexType>
+		</element>
+	</tox-document>
+
+</tox-template>
