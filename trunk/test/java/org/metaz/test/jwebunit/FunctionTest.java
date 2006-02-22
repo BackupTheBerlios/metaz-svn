@@ -97,11 +97,11 @@ public class FunctionTest extends WebTestCase
         //assertFormPresent("searchhandler.jsp"); // form element has no id or name specified
         assertFormElementPresent("targetEndUser");
         assertFormElementEquals("targetEndUser", "*");
-        //setFormElement("targetEndUser", "b504524c-74e5-403e-94c9-38525c7046c2"); // option value is not static
-        //setFormElementWithLabel("Ik ben een:", "b504524c-74e5-403e-94c9-38525c7046c2"); //option value is not static
+        setFormElement("targetEndUser", "7a5444d3"); 
+        setFormElementWithLabel("Mijn schooltype:", "284144");
         setFormElement("keywords", "ik zoek een leerobject");
         submit();
-        assertTextPresent("The teacher is cool");
+        assertTextPresent("De nieuwe universiteit");
     } // end testSimpleSearch()
     
     /**

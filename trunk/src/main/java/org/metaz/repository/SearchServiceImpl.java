@@ -119,7 +119,11 @@ public class SearchServiceImpl implements SearchService
             writer.optimize();
             writer.close();
 
+            //for testing purposes
             IndexReader reader = IndexReader.open(f);
+            for (int i = 0; i < reader.numDocs(); i++) {
+                logger.info ((reader.document(i)).toString());
+            }
             reader.close();
         } // end try
         catch (Exception ex)
