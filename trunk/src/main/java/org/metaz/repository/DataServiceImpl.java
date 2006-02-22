@@ -53,7 +53,7 @@ public class DataServiceImpl implements DataService {
 		Session sess = null;
 		Transaction t = null;
 		try {
-			sess = MetaZ.getInstance().getHibernateSessionFactory()
+			sess = MetaZ.getHibernateSessionFactory()
 					.openSession();
 			t = sess.beginTransaction();
 			Iterator<Record> it = records.iterator();
@@ -81,7 +81,7 @@ public class DataServiceImpl implements DataService {
 		Session sess = null;
 		Transaction t = null;
 		try {
-			sess = MetaZ.getInstance().getHibernateSessionFactory()
+			sess = MetaZ.getHibernateSessionFactory()
 					.openSession();
 			t = sess.beginTransaction();
 			int recordRowsDeleted = sess.createQuery("delete Record")
