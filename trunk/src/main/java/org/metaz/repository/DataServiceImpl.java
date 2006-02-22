@@ -65,7 +65,10 @@ public class DataServiceImpl implements DataService {
 		} catch (HibernateException e) {
 			t.rollback();
 			throw e;
-		} finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally {
 			if (sess != null) {
 				sess.close();
 			}
