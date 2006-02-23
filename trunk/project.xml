@@ -61,7 +61,7 @@
    <!-- who the developers are for the project -->
    <developers>
       <developer>
-         <id>EJS</id>
+         <id>ejspaans</id>
          <name>Erik-Jan Spaans</name>
          <email>xxxx</email>
          <organization>OTO Meta/Z</organization>
@@ -71,7 +71,7 @@
          <timezone>+1</timezone>
       </developer>
       <developer>
-         <id>ES</id>
+         <id>erik-metaz</id>
          <name>Erik Schouten</name>
          <email>xxxx</email>
          <organization>OTO Meta/Z</organization>
@@ -81,7 +81,7 @@
          <timezone>+1</timezone>
       </developer>
       <developer>
-         <id>JG</id>
+         <id>jurgoe</id>
          <name>Jurgen Goelen</name>
          <email>xxxx</email>
          <organization>OTO Meta/Z</organization>
@@ -91,7 +91,7 @@
          <timezone>+1</timezone>
       </developer>
       <developer>
-         <id>LO</id>
+         <id>loosterloo</id>
          <name>Lars Oosterloo</name>
          <email>xxxx</email>
          <organization>OTO Meta/Z</organization>
@@ -101,7 +101,7 @@
          <timezone>+1</timezone>
       </developer>
       <developer>
-         <id>PD</id>
+         <id>dorp</id>
          <name>Peter van Dorp</name>
          <email>xxxx</email>
          <organization>OTO Meta/Z</organization>
@@ -111,7 +111,7 @@
          <timezone>+1</timezone>
       </developer>
       <developer>
-         <id>SD</id>
+         <id>sdalewyn</id>
          <name>Sammy Dalewyn</name>
          <email>xxxx</email>
          <organization>OTO Meta/Z</organization>
@@ -121,7 +121,7 @@
          <timezone>+1</timezone>
       </developer>
       <developer>
-         <id>FP</id>
+         <id>falcopaul</id>
          <name>Falco Paul</name>
          <email>xxxx</email>
          <organization>OTO Meta/Z</organization>
