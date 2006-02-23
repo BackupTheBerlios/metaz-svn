@@ -489,10 +489,10 @@
 				<element name="leerobject" minOccurs="10000" maxOccurs="10000">
 					<complexType>
 						<tox-scan path="[leerobject_list/leerobject]" name="sc">
-							<attribute name="uri">
+							<attribute name="URI">
 								<tox-expr value="[uri]"/>
 							</attribute>
-	  						<element name="title">
+	  						<element name="titel">
 								<tox-expr value="[titel]"/>
 			  				</element>
                                                         <element name="onderwerp" minOccurs="0">
@@ -501,7 +501,7 @@
 							<element name="didactischeFunctie">
 								<tox-expr value="[didactischeFunctie]"/>
 							</element>
-							<element name="productType">
+							<element name="producttype">
 								<tox-expr value="[productType]"/>
 							</element>
 							<element name="beveiligd" maxOccurs="1">

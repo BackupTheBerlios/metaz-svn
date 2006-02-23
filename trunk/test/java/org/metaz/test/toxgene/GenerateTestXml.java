@@ -253,8 +253,8 @@ public class GenerateTestXml
 
                 try
                 {
-                    PrintStream outStream = new PrintStream(new FileOutputStream(
-                                file));
+                    //PrintStream outStream = new PrintStream(new FileOutputStream(file));
+                    PrintStream outStream = new PrintStream(new FileOutputStream(file),true,"US-ASCII");
                     tgEngine.materialize(tgColl, outStream);
                 } // end try
                 catch (Exception e)
