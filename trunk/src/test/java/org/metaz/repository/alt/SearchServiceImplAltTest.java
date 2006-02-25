@@ -99,8 +99,8 @@ public class SearchServiceImplAltTest extends TestCase
         profSit1Level2.setValue("Leiding geven aan groepsprocessen");
 
         HierarchicalStructuredTextMetaData hstmd1 = new HierarchicalStructuredTextMetaData();
-        hstmd1.addChild(profSit1Level1);
-        hstmd1.addChild(profSit1Level2);
+        hstmd1.addChild((String)profSit1Level1.getValue());
+        hstmd1.addChild((String)profSit1Level2.getValue());
         rec1.setProfessionalSituation(hstmd1);
 
         // optional metadata school type
@@ -117,17 +117,17 @@ public class SearchServiceImplAltTest extends TestCase
         vmbo.setValue("VMBO");
 
         HierarchicalStructuredTextMetaData hstmd2 = new HierarchicalStructuredTextMetaData();
-        hstmd2.addChild(vo);
-        hstmd2.addChild(havo);
+        hstmd2.addChild((String)vo.getValue());
+        hstmd2.addChild((String)havo.getValue());
 
         HierarchicalStructuredTextMetaData hstmd3 = new HierarchicalStructuredTextMetaData();
-        hstmd3.addChild(vo);
-        hstmd3.addChild(vbo);
-        hstmd3.addChild(vmbo);
+        hstmd3.addChild((String)vo.getValue());
+        hstmd3.addChild((String)vbo.getValue());
+        hstmd3.addChild((String)vmbo.getValue());
 
         HierarchicalStructuredTextMetaDataSet hstmds1 = new HierarchicalStructuredTextMetaDataSet();
-        hstmds1.addHierarchy(hstmd2);
-        hstmds1.addHierarchy(hstmd3);
+        hstmds1.addHierarchy((String)hstmd2.getValue());
+        hstmds1.addHierarchy((String)hstmd3.getValue());
         rec1.setSchoolType(hstmds1);
 
         // optional metadata keywords
@@ -203,7 +203,7 @@ public class SearchServiceImplAltTest extends TestCase
         HierarchicalStructuredTextMetaData targetEndUser2 = new HierarchicalStructuredTextMetaData();
         TextMetaData docent = new TextMetaData();
         docent.setValue("docent");
-        targetEndUser2.addChild(docent);
+        targetEndUser2.addChild((String)docent.getValue());
         rec2.setTargetEndUser(targetEndUser2);
 
         //optional metadata schooltype
@@ -211,8 +211,8 @@ public class SearchServiceImplAltTest extends TestCase
         HierarchicalStructuredTextMetaData schoolType1 = new HierarchicalStructuredTextMetaData();
         TextMetaData so = new TextMetaData();
         so.setValue("Speciaal onderwijs");
-        schoolType1.addChild(so);
-        schoolType.addHierarchy(schoolType1);
+        schoolType1.addChild((String)so.getValue());
+        schoolType.addHierarchy((String)schoolType1.getValue());
         rec2.setSchoolType(schoolType);
 
         //optional metadata school discipline
@@ -222,8 +222,8 @@ public class SearchServiceImplAltTest extends TestCase
 
         TextMetaData nl_anders = new TextMetaData();
         nl_anders.setValue("Nederlands voor anderstaligen");
-        schoolDiscipline.addChild(nl);
-        schoolDiscipline.addChild(nl_anders);
+        schoolDiscipline.addChild((String)nl.getValue());
+        schoolDiscipline.addChild((String)nl_anders.getValue());
         rec2.setSchoolDiscipline(schoolDiscipline);
 
         //optional metadata professional situation
@@ -234,8 +234,8 @@ public class SearchServiceImplAltTest extends TestCase
         TextMetaData sit2 = new TextMetaData();
         sit2.setValue(
             "omgaan met verschillen in taal, leerstijl, motivatie en tempo");
-        profSit2.addChild(sit1);
-        profSit2.addChild(sit2);
+        profSit2.addChild((String)sit1.getValue());
+        profSit2.addChild((String)sit2.getValue());
         rec2.setProfessionalSituation(profSit2);
 
         //optional metadata competence
