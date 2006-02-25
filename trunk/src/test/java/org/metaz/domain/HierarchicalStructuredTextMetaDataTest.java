@@ -89,9 +89,9 @@ public class HierarchicalStructuredTextMetaDataTest extends TestCase
     public void testAddChild()
     {
         HierarchicalStructuredTextMetaData hstmd = new HierarchicalStructuredTextMetaData();
-        hstmd.addChild(level1);
-        hstmd.addChild(level2);
-        hstmd.addChild(level3);
+        hstmd.addChild((String)level1.getValue());
+        hstmd.addChild((String)level2.getValue());
+        hstmd.addChild((String)level3.getValue());
         assertNotNull("Expected hierarchical structure", hstmd.getValue());
 
         Iterator i = ((List) hstmd.getValue()).iterator();
@@ -109,9 +109,9 @@ public class HierarchicalStructuredTextMetaDataTest extends TestCase
     public void testToString()
     {
         HierarchicalStructuredTextMetaData hstmd = new HierarchicalStructuredTextMetaData();
-        hstmd.addChild(level1);
-        hstmd.addChild(level2);
-        hstmd.addChild(level3);
+        hstmd.addChild((String)level1.getValue());
+        hstmd.addChild((String)level2.getValue());
+        hstmd.addChild((String)level3.getValue());
 
         String treePath = hstmd.toString();
         System.out.println(treePath);

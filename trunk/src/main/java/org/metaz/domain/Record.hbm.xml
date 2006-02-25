@@ -4,9 +4,8 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="org.metaz.domain.Record" table="records" lazy="false">
-		<id name="id" type="string" unsaved-value="null">
-			<column name="id" sql-type="char(32)" not-null="true"/>
-			<generator class="uuid.hex"/>
+		<id name="id" type="long" column="ID">
+			<generator class="increment"/>
 		</id>
 		<many-to-one name="title" column="title_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
                 <many-to-one name="subject" column="subject_id" class="org.metaz.domain.TextMetaData" cascade="all"/>

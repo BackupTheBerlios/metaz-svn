@@ -4,9 +4,8 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="org.metaz.domain.MetaData" table="metadata" abstract="true" lazy="false">
-		<id name="id" type="string" unsaved-value="null">
-			<column name="id" sql-type="char(32)" not-null="true"/>
-			<generator class="uuid.hex"/>
+		<id name="id" type="long" column="ID" >
+			<generator class="increment"/>
 		</id>
 		<discriminator column="metadata_type" type="string"/>
 		<property name="name" column="metadata_name" type="string"/>
@@ -21,12 +20,16 @@
 			<property name="value" column="DMD_metadata_value" type="date"/>
 		</subclass>
 		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaData" discriminator-value="HSTM" lazy="false">
-			<property name="value" column="HSTM_metadata_value" type="string"/>
+			<list name="value" lazy="false" table="HIERARCHICAL_METADATA_LIST_ITEMS" cascade="all">
+				<key column="ID"/>
+				<index column="ITEM_POSITION"/>
+				<element type="string" column="ITEM_VALUE"/>
+			</list>
 		</subclass>
 		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" discriminator-value="HSTMS" lazy="false">
-			<set name="value" table="HIERARCHICAL_METADATA_ITEMS">
+			<set name="value" table="HIERARCHICAL_METADATA_SET_ITEMS" cascade="all">
 				<key column="ID"/>
-				<element type="string" column="METADATA_ITEM"/>
+				<element type="string" column="ITEM_VALUE"/>
 			</set>
 		</subclass>
 		<subclass name="org.metaz.domain.HtmlTextMetaData" discriminator-value="HTMD" lazy="false">

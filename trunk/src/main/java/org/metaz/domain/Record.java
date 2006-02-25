@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class Record
 {
-    private String id;
+    private Long id;
     private TextMetaData title;
     private TextMetaData subject;
     private HtmlTextMetaData description;
@@ -37,7 +37,7 @@ public class Record
     private TextMetaData version;
     private TextMetaData status;
     private TextMetaData roleName;
-    private List<MetaData> recordMetadata = new Vector<MetaData>();
+    //private List<MetaData> recordMetadata = new Vector<MetaData>();
 
 /**
          * Creates a new Record. This constructor ensures only valid Records (that
@@ -575,7 +575,7 @@ public class Record
      *
      * @return the id
      */
-    public String getId()
+    public Long getId()
     {
         return id;
     } // end getId()
@@ -585,7 +585,7 @@ public class Record
      *
      * @param id the id
      */
-    public void setId(String id)
+    public void setId(Long id)
     {
         this.id = id;
     } // end setId()
@@ -635,6 +635,7 @@ public class Record
      *
      * @return the record iterator
      */
+    /*
     public Iterator iterator()
     {
         if (recordMetadata.size() == 0)
@@ -782,6 +783,7 @@ public class Record
      * @param metadatafield the record metadata field
      * @param value the value
      */
+    /*
     public void setValue(String metadatafield, Object value)
     {
         if (metadatafield.equals(MetaData.AGGREGATIONLEVEL))
@@ -914,4 +916,5 @@ public class Record
             this.setVersion((TextMetaData) value);
         } // end if
     } // end setValue()
+    */
 } // end Record

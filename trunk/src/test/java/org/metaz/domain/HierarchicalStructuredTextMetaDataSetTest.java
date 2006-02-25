@@ -62,12 +62,12 @@ public class HierarchicalStructuredTextMetaDataSetTest extends TestCase
         level3b = new TextMetaData();
         level3b.setValue("VMBO");
         hstmd1 = new HierarchicalStructuredTextMetaData();
-        hstmd1.addChild(level1a);
-        hstmd1.addChild(level2a);
+        hstmd1.addChild((String)level1a.getValue());
+        hstmd1.addChild((String)level2a.getValue());
         hstmd2 = new HierarchicalStructuredTextMetaData();
-        hstmd2.addChild(level1a);
-        hstmd2.addChild(level2b);
-        hstmd2.addChild(level3b);
+        hstmd2.addChild((String)level1a.getValue());
+        hstmd2.addChild((String)level2b.getValue());
+        hstmd2.addChild((String)level3b.getValue());
     } // end setUp()
 
     /**
@@ -93,8 +93,8 @@ public class HierarchicalStructuredTextMetaDataSetTest extends TestCase
     public void testAddHierarchy()
     {
         HierarchicalStructuredTextMetaDataSet hstmdSet = new HierarchicalStructuredTextMetaDataSet();
-        hstmdSet.addHierarchy(hstmd1);
-        hstmdSet.addHierarchy(hstmd2);
+        hstmdSet.addHierarchy((String)hstmd1.getValue());
+        hstmdSet.addHierarchy((String)hstmd2.getValue());
         assertEquals("Two hierarchies expected", 2,
             ((Set) hstmdSet.getValue()).size());
     } // end testAddHierarchy()

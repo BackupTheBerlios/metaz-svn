@@ -86,7 +86,7 @@ public abstract class MetaData
 
     /** Metadata field name constant */
     public final static String ROLENAME = "rolEnNaam";
-    private String id;
+    private Long id;
     private String name;
     private String xmltagname;
     private String description;
@@ -195,7 +195,7 @@ public abstract class MetaData
      *
      * @return the metadata id
      */
-    public String getId()
+    public Long getId()
     {
         return id;
     } // end getId()
@@ -205,7 +205,7 @@ public abstract class MetaData
      *
      * @param id the metadata id
      */
-    public void setId(String id)
+    public void setId(Long id)
     {
         this.id = id;
     } // end setId()

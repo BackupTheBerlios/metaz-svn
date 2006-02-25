@@ -2,13 +2,18 @@ package org.metaz.repository;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Vector;
 
 import junit.framework.TestCase;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.metaz.domain.BooleanMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
@@ -55,7 +60,7 @@ public class DataServiceImplTest extends TestCase {
 		fileFormat.setName("bestandsformaat");
 		fileFormat.setValue("application/pdf");
 		fileFormat.setMandatory(true);
-
+		
 		TextMetaData didacticalFunction = new TextMetaData();
 		didacticalFunction.setName("didactischeFunctie");
 		didacticalFunction.setValue("bla");
@@ -69,9 +74,27 @@ public class DataServiceImplTest extends TestCase {
 		HyperlinkMetaData uri = new HyperlinkMetaData();
 		uri.setName("URI");
 		uri.setValue("http://www.ou.nl/stories/ruuddemoor.pdf");
+		
+		HierarchicalStructuredTextMetaData hierStrucText = new HierarchicalStructuredTextMetaData();
+		List<String> listValues = new Vector<String>();
+		listValues.add("aap");
+		listValues.add("noot");
+		listValues.add("mies");
+		hierStrucText.setValue(listValues);
+		hierStrucText.setName("professionalSituation");
+		
+		HierarchicalStructuredTextMetaDataSet hierStrucSet = new HierarchicalStructuredTextMetaDataSet();
+		Set<String> setValues = new HashSet<String>();
+		setValues.add("aap");
+		setValues.add("noot");
+		setValues.add("mies");
+		hierStrucSet.setValue(setValues);
+		hierStrucSet.setName("schoolTypes");
 
 		Record rec = new Record(title, secured, fileFormat, didacticalFunction,
 				productType, uri);
+		rec.setProfessionalSituation(hierStrucText);
+		rec.setSchoolType(hierStrucSet);
 		List<Record> l = new ArrayList<Record>();
 		l.add(rec);
 		dataService.doUpdate(l);
