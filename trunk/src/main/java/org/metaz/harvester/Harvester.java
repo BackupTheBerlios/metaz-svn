@@ -404,11 +404,11 @@ public class Harvester {
 				HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData(); 
 				for (int j=branch.size();j>0;j--){
 					//add listelements to HierarchicalMetaDataText
-					hMetaData.addChild((String)branch.get(j-1).getValue());
+					hMetaData.addChild(branch.get(j-1));
 					logger.info(j + "-branch: " + branch.get(j-1).getValue());
 				}
 				//add HierarchicalMetaDataText to hSet
-				hSet.addHierarchy((String)hMetaData.getValue());
+				hSet.addHierarchy(hMetaData);
 				//next branch
 			}
 			else {
@@ -459,7 +459,7 @@ public class Harvester {
 				//reverselist 
 				for (int j=branch.size();j>0;j--){
 					//add listelements to HierarchicalMetaDataText
-					hMetaData.addChild((String)branch.get(j-1).getValue());
+					hMetaData.addChild(branch.get(j-1));
 					logger.info(j + "-branch: " + branch.get(j-1).getValue());
 				}
 			}
