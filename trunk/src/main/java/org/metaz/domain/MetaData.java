@@ -70,7 +70,7 @@ public abstract class MetaData
     public final static String PLAYINGTIME = "afspeelduur";
 
     /** Metadata field name constant */
-    public final static String TECHNICALREQUIREMENTS = "technische vereiste";
+    public final static String TECHNICALREQUIREMENTS = "technischeVereiste";
 
     /** Metadata field name constant */
     public final static String CREATIONDATE = "datumCreatie";
