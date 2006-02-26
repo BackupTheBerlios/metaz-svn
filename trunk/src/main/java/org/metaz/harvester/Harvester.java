@@ -5,9 +5,12 @@ import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.DateMetaData;
 import org.metaz.domain.HierarchicalStructuredTextMetaData;
 import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
+import org.metaz.domain.HtmlTextMetaData;
 import org.metaz.domain.HyperlinkMetaData;
+import org.metaz.domain.MetaData;
 import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
+import org.metaz.domain.RecordAttributeSetter;
 import org.metaz.domain.TextMetaData;
 import org.metaz.repository.Facade;
 import org.metaz.util.MetaZ;
@@ -114,265 +117,182 @@ public class Harvester {
 	 */
 	private boolean parseFile(File f){
 		try{
-		//validate and create document
+			//validate and create document
 			logger.info("start parsing");
-		Document doc = getDom4jDocument(f);
-		logger.info("doc created");
-		//convert to collection of LearningObjects
-		//get and check root element
-		Element root = doc.getRootElement();
-		if (root.getName()=="leerobjecten"){
-			logger.info("before iterating");
-			List<Record> leerobjecten = new Vector<Record>();
-			for (Iterator i = root.elementIterator(); i.hasNext(); )
-			{
-				
-				//get first/next leerobject
-				Element element = (Element) i.next();
-				//create new record from mandatory elements
-				TextMetaData tmdt1= new TextMetaData();
-				tmdt1.setValue(element.element("titel").getText());
-				TextMetaData tmdt2= new TextMetaData();
-				tmdt2.setValue(element.element("bestandsformaat").getText());
-				TextMetaData tmdt3= new TextMetaData();
-				tmdt3.setValue(element.element("didactischeFunctie").getText());
-				TextMetaData tmdt4= new TextMetaData();
-				tmdt4.setValue(element.element("producttype").getText());
-				HyperlinkMetaData hper = new HyperlinkMetaData();
-				hper.setValue(element.attributeValue("URI"));
-				BooleanMetaData bln = new BooleanMetaData();
-				bln.setValue(Boolean.valueOf(element.element("beveiligd").getText()));
-				Record rec = new org.metaz.domain.Record(tmdt1,bln,tmdt2,tmdt3,tmdt4,hper);
-				logger.info("record created" + element.attributeValue("URI"));
-				//next are optional, should be done via iterator
-				try{
-					tmdt1.setValue(element.element("aggregatieniveau").getText());
-					rec.setAggregationLevel(tmdt1);
-					logger.info("aggregatieniveau");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-				}
-				try{
-					tmdt1.setValue(element.element("didactischScenario").getText());
-					rec.setAggregationLevel(tmdt1);
-					logger.info("didactischScenario");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
+			Document doc = getDom4jDocument(f);
+			logger.info("doc created");
+			//convert to collection of LearningObjects
+			//get and check root element
+			Element root = doc.getRootElement();
+			if (root.getName()=="leerobjecten"){
+				logger.info("before iterating");
+				List<Record> leerobjecten = new Vector<Record>();
+				for (Iterator i = root.elementIterator(); i.hasNext(); )
+				{
 					
-				}
-				try{
-					tmdt1.setValue(element.element("competentie").getText());
-					rec.setCompetence(tmdt1);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					tmdt1.setValue(element.element("onderwerp").getText());
-					rec.setSubject(tmdt1);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					tmdt1.setValue(element.element("rechten").getText());
-					rec.setRights(tmdt1);
-					logger.info("rechten");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					tmdt1.setValue(element.element("technischeVereiste").getText());
-					rec.setTechnicalRequirements(tmdt1);
-					logger.info("technischeVereiste");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				DateMetaData dmdt = new DateMetaData();
-				try{
-					Date d = sdf.parse(element.element("datumCreatie").getText());
-					dmdt.setValue(d);
-					rec.setCreationDate(dmdt);
-					logger.info("datumCreatie");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					Date d = sdf.parse(element.element("datumLaatsteWijziging").getText());
-					dmdt.setValue(d);
-					rec.setLastChangedDate(dmdt);
-					logger.info("datumLaatsteWijziging");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-
-				}
-				NumericMetaData nmdt=new NumericMetaData();
-				try{
-					nmdt.setValue(Long.getLong(element.element("bestandsgrootte").getText()));
-					rec.setFileSize(nmdt);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					nmdt.setValue(Long.getLong(element.element("benodigdeTijd").getText()));
-					rec.setRequiredTime(nmdt);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					nmdt.setValue(Long.getLong(element.element("afspeelduur").getText()));
-					rec.setPlayingTime(nmdt);
-					logger.info("afspeelduur");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					tmdt1.setValue(element.element("versie").getText());
-					rec.setVersion(tmdt1);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					tmdt1.setValue(element.element("status").getText());
-					rec.setStatus(tmdt1);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					tmdt1.setValue(element.element("bestandsformaat").getText());
-					rec.setStatus(tmdt1);
-					logger.info("bestandsformaat");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					tmdt1.setValue(element.element("omschrijving").getText());
-					rec.setStatus(tmdt1);
-					logger.info("omschrijving" + tmdt1.getValue());
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					//sleutelwoorden
-					String keywords="";
-					for (Iterator j=element.element("sleutelwoorden").elementIterator();j.hasNext();){
-						Element keyword = (Element) j.next();
-						keywords= keyword.getText() + ";";
-						//.element("sleutelwoord")
-						logger.info(keywords);
+					//get first/next leerobject
+					Element element = (Element) i.next();
+					//create new record from mandatory elements
+					TextMetaData tmdt1= new TextMetaData();
+					tmdt1.setValue(element.element("titel").getText());
+					TextMetaData tmdt2= new TextMetaData();
+					tmdt2.setValue(element.element("bestandsformaat").getText());
+					TextMetaData tmdt3= new TextMetaData();
+					tmdt3.setValue(element.element("didactischeFunctie").getText());
+					TextMetaData tmdt4= new TextMetaData();
+					tmdt4.setValue(element.element("producttype").getText());
+					HyperlinkMetaData hper = new HyperlinkMetaData();
+					hper.setValue(element.attributeValue("URI"));
+					BooleanMetaData bln = new BooleanMetaData();
+					bln.setValue(Boolean.valueOf(element.element("beveiligd").getText()));
+					Record rec = new org.metaz.domain.Record(tmdt1,bln,tmdt2,tmdt3,tmdt4,hper);
+					logger.info("record created" + element.attributeValue("URI"));
+					RecordAttributeSetter recset = new RecordAttributeSetter(rec);
+					try{
+						for (Iterator k=recset.iterator();k.hasNext();){
+							logger.info("in iterator");
+							MetaData metadata = (MetaData)k.next();
+							logger.info("metadata :" + metadata.getMetaDataType() + " - " + metadata.getXMLTagName());
+							logger.info("mandatory :" + metadata.isMandatory());
+							if (!metadata.isMandatory()){
+								logger.info("not mandatory");
+								if (metadata.getMetaDataType().equals("TextMetaData")){
+									try{
+										logger.info("textmetadata");
+										TextMetaData tmdt = new TextMetaData();
+										//sleutelwoorden
+										if (metadata.getName().equals("keywords")){
+											String keywords="";
+											for (Iterator j=element.element("sleutelwoorden").elementIterator();j.hasNext();){
+												Element keyword = (Element) j.next();
+												keywords= keyword.getText() + ";";
+												//.element("sleutelwoord")
+												logger.info(keywords);
+											}
+											tmdt.setValue(keywords);
+										}
+										else if(metadata.getName().equals("roleName")){
+											//rolEnNaam
+											String rolenames="";
+											for (Iterator m=element.element("rolEnNaam").elementIterator();k.hasNext();){
+													Element rolename = (Element) m.next();
+													rolenames= "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
+													logger.info(rolenames);
+											}
+											tmdt.setValue(rolenames);
+										}
+										else {
+											tmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+										}
+										recset.setValue(metadata.getXMLTagName(),tmdt);									
+										logger.info(metadata.getXMLTagName() + " : " + tmdt.getValue().toString());
+									}						
+									catch (Exception ignore){
+										logger.error("here 1:" + ignore.toString());
+									}						
+								}
+								if (metadata.getMetaDataType().equals("BooleanMetaData")){
+									try{
+										logger.info("boolmetadata");
+										BooleanMetaData bmdt = new BooleanMetaData();
+										bmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+										recset.setValue(metadata.getXMLTagName(),bmdt);
+										logger.info(metadata.getXMLTagName());
+									}						
+									catch (Exception ignore){
+										logger.error("here 2:" + ignore.toString());
+									}						
+									
+								}
+								if (metadata.getMetaDataType().equals("HtmlTextMetaData")){
+									try{
+										logger.info("htmlmetadata");
+										HtmlTextMetaData hmdt = new HtmlTextMetaData();
+										hmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+										recset.setValue(metadata.getXMLTagName(),hmdt);
+										logger.info(metadata.getXMLTagName());
+									}						
+									catch (Exception ignore){
+										logger.error("here 3:" + ignore.toString());
+									}						
+									
+								}
+								if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaData")){
+									try{
+										logger.info("hstmetadata");
+										HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData();
+										addNodeRecursive(element.element(metadata.getXMLTagName()).element("hoofdwaarden"), element.element(metadata.getXMLTagName()).element("hoofdwaarden"),hMetaData);
+										recset.setValue(metadata.getXMLTagName(),hMetaData);
+										logger.info(metadata.getXMLTagName());
+									}						
+									catch (Exception ignore){
+										logger.error("here 4:" + ignore.toString());
+									}						
+									
+								}
+								if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaDataSet")){
+									try{
+										logger.info("hstmetadataSet");
+										HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
+										addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),element.element("schooltype").element("hoofdwaarden"),hSet);
+										recset.setValue(metadata.getXMLTagName(),hSet);
+										logger.info(metadata.getXMLTagName());
+									}						
+									catch (Exception ignore){
+										logger.error("here 5:" + ignore.toString());
+									}						
+									
+								}
+								if (metadata.getMetaDataType().equals("HyperlinkMetaData")){
+									try{
+										logger.info("hyperlinkmetadata");
+										HyperlinkMetaData hlmdt = new HyperlinkMetaData();
+										hlmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+										recset.setValue(metadata.getXMLTagName(),hlmdt);
+										logger.info(metadata.getXMLTagName());
+									}						
+									catch (Exception ignore){
+										logger.error("here 6:" + ignore.toString());
+									}						
+									
+								}
+								if (metadata.getMetaDataType().equals("NumericMetaData")){
+									try{
+										logger.info("nummetadata");
+										NumericMetaData nmdt = new NumericMetaData();
+										nmdt.setValue(Long.getLong(element.element(metadata.getXMLTagName()).getText()));
+										recset.setValue(metadata.getXMLTagName(),nmdt);
+										logger.info(metadata.getXMLTagName());
+									}						
+									catch (Exception ignore){
+										logger.error("here 7:" + ignore.toString());
+									}						
+									
+								}
+								if (metadata.getMetaDataType().equals("DateMetaData")){
+									logger.info("datemetadata");
+									SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+									DateMetaData dmdt = new DateMetaData();
+									try{
+										Date d = sdf.parse(element.element(metadata.getXMLTagName()).getText());
+										dmdt.setValue(d);
+										recset.setValue(metadata.getXMLTagName(),dmdt);
+									}
+									catch (Exception ignore){
+										logger.error("here 8:" + ignore.toString());
+										
+									}
+								}
+							}
+						}
 					}
-					tmdt1.setValue(keywords);
-					rec.setKeywords(tmdt1);
-					logger.info("sleutelwoorden");
+					catch (Exception exc){
+						logger.fatal(exc.toString());
+					}			
+					leerobjecten.add(rec);
 				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					//rolEnNaam
-					String rolenames="";
-					for (Iterator k=element.element("rolEnNaam").elementIterator();k.hasNext();){
-							Element rolename = (Element) k.next();
-							rolenames= "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() + "\n";
-							logger.info(rolenames);
-					}
-					tmdt1.setValue(rolenames);
-					rec.setRoleName(tmdt1);
-					logger.info("rolEnNaam");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
-				HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData();
-				try{
-					//beoogdeEindgebruiker
-					addNodeRecursive(element.element("beoogdeEindgebruiker").element("hoofdwaarden"), element.element("beoogdeEindgebruiker").element("hoofdwaarden"),hMetaData);
-					rec.setTargetEndUser(hMetaData);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					//schooltype
-					addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),element.element("schooltype").element("hoofdwaarden"),hSet);
-					rec.setSchoolType(hSet);
-
-					//another possibility, less code but slower
-					//select all waarde nodes within the schooltype node
-					//X-path //schooltype/descendant::waarde "//leerobject[@uri='" + hper.getText() + "']/schooltype//*/waarde"
-					//List list = doc.selectNodes( "//leerobject[@uri='" + hper.getValue() + "']/schooltype//*/waarde");
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-				
-					//vakleergebied
-					hMetaData = new HierarchicalStructuredTextMetaData();
-					addNodeRecursive(element.element("vakleergebied").element("hoofdwaarden"), element.element("vakleergebied").element("hoofdwaarden"),hMetaData);
-					rec.setSchoolDiscipline(hMetaData);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());
-					
-				}
-				try{
-					
-					//beroepssituatie
-					hMetaData = new HierarchicalStructuredTextMetaData();
-					addNodeRecursive(element.element("beroepssituatie").element("hoofdwaarden"),element.element("beroepssituatie").element("hoofdwaarden"),hMetaData);
-					rec.setProfessionalSituation(hMetaData);
-				}
-				catch (Exception ignore){
-					logger.error(ignore.toString());					
-				}
-				
-				leerobjecten.add(rec);
+				MetaZ.getRepositoryFacade().doUpdate(leerobjecten);
 			}
-			MetaZ app = MetaZ.getInstance();
-			Facade facade = app.getRepositoryFacade();
-			facade.doUpdate(leerobjecten);
-		}
-		//
-		// iterate through child elements of root
-		//domain.Record rec;
-		//getRecords(root);
-		//iterate throught the xml
-		//add every learnobject to the collection
-		//release file
-		
-		//call repository interface with collection
 			return true;
 		}
 		catch (Exception ex){
