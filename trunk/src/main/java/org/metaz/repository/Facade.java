@@ -9,7 +9,7 @@ import org.metaz.domain.Record;
  * The public interface for the Repository package.
  * 
  * @authors Jurgen Goelen
- * @version 0.2 
+ * @version 0.3 
  */
 public interface Facade {
         
@@ -31,6 +31,65 @@ public interface Facade {
      *      Update action failed.
      */
     public void doUpdate(List<Record> records) throws Exception; 
+    
+    
+    /**
+     * @return
+     *      Returns a list of unique TargetEndUser values that are 
+     *      stored in the repository. 
+     * @throws Exception
+     */
+    public List getTargetEndUserValues() throws Exception;
+    
+    /**
+     * @return
+     *      Returns a list of unique SchoolType values that are 
+     *      stored in the repository. 
+     * @throws Exception
+     */
+    public List getSchoolTypesValues() throws Exception;
+    
+    
+    /**
+     * @return
+     *      Returns a unique list of SchoolDiscipline values that are 
+     *      stored in the repository. 
+     * @throws Exception
+     */
+    public List getSchoolDisciplineValues() throws Exception;
+        
+    /**
+     * @return
+     *      Returns a list of unique DidacticFunction values that are 
+     *      stored in the repository. 
+     * @throws Exception
+     */
+    public List getDidacticFunctionValues() throws Exception;
+    
+    /**
+     * @return
+     *      Returns a list of unique ProductType values that are 
+     *      stored in the repository. 
+     * @throws Exception
+     */
+    public List getProductTypeValues() throws Exception;
+    
+    /**
+     * @return
+     *      Returns a list of unique ProfessionalSituation values that are 
+     *      stored in the repository. 
+     * @throws Exception
+     */
+    public List getProfessionalSituationValues() throws Exception;
+    
+    /**
+     * @return
+     *      Returns a list of unique Competence values that are 
+     *      stored in the repository. 
+     * @throws Exception
+     */
+    public List getCompetenceValues() throws Exception;
+    
         
     /**
      * Sets the SearchService implementation to be used.

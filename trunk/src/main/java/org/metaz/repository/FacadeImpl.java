@@ -18,6 +18,10 @@ import org.metaz.util.MetaZ;
  * Concrete implementation for the Facade interface.
  * @author Jurgen Goelen
  */
+/**
+ * @author jurgoe
+ *
+ */
 public class FacadeImpl implements Facade {
 
 	//logger instance
@@ -122,5 +126,62 @@ public class FacadeImpl implements Facade {
 	public void setDataService(DataService service) {
 		dataService = service;
 	}
+
+    
+    /* (non-Javadoc)
+     * @see org.metaz.repository.Facade#getTargetEndUserValues()
+     */
+    public List getTargetEndUserValues() throws Exception {
+        List values = dataService.getUniqueFieldValues("targetEndUser.value");
+        return values;
+    }
+
+    /* (non-Javadoc)
+     * @see org.metaz.repository.Facade#getSchoolTypesValues()
+     */
+    public List getSchoolTypesValues() throws Exception {
+        List values = dataService.getUniqueFieldValues("schoolType.value");
+        return values;
+    }
+
+    /* (non-Javadoc)
+     * @see org.metaz.repository.Facade#getSchoolDisciplineValues()
+     */
+    public List getSchoolDisciplineValues() throws Exception {
+        List values = dataService.getUniqueFieldValues("schoolDiscipline.value");
+        return values;
+    }
+
+    /* (non-Javadoc)
+     * @see org.metaz.repository.Facade#getDidacticFunctionValues()
+     */
+    public List getDidacticFunctionValues() throws Exception {
+        List values = dataService.getUniqueFieldValues("didacticFunction.value");
+        return values;
+    }
+
+    /* (non-Javadoc)
+     * @see org.metaz.repository.Facade#getProductTypeValues()
+     */
+    public List getProductTypeValues() throws Exception {
+        List values = dataService.getUniqueFieldValues("productType.value");
+        return values;
+    }
+
+    /* (non-Javadoc)
+     * @see org.metaz.repository.Facade#getProfessionalSituationValues()
+     */
+    public List getProfessionalSituationValues() throws Exception {
+        List values = dataService.getUniqueFieldValues("professionalSituation.value");
+        return values;
+    }
+
+    /* (non-Javadoc)
+     * @see org.metaz.repository.Facade#getCompetenceValues()
+     */
+    public List getCompetenceValues() throws Exception {
+        List values = dataService.getUniqueFieldValues("competence.value");
+        return values;
+    }
 
 }

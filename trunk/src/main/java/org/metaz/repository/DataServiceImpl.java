@@ -114,7 +114,7 @@ public class DataServiceImpl implements DataService {
 		Record rec = null;
 		Session sess = null;
 		try {
-			sess = MetaZ.getInstance().getHibernateSessionFactory()
+			sess = MetaZ.getHibernateSessionFactory()
 					.openSession();
 			rec = (Record) sess.createQuery(
 					"from Record r where r.uri.value = ?").setString(0,
@@ -131,4 +131,36 @@ public class DataServiceImpl implements DataService {
 		return rec;
 	}
 
+    /* (non-Javadoc)
+     * @see org.metaz.repository.DataService#getUniqueValues(java.lang.String)
+     */
+    public List getUniqueFieldValues(String recordField) throws Exception {
+        
+        Session sess = null;
+        List values = null;
+        try {
+            sess = MetaZ.getHibernateSessionFactory()
+                    .openSession();             
+            String query = "select distinct r." 
+                            + recordField 
+                            + " from Record r"                            
+                            + " order by r." + recordField;
+            LOG.debug(query);
+            values = sess.createQuery(query).list();
+        } catch (HibernateException e) {            
+            LOG.error("HibernateException",e);
+            throw e; //rethrow error
+        } finally {            
+            if (sess != null) {
+                sess.close();
+            }            
+        }
+        
+        return values;
+    }
+
+    
+
+    
+    
 }

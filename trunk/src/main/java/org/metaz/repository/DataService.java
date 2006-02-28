@@ -30,5 +30,16 @@ public interface DataService extends RepositoryService {
      * @throws Exception
      */
     public Record getRecord(URI id) throws Exception;
+    
+    
+    /**
+     * Retrieve a list of unique values for a specific record field. 
+     * @param recordField 
+     *      Field name
+     * @return
+     *      Returns a list of unique values. (sorted ascending)
+     * @throws Exception
+     */
+    public List getUniqueFieldValues(String recordField)throws Exception;
            
 }
