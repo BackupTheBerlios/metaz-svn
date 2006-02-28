@@ -1,4 +1,3 @@
-// @author: Falco Paul
 package org.metaz.gui.portal;
 
 import org.metaz.domain.Record;
@@ -11,41 +10,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * DOCUMENT ME!
+ * Handles advanced search page form submits. 
+ * In fact redirects most of the work to the SearchBean...
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public class SearchHandler extends HttpServlet {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Empty HttpServlet override
    */
   public void init() {
 
   }
 
+  // retrieve the Session SearchBean instance, or create one if for some reasons this instance is not available yey
   protected SearchBean getSearchBean(HttpServletRequest req) {
 
-    SearchBean searchBean = (SearchBean) req.getSession().getAttribute("searchBean");
+    SearchBean searchBean = (SearchBean) req.getSession(true).getAttribute(SearchBean.SEARCH_BEAN_SESSION_KEY);
 
-    if (searchBean == null)
+    if (searchBean == null) {
+
       searchBean = new SearchBean();
+      req.getSession().setAttribute(SearchBean.SEARCH_BEAN_SESSION_KEY, searchBean);
+
+    }
 
     return searchBean;
 
   }
 
   /**
-   * DOCUMENT ME!
+   * Forwards handling to post
    *
-   * @param req DOCUMENT ME!
-   * @param res DOCUMENT ME!
+   * @param req request
+   * @param res response
    *
-   * @throws ServletException DOCUMENT ME!
-   * @throws IOException DOCUMENT ME!
+   * @throws ServletException On servlet error
+   * @throws IOException On I/O error
    */
   public void doGet(HttpServletRequest req, HttpServletResponse res)
              throws ServletException,
@@ -57,13 +62,13 @@ public class SearchHandler extends HttpServlet {
   }
 
   /**
-   * DOCUMENT ME!
+   * Forwards hanlding to SearchBean
    *
-   * @param req DOCUMENT ME!
-   * @param res DOCUMENT ME!
+   * @param req request
+   * @param res response
    *
-   * @throws ServletException DOCUMENT ME!
-   * @throws IOException DOCUMENT ME!
+   * @throws ServletException On servlet error
+   * @throws IOException On I/O error
    */
   public void doPost(HttpServletRequest req, HttpServletResponse res)
               throws ServletException,

@@ -22,6 +22,7 @@ public class SearchBean {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
+  public final static String SEARCH_BEAN_SESSION_KEY = "searchBean";
   public final static String SEARCH_PAGE = "search.jsp";
   public final static String ADVANCED_SEARCH_PAGE = "advancedsearch.jsp";
   public final static String RESULTS_PAGE = "searchresults.jsp";
