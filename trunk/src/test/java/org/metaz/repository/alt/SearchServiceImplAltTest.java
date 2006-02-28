@@ -92,18 +92,18 @@ public class SearchServiceImplAltTest extends TestCase
                  didacticFunction1, productType1, uri1);
 
          // optional metadata profession situation
-         //TextMetaData profSit1Level1 = new TextMetaData();
-         //profSit1Level1.setValue("Omgaan met een groep");
+         TextMetaData profSit1Level1 = new TextMetaData();
+         profSit1Level1.setValue("Omgaan met een groep");
 
-         //TextMetaData profSit1Level2 = new TextMetaData();
-         //profSit1Level2.setValue("Leiding geven aan groepsprocessen");
+         TextMetaData profSit1Level2 = new TextMetaData();
+         profSit1Level2.setValue("Leiding geven aan groepsprocessen");
 
          HierarchicalStructuredTextMetaData hstmd1 = new HierarchicalStructuredTextMetaData();
-         hstmd1.addChild("Omgaan met een groep");
-         hstmd1.addChild("Leiding geven aan groepsprocessen");
+         hstmd1.addChild(profSit1Level1);
+         hstmd1.addChild(profSit1Level2);
          rec1.setProfessionalSituation(hstmd1);
 
-         /* 
+          
          // optional metadata school type
          TextMetaData vo = new TextMetaData();
          vo.setValue("Voortgezet onderwijs");
@@ -118,19 +118,19 @@ public class SearchServiceImplAltTest extends TestCase
          vmbo.setValue("VMBO");
 
          HierarchicalStructuredTextMetaData hstmd2 = new HierarchicalStructuredTextMetaData();
-         hstmd2.addChild((String)vo.getValue());
-         hstmd2.addChild((String)havo.getValue());
+         hstmd2.addChild(vo);
+         hstmd2.addChild(havo);
 
          HierarchicalStructuredTextMetaData hstmd3 = new HierarchicalStructuredTextMetaData();
-         hstmd3.addChild((String)vo.getValue());
-         hstmd3.addChild((String)vbo.getValue());
-         hstmd3.addChild((String)vmbo.getValue());
+         hstmd3.addChild(vo);
+         hstmd3.addChild(vbo);
+         hstmd3.addChild(vmbo);
 
          HierarchicalStructuredTextMetaDataSet hstmds1 = new HierarchicalStructuredTextMetaDataSet();
-         hstmds1.addHierarchy((String)hstmd2.getValue());
-         hstmds1.addHierarchy((String)hstmd3.getValue());
+         hstmds1.addHierarchy(hstmd2);
+         hstmds1.addHierarchy(hstmd3);
          rec1.setSchoolType(hstmds1);
-         */
+         
 
          // optional metadata keywords
          TextMetaData keywords1 = new TextMetaData();
@@ -203,42 +203,42 @@ public class SearchServiceImplAltTest extends TestCase
 
          //optional metadata targetEndUser
          HierarchicalStructuredTextMetaData targetEndUser2 = new HierarchicalStructuredTextMetaData();
-         //TextMetaData docent = new TextMetaData();
-         //docent.setValue("docent");
-         targetEndUser2.addChild("docent");
+         TextMetaData docent = new TextMetaData();
+         docent.setValue("docent");
+         targetEndUser2.addChild(docent);
          rec2.setTargetEndUser(targetEndUser2);
 
-         /*
+         
          //optional metadata schooltype
          HierarchicalStructuredTextMetaDataSet schoolType = new HierarchicalStructuredTextMetaDataSet();
          HierarchicalStructuredTextMetaData schoolType1 = new HierarchicalStructuredTextMetaData();
          TextMetaData so = new TextMetaData();
          so.setValue("Speciaal onderwijs");
-         schoolType1.addChild((String)so.getValue());
-         schoolType.addHierarchy((String)schoolType1.getValue());
+         schoolType1.addChild(so);
+         schoolType.addHierarchy(schoolType1);
          rec2.setSchoolType(schoolType);
-         */
+         
 
          //optional metadata school discipline
          HierarchicalStructuredTextMetaData schoolDiscipline = new HierarchicalStructuredTextMetaData();
-         //TextMetaData nl = new TextMetaData();
-         //nl.setValue("Nederlands");
+         TextMetaData nl = new TextMetaData();
+         nl.setValue("Nederlands");
 
-         //TextMetaData nl_anders = new TextMetaData();
-         //nl_anders.setValue("Nederlands voor anderstaligen");
-         schoolDiscipline.addChild("Nederlands");
-         schoolDiscipline.addChild("Nederlands voor anderstaligen");
+         TextMetaData nl_anders = new TextMetaData();
+         nl_anders.setValue("Nederlands voor anderstaligen");
+         schoolDiscipline.addChild(nl);
+         schoolDiscipline.addChild(nl_anders);
          rec2.setSchoolDiscipline(schoolDiscipline);
 
          //optional metadata professional situation
          HierarchicalStructuredTextMetaData profSit2 = new HierarchicalStructuredTextMetaData();
-         //TextMetaData sit1 = new TextMetaData();
-         //sit1.setValue("Omgaan met verschillen");
+         TextMetaData sit1 = new TextMetaData();
+         sit1.setValue("Omgaan met verschillen");
 
-         //TextMetaData sit2 = new TextMetaData();
-         //sit2.setValue("omgaan met verschillen in taal, leerstijl, motivatie en tempo");
-         profSit2.addChild("Omgaan met verschillen");
-         profSit2.addChild("Omgaan met verschillen in taal, leerstijl, motivatie en tempo");
+         TextMetaData sit2 = new TextMetaData();
+         sit2.setValue("omgaan met verschillen in taal, leerstijl, motivatie en tempo");
+         profSit2.addChild(sit1);
+         profSit2.addChild(sit2);
          rec2.setProfessionalSituation(profSit2);
 
          //optional metadata competence

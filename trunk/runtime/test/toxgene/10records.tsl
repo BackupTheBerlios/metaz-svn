@@ -73,7 +73,7 @@
 		</element>
 	</tox-list>
 
-	<tox-document name="test/toxgene/output/10Records">
+	<tox-document name="test/toxgene/output/10records">
 		<element name="leerobjecten" minOccurs="1" maxOccurs="1">
 			<complexType>
 				<element name="leerobject" minOccurs="10" maxOccurs="10">
