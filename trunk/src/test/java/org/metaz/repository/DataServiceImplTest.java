@@ -100,6 +100,8 @@ public class DataServiceImplTest extends TestCase {
 		dataService.doUpdate(l);
 	}
 
+    
+        
 	public void testGetRecord() throws Exception{
 		URI uri = new URI("http://www.ou.nl/stories/ruuddemoor.pdf");
 		Record rec = dataService.getRecord(uri);
@@ -110,6 +112,21 @@ public class DataServiceImplTest extends TestCase {
 		assertEquals("Wrong value", "http://www.ou.nl/stories/ruuddemoor.pdf", rec.getUri().getValue());
 	}
 	
+    public void testGetUniqueFieldValues() throws Exception {
+        
+        
+        List values = dataService.getUniqueFieldValues("didacticFunction.value");
+        assertNotNull(values);
+        assertEquals(1,values.size());
+        
+        values = dataService.getUniqueFieldValues("productType.value");
+        assertNotNull(values);
+        assertEquals(1,values.size());
+        
+        
+    }
+    
+    
 	public void testDoPurge() throws Exception {
 		dataService.doPurge();
 		URI uri = new URI("http://www.ou.nl/stories/ruuddemoor.pdf");
@@ -117,4 +134,7 @@ public class DataServiceImplTest extends TestCase {
 		assertNull(rec);
 	}
 
+    
+    
+    
 }
