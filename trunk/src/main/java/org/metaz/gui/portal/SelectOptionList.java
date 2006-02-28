@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-// @author: Falco Paul
 /**
- * DOCUMENT ME!
- *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
   */
 public final class SelectOptionList extends ArrayList<SelectOption> {
@@ -18,11 +15,9 @@ public final class SelectOptionList extends ArrayList<SelectOption> {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * @param options a list of options
    *
-   * @param options DOCUMENT ME!
-   *
-   * @return DOCUMENT ME!
+   * @return HTML representation of the given options
    */
   public static String toHtml(SelectOptionList options) {
 
@@ -42,9 +37,9 @@ public final class SelectOptionList extends ArrayList<SelectOption> {
   }
 
   /**
-   * DOCUMENT ME!
+   * Return HTML representation of this object
    *
-   * @return DOCUMENT ME!
+   * @return HTML representation
    */
   public String toHtml() {
 
@@ -52,13 +47,12 @@ public final class SelectOptionList extends ArrayList<SelectOption> {
 
   }
 
-  // This method is usefull for obtaining a selected options if
   /**
-   * DOCUMENT ME!
+   * Find the selected option (use this method for HTML "select one" dropdowns)
    *
-   * @param selectedValue DOCUMENT ME!
+   * @param selectedValue selected value (usually obtained from HTML form)
    *
-   * @return DOCUMENT ME!
+   * @return The selected option
    */
   public SelectOption getOption(String selectedValue) {
 
@@ -82,13 +76,12 @@ public final class SelectOptionList extends ArrayList<SelectOption> {
 
   }
 
-  // This method is usefull for obtaining all selected options if
   /**
-   * DOCUMENT ME!
+   * Find all selected options (use this method for HTML "select many" blocks)
    *
-   * @param selectedValues DOCUMENT ME!
+   * @param selectedValues selected values (usually obtained from HTML form)
    *
-   * @return DOCUMENT ME!
+   * @return a list of all the selected options
    */
   public SelectOptionList getOptions(String[] selectedValues) {
 
@@ -118,11 +111,10 @@ public final class SelectOptionList extends ArrayList<SelectOption> {
 
   }
 
-  // Sets all "selected" values of the list to "value" (true/false)
   /**
-   * DOCUMENT ME!
+   * Sets the "selected" value to a certain state
    *
-   * @param value DOCUMENT ME!
+   * @param value state you which to set
    */
   public void setSelected(boolean value) {
 

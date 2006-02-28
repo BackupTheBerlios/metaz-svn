@@ -2,11 +2,10 @@ package org.metaz.gui.portal;
 
 import java.util.UUID;
 
-// @author: Falco Paul
 /**
  * DOCUMENT ME!
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
   */
 public final class SelectOption {
@@ -56,11 +55,11 @@ public final class SelectOption {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Returns a HMTL representation of an option
    *
-   * @param option DOCUMENT ME!
+   * @param option option to HTML-ify
    *
-   * @return DOCUMENT ME!
+   * @return the HTML string
    */
   public static String toHtml(SelectOption option) {
 
@@ -78,9 +77,10 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Wrapper for toHtml(SelectOption option)
    *
-   * @return DOCUMENT ME!
+   * @return HMTL representation of the invoking instance
+   *
    */
   public String toHtml() {
 
@@ -89,11 +89,11 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Generates a "default" HTML select option value
    *
-   * @param description DOCUMENT ME!
+   * @param description Description to base default value on
    *
-   * @return DOCUMENT ME!
+   * @return a "value" for a HTML select option
    */
   public static String defaultValue(String description) {
 
@@ -102,9 +102,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Generates a nice String representation
    *
-   * @return DOCUMENT ME!
+   * @return String representation
    */
   public String toString() {
 
@@ -113,9 +113,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Setter for selected
    *
-   * @param selected DOCUMENT ME!
+   * @param selected State
    */
   public void setSelected(boolean selected) {
 
@@ -124,9 +124,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Getter for selected
    *
-   * @return DOCUMENT ME!
+   * @return state
    */
   public boolean isSelected() {
 
@@ -135,9 +135,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Getter for value
    *
-   * @param value DOCUMENT ME!
+   * @param value value
    */
   public void setValue(String value) {
 
@@ -146,9 +146,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Setter for value
    *
-   * @return DOCUMENT ME!
+   * @return value
    */
   public String getValue() {
 
@@ -157,9 +157,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Setter for description
    *
-   * @param description DOCUMENT ME!
+   * @param description description
    */
   public void setDescription(String description) {
 
@@ -168,9 +168,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Getter for description
    *
-   * @return DOCUMENT ME!
+   * @return description
    */
   public String getDescription() {
 
@@ -179,9 +179,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Setter for additional (and optional) payload object
    *
-   * @param object DOCUMENT ME!
+   * @param object payload object
    */
   public void setObject(Object object) {
 
@@ -190,9 +190,9 @@ public final class SelectOption {
   }
 
   /**
-   * DOCUMENT ME!
+   * Getter for additional (and optional) payload object
    *
-   * @return DOCUMENT ME!
+   * @return payload object
    */
   public Object getObject() {
 
