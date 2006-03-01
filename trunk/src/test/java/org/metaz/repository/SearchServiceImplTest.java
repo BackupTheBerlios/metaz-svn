@@ -403,5 +403,6 @@ public class SearchServiceImplTest extends TestCase
         assertEquals(1, ((List) ssi.doSearch("\"Surinaamse mannen\"")).size()); //phrase
         assertEquals(1,
             ((List) ssi.doSearch("(monarchie OR uitzending) AND nederlands")).size()); //grouping
+        assertEquals(3,((List)ssi.doSearch(MetaData.DIDACTICFUNCTION + FIELDDELIMITER + "\"Leestekst%Oefening\"")).size()); // multiselection search
     } // end testDoSearch()
 } // end SearchServiceImplTest

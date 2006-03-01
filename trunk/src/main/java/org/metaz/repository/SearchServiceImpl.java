@@ -44,6 +44,7 @@ public class SearchServiceImpl
   private static final String INDEXPATH = "repository/searchservice/searchindex";
   private static final String TERMDELIMITER = ":";
   private static final String WHITESPACE = " ";
+  private static final String VALUESEPARATOR = "%";
   private static final char   DOUBLEQUOTE = '\"';
   private static final String EMPTYSTRING = "";
   private static final String STEMDICT = "repository/searchservice/wordlists/wordstem.txt";
@@ -162,6 +163,7 @@ public class SearchServiceImpl
    * *  Clause ::= [&lt;FULLTEXTSEARCHPHRASE&gt;] || [&lt;TERM&gt;:&lt;VALUE&gt;]+</code><br>
    * <code>&lt;FULLTEXTSEARCHPHRASE&gt;</code> should always precede term-value combinations and shall not contain any
    * semicolon.</p>
+   *  <p>NOTE: In case of multiple selection the values should be seperated by the character '%".</p>
    *
    * @param query the search query
    *
@@ -241,6 +243,7 @@ public class SearchServiceImpl
   /**
    * Returns Records that match the specified query<p>The query is a hashmap containing the term-value
    * combinations to search for.</p>
+   *  <p>NOTE: In case of multiple selection the values should be seperated by the character '%".</p>
    *
    * @param hmquery the search query hashmap
    *
@@ -260,8 +263,7 @@ public class SearchServiceImpl
 
         Query fullTextQuery = QueryParser.parse(fullText, RecordDocument.MERGED, analyzer);
 
-        q.add(fullTextQuery, true, false); //logische OR
-                                           //q.add(fullTextQuery, false, true); //logische AND
+        q.add(fullTextQuery, true, false); //logical AND
 
       } // end if
 
@@ -271,10 +273,19 @@ public class SearchServiceImpl
 
         if (keywordValue != null) {
 
-          Term  keyword = new Term(keywords[i], keywordValue);
-          Query keywordQuery = new TermQuery(keyword);
+          String[] terms = keywordValue.split(VALUESEPARATOR);
 
-          q.add(keywordQuery, false, false);
+          for (int j = 0; j < terms.length; j++) {
+
+            Term  keyword = new Term(keywords[i], terms[j]);
+            Query keywordQuery = new TermQuery(keyword);
+
+            q.add(keywordQuery, false, false); // logical OR
+                                               /*
+               q.add(keywordQuery, true, false); // logical AND
+             */
+
+          }
 
         } // end if
 

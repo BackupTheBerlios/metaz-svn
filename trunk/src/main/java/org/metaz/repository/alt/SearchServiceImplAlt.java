@@ -59,6 +59,7 @@ public class SearchServiceImplAlt
   private static final String INDEXPATH = "repository/searchservice/searchindex";
   private static final String TERMDELIMITER = ":";
   private static final String WHITESPACE = " ";
+  private static final String VALUESEPARATOR = "%";
   private static final char   DOUBLEQUOTE = '\"';
   private static final String EMPTYSTRING = "";
   private static final String STEMDICT = "repository/searchservice/wordlists/wordstem.txt";
@@ -284,20 +285,29 @@ public class SearchServiceImplAlt
 
       } // end if
 
-      for (int i = 0; i < keywords.length; i++) {
+          for (int i = 0; i < keywords.length; i++) {
 
-        String keywordValue = (String) hmquery.get(keywords[i]);
+            String keywordValue = (String) hmquery.get(keywords[i]);
 
-        if (keywordValue != null) {
+            if (keywordValue != null) {
 
-          Term  keyword = new Term(keywords[i], keywordValue);
-          Query keywordQuery = new TermQuery(keyword);
+              String[] terms = keywordValue.split(VALUESEPARATOR);
 
-          q.add(keywordQuery, false, false);
+              for (int j = 0; j < terms.length; j++) {
 
-        } // end if
+                Term  keyword = new Term(keywords[i], terms[j]);
+                Query keywordQuery = new TermQuery(keyword);
 
-      } // end for
+                q.add(keywordQuery, false, false); // logical OR
+                                                   /*
+                   q.add(keywordQuery, true, false); // logical AND
+                 */
+
+              }
+
+            } // end if
+
+          } // end for
 
       logger.info("Searching for: " + q.toString());
 
