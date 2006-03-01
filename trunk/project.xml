@@ -196,6 +196,9 @@
          <version>1.2.8</version>
          <url>http://logging.apache.org/log4j/docs/</url>
          <type>jar</type>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
       </dependency>
       <dependency>
          <groupId>lucene</groupId>
@@ -252,6 +255,9 @@
          <version>1.0.4</version>
          <url>http://jakarta.apache.org/commons/logging/</url>
          <type>jar</type>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
       </dependency>
       <dependency>
          <groupId>commons-collections</groupId>
@@ -259,6 +265,9 @@
          <version>2.1.1</version>
          <url>http://jakarta.apache.org/commons/collections/</url>
          <type>jar</type>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
       </dependency>
       <dependency>
          <groupId>commons-beanutils</groupId>
