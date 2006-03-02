@@ -25,7 +25,7 @@
 <body background="images/binocs.jpg">
 <table width="100%" border="0" cellspacing="0">
   <tr>
-    <td bgcolor="#FF0000"><center>
+    <td bgcolor="#FFFFFF"><center>
         <br/>
         <ul id="tablist">
           <li><a class="current" href="simple.jsp" title="Zoeken naar leerobjecten">Eenvoudig zoeken</a></li>
@@ -34,7 +34,7 @@
           <li><a href="info.jsp" title="Informatie over deze portal en het Rdmc">Informatie</a></li>
           <li><a href="http://www.google.nl" title="Naar google">Google</a></li>
         </ul>
-      </center></td>
+    </center></td>
   </tr>
 </table>
 <br/>

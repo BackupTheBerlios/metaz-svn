@@ -5,12 +5,12 @@
 >
 <table width="100%" border="0" cellspacing="0">
   <tr>
-    <td bgcolor="#FF0000"><center>
+    <td bgcolor="#FFFFFF"><center>
         <br/>
         <ul id="tablist">
           <portal:PortalTab/>
         </ul>
-      </center></td>
+    </center></td>
   </tr>
 </table>
 <table width="100%" border="0" cellspacing="0">
