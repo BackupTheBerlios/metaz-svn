@@ -13,7 +13,7 @@ public class HierarchicalStructuredTextMetaDataSet extends MetaData {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  private Set<String> value;
+  private Set value;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ public class HierarchicalStructuredTextMetaDataSet extends MetaData {
    */
   public HierarchicalStructuredTextMetaDataSet() {
 
-    value = new HashSet<String>();
+    value = new HashSet();
 
   } // end HierarchicalStructuredTextMetaDataSet()
 
@@ -48,7 +48,7 @@ public class HierarchicalStructuredTextMetaDataSet extends MetaData {
   @Override
   public void setValue(Object value) {
 
-    this.value = (Set<String>) value;
+    this.value = (Set) value;
 
   } // end setValue()
 
@@ -59,7 +59,7 @@ public class HierarchicalStructuredTextMetaDataSet extends MetaData {
    */
   public void addHierarchy(HierarchicalStructuredTextMetaData hierarchy) {
 
-    value.add(hierarchy.toString());
+    value.add(hierarchy);
 
   } // end addHierarchy()
 
