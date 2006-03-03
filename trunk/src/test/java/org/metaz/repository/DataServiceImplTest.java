@@ -84,11 +84,11 @@ public class DataServiceImplTest extends TestCase {
 		hierStrucText.setName("professionalSituation");
 		
 		HierarchicalStructuredTextMetaDataSet hierStrucSet = new HierarchicalStructuredTextMetaDataSet();
-		Set<String> setValues = new HashSet<String>();
+		/*Set<String> setValues = new HashSet<String>();
 		setValues.add("aap");
 		setValues.add("noot");
-		setValues.add("mies");
-		hierStrucSet.setValue(setValues);
+		setValues.add("mies");*/
+		hierStrucSet.addHierarchy(hierStrucText);
 		hierStrucSet.setName("schoolTypes");
 
 		Record rec = new Record(title, secured, fileFormat, didacticalFunction,
@@ -107,9 +107,13 @@ public class DataServiceImplTest extends TestCase {
 		Record rec = dataService.getRecord(uri);
 		assertNotNull(rec);
 		MetaData m = rec.getUri();
-		assertNotNull(m);
-		// TODO: [EJS] figure out how to deal with detachment after session closed.
+		assertNotNull(m);                               
 		assertEquals("Wrong value", "http://www.ou.nl/stories/ruuddemoor.pdf", rec.getUri().getValue());
+        
+        Set set = (Set)rec.getSchoolType().getValue();
+        for(Object s:set){            
+            assertEquals("Wrong value","/aap/noot/mies",((HierarchicalStructuredTextMetaData)s).toString());
+        }                
 	}
 	
     public void testGetUniqueFieldValues() throws Exception {
