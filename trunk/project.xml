@@ -371,6 +371,33 @@
 		   </properties>
          <type>jar</type>
       </dependency>
+	   <!-- dependencies to be found in metaz maven repo 
+		    All libs are versioned 1.0 -->
+	   <dependency>
+         <groupId>jta</groupId>
+         <artifactId>jta</artifactId>
+         <version>1.0</version>
+         <type>jar</type>
+      </dependency>
+	   <dependency>
+         <groupId>lucene-nl</groupId>
+         <artifactId>lucene-nl</artifactId>
+         <version>1.0</version>
+         <type>jar</type>
+      </dependency>
+	   <dependency>
+         <groupId>toxgene</groupId>
+         <artifactId>toxgene</artifactId>
+         <version>1.0</version>
+         <type>jar</type>
+      </dependency>
+	   <dependency>
+		   <!-- originally : js-1.5R4.1.jar -->
+         <groupId>js</groupId>
+         <artifactId>js</artifactId>
+         <version>1.0</version>
+         <type>jar</type>
+      </dependency>
    </dependencies>
    <!-- build information for the project -->
    <build>
