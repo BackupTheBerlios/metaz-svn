@@ -1,9 +1,11 @@
 <rol_list>
 <rol>auteur</rol>
+<rol>co-auteur</rol>
 <rol>acteur</rol>
 <rol>regisseur</rol>
 <rol>producer</rol>
 <rol>uitvoerder</rol>
 <rol>spreker</rol>
+<rol>eindverantwoordelijke</rol>
 <rol></rol>
 </rol_list>

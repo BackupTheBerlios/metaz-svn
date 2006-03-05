@@ -1,67 +1,378 @@
 <schooltype_list>
    <schooltype>
-      <niveau1>Pre-primair onderwijs</niveau1>
-      <niveau2>Peuter onderwijs</niveau2>
-      <niveau3>Peuterspeelzaal</niveau3>
+      <niveau1>Pre primair onderwijs</niveau1>
+      <niveau2>kinderopvang</niveau2>
+      <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Primair onderwijs</niveau1>
-      <niveau2>Speciaal onderwijs</niveau2>
-      <niveau3>SMOK</niveau3>
+      <niveau2>Onderbouw</niveau2>
+      <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Primair onderwijs</niveau1>
+      <niveau2>Middenbouw</niveau2>
+      <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Primair onderwijs</niveau1>
+      <niveau2>Bovenbouw</niveau2>
+      <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Voortgezet onderwijs</niveau1>
-      <niveau2>Speciaal voortgezet onderwijs</niveau2>
-      <niveau3>LOM</niveau3>
+      <niveau2>HAVO</niveau2>
+      <niveau3>HAVO eerste fase</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Voortgezet onderwijs</niveau1>
-      <niveau2>Algemeen</niveau2>
-      <niveau3>HAVO</niveau3>
+      <niveau2>HAVO</niveau2>
+      <niveau3>HAVO tweede fase</niveau3>
+      <niveau4>Profiel cultuur en maatschappij</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Voortgezet onderwijs</niveau1>
-      <niveau2>Wetenschappelijk</niveau2>
-      <niveau3>VWO</niveau3>
+      <niveau2>HAVO</niveau2>
+      <niveau3>HAVO tweede fase</niveau3>
+      <niveau4>Profiel economie en maatschappij</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Voortgezet onderwijs</niveau1>
-      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
-      <niveau3>LBO</niveau3>
+      <niveau2>HAVO</niveau2>
+      <niveau3>HAVO tweede fase</niveau3>
+      <niveau4>Profiel natuur en gezondheid</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>HAVO</niveau2>
+      <niveau3>HAVO tweede fase</niveau3>
+      <niveau4>Profiel natuur en techniek</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>VWO</niveau2>
+      <niveau3>VWO eerste fase</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>VWO</niveau2>
+      <niveau3>VWO tweede fase</niveau3>
+      <niveau4>Profiel cultuur en maatschappij</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>VWO</niveau2>
+      <niveau3>VWO tweede fase</niveau3>
+      <niveau4>Profiel economie en maatschappij</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>VWO</niveau2>
+      <niveau3>VWO tweede fase</niveau3>
+      <niveau4>Profiel natuur en gezondheid</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>VWO</niveau2>
+      <niveau3>VWO tweede fase</niveau3>
+      <niveau4>Profiel natuur en techniek</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Voortgezet onderwijs</niveau1>
       <niveau2>Voorbereidend beroepsonderwijs</niveau2>
       <niveau3>VMBO</niveau3>
-   </schooltype>
-   <schooltype>
-      <niveau1>Voortgezet onderwijs </niveau1>
-      <niveau2>VBO</niveau2>
-      <niveau3>Lwoo</niveau3>
+      <niveau4>VMBO eerste fase</niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Voortgezet onderwijs</niveau1>
       <niveau2>Voorbereidend beroepsonderwijs</niveau2>
-      <niveau3>Praktijk onderwijs</niveau3>
+      <niveau3>VMBO</niveau3>
+      <niveau4>VMBO tweede fase</niveau4>
+      <niveau5>Sectoren</niveau5>
+      <niveau6>Techniek</niveau6>
    </schooltype>
    <schooltype>
-      <niveau1>Universitair onderwijs</niveau1>
-      <niveau2>Technisch</niveau2>
-      <niveau3>TU</niveau3>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>VMBO</niveau3>
+      <niveau4>VMBO tweede fase</niveau4>
+      <niveau5>Sectoren</niveau5>
+      <niveau6>Zorg en welzijn</niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>VMBO</niveau3>
+      <niveau4>VMBO tweede fase</niveau4>
+      <niveau5>Sectoren</niveau5>
+      <niveau6>Economie</niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>VMBO</niveau3>
+      <niveau4>VMBO tweede fase</niveau4>
+      <niveau5>Sectoren</niveau5>
+      <niveau6>Landbouw</niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>VMBO</niveau3>
+      <niveau4>VMBO tweede fase</niveau4>
+      <niveau5>Leerwegen</niveau5>
+      <niveau6>theoretisch</niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>VMBO</niveau3>
+      <niveau4>VMBO tweede fase</niveau4>
+      <niveau5>Leerwegen</niveau5>
+      <niveau6>gemengd</niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>VMBO</niveau3>
+      <niveau4>VMBO tweede fase</niveau4>
+      <niveau5>Leerwegen</niveau5>
+      <niveau6>kaderberoepsgericht</niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>VMBO tweede fase</niveau3>
+      <niveau4>Leerwegen</niveau4>
+      <niveau5>basisberoepsgericht</niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Voorbereidend beroepsonderwijs</niveau2>
+      <niveau3>Lwoo (leerwegondersteunend onderwijs)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Voortgezet onderwijs</niveau1>
+      <niveau2>Praktijkonderwijs</niveau2>
+      <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>BVE</niveau1>
+      <niveau2>Middelbaar beroepsonderwijs</niveau2>
+      <niveau3>BOL (beroepsopleidende leerweg)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>BVE</niveau1>
+      <niveau2>Middelbaar beroepsonderwijs</niveau2>
+      <niveau3>BBL (beroepsbegeleidende leerweg)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>BVE</niveau1>
+      <niveau2>(Volwassenen)educatie</niveau2>
+      <niveau3>Voortgezet algemeen volwassenenonderwijs (vavo)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>BVE</niveau1>
+      <niveau2>(Volwassenen)educatie</niveau2>
+      <niveau3>Breed maatschappelijk functioneren</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>BVE</niveau1>
+      <niveau2>(Volwassenen)educatie</niveau2>
+      <niveau3>Nederlands als tweede taal</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>BVE</niveau1>
+      <niveau2>(Volwassenen)educatie</niveau2>
+      <niveau3>Sociale redzaamheid</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Hoger onderwijs</niveau1>
-      <niveau2>Technisch</niveau2>
-      <niveau3>HIO</niveau3>
+      <niveau2>HBO</niveau2>
+      <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1>Hoger onderwijs</niveau1>
-      <niveau2>Beroeps</niveau2>
-      <niveau3>HBO</niveau3>
+      <niveau2>WO</niveau2>
+      <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal basisonderwijs</niveau2>
+      <niveau3>Leer- en opvoedingsmoeilijkheden (lom)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal basisonderwijs</niveau2>
+      <niveau3>Moeilijk lerende kinderen (mlk)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal basisonderwijs</niveau2>
+      <niveau3>In hun ontwikkeling bedreigde kleuters (iobk)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal voortgezet onderwijs</niveau2>
+      <niveau3>Leer- en opvoedingsmoeilijkheden (lom)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal voortgezet onderwijs</niveau2>
+      <niveau3>Moeilijk lerende kinderen (mlk)</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal onderwijs</niveau2>
+      <niveau3>Cluster 1: Slechtziend</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal onderwijs</niveau2>
+      <niveau3>Cluster 2: Doof / Spraakmoeilijkheden</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal onderwijs</niveau2>
+      <niveau3>Cluster 3: Motorisch / zeer moeilijk lerende kinderen (zmlk) / langdurig zieke kinderen (lzk) met een lichamelijk handicap</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Speciaal onderwijs</niveau2>
+      <niveau3>Cluster 4: Zeer moeilijk opvoedbare kinderen (zmok) / langdurig zieke kinderen (lzk) zonder een lichamelijk handicap</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Voortgezet speciaal onderwijs</niveau2>
+      <niveau3>Cluster 1: Slechtziend</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Voortgezet speciaal onderwijs</niveau2>
+      <niveau3>Cluster 2: Doof / Spraakmoeilijkheden</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Voortgezet speciaal onderwijs</niveau2>
+      <niveau3>Cluster 3: Motorisch / zeer moeilijk lerende kinderen (zmlk) / langdurig zieke kinderen (lzk) met een lichamelijk handicap</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
+   </schooltype>
+   <schooltype>
+      <niveau1>Speciaal onderwijs</niveau1>
+      <niveau2>Voortgezet speciaal onderwijs</niveau2>
+      <niveau3>Cluster 4: Zeer moeilijk opvoedbare kinderen (zmok) / langdurig zieke kinderen (lzk) zonder een lichamelijk handicap</niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
    <schooltype>
       <niveau1></niveau1>
       <niveau2></niveau2>
       <niveau3></niveau3>
+      <niveau4></niveau4>
+      <niveau5></niveau5>
+      <niveau6></niveau6>
    </schooltype>
 </schooltype_list>

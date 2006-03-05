@@ -1,10 +1,8 @@
 <status_list>
-<status>concept</status>
-<status>ter review</status>
-<status>alfa</status>
-<status>beta</status>
-<status>RFC</status>
-<status>nieuw</status>
-<status>gereed</status>
+<status>In ontwikkeling</status>
+<status>Gereed voor validatie</status>
+<status>Gevalideerd voor intern (her)gebruik</status>
+<status>Gevalideerd voor extern (her)gebruik</status>
+<status>Niet meer courant</status>
 <status></status>
 </status_list>
