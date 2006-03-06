@@ -44,7 +44,7 @@ public class SearchServiceImpl
   private static final String INDEXPATH = "repository/searchservice/searchindex";
   private static final String TERMDELIMITER = ":";
   private static final String WHITESPACE = " ";
-  private static final String VALUESEPARATOR = "%%";
+  private static final String VALUESEPARATOR = "%";
   private static final char   DOUBLEQUOTE = '\"';
   private static final String EMPTYSTRING = "";
   private static final String STEMDICT = "repository/searchservice/wordlists/wordstem.txt";
@@ -273,10 +273,14 @@ public class SearchServiceImpl
 
         if (keywordValue != null) {
 
+          keywordValue = keywordValue.replaceAll("%%","temporaryvalue");
+          
           String[] terms = keywordValue.split(VALUESEPARATOR);
 
           for (int j = 0; j < terms.length; j++) {
 
+            terms[j] = ((String)terms[j]).replaceAll("temporaryvalue","%");
+                    
             Term  keyword = new Term(keywords[i], terms[j]);
             Query keywordQuery = new TermQuery(keyword);
 
