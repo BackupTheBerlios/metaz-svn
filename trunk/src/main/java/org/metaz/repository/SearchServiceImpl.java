@@ -44,7 +44,7 @@ public class SearchServiceImpl
   private static final String INDEXPATH = "repository/searchservice/searchindex";
   private static final String TERMDELIMITER = ":";
   private static final String WHITESPACE = " ";
-  private static final String VALUESEPARATOR = "%";
+  private static final String VALUESEPARATOR = "%%";
   private static final char   DOUBLEQUOTE = '\"';
   private static final String EMPTYSTRING = "";
   private static final String STEMDICT = "repository/searchservice/wordlists/wordstem.txt";
