@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * DOCUMENT ME!
+ * The class RecordAttributeSetter is used to collect attributes around record metadata attributes so 
+ * it can be used to iterate through the collection of record attributes
+ * and retrieve metadata on the attributes
  *
- * @author $author$
- * @version $Revision$
+ * @author Lars Oosterloo
+ * @version 1.0
   */
 public class RecordAttributeSetter {
 
@@ -78,7 +80,6 @@ public class RecordAttributeSetter {
   public Iterator iterator() {
 
     if (recordMetadata.isEmpty()) {
-
       title = new TextMetaData();
       title.setMandatory(true);
       title.setXMLTagName(MetaData.TITLE);
@@ -94,7 +95,7 @@ public class RecordAttributeSetter {
       description = new HtmlTextMetaData();
       description.setXMLTagName(MetaData.DESCRIPTION);
       description.setName("description");
-      description.setMetaDataType("HtmlTextMetaData");
+      description.setMetaDataType("HtmlTextMetaData ");
       description.setOptional(true);
       recordMetadata.add(description);
       keywords = new TextMetaData();
@@ -235,7 +236,6 @@ public class RecordAttributeSetter {
       roleName.setMetaDataType("TextMetaData");
       roleName.setOptional(true);
       recordMetadata.add(roleName);
-
     } // end if
 
     return recordMetadata.iterator();
