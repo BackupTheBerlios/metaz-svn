@@ -9,7 +9,11 @@ package org.metaz.util;
  * Equals.test(this.property_2, that.property_2) && .. Equals.test(this.property_x, that.property_x) &&
  * Equals.test(this.property_y, that.property_y) && Arrays.equals(this.property_z, that.property_z); } Note: use
  * Array.equals() to test for array field equality
+ * 
+ * @author author Falco Paul, Open University Netherlands, OTO Meta/Z project
+ * @version $Revision$
  */
+ 
 public final class Equals {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
