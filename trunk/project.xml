@@ -366,6 +366,7 @@
          <groupId>displaytag</groupId>
          <artifactId>displaytag</artifactId>
          <version>1.1</version>
+         <url>http://displaytag.sourceforge.net/11/</url>
 		   <properties>
 			   <war.bundle>true</war.bundle>
 		   </properties>
@@ -377,27 +378,29 @@
          <groupId>jta</groupId>
          <artifactId>jta</artifactId>
          <version>1.0</version>
+         <url>http://java.sun.com/products/jta/</url>
          <type>jar</type>
-      </dependency>
+      <!--</dependency>
 	   <dependency>
          <groupId>lucene-nl</groupId>
          <artifactId>lucene-nl</artifactId>
          <version>1.0</version>
          <type>jar</type>
-      </dependency>
+      </dependency>-->
 	   <dependency>
          <groupId>toxgene</groupId>
          <artifactId>toxgene</artifactId>
          <version>1.0</version>
+         <url>http://www.cs.toronto.edu/tox/toxgene/</url>
          <type>jar</type>
       </dependency>
-	   <dependency>
+	   <!--<dependency>
 		   <!-- originally : js-1.5R4.1.jar -->
-         <groupId>js</groupId>
+         <!--<groupId>js</groupId>
          <artifactId>js</artifactId>
          <version>1.0</version>
          <type>jar</type>
-      </dependency>
+      </dependency>-->
    </dependencies>
    <!-- build information for the project -->
    <build>
