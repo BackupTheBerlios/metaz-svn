@@ -1,18 +1,24 @@
 package org.metaz.util;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 import java.lang.reflect.Method;
 
+import org.apache.log4j.Logger;
+
 /**
- * Simple helper methods for debugging and stack traces, etc Will grow as needed...
+ * 
+ * Some simple helper methods for debugging and stack traces, etc.
+ * Will grow as needed...
+ *
+ * @author author Falco Paul, Open University Netherlands, OTO Meta/Z project
+ * @version $Revision$
+ *
  */
 public class Debug extends Object {
 
   //~ Inner Classes ----------------------------------------------------------------------------------------------------
 
   // static inner helper class
+
   static public class OrchestratedException extends Exception {
 
     // Does nothing particular usefull, just used for pretty output
@@ -20,7 +26,7 @@ public class Debug extends Object {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-  private static Logger       logger = MetaZ.getLogger(Debug.class);
+  private static Logger logger = MetaZ.getLogger(Debug.class);
   private static final String STACK_DUMP_TEXT = "Orchestrated stack dump follows:";
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
