@@ -1,16 +1,19 @@
 package org.metaz.util;
 
-import org.apache.log4j.*; // log4j stuff
-
 import java.io.File;
 
 import java.util.Arrays;
 
-// @author Falco Paul, Open University Netherlands, OTO Meta/Z project
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+// log4j stuff
+
+
 /**
- * DOCUMENT ME!
+ * Simple example class to demonstrate some org.metaz.util package features
  *
- * @author $author$
+ * @author author Falco Paul, Open University Netherlands, OTO Meta/Z project
  * @version $Revision$
   */
 public class Example extends Object {
@@ -22,6 +25,7 @@ public class Example extends Object {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   // some fake properties for usage in equals() and hashCode() demonstrations
+  
   public int       property_1;
   public String    property_2;
   public Integer[] property_3;
@@ -29,11 +33,11 @@ public class Example extends Object {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Equals usage example
    *
-   * @param anotherObject DOCUMENT ME!
+   * @param anotherObject object to test for equality
    *
-   * @return DOCUMENT ME!
+   * @return true if equal, false if unequal
    */
   public boolean equals(Object anotherObject) {
 
@@ -52,9 +56,9 @@ public class Example extends Object {
 
   // example of hashCode() implementation using HashCode class
   /**
-   * DOCUMENT ME!
+   * Hashcode usage example
    *
-   * @return DOCUMENT ME!
+   * @return hashcode
    */
   public int hashCode() {
 
@@ -68,9 +72,9 @@ public class Example extends Object {
   }
 
   /**
-   * DOCUMENT ME!
+   * Main method
    *
-   * @param args DOCUMENT ME!
+   * @param args run time arguments
    */
   public static void main(String[] args) {
 
