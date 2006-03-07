@@ -1,18 +1,5 @@
 package org.metaz.util;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.PropertyConfigurator;
-
-import org.hibernate.SessionFactory;
-
-import org.hibernate.cfg.Configuration;
-
-import org.metaz.repository.Facade;
-import org.metaz.repository.FacadeFactory;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -24,15 +11,31 @@ import java.net.URLClassLoader;
 
 import java.util.Properties;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.PropertyConfigurator;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import org.metaz.repository.Facade;
+import org.metaz.repository.FacadeFactory;
+
 /**
  * 
-DOCUMENT ME!
+ * This is the Meta/Z application instance (implemented as a singleton object).
+ * This class offers "global" services to application modules.
+ * The singleton pattern assures that only one instance will exist in the VM.
+ * Please note that there are some special cases where this may not be true.
+ * Fortunally, these cases are very rare and it's not likely w'll have to deal with this.
+ * See http://www.javaworld.com/javaworld/jw-01-2001/jw-0112-singleton.html for a discussion.
  *
- * @author Falco Paul, Open University Netherlands, OTO Meta/Z project Meta/Z application instance (implemented as a
- *         singleton object) This class offers "global" services to application modules The singleton pattern assures
- *         that only one instance will exist in the VM And yes, I know there are some exceptions... See
- *         http://www.javaworld.com/javaworld/jw-01-2001/jw-0112-singleton.html for a discussion
+ * @author Falco Paul, Open University Netherlands, OTO Meta/Z project 
+ * @version $Revision$
  */
+
 public class MetaZ
   implements java.io.Serializable
 {
@@ -48,21 +51,20 @@ public class MetaZ
   private static MetaZ instance;
   private static Logger logger = Logger.getLogger(MetaZ.class); // logger
 
-  // instance
-  // for this
-  // class
+  // instance for this class
   private static Facade         facadeInst; // Facade object of the Repository
   private static SessionFactory hibernateSessionFactory;
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  private InputStream propertyStream = null; // a stream pointing to the
+  // a stream pointing to the actual property file in use
+  private InputStream propertyStream = null;
+  
+  // application properties loaded from the above stream
+  private Properties properties = null;
 
-  // actual property file we use
-  private Properties properties = null; // application properties loaded
-
-  // from the above stream
-  private String log4JConfigFile = null; // log4J configuration file
+  // log4J configuration file  
+  private String log4JConfigFile = null;
 
   // set true if logging does not work
   private boolean verboseOutput = false;
@@ -73,8 +75,7 @@ public class MetaZ
   private MetaZ() {
 
     // set up a default logging style, to be used as a fallback style in
-    // case of property
-    // file loading errors
+    // case of property file loading errors
     PatternLayout layout = new PatternLayout();
 
     layout.setConversionPattern("%d{dd/mm/yy HH:mm:ss} %-5p[%t]: %m%n");
@@ -126,10 +127,9 @@ public class MetaZ
   }
 
   /**
-   * 
-  DOCUMENT ME!
+   * Returns the Meta/Z Facade instance
    *
-   * @return Returns the Facade instance of the Repository.
+   * @return Facade instance
    */
   public static synchronized Facade getRepositoryFacade() {
 
@@ -146,10 +146,9 @@ public class MetaZ
   }
 
   /**
-   * 
-  DOCUMENT ME!
+   * Returns the Meta/Z Hibernate Session Factory instance
    *
-   * @return Returns the Hibernate Session Factory instance of the Repository.
+   * @return Hibernate Session Factory instance
    */
   public static synchronized SessionFactory getHibernateSessionFactory() {
 
@@ -168,7 +167,7 @@ public class MetaZ
   }
 
   /**
-   * Gets a logger instance and initializes the logger look and feel
+   * Gets a logger instance and initializes the logger "look and feel"
    *
    * @param clazz classname where you would like a logger for
    *
@@ -216,7 +215,7 @@ public class MetaZ
   /**
    * Returns A path string (in location file system notation) for the given file object
    *
-   * @param fileObject DOCUMENT ME!
+   * @param fileObject file instance for which to generate a canonical path
    *
    * @return A canonical path string (in location file system notation) representing the given file object, or null if
    *         the file object is not representable in the file system
