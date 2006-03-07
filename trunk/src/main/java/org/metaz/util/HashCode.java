@@ -3,11 +3,18 @@ package org.metaz.util;
 import java.lang.reflect.Array;
 
 /**
- * Nice helper class to assist with hashCode() function implementations This class makes sure that you generate a
- * proper hashcode The sister class of HashCode is Equals See javadoc for java.lang.Object for more information on
- * both methods Falco Paul, 6 january 2006 Usage: int result = HashCode.SEED; result = HashCode.hash(result,
- * property_1); result = HashCode.hash(result, property_2); ... return   HashCode.hash(result, property_x);
+ * Nice helper class to assist with hashCode() function implementations.
+ * This class makes sure that you generate a proper hashcode.
+ * The sister class of HashCode is Equals.
+ * See javadoc for java.lang.Object for more information on both methods.
+ * Usage: int result = HashCode.SEED; result = HashCode.hash(result, property_1); 
+ * result = HashCode.hash(result, property_2); ... 
+ * return   HashCode.hash(result, property_x);
+ * 
+ * @author author Falco Paul, Open University Netherlands, OTO Meta/Z project
+ * @version $Revision$
  */
+ 
 public final class HashCode {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
@@ -40,7 +47,7 @@ public final class HashCode {
    * @param seed The seed
    * @param value The value
    *
-   * @return int     A hash code based on the given seed and value
+   * @return A hash code based on the given seed and value
    */
   public static int hash(int seed, boolean value) {
 
@@ -54,7 +61,7 @@ public final class HashCode {
    * @param seed The seed
    * @param value The value
    *
-   * @return int     A hash code based on the given seed and value
+   * @return int A hash code based on the given seed and value
    */
   public static int hash(int seed, char value) {
 
@@ -69,7 +76,7 @@ public final class HashCode {
    * @param seed The seed
    * @param value The value
    *
-   * @return int     A hash code based on the given seed and value
+   * @return A hash code based on the given seed and value
    */
   public static int hash(int seed, int value) {
 
@@ -83,7 +90,7 @@ public final class HashCode {
    * @param seed The seed
    * @param value The value
    *
-   * @return int     A hash code based on the given seed and value
+   * @return A hash code based on the given seed and value
    */
   public static int hash(int seed, long value) {
 
@@ -97,7 +104,7 @@ public final class HashCode {
    * @param seed The seed
    * @param value The value
    *
-   * @return int     A hash code based on the given seed and value
+   * @return A hash code based on the given seed and value
    */
   public static int hash(int seed, float value) {
 
