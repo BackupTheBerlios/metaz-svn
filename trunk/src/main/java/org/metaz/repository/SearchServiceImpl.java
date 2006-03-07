@@ -158,12 +158,12 @@ public class SearchServiceImpl
   } // end doUpdate()
 
   /**
-   * Returns Record instances that match the specified query.<p>The query syntax is:<br>
+   * Returns the URI's of Record instances that match the specified query.<p>The query syntax is:<br>
    * <code>Query ::= (Clause)+<br>
    * *  Clause ::= [&lt;FULLTEXTSEARCHPHRASE&gt;] || [&lt;TERM&gt;:&lt;VALUE&gt;]+</code><br>
    * <code>&lt;FULLTEXTSEARCHPHRASE&gt;</code> should always precede term-value combinations and shall not contain any
    * semicolon.</p>
-   *  <p>NOTE: In case of multiple selection the values should be seperated by the character '%".</p>
+   *  <p>NOTE: In case of multiple selection the values should be seperated by the character '%'.</p>
    *
    * @param query the search query
    *
@@ -241,7 +241,7 @@ public class SearchServiceImpl
   } // end doSearch()
 
   /**
-   * Returns Records that match the specified query<p>The query is a hashmap containing the term-value
+   * Returns the URI's of Records that match the specified query<p>The query is a hashmap containing the term-value
    * combinations to search for.</p>
    *  <p>NOTE: In case of multiple selection the values should be seperated by the character '%".</p>
    *
