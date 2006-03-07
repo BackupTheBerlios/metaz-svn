@@ -72,6 +72,7 @@ public class WordlistLoader {
         result.put(wordstem[0], wordstem[1]);
       }
     } catch (IOException e) {
+        result = new HashMap();
     }
     return result;
   }
