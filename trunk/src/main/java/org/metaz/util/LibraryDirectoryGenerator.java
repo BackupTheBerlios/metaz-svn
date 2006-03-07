@@ -1,21 +1,7 @@
 package org.metaz.util;
 
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
-import org.apache.log4j.Logger;
-
-import org.metaz.domain.MetaData;
-
-import org.metaz.gui.PrototypeCLI;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,9 +12,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.log4j.Logger;
+
 /**
- * 
-DOCUMENT ME!
+ * Simple utility class that generates a "library" direcotry from a (Maven) JAR tree
  *
  * @author Falco Paul
  */
@@ -40,6 +32,8 @@ public class LibraryDirectoryGenerator {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
+  // Get a list of available JAR's
+  
   private static ArrayList getJarListing(File dir)
                                   throws IOException
   {
@@ -82,6 +76,8 @@ public class LibraryDirectoryGenerator {
     return result;
 
   }
+  
+  // Copy available jars to the target library
 
   private static void populateLibraryDirectory(ArrayList jarFiles, File libDir)
                                         throws IOException
@@ -103,6 +99,7 @@ public class LibraryDirectoryGenerator {
       OutputStream out = new FileOutputStream(dest);
 
       // Transfer bytes from in to out
+      
       byte[] buf = new byte[1024];
       int    len;
 
@@ -118,6 +115,8 @@ public class LibraryDirectoryGenerator {
     }
 
   }
+  
+  // Core logic starts here
 
   private static void createLibrary(String sourceDirSpec, String libDirSpec) {
 
@@ -146,10 +145,9 @@ public class LibraryDirectoryGenerator {
   }
 
   /**
+   * Main method
    * 
-  DOCUMENT ME!
-   *
-   * @param args
+   * @param args Command line arguments
    */
   public static void main(String[] args) {
 
