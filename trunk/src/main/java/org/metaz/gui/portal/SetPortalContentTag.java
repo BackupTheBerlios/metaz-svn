@@ -7,16 +7,12 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
- * DOCUMENT ME!
+ * JSP tag that allows template injection
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
   */
 public class SetPortalContentTag extends BodyTagSupport {
-
-  //~ Static fields/initializers ---------------------------------------------------------------------------------------
-
-  private static Logger logger = Logger.getLogger(SetPortalContentTag.class); // logger instance for this class
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
@@ -25,9 +21,9 @@ public class SetPortalContentTag extends BodyTagSupport {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Name property setter
    *
-   * @param setName DOCUMENT ME!
+   * @param setName Name of the injection
    */
   public void setName(String setName) {
 
@@ -36,9 +32,9 @@ public class SetPortalContentTag extends BodyTagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * Name property getter
    *
-   * @return DOCUMENT ME!
+   * @return name property
    */
   public String getName() {
 
@@ -47,9 +43,11 @@ public class SetPortalContentTag extends BodyTagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * TagSupport contract method ... 
+   * 
+   * Used to mark the start of an injectable source
    *
-   * @return DOCUMENT ME!
+   * @return EVAL_BODY_BUFFERED constant
    */
   public int doStartTag() {
 
@@ -60,11 +58,14 @@ public class SetPortalContentTag extends BodyTagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * TagSupport contract method ... 
+   * 
+   * Used to mark the end of an injectable source
+   * Stores the injectable source as a request attribute
    *
-   * @return DOCUMENT ME!
+   * @return SKIP_BODY constant
    *
-   * @throws JspException DOCUMENT ME!
+   * @throws JspException thrown on error
    */
   public int doEndTag()
                throws JspException

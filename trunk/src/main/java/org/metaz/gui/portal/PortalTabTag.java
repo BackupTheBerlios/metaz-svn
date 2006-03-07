@@ -1,8 +1,6 @@
 // @author: Falco Paul
 package org.metaz.gui.portal;
 
-import org.apache.log4j.Logger;
-
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +8,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * DOCUMENT ME!
+ * JSP tag file to support 'tabbed' interface
  *
  * @author $author$
  * @version $Revision$
@@ -30,14 +28,13 @@ public class PortalTabTag extends TagSupport {
   public static final String TAB_HELP = "HELP";
   public static final String TAB_INFO = "INFO";
   public static final String TAB_RDMC = "RDMC";
-  private static Logger      logger = Logger.getLogger(PortalTabTag.class); // logger instance for this class
-
+  
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Retrieves the "active" tab from the request object
    *
-   * @return DOCUMENT ME!
+   * @return active tab ID
    */
   public String getActiveTabId() {
 
@@ -46,9 +43,9 @@ public class PortalTabTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * TagSupport contract method ... 
    *
-   * @return DOCUMENT ME!
+   * @return SKIP_BODY constant
    */
   public int doStartTag() {
 
@@ -57,11 +54,9 @@ public class PortalTabTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
-   *
-   * @param html DOCUMENT ME!
+   * Helper function... print html to the page context
    */
-  public void printHtml(String html) {
+  private void printHtml(String html) {
 
     try {
 
@@ -69,20 +64,16 @@ public class PortalTabTag extends TagSupport {
 
     } catch (IOException e) {
 
-      // ignore
+      return; // no special handling
+      
     }
 
   }
 
   /**
-   * DOCUMENT ME!
-   *
-   * @param tabId DOCUMENT ME!
-   * @param text DOCUMENT ME!
-   * @param url DOCUMENT ME!
-   * @param tooltip DOCUMENT ME!
+   * Helper function... 'adds' a tab to the output
    */
-  public void addTab(String tabId, String text, String url, String tooltip) {
+  private void addTab(String tabId, String text, String url, String tooltip) {
 
     if ((text == null) || (url == null))
 
@@ -101,24 +92,22 @@ public class PortalTabTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
-   *
-   * @param url DOCUMENT ME!
-   *
-   * @return DOCUMENT ME!
+   * Helper function: generates a proper URL based on the web container environment
    */
-  public String url(String url) {
+  private String url(String url) {
 
     return PortalUtil.getPortalBaseUrl((HttpServletRequest) pageContext.getRequest()) + "/" + url;
 
   }
 
   /**
-   * DOCUMENT ME!
+   * TagSupport contract method ... 
+   * 
+   * Injects the tabbed interface into the page
    *
-   * @return DOCUMENT ME!
+   * @return EVAL_PAGE constant
    *
-   * @throws JspException DOCUMENT ME!
+   * @throws JspException Thrown on error
    */
   public int doEndTag()
                throws JspException

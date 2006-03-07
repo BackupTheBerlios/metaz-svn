@@ -31,6 +31,17 @@ public class Debug extends Object {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
+   /**
+    * formats an exception
+    *
+    * @param e The exception nicely formatted
+    */
+   public static String prettyException(Exception e) {
+
+     return "Exception: " + e.getClass().getName() + ": " + e.getMessage();
+
+   }
+
   /**
    * Pretty prints an exception with DEBUG level to the logger
    *
@@ -38,7 +49,7 @@ public class Debug extends Object {
    */
   public static void printException(Exception e) {
 
-    logger.debug("Exception: " + e.getClass().getName() + ": " + e.getMessage());
+    logger.debug(prettyException(e));
 
   }
 

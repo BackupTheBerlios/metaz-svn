@@ -96,15 +96,14 @@ public class Example extends Object {
 
     } catch (Exception e) {
 
-      // does nothing
+      logger.error(testFile, e);
+      
     }
-
-    File someFile = app.getRelativeFile(app.getProperties().getProperty("SOME_PROPERTY"));
 
     // Make sure we actually see DEBUG output
     Logger rootLogger = Logger.getRootLogger();
 
-    logger.setLevel((Level) Level.DEBUG);
+    rootLogger.setLevel((Level) Level.DEBUG);
 
     Debug.printException(new Exception("Test 1"));
     Debug.printExceptionAndTrace(new Exception("Test 2"));

@@ -1,13 +1,12 @@
 package org.metaz.gui.portal;
 
-import java.util.UUID;
-
 /**
- * DOCUMENT ME!
+ * This class is a HTML "select option" abstraction
  *
  * @author Falco Paul
  * @version $Revision$
-  */
+ */
+ 
 public final class SelectOption {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------

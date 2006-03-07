@@ -177,6 +177,7 @@ public class MetaZ
 
     // this next line actually forces initialization of the MetaZ singleton
     // object, which in turns sets up the logger properties
+
     MetaZ metaz = getInstance();
 
     Logger logger = Logger.getLogger(clazz);
@@ -232,6 +233,10 @@ public class MetaZ
 
     } catch (Exception e) {
 
+      logger.warn("Could not construct a canonical path for this file object <" + 
+                  fileObject.toString() + "> because of an error: " + 
+                  Debug.prettyException(e));
+
       return null;
 
     }
@@ -261,14 +266,22 @@ public class MetaZ
     String root = null;
 
     try {
+    
+      if (fileObject == null)
+        throw new Exception("Could not construct a file object");
 
       root = fileObject.getCanonicalPath();
+      
+      if (root == null)
+        throw new Exception("Could not retrieve the canonical path");
 
       return fileObject;
 
     } catch (Exception e) {
 
-      logger.warn("Could not construct a canonical path for the MetaZ root directory <" + getRootSpec() + ">");
+      logger.warn("Could not construct a canonical path for the MetaZ root directory <" + 
+                  getRootSpec() + "> because of an error: " + 
+                  Debug.prettyException(e));
 
       return null;
 
@@ -311,15 +324,22 @@ public class MetaZ
     String file = null;
 
     try {
+    
+      if (fileObject == null)
+        throw new Exception("Could not construct a file object");
 
       file = fileObject.getCanonicalPath();
+      
+      if (file == null)
+        throw new Exception("Could not retrieve the canonical path");
 
       return fileObject;
 
     } catch (Exception e) {
 
       logger.warn("Could not construct a canonical path for the relative file <" +
-                  getRelativeFileSpec(relativeFileName) + ">");
+                  getRelativeFileSpec(relativeFileName) + "> because of an error: " + 
+                  Debug.prettyException(e));
 
       return null;
 
@@ -392,6 +412,8 @@ public class MetaZ
                     getClassPathString(getClassPath()) + ">");
 
     }
+    
+    propertyStream = null;
 
     // attempt to load, if we obtained a valid stream
     if (propStream != null) {
