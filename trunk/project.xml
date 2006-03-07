@@ -380,13 +380,7 @@
          <version>1.0</version>
          <url>http://java.sun.com/products/jta/</url>
          <type>jar</type>
-      <!--</dependency>
-	   <dependency>
-         <groupId>lucene-nl</groupId>
-         <artifactId>lucene-nl</artifactId>
-         <version>1.0</version>
-         <type>jar</type>
-      </dependency>-->
+     </dependency>
 	   <dependency>
          <groupId>toxgene</groupId>
          <artifactId>toxgene</artifactId>
@@ -394,13 +388,6 @@
          <url>http://www.cs.toronto.edu/tox/toxgene/</url>
          <type>jar</type>
       </dependency>
-	   <!--<dependency>
-		   <!-- originally : js-1.5R4.1.jar -->
-         <!--<groupId>js</groupId>
-         <artifactId>js</artifactId>
-         <version>1.0</version>
-         <type>jar</type>
-      </dependency>-->
    </dependencies>
    <!-- build information for the project -->
    <build>
