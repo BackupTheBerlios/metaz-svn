@@ -32,13 +32,13 @@
    </mailingLists>
    <id>MetaZ</id>
    <!-- a short but descriptive name for the project -->
-   <name>MetaZ</name>
+   <name>Meta&#47;Z</name>
    <!-- The version of the project under development, e.g.
        1.1, 1.2, 2.0-SNAPSHOT -->
    <currentVersion>0.1</currentVersion>
    <!-- details about the organization that 'owns' the project -->
    <organization>
-      <name>MetaZ team Open Universiteit Ontwerpproject</name>
+      <name>Meta&#47;Z team Open Universiteit Ontwerpproject</name>
       <url>http://www.open.ou.nl/otonet/</url>
    </organization>
    <!-- the year the project started -->
