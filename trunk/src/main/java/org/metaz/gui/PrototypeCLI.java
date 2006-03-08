@@ -20,21 +20,16 @@ import org.metaz.util.MetaZ;
 import java.util.List;
 
 /**
- * This class provide a command line interface to Application Z, an application  that provides a search facility
- * within multiple CMS's of the Ruud de Moor Centrum.
+ * <p>This class provide a command line interface to Application Z, an application  that provides a search facility
+ * within multiple CMS's of the Ruud de Moor Centrum.</p>
  */
 public class PrototypeCLI {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-  private static String syntax = "PrototypeCLI -option [goal] [[-option goal][..]]";
-  private static Logger logger = MetaZ.getLogger(PrototypeCLI.class);
-
-  //~ Constructors -----------------------------------------------------------------------------------------------------
-
-  public PrototypeCLI() {
-
-  }
+  public static final int MAX_OPTIONS = 10;
+  private static String   syntax = "PrototypeCLI -option [goal] [[-option goal][..]]";
+  private static Logger   logger = MetaZ.getLogger(PrototypeCLI.class);
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -44,7 +39,7 @@ public class PrototypeCLI {
    *
    * @param args The options specified in the command line.
    */
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
 
     String searchString = "";
 
@@ -111,7 +106,7 @@ public class PrototypeCLI {
    * <p>Sends the searchstring to the searchservice through the MetaZ  singleton instance method
    * getRepositoryFacade().</p>
    *
-   * @param searchString
+   * @param searchString The string which is sent to Lucene
    */
   public static void performSearch(String searchString) {
 
@@ -126,8 +121,11 @@ public class PrototypeCLI {
       // Printing of the record list is not yet tested!!!
       System.out.println("Here are the results of your query:");
 
-      if (resultList.size() == 0)
+      if (resultList.size() == 0) {
+
         System.out.println("--> No records were found.");
+
+      }
 
       for (int i = 0; i < resultList.size(); i++) {
 
@@ -152,41 +150,43 @@ public class PrototypeCLI {
    * *  Clause ::= (FullTextSearchString) | &lt;FIELDNAME&gt;:&lt;VALUE&gt;<br>
    * * </code></p>
    *
-   * @param searchString
+   * @param searchStr The string which is sent to Lucene
    *
    * @return boolean
    */
-  public static boolean checkQuery(String searchString) {
+  public static boolean checkQuery(String searchStr) {
 
     // FIXME (no checks done, except for empty String)
-    if (searchString == "")
+    if (searchStr == "") {
 
       return false;
+
+    }
 
     return true;
 
   }
 
   /**
-   * p>Prints the helpmessage.<br>
+   * <p>Prints the helpmessage.<br></p>
    *
-   * @param options
+   * @param opts The available options and syntax for PrototypeCLI
    */
-  public static void printHelp(Options options) {
+  public static void printHelp(Options opts) {
 
     System.out.println();
 
     HelpFormatter f = new HelpFormatter();
 
-    f.printHelp(syntax, options);
+    f.printHelp(syntax, opts);
     java.lang.System.exit(0);
 
   }
 
   /**
-   * Defines the possible CLI options
+   * <p>The method defines the CLI options that are allowed as arguments.</p>
    *
-   * @return Options
+   * @return Options The options of PrototypeCLI
    */
   private static Options defineOptions() {
 
@@ -195,14 +195,14 @@ public class PrototypeCLI {
 
     Option  tOpt = new Option("t", "trefwoorden", false, "Trefwoorden");
 
-    tOpt.setArgs(10);
+    tOpt.setArgs(MAX_OPTIONS);
     tOpt.setType(new String());
     tOpt.setRequired(false);
     options.addOption(tOpt);
 
     Option gOpt = new Option("g", MetaData.TARGETENDUSER, false, "Docent, Begeleider, Manager");
 
-    gOpt.setArgs(5);
+    gOpt.setArgs(MAX_OPTIONS);
     gOpt.setType(new String());
     gOpt.setRequired(false);
     options.addOption(gOpt);
@@ -210,42 +210,42 @@ public class PrototypeCLI {
     Option sOpt = new Option("s", MetaData.SCHOOLTYPE, false,
                              "Pre-primair onderwijs, Primair onderwijs, Voortgezet onderwijs");
 
-    sOpt.setArgs(5);
+    sOpt.setArgs(MAX_OPTIONS);
     sOpt.setType(new String());
     sOpt.setRequired(false);
     options.addOption(sOpt);
 
     Option vOpt = new Option("v", MetaData.SCHOOLDISCIPLINE, false, "Toepasselijke vakkenlijst");
 
-    vOpt.setArgs(5);
+    vOpt.setArgs(MAX_OPTIONS);
     vOpt.setType(new String());
     vOpt.setRequired(false);
     options.addOption(vOpt);
 
     Option dOpt = new Option("d", MetaData.DIDACTICFUNCTION, false, "Oefening, Simulatie, enz");
 
-    dOpt.setArgs(5);
+    dOpt.setArgs(MAX_OPTIONS);
     dOpt.setType(new String());
     dOpt.setRequired(false);
     options.addOption(dOpt);
 
     Option pOpt = new Option("p", MetaData.PRODUCTTYPE, false, "Document, Afbeelding, Video, enz");
 
-    pOpt.setArgs(5);
+    pOpt.setArgs(MAX_OPTIONS);
     pOpt.setType(new String());
     pOpt.setRequired(false);
     options.addOption(pOpt);
 
     Option bOpt = new Option("b", MetaData.PROFESSIONALSITUATION, false, "...een zeer lange lijst...");
 
-    bOpt.setArgs(5);
+    bOpt.setArgs(MAX_OPTIONS);
     bOpt.setType(new String());
     bOpt.setRequired(false);
     options.addOption(bOpt);
 
     Option cOpt = new Option("c", MetaData.COMPETENCE, false, "Interpersoonlijk, Pedagogisch, enz..");
 
-    cOpt.setArgs(5);
+    cOpt.setArgs(MAX_OPTIONS);
     cOpt.setType(new String());
     cOpt.setRequired(false);
     options.addOption(cOpt);
@@ -347,9 +347,11 @@ public class PrototypeCLI {
 
       for (int n = 0; n < keywords.length; n++) {
 
-        if (keywords[n].startsWith("-"))
+        if (keywords[n].startsWith("-")) {
 
           throw new ParseException("Unrecognised option \"" + keywords[n] + "\"");
+
+        }
 
         clausule += (keywords[n] + " ");
 
@@ -373,9 +375,11 @@ public class PrototypeCLI {
 
           value += (" " + valueStr[n]);
 
-          if (valueStr[n].startsWith("-"))
+          if (valueStr[n].startsWith("-")) {
 
             throw new ParseException("Unrecognised option \"" + valueStr[n] + "\"");
+
+          }
 
         }
 
