@@ -11,8 +11,8 @@
     <section name="Welcome to Meta&#47;Z at berliOS.de">
 
       <!-- Within sections, any XHTML can be used -->
-      <p>Meta&#47;Z is a project build by a software engineering team from the Open University, 
-      the Netherlands as part of their BSc. graduation. <br/>We are developing software that will act as an aggregating web 
+      <p>Meta&#47;Z is a project build by a software engineering team from OTO. 
+      <br/>We are developing software that will act as an aggregating web 
       front-end to retrieve information from several content databases that contain various metadata value
       assigned didactic products (so called learnobjects). <br/>The web application 
       offers its users an efficient way of searching and accessing the content 

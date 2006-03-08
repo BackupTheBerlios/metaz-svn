@@ -38,14 +38,14 @@
    <currentVersion>0.1</currentVersion>
    <!-- details about the organization that 'owns' the project -->
    <organization>
-      <name>Meta&#47;Z team Open Universiteit Ontwerpproject</name>
+      <name>Meta&#47;Z team OTO</name>
       <url>http://www.open.ou.nl/otonet/</url>
    </organization>
    <!-- the year the project started -->
    <inceptionYear>2005</inceptionYear>
    <package>org.metaz</package>
    <!-- a short description of what the project does -->
-   <shortDescription>Meta/Z is een software engineering team of the Open University, The Netherlands. We are developing software that will act as an aggregating web front-end to retrieve information from several content databases. The web application offers its users an efficient way of searching and accessing the content. The content is organized with metadata.</shortDescription>
+   <shortDescription>Meta/Z is een software engineering team of OTO. We are developing software that will act as an aggregating web front-end to retrieve information from several content databases. The web application offers its users an efficient way of searching and accessing the content. The content is organized with metadata.</shortDescription>
    <!-- the project home page -->
    <url>http://metaz.berlios.de/</url>
    <siteAddress>metaz.berlios.de</siteAddress>
