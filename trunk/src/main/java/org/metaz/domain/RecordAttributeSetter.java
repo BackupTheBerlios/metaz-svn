@@ -95,7 +95,7 @@ public class RecordAttributeSetter {
       description = new HtmlTextMetaData();
       description.setXMLTagName(MetaData.DESCRIPTION);
       description.setName("description");
-      description.setMetaDataType("HtmlTextMetaData ");
+      description.setMetaDataType("HtmlTextMetaData");
       description.setOptional(true);
       recordMetadata.add(description);
       keywords = new TextMetaData();
