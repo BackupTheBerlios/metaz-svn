@@ -263,7 +263,7 @@ public class FacadeImpl
                               throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("targetEndUser.value");
+    List values = dataService.getUniqueFieldValues("targetEndUser");
 
     return values;
 
@@ -283,7 +283,7 @@ public class FacadeImpl
                             throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("schoolType.value");
+    List values = dataService.getUniqueFieldValues("schoolType");
 
     return values;
 
@@ -303,7 +303,7 @@ public class FacadeImpl
                                  throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("schoolDiscipline.value");
+    List values = dataService.getUniqueFieldValues("schoolDiscipline");
 
     return values;
 
@@ -323,7 +323,7 @@ public class FacadeImpl
                                  throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("didacticFunction.value");
+    List values = dataService.getUniqueFieldValues("didacticFunction");
 
     return values;
 
@@ -343,7 +343,7 @@ public class FacadeImpl
                             throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("productType.value");
+    List values = dataService.getUniqueFieldValues("productType");
 
     return values;
 
@@ -363,7 +363,7 @@ public class FacadeImpl
                                       throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("professionalSituation.value");
+    List values = dataService.getUniqueFieldValues("professionalSituation");
 
     return values;
 
@@ -383,7 +383,7 @@ public class FacadeImpl
                            throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("competence.value");
+    List values = dataService.getUniqueFieldValues("competence");
 
     return values;
 
