@@ -228,7 +228,7 @@ public class Harvester {
 
             } catch (Exception ignore) {
 
-              logger.warn("Cannot writ node to file!");
+              logger.warn("Cannot write node to file!");
 
             }
 
