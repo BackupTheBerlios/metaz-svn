@@ -224,7 +224,8 @@ public class Harvester {
             try {
 
               logger.fatal(element.element("titel").getText() + " is an invalid node.");
-              writeDocument2File(ldoc, f.getName());
+              logger.info(ex.getMessage());
+              writeDocument2File(ldoc, ex.getMessage(), f.getName());
 
             } catch (Exception ignore) {
 
@@ -584,13 +585,20 @@ public class Harvester {
    * Writes the content of a DOM4J xml document to a file
    *
    * @param document to write the contents to a file
+   * @param error string which hold the error why validation failed
    * @param file name of the file to write the content of document to
    *
    * @throws IOException
    */
-  public void writeDocument2File(Document document, String file)
+  public void writeDocument2File(Document document, String error, String file)
                           throws IOException
   {
+
+    Element root = document.getRootElement();
+    Element errEl = root.addElement("Error");
+
+    errEl.setText(error);
+    logger.info("Error element created");
 
     long timestamp = System.currentTimeMillis();
 
@@ -642,9 +650,10 @@ public class Harvester {
     Verifier verifier = schema.newVerifier();
 
     logger.info("verifier created");
-    verifier.setErrorHandler(
-    //when error occurs add code to move file to error directory
-    //and stop processing....
+/**
+     * 
+     verifier.setErrorHandler(
+
     new ErrorHandler() {
 
         public void error(SAXParseException e) {
@@ -666,7 +675,7 @@ public class Harvester {
         }
 
       });
-
+*/
     logger.info("Validating XML document");
 
     VerifierHandler handler = verifier.getVerifierHandler();
