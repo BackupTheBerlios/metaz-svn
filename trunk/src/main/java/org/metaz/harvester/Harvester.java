@@ -6,10 +6,13 @@ import org.apache.log4j.Logger;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.SAXWriter;
+import org.dom4j.io.XMLWriter;
 
 import org.iso_relax.verifier.Schema;
 import org.iso_relax.verifier.Verifier;
@@ -27,8 +30,6 @@ import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.RecordAttributeSetter;
 import org.metaz.domain.TextMetaData;
-
-import org.metaz.repository.Facade;
 
 import org.metaz.util.MetaZ;
 
@@ -99,13 +100,13 @@ public class Harvester {
   }
 
   /**
-   * DOCUMENT ME!
+   * sets the name of the file to parse and initiates parsing of the file
    *
-   * @param f
+   * @param f filename to parse
    */
   protected void setXMLFile(String f) {
 
-    //copy file to gain exclsive rights
+    //copy file to gain exclusive rights
     MetaZ app = MetaZ.getInstance();
 
     try {
@@ -175,19 +176,23 @@ public class Harvester {
    */
   private boolean parseFile(File f) {
 
+    Boolean validated = false;
+
     try {
 
       //validate and create document
       logger.info("start parsing");
 
+      //repeat for each learnObject in the xml file
+      //create a ne document for each learnObject
+      //parse each learnobject xml part
       Document doc = getDom4jDocument(f);
 
-      if (doc == null) {
+      //if (doc == null) {
 
-        return false;
+      //return false;
 
-      }
-
+      //}
       logger.info("doc created");
 
       //convert to collection of LearningObjects
@@ -203,252 +208,280 @@ public class Harvester {
         for (Iterator i = root.elementIterator(); i.hasNext();) {
 
           //get first/next leerobject
-          Element element = (Element) i.next();
-
-          //create new record from mandatory elements
-          TextMetaData tmdt1 = new TextMetaData();
-
-          tmdt1.setValue(element.element("titel").getText());
-
-          TextMetaData tmdt2 = new TextMetaData();
-
-          tmdt2.setValue(element.element("bestandsformaat").getText());
-
-          TextMetaData tmdt3 = new TextMetaData();
-
-          tmdt3.setValue(element.element("didactischeFunctie").getText());
-
-          TextMetaData tmdt4 = new TextMetaData();
-
-          tmdt4.setValue(element.element("producttype").getText());
-
-          HyperlinkMetaData hper = new HyperlinkMetaData();
-
-          hper.setValue(element.attributeValue("URI"));
-
-          BooleanMetaData bln = new BooleanMetaData();
-
-          bln.setValue(Boolean.valueOf(element.element("beveiligd").getText()));
-
-          Record rec = new org.metaz.domain.Record(tmdt1, bln, tmdt2, tmdt3, tmdt4, hper);
-
-          logger.info("record created" + element.attributeValue("URI"));
-
-          RecordAttributeSetter recset = new RecordAttributeSetter(rec);
+          Element  element = (Element) i.next();
+          Document ldoc = createDocument(element);
 
           try {
 
-            for (Iterator k = recset.iterator(); k.hasNext();) {
+            processValidation(ldoc);
+            validated = true;
 
-              logger.info("in iterator");
+          } catch (Exception ex) {
 
-              MetaData metadata = (MetaData) k.next();
+            validated = false;
 
-              logger.info("metadata :" + metadata.getMetaDataType() + " - " + metadata.getXMLTagName());
-              logger.info("mandatory :" + metadata.isMandatory());
+            //save ldoc to errordir
+            try {
 
-              if (! metadata.isMandatory()) {
+              logger.fatal(element.element("titel").getText() + " is an invalid node.");
+              writeDocument2File(ldoc, f.getName());
 
-                logger.info("not mandatory");
+            } catch (Exception ignore) {
 
-                if (metadata.getMetaDataType().equals("TextMetaData")) {
+              logger.warn("Cannot writ node to file!");
 
-                  try {
+            }
 
-                    logger.info("textmetadata");
+          }
 
-                    TextMetaData tmdt = new TextMetaData();
+          if (validated) {
 
-                    //sleutelwoorden
-                    if (metadata.getName().equals("keywords")) {
+            //create new record from mandatory elements
+            TextMetaData tmdt1 = new TextMetaData();
 
-                      String keywords = "";
+            tmdt1.setValue(element.element("titel").getText());
 
-                      for (Iterator j = element.element("sleutelwoorden").elementIterator(); j.hasNext();) {
+            TextMetaData tmdt2 = new TextMetaData();
 
-                        Element keyword = (Element) j.next();
+            tmdt2.setValue(element.element("bestandsformaat").getText());
 
-                        keywords = keyword.getText() + ";";
-                        //.element("sleutelwoord")
-                        logger.info(keywords);
+            TextMetaData tmdt3 = new TextMetaData();
+
+            tmdt3.setValue(element.element("didactischeFunctie").getText());
+
+            TextMetaData tmdt4 = new TextMetaData();
+
+            tmdt4.setValue(element.element("producttype").getText());
+
+            HyperlinkMetaData hper = new HyperlinkMetaData();
+
+            hper.setValue(element.attributeValue("URI"));
+
+            BooleanMetaData bln = new BooleanMetaData();
+
+            bln.setValue(Boolean.valueOf(element.element("beveiligd").getText()));
+
+            Record rec = new org.metaz.domain.Record(tmdt1, bln, tmdt2, tmdt3, tmdt4, hper);
+
+            logger.info("record created" + element.attributeValue("URI"));
+
+            RecordAttributeSetter recset = new RecordAttributeSetter(rec);
+
+            try {
+
+              for (Iterator k = recset.iterator(); k.hasNext();) {
+
+                logger.info("in iterator");
+
+                MetaData metadata = (MetaData) k.next();
+
+                logger.info("metadata :" + metadata.getMetaDataType() + " - " + metadata.getXMLTagName());
+                logger.info("mandatory :" + metadata.isMandatory());
+
+                if (! metadata.isMandatory()) {
+
+                  logger.info("not mandatory");
+
+                  if (metadata.getMetaDataType().equals("TextMetaData")) {
+
+                    try {
+
+                      logger.info("textmetadata");
+
+                      TextMetaData tmdt = new TextMetaData();
+
+                      //sleutelwoorden
+                      if (metadata.getName().equals("keywords")) {
+
+                        String keywords = "";
+
+                        for (Iterator j = element.element("sleutelwoorden").elementIterator(); j.hasNext();) {
+
+                          Element keyword = (Element) j.next();
+
+                          keywords = keyword.getText() + ";";
+                          //.element("sleutelwoord")
+                          logger.info(keywords);
+
+                        }
+
+                        tmdt.setValue(keywords);
+
+                      } else if (metadata.getName().equals("roleName")) {
+
+                        //rolEnNaam
+                        String rolenames = "";
+
+                        for (Iterator m = element.element("rolEnNaam").elementIterator(); k.hasNext();) {
+
+                          Element rolename = (Element) m.next();
+
+                          rolenames = "Rol: " + rolename.element("rol").getText() + "\n Naam: " +
+                                      rolename.element("naam").getText() + "\n";
+                          logger.info(rolenames);
+
+                        }
+
+                        tmdt.setValue(rolenames);
+
+                      } else {
+
+                        tmdt.setValue(element.element(metadata.getXMLTagName()).getText());
 
                       }
 
-                      tmdt.setValue(keywords);
+                      recset.setValue(metadata.getXMLTagName(), tmdt);
+                      logger.info(metadata.getXMLTagName() + " : " + tmdt.getValue().toString());
 
-                    } else if (metadata.getName().equals("roleName")) {
+                    } catch (Exception ignore) {
 
-                      //rolEnNaam
-                      String rolenames = "";
-
-                      for (Iterator m = element.element("rolEnNaam").elementIterator(); k.hasNext();) {
-
-                        Element rolename = (Element) m.next();
-
-                        rolenames = "Rol: " + rolename.element("rol").getText() + "\n Naam: " +
-                                    rolename.element("naam").getText() + "\n";
-                        logger.info(rolenames);
-
-                      }
-
-                      tmdt.setValue(rolenames);
-
-                    } else {
-
-                      tmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+                      logger.error("here 1:" + ignore.toString());
 
                     }
 
-                    recset.setValue(metadata.getXMLTagName(), tmdt);
-                    logger.info(metadata.getXMLTagName() + " : " + tmdt.getValue().toString());
+                  }
 
-                  } catch (Exception ignore) {
+                  if (metadata.getMetaDataType().equals("BooleanMetaData")) {
 
-                    logger.error("here 1:" + ignore.toString());
+                    try {
+
+                      logger.info("boolmetadata");
+
+                      BooleanMetaData bmdt = new BooleanMetaData();
+
+                      bmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+                      recset.setValue(metadata.getXMLTagName(), bmdt);
+                      logger.info(metadata.getXMLTagName());
+
+                    } catch (Exception ignore) {
+
+                      logger.error("here 2:" + ignore.toString());
+
+                    }
 
                   }
 
-                }
+                  if (metadata.getMetaDataType().equals("HtmlTextMetaData")) {
 
-                if (metadata.getMetaDataType().equals("BooleanMetaData")) {
+                    try {
 
-                  try {
+                      logger.info("htmlmetadata");
 
-                    logger.info("boolmetadata");
+                      HtmlTextMetaData hmdt = new HtmlTextMetaData();
 
-                    BooleanMetaData bmdt = new BooleanMetaData();
+                      hmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+                      recset.setValue(metadata.getXMLTagName(), hmdt);
+                      logger.info(metadata.getXMLTagName());
 
-                    bmdt.setValue(element.element(metadata.getXMLTagName()).getText());
-                    recset.setValue(metadata.getXMLTagName(), bmdt);
-                    logger.info(metadata.getXMLTagName());
+                    } catch (Exception ignore) {
 
-                  } catch (Exception ignore) {
+                      logger.error("here 3:" + ignore.toString());
 
-                    logger.error("here 2:" + ignore.toString());
-
-                  }
-
-                }
-
-                if (metadata.getMetaDataType().equals("HtmlTextMetaData")) {
-
-                  try {
-
-                    logger.info("htmlmetadata");
-
-                    HtmlTextMetaData hmdt = new HtmlTextMetaData();
-
-                    hmdt.setValue(element.element(metadata.getXMLTagName()).getText());
-                    recset.setValue(metadata.getXMLTagName(), hmdt);
-                    logger.info(metadata.getXMLTagName());
-
-                  } catch (Exception ignore) {
-
-                    logger.error("here 3:" + ignore.toString());
+                    }
 
                   }
 
-                }
+                  if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaData")) {
 
-                if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaData")) {
+                    try {
 
-                  try {
+                      logger.info("hstmetadata");
 
-                    logger.info("hstmetadata");
+                      HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData();
 
-                    HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData();
+                      addNodeRecursive(element.element(metadata.getXMLTagName()).element("hoofdwaarden"),
+                                       element.element(metadata.getXMLTagName()).element("hoofdwaarden"), hMetaData);
+                      recset.setValue(metadata.getXMLTagName(), hMetaData);
+                      logger.info(metadata.getXMLTagName());
 
-                    addNodeRecursive(element.element(metadata.getXMLTagName()).element("hoofdwaarden"),
-                                     element.element(metadata.getXMLTagName()).element("hoofdwaarden"), hMetaData);
-                    recset.setValue(metadata.getXMLTagName(), hMetaData);
-                    logger.info(metadata.getXMLTagName());
+                    } catch (Exception ignore) {
 
-                  } catch (Exception ignore) {
+                      logger.error("here 4:" + ignore.toString());
 
-                    logger.error("here 4:" + ignore.toString());
-
-                  }
-
-                }
-
-                if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaDataSet")) {
-
-                  try {
-
-                    logger.info("hstmetadataSet");
-
-                    HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
-
-                    addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),
-                                     element.element("schooltype").element("hoofdwaarden"), hSet);
-                    recset.setValue(metadata.getXMLTagName(), hSet);
-                    logger.info(metadata.getXMLTagName());
-
-                  } catch (Exception ignore) {
-
-                    logger.error("here 5:" + ignore.toString());
+                    }
 
                   }
 
-                }
+                  if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaDataSet")) {
 
-                if (metadata.getMetaDataType().equals("HyperlinkMetaData")) {
+                    try {
 
-                  try {
+                      logger.info("hstmetadataSet");
 
-                    logger.info("hyperlinkmetadata");
+                      HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
 
-                    HyperlinkMetaData hlmdt = new HyperlinkMetaData();
+                      addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),
+                                       element.element("schooltype").element("hoofdwaarden"), hSet);
+                      recset.setValue(metadata.getXMLTagName(), hSet);
+                      logger.info(metadata.getXMLTagName());
 
-                    hlmdt.setValue(element.element(metadata.getXMLTagName()).getText());
-                    recset.setValue(metadata.getXMLTagName(), hlmdt);
-                    logger.info(metadata.getXMLTagName());
+                    } catch (Exception ignore) {
 
-                  } catch (Exception ignore) {
+                      logger.error("here 5:" + ignore.toString());
 
-                    logger.error("here 6:" + ignore.toString());
-
-                  }
-
-                }
-
-                if (metadata.getMetaDataType().equals("NumericMetaData")) {
-
-                  try {
-
-                    logger.info("nummetadata");
-
-                    NumericMetaData nmdt = new NumericMetaData();
-
-                    nmdt.setValue(Long.getLong(element.element(metadata.getXMLTagName()).getText()));
-                    recset.setValue(metadata.getXMLTagName(), nmdt);
-                    logger.info(metadata.getXMLTagName());
-
-                  } catch (Exception ignore) {
-
-                    logger.error("here 7:" + ignore.toString());
+                    }
 
                   }
 
-                }
+                  if (metadata.getMetaDataType().equals("HyperlinkMetaData")) {
 
-                if (metadata.getMetaDataType().equals("DateMetaData")) {
+                    try {
 
-                  logger.info("datemetadata");
+                      logger.info("hyperlinkmetadata");
 
-                  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                  DateMetaData     dmdt = new DateMetaData();
+                      HyperlinkMetaData hlmdt = new HyperlinkMetaData();
 
-                  try {
+                      hlmdt.setValue(element.element(metadata.getXMLTagName()).getText());
+                      recset.setValue(metadata.getXMLTagName(), hlmdt);
+                      logger.info(metadata.getXMLTagName());
 
-                    Date d = sdf.parse(element.element(metadata.getXMLTagName()).getText());
+                    } catch (Exception ignore) {
 
-                    dmdt.setValue(d);
-                    recset.setValue(metadata.getXMLTagName(), dmdt);
+                      logger.error("here 6:" + ignore.toString());
 
-                  } catch (Exception ignore) {
+                    }
 
-                    logger.error("here 8:" + ignore.toString());
+                  }
+
+                  if (metadata.getMetaDataType().equals("NumericMetaData")) {
+
+                    try {
+
+                      logger.info("nummetadata");
+
+                      NumericMetaData nmdt = new NumericMetaData();
+
+                      nmdt.setValue(Long.getLong(element.element(metadata.getXMLTagName()).getText()));
+                      recset.setValue(metadata.getXMLTagName(), nmdt);
+                      logger.info(metadata.getXMLTagName());
+
+                    } catch (Exception ignore) {
+
+                      logger.error("here 7:" + ignore.toString());
+
+                    }
+
+                  }
+
+                  if (metadata.getMetaDataType().equals("DateMetaData")) {
+
+                    logger.info("datemetadata");
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    DateMetaData     dmdt = new DateMetaData();
+
+                    try {
+
+                      Date d = sdf.parse(element.element(metadata.getXMLTagName()).getText());
+
+                      dmdt.setValue(d);
+                      recset.setValue(metadata.getXMLTagName(), dmdt);
+
+                    } catch (Exception ignore) {
+
+                      logger.error("here 8:" + ignore.toString());
+
+                    }
 
                   }
 
@@ -456,15 +489,15 @@ public class Harvester {
 
               }
 
+            } catch (Exception exc) {
+
+              logger.fatal(exc.toString());
+
             }
 
-          } catch (Exception exc) {
-
-            logger.fatal(exc.toString());
+            leerobjecten.add(rec);
 
           }
-
-          leerobjecten.add(rec);
 
         }
 
@@ -507,6 +540,9 @@ public class Harvester {
 
         document = reader.read(f);
         logger.info("doc read");
+        //validation will not trigger move of complete file to error
+        //directory. This will be done later on a leerObject level
+        //remarks will be logged
         processValidation(document);
         logger.info("document created and validated");
 
@@ -514,19 +550,68 @@ public class Harvester {
 
         logger.error(ex.getMessage());
 
-        return null;
-
       } catch (Exception exc) {
 
         logger.error(exc.getMessage());
-
-        return null;
 
       }
 
       return document;
 
     }
+
+  }
+
+  /**
+   * Creates a new document from a node, adding the required parent nodes
+   *
+   * @param node that will be cloned and added to the new document
+   *
+   * @return Document containing the passed node with a leerobjecten parent
+   */
+  protected Document createDocument(Element node) {
+
+    Document document = DocumentHelper.createDocument();
+    Element  root = document.addElement("leerobjecten");
+
+    root.add(node.createCopy());
+
+    return document;
+
+  }
+
+  /**
+   * Writes the content of a DOM4J xml document to a file
+   *
+   * @param document to write the contents to a file
+   * @param file name of the file to write the content of document to
+   *
+   * @throws IOException
+   */
+  public void writeDocument2File(Document document, String file)
+                          throws IOException
+  {
+
+    long timestamp = System.currentTimeMillis();
+
+    // lets write to a file
+    XMLWriter writer = new XMLWriter(new FileWriter(MetaZ.getInstance()
+                                                    .getRelativeFile(APPLICATIONZ_REJECTED_PATH + "/" +
+                                                                     Long.toString(timestamp) + file)));
+
+    writer.write(document);
+    writer.close();
+
+    // Pretty print the document to System.out
+    OutputFormat format = OutputFormat.createPrettyPrint();
+
+    writer = new XMLWriter(System.out, format);
+    writer.write(document);
+
+    // Compact format to System.out
+    format = OutputFormat.createCompactFormat();
+    writer = new XMLWriter(System.out, format);
+    writer.write(document);
 
   }
 
