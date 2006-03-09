@@ -6,6 +6,8 @@ import java.util.Vector;
 import junit.framework.TestCase;
 
 import org.metaz.domain.BooleanMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
@@ -19,18 +21,18 @@ public class RepositoryFacadeTest extends TestCase {
     Facade facade;
 
     public RepositoryFacadeTest() {
-        facade = MetaZ.getInstance().getRepositoryFacade();
+        facade = MetaZ.getRepositoryFacade();
     }
 
     @Override
     protected void setUp() throws Exception {
         // clean repository
-        facade.doUpdate(new Vector());
+        facade.doUpdate(new Vector<Record>());
     }
 
     private Record createRecord(String title, boolean secured,
             String fileFormat, String dictaticFunc, String productType,
-            String uri) {
+            String uri,String schoolType) {
         Record record = null;
 
         TextMetaData metaTitle = new TextMetaData();
@@ -61,9 +63,23 @@ public class RepositoryFacadeTest extends TestCase {
         HyperlinkMetaData metaUri = new HyperlinkMetaData();
         metaUri.setName("URI");
         metaUri.setValue(uri);
+        
+        
+        HierarchicalStructuredTextMetaData hv1 = new HierarchicalStructuredTextMetaData();
+        for (int i = 0; i < 4; i++) {
+            TextMetaData tm = new TextMetaData();
+            tm.setValue(schoolType + i);
+            hv1.addChild(tm);            
+        }
+        HierarchicalStructuredTextMetaDataSet metaSchoolType = new HierarchicalStructuredTextMetaDataSet();
+        metaSchoolType.addHierarchy(hv1);
+        
+        
 
         record = new Record(metaTitle, metaSecured, metaFileFormat,
                 metaDidactiFunc, metaProductType, metaUri);
+        
+        record.setSchoolType(metaSchoolType);
 
         return record;
     }
@@ -73,21 +89,21 @@ public class RepositoryFacadeTest extends TestCase {
         List<Record> records = new Vector<Record>();
 
         records.add(createRecord("title1", true, "pdf", "didac1", "type1",
-                "uri1"));
+                "uri1","type_a"));
         records.add(createRecord("title2", true, "txt", "didac2", "type4",
-                "uri2"));
+                "uri2","type_b"));
         records.add(createRecord("title3", true, "htm", "didac4", "type5",
-                "uri3"));
+                "uri3","type_c"));
         records.add(createRecord("title4", true, "xml", "didac1", "type4",
-                "uri4"));
+                "uri4","type_d"));
         records.add(createRecord("title5", true, "pdf", "didac2", "type2",
-                "uri5"));
+                "uri5","type_e"));
         records.add(createRecord("title6", true, "doc", "didac3", "type1",
-                "uri6"));
+                "uri6","type_f"));
         records.add(createRecord("title7", true, "xls", "didac1", "type3",
-                "uri7"));
+                "uri7","type_a"));
         records.add(createRecord("title8", true, "htm", "didac2", "type1",
-                "uri8"));
+                "uri8","type_b"));
         
         return records;
         
@@ -243,7 +259,7 @@ public class RepositoryFacadeTest extends TestCase {
             List values = null;
 
             values = facade.getSchoolTypesValues();
-            assertEquals(0, values.size());
+            assertEquals(6, values.size());
 
         } catch (Exception e) {
             e.printStackTrace();
