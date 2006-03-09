@@ -7,7 +7,7 @@ package org.metaz.domain;
  *
  * @see org.metaz.domain.Record See document Koppelingsspecificatie.doc
  */
-public abstract class MetaData {
+public abstract class MetaData implements Comparable {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
@@ -270,4 +270,31 @@ public abstract class MetaData {
 
   } // end setMetaDataType()
 
+  /**
+   * Returns a representation of this MetaData instance.
+   *
+   * @return string representation.
+   */
+  public String toString() {
+
+      if(this.getValue()!=null){
+          
+          return this.getValue().toString();
+      
+      } else {
+          
+          return "";
+      
+      } //end if
+
+  } // end toString()
+
+  /* (non-Javadoc)
+   * @see java.lang.Comparable#compareTo(T)
+   */
+  public int compareTo(Object other) {
+      // reuse string comparator
+      return toString().compareTo(other.toString());
+  }
+  
 } // end MetaData
