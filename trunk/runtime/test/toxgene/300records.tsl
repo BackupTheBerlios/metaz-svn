@@ -118,7 +118,7 @@
         </tox-list>
 	
 	<tox-list name="leerobject_list" unique="leerobject/uri">
-		<element name="leerobject" minOccurs="3000" maxOccurs="3000">
+		<element name="leerobject" minOccurs="300" maxOccurs="300">
 			<complexType>
 				<element name="uri" type="uri_type"/>
 				<element name="titel">
@@ -321,7 +321,7 @@
                                                 </restriction>
                                             </simpleType>
                                         </element>
-                                        <element name="B" minOccurs="1">
+                                        <element name="b" minOccurs="1">
                                             <simpleType>
                                                 <restriction base="string">
                                                     <minLength value="1"/>
@@ -339,7 +339,7 @@
                                                 </restriction>
                                             </simpleType>
                                         </element>
-                                        <element name="I" minOccurs="1">
+                                        <element name="i" minOccurs="1">
                                             <simpleType>
                                                 <restriction base="string">
                                                     <minLength value="1"/>
@@ -357,7 +357,7 @@
                                                 </restriction>
                                             </simpleType>
                                         </element>
-                                        <element name="U" minOccurs="1">
+                                        <element name="u" minOccurs="1">
                                             <simpleType>
                                                 <restriction base="string">
                                                     <minLength value="1"/>
@@ -513,10 +513,10 @@
 		</element>
 	</tox-list>
 
-	<tox-document name="test/toxgene/output/3000records">
+	<tox-document name="test/toxgene/output/300records">
 		<element name="leerobjecten" minOccurs="1" maxOccurs="1">
 			<complexType>
-				<element name="leerobject" minOccurs="3000" maxOccurs="3000">
+				<element name="leerobject" minOccurs="300" maxOccurs="300">
 					<complexType>
 						<tox-scan path="[leerobject_list/leerobject]" name="sc">
 							<attribute name="URI">
@@ -525,7 +525,7 @@
 	  						<element name="titel">
 								<tox-expr value="[titel]"/>
 			  				</element>
-                                                        <element name="onderwerp" minOccurs="0">
+                                                        <element name="onderwerp">
                                                             <tox-expr value="[onderwerp]"/>
                                                         </element>
 							<element name="didactischeFunctie">
@@ -534,25 +534,25 @@
 							<element name="producttype">
 								<tox-expr value="[productType]"/>
 							</element>
-							<element name="beveiligd" maxOccurs="1">
+							<element name="beveiligd">
 								<tox-expr value="[beveiligd]"/>
 							</element>
-                                                        <element name="didactischScenario" minOccurs="0">
+                                                        <element name="didactischScenario">
                                                             <tox-expr value="[didactischScenario]"/>
                                                         </element>
-                                                        <element name="aggregatieniveau" minOccurs="0">
+                                                        <element name="aggregatieniveau">
                                                             <tox-expr value="[aggregatieniveau]"/>
                                                         </element>
-                                                        <element name="competentie" minOccurs="0">
+                                                        <element name="competentie">
                                                             <tox-expr value="[competentie]"/>
                                                         </element>
-                                                        <element name="rechten" minOccurs="0">
+                                                        <element name="rechten">
                                                             <tox-expr value="[rechten]"/>
                                                         </element>
-                                                        <element name="rolEnNaam" minOccurs="0">
+                                                        <element name="rolEnNaam">
                                                             <tox-expr value="[rolNaamParen]"/>
                                                         </element>
-                                                        <element name="sleutelwoorden" minOccurs="0">
+                                                        <element name="sleutelwoorden">
                                                             <complexType>
                                                                 <element name="sleutelwoord" maxOccurs="unbounded">
                                                                     <simpleType>
@@ -565,62 +565,62 @@
                                                                 </element>
                                                             </complexType>
                                                         </element>
-                                                        <element name="technischeVereiste" minOccurs="0">
+                                                        <element name="technischeVereiste">
                                                             <tox-expr value="[technischeVereiste]"/>
                                                         </element>
-                                                        <element name="datumCreatie" minOccurs="0">
+                                                        <element name="datumCreatie">
                                                             <tox-expr value="[datumCreatie]"/>
                                                         </element>
-                                                        <element name="datumLaatsteWijziging" minOccurs="0">
+                                                        <element name="datumLaatsteWijziging">
                                                             <tox-expr value="[datumLaatsteWijziging]"/>
                                                         </element>
-                                                        <element name="bestandsgrootte" minOccurs="0">
+                                                        <element name="bestandsgrootte">
                                                             <tox-expr value="[bestandsgrootte]"/>
                                                         </element>
-                                                        <element name="benodigdeTijd" minOccurs="0">
+                                                        <element name="benodigdeTijd">
                                                             <tox-expr value="[benodigdeTijd]"/>
                                                         </element>
-                                                        <element name="afspeelduur" minOccurs="0">
+                                                        <element name="afspeelduur">
                                                             <tox-expr value="[afspeelduur]"/>
                                                         </element>
-                                                        <element name="status" minOccurs="0">
+                                                        <element name="status">
                                                             <tox-expr value="[status]"/>
                                                         </element>
-                                                        <element name="versie" minOccurs="0">
+                                                        <element name="versie">
                                                             <tox-expr value="[versie]"/>
                                                         </element>
-                                                        <element name="bestandsformaat" minOccurs="0">
+                                                        <element name="bestandsformaat">
                                                             <tox-expr value="[bestandsformaat]"/>
                                                         </element>
                                                         <!--<element name="omschrijving" minOccurs="0">
                                                             <tox-expr value="[omschrijving]"/>
                                                         </element>-->
-                                                        <element name="omschrijving" minOccurs="0">
+                                                        <element name="omschrijving">
                                                             <complexType mixed="true">
                                                                 <tox-scan path="[$sc/omschrijving/zin1]">
                                                                     <tox-expr value="[!]"/>
                                                                 </tox-scan>
                                                                 <element name="b" minOccurs="0">
-                                                                    <tox-expr value="[omschrijving/B]"/>
+                                                                    <tox-expr value="[omschrijving/b]"/>
                                                                 </element>
                                                                 <tox-scan path="[$sc/omschrijving/zin2]">
                                                                     <tox-expr value="[!]"/>
                                                                 </tox-scan>
                                                                 <element name="i" minOccurs="0">
-                                                                    <tox-expr value="[omschrijving/I]"/>
+                                                                    <tox-expr value="[omschrijving/i]"/>
                                                                 </element>
                                                                 <tox-scan path="[$sc/omschrijving/zin3]">
                                                                     <tox-expr value="[!]"/>
                                                                 </tox-scan>
                                                                 <element name="u">
-                                                                    <tox-expr value="[omschrijving/U]"/>
+                                                                    <tox-expr value="[omschrijving/u]"/>
                                                                 </element>
                                                                 <tox-scan path="[$sc/omschrijving/zin4]">
                                                                     <tox-expr value="[!]"/>
                                                                 </tox-scan>
                                                             </complexType>
                                                         </element>
-                                                        <element name="beoogdeEindgebruiker" minOccurs="0">
+                                                        <element name="beoogdeEindgebruiker">
                                                             <complexType>
                                                                 <element name="hoofdwaarden">
                                                                     <complexType>
@@ -657,7 +657,7 @@
                                                         <!--<element name="beoogdeEindgebruiker" minOccurs="0">
                                                             <tox-expr value="[beoogdeEindgebruiker]"/>
                                                         </element>-->
-                                                        <element name="schooltype" minOccurs="0">
+                                                        <element name="schooltype">
                                                             <complexType>
                                                                 <element name="hoofdwaarden">
                                                                     <complexType>
@@ -768,7 +768,7 @@
                                                         <!--<element name="schooltype" minOccurs="0">
                                                             <tox-expr value="[schooltype]"/>
                                                         </element>-->
-                                                        <element name="vakleergebied" minOccurs="0">
+                                                        <element name="vakleergebied">
                                                             <complexType>
                                                                 <element name="hoofdwaarden">
                                                                     <complexType>
@@ -805,7 +805,7 @@
                                                         <!--<element name="vakleergebied">
                                                             <tox-expr value="[vakleergebied]"/>
                                                         </element>-->
-                                                        <element name="beroepssituatie" minOccurs="0">
+                                                        <element name="beroepssituatie">
                                                             <complexType>
                                                                 <element name="hoofdwaarden">
                                                                     <complexType>

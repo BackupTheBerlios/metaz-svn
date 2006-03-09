@@ -1,3 +1,7 @@
+300records
+==========
+same as 3000records but contains for every record all metadata fields
+
 10records
 =========
 uri: "http://www.google.com/search?q=" + 10digits
