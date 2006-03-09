@@ -26,17 +26,11 @@
 				<element type="string" column="ITEM_VALUE"/>
 			</list>
 		</subclass>
-		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" discriminator-value="HSTMS" lazy="false">			
-			<set name="value" table="SET_TO_LIST" cascade="all" lazy="false">
+		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" discriminator-value="HSTMS" lazy="false" >			
+			<set name="value" table="HIERARCHICAL_METADATA_SET_ITEMS" cascade="all" lazy="false">
 	        	<key column="SET_ID"/>
-        		<many-to-many column="LIST_ID" unique="true" class="org.metaz.domain.HierarchicalStructuredTextMetaData"/>
-    		</set>			
-			<!--
-			<set name="value" table="HIERARCHICAL_METADATA_SET_ITEMS" cascade="all">
-				<key column="ID"/>
-				<element type="string" column="ITEM_VALUE"/>
-			</set> 
-			-->
+        		<many-to-many column="LIST_ID" unique="true" class="org.metaz.domain.HierarchicalStructuredTextMetaData" />
+    		</set>						
 		</subclass>
 		<subclass name="org.metaz.domain.HtmlTextMetaData" discriminator-value="HTMD" lazy="false">
 			<property name="value" column="HTMD_metadata_value" type="string"/>
