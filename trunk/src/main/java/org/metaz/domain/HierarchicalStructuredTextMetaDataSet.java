@@ -63,4 +63,24 @@ public class HierarchicalStructuredTextMetaDataSet extends MetaData {
 
   } // end addHierarchy()
 
+  
+  /**
+   * Returns a representation of this MetaData instance.
+   *
+   * @return string representation.
+   */
+  public String toString() {
+                
+      StringBuffer tstring = new StringBuffer();
+          
+      for(Object val:value){
+              
+          tstring.append(val.toString());
+              
+      } //end for
+          
+      return tstring.toString();
+                        
+  } // end toString()
+  
 } // end HierarchicalStructuredTextMetaDataSet
