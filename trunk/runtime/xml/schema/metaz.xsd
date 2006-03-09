@@ -3,7 +3,7 @@
   <xs:element name="leerobjecten">
     <xs:complexType>
       <xs:all>
-        <xs:element name="leerobject">
+        <xs:element name="leerobject" minOccurs="1" maxOccurs="unbounded">
           <xs:annotation>
             <xs:documentation>
               A sample element
