@@ -9,7 +9,7 @@
 
   <xsl:template match="dependency">
     <xsl:text>%MAVEN_HOME_LOCAL%\repository\</xsl:text>
-	<xsl:value-of select="artifactId"/>
+	<xsl:value-of select="groupId"/>
 	<xsl:text>\jars\</xsl:text>
     <xsl:value-of select="artifactId"/>
 	<xsl:text>-</xsl:text>
