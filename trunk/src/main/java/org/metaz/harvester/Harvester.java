@@ -511,8 +511,6 @@ public class Harvester {
         writeDocument2File(doc, "", f.getName());
         MetaZ.getRepositoryFacade().doUpdate(leerobjecten);
 
-        //write to success dir
-        //writeDocument2File(doc, "", f.getName());
       }
 
       return true;
@@ -723,7 +721,7 @@ public class Harvester {
    * Recursive function to get paths of hierarchical data
    *
    * @param e current element in xml document
-   * @param root DOCUMENT ME!
+   * @param root root element of the hierarchical structure
    * @param hSet Hierarchical set of MetaData
    */
   private void addNodeRecursive(Element e, Element root, HierarchicalStructuredTextMetaDataSet hSet) {
@@ -791,7 +789,7 @@ public class Harvester {
    * Recursive function to get paths of hierarchical data
    *
    * @param e current element in xml document
-   * @param root DOCUMENT ME!
+   * @param root element root of the hierarchical structure
    * @param hMetaData Hierarchical MetaData sequence
    */
   private void addNodeRecursive(Element e, Element root, HierarchicalStructuredTextMetaData hMetaData) {
