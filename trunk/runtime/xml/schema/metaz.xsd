@@ -42,8 +42,8 @@
               <xs:element minOccurs="0" maxOccurs="1" name="datumCreatie" type="xs:date" />
               <xs:element minOccurs="0" maxOccurs="1" name="datumLaatsteWijziging" type="xs:date" />
               <xs:element minOccurs="0" maxOccurs="1" name="bestandsgrootte" type="xs:integer" />
-              <xs:element minOccurs="0" maxOccurs="1" name="benodigdeTijd" type="xs:time" />
-              <xs:element minOccurs="0" maxOccurs="1" name="afspeelduur" type="xs:time" />
+              <xs:element minOccurs="0" maxOccurs="1" name="benodigdeTijd" type="xs:long" />
+              <xs:element minOccurs="0" maxOccurs="1" name="afspeelduur" type="xs:long" />
               <xs:element minOccurs="0" maxOccurs="1" name="versie" type="xs:string" />
               <xs:element minOccurs="0" maxOccurs="1" name="status" type="xs:string" />
               <xs:element minOccurs="0" maxOccurs="1" name="omschrijving" type="omschrijvingType" />
