@@ -205,6 +205,9 @@
          <artifactId>lucene</artifactId>
          <version>1.4.3</version>
          <url>http://lucene.apache.org/java/docs/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -212,6 +215,9 @@
          <artifactId>hsqldb</artifactId>
          <version>1.8.0.1</version>
          <url>http://hsqldb.org/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -219,6 +225,9 @@
          <artifactId>hibernate</artifactId>
          <version>3.0.5</version>
          <url>http://www.hibernate.org/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -240,6 +249,9 @@
          <artifactId>msv</artifactId>
          <version>20030225</version>
          <url>https://msv.dev.java.net/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -294,6 +306,9 @@
          <artifactId>jstl</artifactId>
          <version>1.1.2</version>
          <url>http://jakarta.apache.org/taglibs/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -301,6 +316,9 @@
          <artifactId>standard</artifactId>
          <version>1.1.2</version>
          <url>http://jakarta.apache.org/taglibs/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -318,6 +336,9 @@
          <artifactId>cglib</artifactId>
          <version>2.1_3</version>
          <url>http://cglib.sourceforge.net/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -325,6 +346,9 @@
          <artifactId>relaxngDatatype</artifactId>
          <version>20030807</version>
          <url>https://msv.dev.java.net/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -332,6 +356,9 @@
          <artifactId>isorelax</artifactId>
          <version>20030108</version>
          <url>https://msv.dev.java.net/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -339,6 +366,9 @@
          <artifactId>xsdlib</artifactId>
          <version>20030807</version>
          <url>https://msv.dev.java.net/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -346,6 +376,9 @@
          <artifactId>ehcache</artifactId>
          <version>1.1</version>
          <url>http://ehcache.sourceforge.net/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -353,6 +386,9 @@
          <artifactId>asm</artifactId>
          <version>1.5.3</version>
          <url>http://asm.objectweb.org/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -360,6 +396,15 @@
          <artifactId>antlr</artifactId>
          <version>2.7.6rc1</version>
          <url>http://www.antlr.org/</url>
+         <type>jar</type>
+      </dependency>
+	   <dependency>
+         <groupId>quartz</groupId>
+         <artifactId>quartz</artifactId>
+         <version>1.5.1</version>
+		   <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
 	   <dependency>

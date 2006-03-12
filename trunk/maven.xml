@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:j="jelly:core" xmlns:ant="jelly:ant"
+	xmlns:deploy="deploy">
+	<postGoal name="war:war">
+		<ant:copy failonerror="true" todir="target/metaz" dir="runtime">
+			<fileset dir=".">
+				<include name="**/runtime/**"/>
+			</fileset>
+		</ant:copy>
+		<ant:copy file="metaz.props" todir="target/metaz/WEB-INF/classes" failonerror="false"/>
+	</postGoal>
+</project>
