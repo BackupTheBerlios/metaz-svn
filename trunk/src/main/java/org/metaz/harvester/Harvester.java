@@ -34,9 +34,8 @@ import org.metaz.domain.TextMetaData;
 import org.metaz.util.MetaZ;
 
 //import com.sun.msv.grammar.relaxng.datatype.*;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXParseException;
-
+//import org.xml.sax.ErrorHandler;
+//import org.xml.sax.SAXParseException;
 import java.io.*;
 
 import java.text.*;
@@ -77,7 +76,7 @@ public class Harvester {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Only used as a temporary start-up
    *
    * @param args arguments, first one should contain xml file to parse
    */
@@ -131,11 +130,15 @@ public class Harvester {
 
         if (parseFile(xmlfile)) {
 
-          xmlfile.renameTo(app.getRelativeFile(APPLICATIONZ_PROCESSED_PATH + "/" + Long.toString(timestamp) + f));
+          //if parsing was successfull the file is already saved to the success
+          //folder, so we need to remove the file from the staging folder
+          xmlfile.delete();
 
+          //xmlfile.renameTo(app.getRelativeFile(APPLICATIONZ_PROCESSED_PATH + "/" + Long.toString(timestamp) + f));
         } else {
 
-          xmlfile.renameTo(app.getRelativeFile(APPLICATIONZ_REJECTED_PATH + "/" + Long.toString(timestamp) + f));
+          xmlfile.renameTo(app.getRelativeFile(APPLICATIONZ_REJECTED_PATH + "/" + Long.toString(timestamp) +
+                                               "_complete_" + f));
 
         }
 
@@ -157,9 +160,12 @@ public class Harvester {
 
         long timestamp = System.currentTimeMillis();
 
-        xmlfile.renameTo(app.getRelativeFile(APPLICATIONZ_REJECTED_PATH + "/" + Long.toString(timestamp) + f));
+        xmlfile.renameTo(app.getRelativeFile(APPLICATIONZ_REJECTED_PATH + "/" + Long.toString(timestamp) +
+                                             "_complete_" + f));
 
       } catch (Exception ignore) {
+
+        logger.fatal("Unable to move the file: " + ignore.getMessage());
 
       }
 
@@ -372,7 +378,7 @@ public class Harvester {
 
                       hmdt.setValue(element.element(metadata.getXMLTagName()).getText());
                       recset.setValue(metadata.getXMLTagName(), hmdt);
-                      logger.info(metadata.getXMLTagName());
+                      logger.info(metadata.getXMLTagName() + " : " + hmdt.getValue().toString());
 
                     } catch (Exception ignore) {
 
@@ -452,13 +458,13 @@ public class Harvester {
 
                       NumericMetaData nmdt = new NumericMetaData();
 
-                      nmdt.setValue(Long.getLong(element.element(metadata.getXMLTagName()).getText()));
+                      nmdt.setValue(Long.parseLong(element.element(metadata.getXMLTagName()).getText()));
                       recset.setValue(metadata.getXMLTagName(), nmdt);
-                      logger.info(metadata.getXMLTagName());
+                      logger.info(metadata.getXMLTagName() + ": " + nmdt.getValue());
 
                     } catch (Exception ignore) {
 
-                      logger.error("here 7:" + ignore.toString());
+                      logger.error("here 7:" + ignore.toString() + element.element(metadata.getXMLTagName()).getText());
 
                     }
 
@@ -502,8 +508,11 @@ public class Harvester {
 
         }
 
+        writeDocument2File(doc, "", f.getName());
         MetaZ.getRepositoryFacade().doUpdate(leerobjecten);
 
+        //write to success dir
+        //writeDocument2File(doc, "", f.getName());
       }
 
       return true;
@@ -595,17 +604,21 @@ public class Harvester {
   {
 
     Element root = document.getRootElement();
-    Element errEl = root.addElement("Error");
+    long    timestamp = System.currentTimeMillis();
+    String  path = APPLICATIONZ_PROCESSED_PATH + "/" + Long.toString(timestamp) + file;
 
-    errEl.setText(error);
-    logger.info("Error element created");
+    if (! error.equals("")) {
 
-    long timestamp = System.currentTimeMillis();
+      Element errEl = root.addElement("Error");
+
+      path = APPLICATIONZ_REJECTED_PATH + "/" + Long.toString(timestamp) + file;
+      errEl.setText(error);
+      logger.info("Error element created");
+
+    }
 
     // lets write to a file
-    XMLWriter writer = new XMLWriter(new FileWriter(MetaZ.getInstance()
-                                                    .getRelativeFile(APPLICATIONZ_REJECTED_PATH + "/" +
-                                                                     Long.toString(timestamp) + file)));
+    XMLWriter writer = new XMLWriter(new FileWriter(MetaZ.getInstance().getRelativeFile(path)));
 
     writer.write(document);
     writer.close();
@@ -638,6 +651,12 @@ public class Harvester {
 
     logger.info("Loaded schema document: " + APPLICATIONZ_SCHEMA);
 
+    //write validator to xml
+    Element root = document.getRootElement();
+
+    //add comment with validator
+    root.addComment("Validated by ApplicationZ harvester, developed by Meta/Z projectteam (OTO)");
+
     // use autodetection of schemas
     VerifierFactory factory = new TheFactoryImpl();
 
@@ -650,6 +669,8 @@ public class Harvester {
     Verifier verifier = schema.newVerifier();
 
     logger.info("verifier created");
+
+    //Do not catch validation exceptions, simply propagate the error
 /**
      * 
      verifier.setErrorHandler(
@@ -843,4 +864,3 @@ public class Harvester {
   }
 
 }
-
