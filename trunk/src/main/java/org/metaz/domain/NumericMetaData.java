@@ -12,14 +12,14 @@ public class NumericMetaData extends MetaData {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  private Integer value;
+  private Long value;
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * Returns the integer value
+   * Returns the long value
    *
-   * @return the integer value
+   * @return the long value
    */
   @Override
   public Object getValue() {
@@ -29,14 +29,14 @@ public class NumericMetaData extends MetaData {
   } // end getValue()
 
   /**
-   * Sets the integer value
+   * Sets the long value
    *
-   * @param value the integer value
+   * @param value the long value
    */
   @Override
   public void setValue(Object value) {
 
-    this.value = (Integer) value;
+    this.value = (Long) value;
 
   } // end setValue()
 
