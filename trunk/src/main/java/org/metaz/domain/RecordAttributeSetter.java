@@ -61,16 +61,6 @@ public class RecordAttributeSetter {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
-   *
-   * @param args
-   */
-  public static void main(String[] args) {
-
-    // TODO Auto-generated method stub
-  }
-
-  /**
    * Returns an iterator containing all metadata fields of the record object
    *
    * @return the record iterator
@@ -248,7 +238,7 @@ public class RecordAttributeSetter {
    * @param metadatafield the record metadata field
    * @param value the value
    *
-   * @throws NullPointerException DOCUMENT ME!
+   * @throws NullPointerException 
    */
   public void setValue(String metadatafield, Object value)
                 throws NullPointerException
