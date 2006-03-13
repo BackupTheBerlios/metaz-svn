@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 /**
- * 
+ *
  * Some simple helper methods for debugging and stack traces, etc.
  * Will grow as needed...
  *
@@ -17,9 +17,11 @@ public class Debug extends Object {
 
   //~ Inner Classes ----------------------------------------------------------------------------------------------------
 
-  // static inner helper class
+  /**
+   * static inner helper class
+   */
 
-  static public class OrchestratedException extends Exception {
+  public static class OrchestratedException extends Exception {
 
     // Does nothing particular usefull, just used for pretty output
   }
@@ -35,6 +37,7 @@ public class Debug extends Object {
     * formats an exception
     *
     * @param e The exception nicely formatted
+    * @return a nicely formatted exception
     */
    public static String prettyException(Exception e) {
 

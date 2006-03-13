@@ -3,18 +3,14 @@ package org.metaz.util;
 import java.lang.reflect.Array;
 
 /**
- * Nice helper class to assist with hashCode() function implementations.
- * This class makes sure that you generate a proper hashcode.
- * The sister class of HashCode is Equals.
- * See javadoc for java.lang.Object for more information on both methods.
- * Usage: int result = HashCode.SEED; result = HashCode.hash(result, property_1); 
- * result = HashCode.hash(result, property_2); ... 
- * return   HashCode.hash(result, property_x);
- * 
+ * Nice helper class to assist with hashCode() function implementations. This class makes sure that you generate a
+ * proper hashcode. The sister class of HashCode is Equals. See javadoc for java.lang.Object for more information on
+ * both methods. Usage: int result = HashCode.SEED; result = HashCode.hash(result, property_1); result =
+ * HashCode.hash(result, property_2); ... return   HashCode.hash(result, property_x);
+ *
  * @author author Falco Paul, Open University Netherlands, OTO Meta/Z project
  * @version $Revision$
  */
- 
 public final class HashCode {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
@@ -27,14 +23,37 @@ public final class HashCode {
    */
   public static final int SEED = 23;
 
+  //~ Constructors -----------------------------------------------------------------------------------------------------
+
+  /**
+   * private constructor, prevent instantiation
+   */
+  private HashCode() {
+
+  }
+
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
+  /**
+   * initialize the first term
+   *
+   * @param seed user supplied seed
+   *
+   * @return the first term
+   */
   private static int firstTerm(int seed) {
 
     return ODD_PRIME_NUMBER * seed;
 
   }
 
+  /**
+   * test for array
+   *
+   * @param object the object to test
+   *
+   * @return true if the supplied object is an array
+   */
   private static boolean isArray(Object object) {
 
     return object.getClass().isArray();
@@ -51,7 +70,11 @@ public final class HashCode {
    */
   public static int hash(int seed, boolean value) {
 
-    return firstTerm(seed) + (value ? 1 : 0);
+    if (value)
+
+      return firstTerm(seed) + 1;
+
+    return firstTerm(seed);
 
   }
 

@@ -1,5 +1,13 @@
 package org.metaz.util;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,29 +20,37 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.log4j.Logger;
-
-
 /**
  * Simple utility class that generates a "library" direcotry from a (Maven) JAR tree
  *
  * @author Falco Paul
  */
-public class LibraryDirectoryGenerator {
+public final class LibraryDirectoryGenerator {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   private static Logger logger = MetaZ.getLogger(LibraryDirectoryGenerator.class);
 
+  //~ Constructors -----------------------------------------------------------------------------------------------------
+
+/**
+   * Private constructor, prevents instantiation
+   */
+  private LibraryDirectoryGenerator() {
+
+  }
+
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
-  // Get a list of available JAR's
-  
+  /**
+   * Get a list of available JAR's
+   *
+   * @param dir directory to scan
+   *
+   * @return ArrayList filled with JAR founds (File objects)
+   *
+   * @throws IOException Thrown on some I/O error
+   */
   private static ArrayList getJarListing(File dir)
                                   throws IOException
   {
@@ -77,9 +93,15 @@ public class LibraryDirectoryGenerator {
     return result;
 
   }
-  
-  // Copy available jars to the target library
 
+  /**
+   * Copy available jars to the target library
+   *
+   * @param jarFiles ArrayList filled with JAR files (File objects)
+   * @param libDir Target library directory
+   *
+   * @throws IOException IOException Thrown on some I/O error
+   */
   private static void populateLibraryDirectory(ArrayList jarFiles, File libDir)
                                         throws IOException
   {
@@ -100,7 +122,6 @@ public class LibraryDirectoryGenerator {
       OutputStream out = new FileOutputStream(dest);
 
       // Transfer bytes from in to out
-      
       byte[] buf = new byte[1024];
       int    len;
 
@@ -116,9 +137,13 @@ public class LibraryDirectoryGenerator {
     }
 
   }
-  
-  // Core logic starts here
 
+  /**
+   * Core logic starts here
+   *
+   * @param sourceDirSpec input source directory
+   * @param libDirSpec target library directory
+   */
   private static void createLibrary(String sourceDirSpec, String libDirSpec) {
 
     try {
@@ -147,7 +172,7 @@ public class LibraryDirectoryGenerator {
 
   /**
    * Main method
-   * 
+   *
    * @param args Command line arguments
    */
   public static void main(String[] args) {

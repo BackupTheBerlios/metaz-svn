@@ -9,12 +9,20 @@ package org.metaz.util;
  * Equals.test(this.property_2, that.property_2) && .. Equals.test(this.property_x, that.property_x) &&
  * Equals.test(this.property_y, that.property_y) && Arrays.equals(this.property_z, that.property_z); } Note: use
  * Array.equals() to test for array field equality
- * 
+ *
  * @author author Falco Paul, Open University Netherlands, OTO Meta/Z project
  * @version $Revision$
  */
- 
 public final class Equals {
+
+  //~ Constructors -----------------------------------------------------------------------------------------------------
+
+  /**
+   * private constructor, prevent instantiation
+   */
+  private Equals() {
+
+  }
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -28,7 +36,7 @@ public final class Equals {
    *
    * @return boolean indicating wether these basic checks have passed succesfully
    */
-  static public boolean simpleTest(Object a, Object b) {
+  public static boolean simpleTest(Object a, Object b) {
 
     // real equality?
     if (a == b)
@@ -58,7 +66,7 @@ public final class Equals {
    *
    * @return boolean indicating wether the objects are identicial
    */
-  static public boolean test(boolean a, boolean b) {
+  public static boolean test(boolean a, boolean b) {
 
     return a == b;
 
@@ -72,7 +80,7 @@ public final class Equals {
    *
    * @return boolean indicating wether the objects are identicial
    */
-  static public boolean test(char a, char b) {
+  public static boolean test(char a, char b) {
 
     return a == b;
 
@@ -86,7 +94,7 @@ public final class Equals {
    *
    * @return boolean indicating wether the objects are identicial
    */
-  static public boolean test(long a, long b) {
+  public static boolean test(long a, long b) {
 
     return a == b;
 
@@ -100,7 +108,7 @@ public final class Equals {
    *
    * @return boolean indicating wether the objects are identicial
    */
-  static public boolean test(float a, float b) {
+  public static boolean test(float a, float b) {
 
     return Float.floatToIntBits(a) == Float.floatToIntBits(b);
 
@@ -114,7 +122,7 @@ public final class Equals {
    *
    * @return boolean indicating wether the objects are identicial
    */
-  static public boolean test(double a, double b) {
+  public static boolean test(double a, double b) {
 
     return Double.doubleToLongBits(a) == Double.doubleToLongBits(b);
 
@@ -128,9 +136,15 @@ public final class Equals {
    *
    * @return boolean indicating wether the objects are identicial
    */
-  static public boolean test(Object a, Object b) {
+  public static boolean test(Object a, Object b) {
 
-    return (a == null) ? (b == null) : a.equals(b);
+    if (a == null)
+
+      if (b == null)
+
+        return true;
+
+    return a.equals(b);
 
   }
 

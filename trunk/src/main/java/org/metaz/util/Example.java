@@ -1,21 +1,19 @@
 package org.metaz.util;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 
 import java.util.Arrays;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 // log4j stuff
-
-
 /**
  * Simple example class to demonstrate some org.metaz.util package features
  *
  * @author author Falco Paul, Open University Netherlands, OTO Meta/Z project
  * @version $Revision$
-  */
+ */
 public class Example extends Object {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
@@ -25,10 +23,9 @@ public class Example extends Object {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   // some fake properties for usage in equals() and hashCode() demonstrations
-  
-  public int       property_1;
-  public String    property_2;
-  public Integer[] property_3;
+  private int       property1;
+  private String    property2;
+  private Integer[] property3;
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -39,7 +36,7 @@ public class Example extends Object {
    *
    * @return true if equal, false if unequal
    */
-  public boolean equals(Object anotherObject) {
+  private boolean testEquals(Object anotherObject) {
 
     if (! Equals.simpleTest(this, anotherObject))
 
@@ -49,8 +46,8 @@ public class Example extends Object {
     Example that = (Example) anotherObject;
 
     // Now perform any advanced testing...
-    return Equals.test(this.property_1, that.property_1) && Equals.test(this.property_2, that.property_2) &&
-           Arrays.equals(this.property_3, that.property_3);
+    return Equals.test(this.property1, that.property1) && Equals.test(this.property2, that.property2) &&
+           Arrays.equals(this.property3, that.property3);
 
   }
 
@@ -60,14 +57,14 @@ public class Example extends Object {
    *
    * @return hashcode
    */
-  public int hashCode() {
+  private int testHashCode() {
 
     int result = HashCode.SEED;
 
-    result = HashCode.hash(result, property_1);
-    result = HashCode.hash(result, property_2);
+    result = HashCode.hash(result, property1);
+    result = HashCode.hash(result, property2);
 
-    return HashCode.hash(result, property_3);
+    return HashCode.hash(result, property3);
 
   }
 
@@ -97,7 +94,7 @@ public class Example extends Object {
     } catch (Exception e) {
 
       logger.error(testFile, e);
-      
+
     }
 
     // Make sure we actually see DEBUG output
