@@ -272,8 +272,18 @@
                                         </restriction>
                                     </simpleType>
                                 </element>
-                                <element name="benodigdeTijd" type="tijd_type"/>
-                                <element name="afspeelduur" type="tijd_type"/>
+                                <element name="benodigdeTijd">
+                                    <simpleType>
+                                        <restriction base="positiveInteger">
+                                        </restriction>
+                                    </simpleType>
+                                </element>
+                                <element name="afspeelduur">
+                                    <simpleType>
+                                        <restriction base="positiveInteger">
+                                        </restriction>
+                                    </simpleType>
+                                </element>
                                 <element name="status">
                                     <simpleType>
                                         <restriction base="string">
@@ -321,7 +331,7 @@
                                                 </restriction>
                                             </simpleType>
                                         </element>
-                                        <element name="b" minOccurs="1">
+                                        <element name="B" minOccurs="1">
                                             <simpleType>
                                                 <restriction base="string">
                                                     <minLength value="1"/>
@@ -339,7 +349,7 @@
                                                 </restriction>
                                             </simpleType>
                                         </element>
-                                        <element name="i" minOccurs="1">
+                                        <element name="I" minOccurs="1">
                                             <simpleType>
                                                 <restriction base="string">
                                                     <minLength value="1"/>
@@ -357,7 +367,7 @@
                                                 </restriction>
                                             </simpleType>
                                         </element>
-                                        <element name="u" minOccurs="1">
+                                        <element name="U" minOccurs="1">
                                             <simpleType>
                                                 <restriction base="string">
                                                     <minLength value="1"/>
@@ -513,7 +523,7 @@
 		</element>
 	</tox-list>
 
-	<tox-document name="test/toxgene/output/300records">
+	<tox-document name="test/toxgene/output/temp">
 		<element name="leerobjecten" minOccurs="1" maxOccurs="1">
 			<complexType>
 				<element name="leerobject" minOccurs="300" maxOccurs="300">
@@ -534,7 +544,7 @@
 							<element name="producttype">
 								<tox-expr value="[productType]"/>
 							</element>
-							<element name="beveiligd">
+							<element name="beveiligd" maxOccurs="1">
 								<tox-expr value="[beveiligd]"/>
 							</element>
                                                         <element name="didactischScenario">
@@ -601,19 +611,19 @@
                                                                     <tox-expr value="[!]"/>
                                                                 </tox-scan>
                                                                 <element name="b" minOccurs="0">
-                                                                    <tox-expr value="[omschrijving/b]"/>
+                                                                    <tox-expr value="[omschrijving/B]"/>
                                                                 </element>
                                                                 <tox-scan path="[$sc/omschrijving/zin2]">
                                                                     <tox-expr value="[!]"/>
                                                                 </tox-scan>
                                                                 <element name="i" minOccurs="0">
-                                                                    <tox-expr value="[omschrijving/i]"/>
+                                                                    <tox-expr value="[omschrijving/I]"/>
                                                                 </element>
                                                                 <tox-scan path="[$sc/omschrijving/zin3]">
                                                                     <tox-expr value="[!]"/>
                                                                 </tox-scan>
                                                                 <element name="u">
-                                                                    <tox-expr value="[omschrijving/u]"/>
+                                                                    <tox-expr value="[omschrijving/U]"/>
                                                                 </element>
                                                                 <tox-scan path="[$sc/omschrijving/zin4]">
                                                                     <tox-expr value="[!]"/>

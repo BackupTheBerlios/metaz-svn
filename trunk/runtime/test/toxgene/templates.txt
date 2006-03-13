@@ -1,16 +1,3 @@
-300records
-==========
-same as 3000records but contains for every record all metadata fields
-
-10records
-=========
-uri: "http://www.google.com/search?q=" + 10digits
-title: 1-15 dutch words
-didacticFunction: from list didactischeFuncties.xml
-productType: from list productTypes.xml
-secured: from list beveiligd.xml
-fileFormat: from list bestandsformaten.xml
-
 100records
 ==========
 uri: "http://www.google.com/search?q=" + 20digits

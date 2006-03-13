@@ -272,8 +272,16 @@
                                         </restriction>
                                     </simpleType>
                                 </element>
-                                <element name="benodigdeTijd" type="tijd_type"/>
-                                <element name="afspeelduur" type="tijd_type"/>
+                                <element name="benodigdeTijd">
+                                    <simpleType>
+                                        <restriction base="positiveInteger"/>
+                                    </simpleType>
+                                </element>
+                                <element name="afspeelduur">
+                                    <simpleType>
+                                        <restriction base="positiveInteger"/>
+                                    </simpleType>
+                                </element>
                                 <element name="status">
                                     <simpleType>
                                         <restriction base="string">
@@ -513,7 +521,7 @@
 		</element>
 	</tox-list>
 
-	<tox-document name="test/toxgene/output/10000records">
+	<tox-document name="test/toxgene/output/temp">
 		<element name="leerobjecten" minOccurs="1" maxOccurs="1">
 			<complexType>
 				<element name="leerobject" minOccurs="10000" maxOccurs="10000">

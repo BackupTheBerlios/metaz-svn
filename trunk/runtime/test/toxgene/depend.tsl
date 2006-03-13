@@ -1,0 +1,725 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE tox-template SYSTEM 'http://www.cs.toronto.edu/tox/toxgene/ToXgene2.dtd'>
+
+<tox-template>
+	<tox-distribution name="uniform" minInclusive="0" maxInclusive="100"/>
+        
+        
+        <tox-list name="vakleergebied_list" readFrom="test/toxgene/input/vakleergebieden3.xml">
+            <element name="vakleergebied">
+                <complexType>
+                    <element name="vak" type="string"/>
+                    <element name="onderdeel" type="string"/>
+                    <element name="schooltypes">
+                        <complexType>
+                            <element name="schooltype" maxOccurs="unbounded">
+                                <complexType>
+                                    <element name="niveau1" type="string"/>
+                                    <element name="niveau2" type="string"/>
+                                    <element name="niveau3" type="string"/>
+                                    <element name="niveau4" type="string"/>
+                                    <element name="niveau5" type="string"/>
+                                    <element name="niveau6" type="string"/>
+                                </complexType>
+                            </element>
+                        </complexType>
+                    </element>
+                </complexType>
+            </element>
+        </tox-list>
+	
+	<tox-list name="leerobject_list">
+		<element name="leerobject" minOccurs="1000" maxOccurs="1000">
+			<complexType>
+                            <tox-sample path="[vakleergebied_list/vakleergebied]" name="vlg">
+                                
+                                <element name="vakleergebied">
+                                    <complexType>
+                                        <element name="vak">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <tox-scan path="[$vlg/vak]">
+                                                        <tox-expr value="[!]"/>
+                                                    </tox-scan>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                        <element name="onderdeel">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <tox-scan path="[$vlg/onderdeel]">
+                                                        <tox-expr value="[!]"/>
+                                                    </tox-scan>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                    </complexType>
+                                </element>
+                                
+                                <!--
+                                <element name="schooltypes">
+                                    <complexType>
+                                        <element name="hoofdwaarde" maxOccurs="2">
+                                            <complexType>
+                                                <tox-scan path="[$vlg/schooltypes/schooltype]" name="st">
+                                                    <element name="waarde">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$st/niveau1]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <tox-if expr="DIF([$st/niveau2],'')">
+                                                        <tox-then>
+                                                            <element name="opvolger">
+                                                                <complexType>
+                                                                    <element name="waarde">
+                                                                        <simpleType>
+                                                                            <restriction base="string">
+                                                                                <tox-scan path="[$st/niveau2]">
+                                                                                    <tox-expr value="[!]"/>
+                                                                                </tox-scan>
+                                                                            </restriction>
+                                                                        </simpleType>
+                                                                    </element>
+                                                                    <tox-if expr="DIF([$st/niveau3],'')">
+                                                                        <tox-then>
+                                                                            <element name="opvolger">
+                                                                                <complexType>
+                                                                                    <element name="waarde">
+                                                                                        <simpleType>
+                                                                                            <restriction base="string">
+                                                                                                <tox-scan path="[$st/niveau3]">
+                                                                                                    <tox-expr value="[!]"/>
+                                                                                                </tox-scan>
+                                                                                            </restriction>
+                                                                                        </simpleType>
+                                                                                    </element>
+                                                                                    <tox-if expr="DIF([$st/niveau4],'')">
+                                                                                        <tox-then>
+                                                                                            <element name="opvolger">
+                                                                                                <complexType>
+                                                                                                    <element name="waarde">
+                                                                                                        <simpleType>
+                                                                                                            <restriction base="string">
+                                                                                                                <tox-scan path="[$st/niveau4]">
+                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                </tox-scan>
+                                                                                                            </restriction>
+                                                                                                        </simpleType>
+                                                                                                    </element>
+                                                                                                    <tox-if expr="DIF([$st/niveau5],'')">
+                                                                                                        <tox-then>
+                                                                                                            <element name="opvolger">
+                                                                                                                <complexType>
+                                                                                                                    <element name="waarde">
+                                                                                                                        <simpleType>
+                                                                                                                            <restriction base="string">
+                                                                                                                                <tox-scan path="[$st/niveau5]">
+                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                </tox-scan>
+                                                                                                                            </restriction>
+                                                                                                                        </simpleType>
+                                                                                                                    </element>
+                                                                                                                    <tox-if expr="DIF([$st/niveau6],'')">
+                                                                                                                        <tox-then>
+                                                                                                                            <element name="opvolger">
+                                                                                                                                <complexType>
+                                                                                                                                    <element name="waarde">
+                                                                                                                                        <simpleType>
+                                                                                                                                            <restriction base="string">
+                                                                                                                                                <tox-scan path="[$st/niveau6]">
+                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                </tox-scan>
+                                                                                                                                            </restriction>
+                                                                                                                                        </simpleType>
+                                                                                                                                    </element>
+                                                                                                                                </complexType>
+                                                                                                                            </element>
+                                                                                                                        </tox-then>
+                                                                                                                    </tox-if>
+                                                                                                                </complexType>
+                                                                                                            </element>
+                                                                                                        </tox-then>
+                                                                                                    </tox-if>
+                                                                                                </complexType>
+                                                                                            </element>
+                                                                                        </tox-then>
+                                                                                    </tox-if>
+                                                                                </complexType>
+                                                                            </element>
+                                                                        </tox-then>
+                                                                    </tox-if>
+                                                                </complexType>
+                                                            </element>
+                                                        </tox-then>
+                                                    </tox-if>
+                                                </tox-scan>
+                                            </complexType>
+                                        </element>
+                                    </complexType>
+                                </element>
+                                -->
+                                
+                                                                    
+                                <element name="schooltypes">
+                                    <complexType>
+                                        <element name="schooltype1">
+                                            <complexType>
+                                                <tox-sample path="[$vlg/schooltypes/schooltype]" name="scht">
+                                                    <element name="niveau1">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau1]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau2">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau2]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau3">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau3]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau4">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau4]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau5">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau5]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau6">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau6]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                </tox-sample>
+                                            </complexType>
+                                        </element>
+                                        <element name="schooltype2">
+                                            <complexType>
+                                                <tox-sample path="[$vlg/schooltypes/schooltype]" name="scht">
+                                                    <element name="niveau1">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau1]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau2">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau2]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau3">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau3]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau4">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau4]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau5">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau5]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau6">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau6]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                </tox-sample>
+                                            </complexType>
+                                        </element>
+                                        <element name="schooltype3">
+                                            <complexType>
+                                                <tox-sample path="[$vlg/schooltypes/schooltype]" name="scht">
+                                                    <element name="niveau1">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau1]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau2">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau2]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau3">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau3]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau4">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau4]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau5">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau5]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                    <element name="niveau6">
+                                                        <simpleType>
+                                                            <restriction base="string">
+                                                                <tox-scan path="[$scht/niveau6]">
+                                                                    <tox-expr value="[!]"/>
+                                                                </tox-scan>
+                                                            </restriction>
+                                                        </simpleType>
+                                                    </element>
+                                                </tox-sample>
+                                            </complexType>
+                                        </element>
+                                    </complexType>
+                                </element>
+                                
+                            </tox-sample>
+                                        
+                                
+			</complexType>
+		</element>
+	</tox-list>
+
+	<tox-document name="test/toxgene/output/depend">
+		<element name="leerobjecten" minOccurs="1" maxOccurs="1">
+			<complexType>
+				<element name="leerobject" minOccurs="1000" maxOccurs="1000">
+					<complexType>
+						<tox-scan path="[leerobject_list/leerobject]" name="sc">
+							
+                                                        <element name="vakleergebied">
+                                                            <complexType>
+                                                                <element name="hoofdwaarden">
+                                                                    <complexType>
+                                                                        <element name="hoofdwaarde">
+                                                                            <complexType>
+                                                                                <element name="waarde">
+                                                                                    <simpleType>
+                                                                                        <restriction base="string">
+                                                                                            <tox-scan path="[$sc/vakleergebied/vak]">
+                                                                                                <tox-expr value="[!]"/>
+                                                                                            </tox-scan>
+                                                                                        </restriction>
+                                                                                    </simpleType>
+                                                                                </element>
+                                                                                <tox-if expr="DIF([$sc/vakleergebied/onderdeel],'')">
+                                                                                    <tox-then>
+                                                                                        <element name="simpelopvolger">
+                                                                                            <complexType>
+                                                                                                <element name="waarde">
+                                                                                                    <simpleType>
+                                                                                                        <restriction base="string">
+                                                                                                            <tox-scan path="[$sc/vakleergebied/onderdeel]">
+                                                                                                                <tox-expr value="[!]"/>
+                                                                                                            </tox-scan>
+                                                                                                        </restriction>
+                                                                                                    </simpleType>
+                                                                                                </element>
+                                                                                            </complexType>
+                                                                                        </element>
+                                                                                    </tox-then>
+                                                                                </tox-if>
+                                                                            </complexType>
+                                                                        </element>
+                                                                    </complexType>
+                                                                </element>
+                                                            </complexType>
+                                                        </element>
+                                                        <!--
+                                                        <element name="schooltypes">
+                                                            <tox-expr value="[$sc/schooltypes]"/>
+                                                        </element>
+                                                        -->
+                                                        <element name="schooltype">
+                                                            <complexType>
+                                                                <element name="hoofdwaarden">
+                                                                    <complexType>
+                                                                        <element name="hoofdwaarde">
+                                                                            <complexType>
+                                                                                <tox-scan path="[$sc/schooltypes/schooltype1]" name="st">
+                                                                                    <element name="waarde">
+                                                                                        <simpleType>
+                                                                                            <restriction base="string">
+                                                                                                <tox-scan path="[$st/niveau1]">
+                                                                                                    <tox-expr value="[!]"/>
+                                                                                                </tox-scan>
+                                                                                            </restriction>
+                                                                                        </simpleType>
+                                                                                    </element>
+                                                                                    <tox-if expr="DIF([$st/niveau2],'')">
+                                                                                        <tox-then>
+                                                                                            <element name="opvolger">
+                                                                                                <complexType>
+                                                                                                    <element name="waarde">
+                                                                                                        <simpleType>
+                                                                                                            <restriction base="string">
+                                                                                                                <tox-scan path="[$st/niveau2]">
+                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                </tox-scan>
+                                                                                                            </restriction>
+                                                                                                        </simpleType>
+                                                                                                    </element>
+                                                                                                    <tox-if expr="DIF([$st/niveau3],'')">
+                                                                                                        <tox-then>
+                                                                                                            <element name="opvolger">
+                                                                                                                <complexType>
+                                                                                                                    <element name="waarde">
+                                                                                                                        <simpleType>
+                                                                                                                            <restriction base="string">
+                                                                                                                                <tox-scan path="[$st/niveau3]">
+                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                </tox-scan>
+                                                                                                                            </restriction>
+                                                                                                                        </simpleType>
+                                                                                                                    </element>                                                                                                                
+                                                                                                                    <tox-if expr="DIF([$st/niveau4],'')">
+                                                                                                                        <tox-then>
+                                                                                                                            <element name="opvolger">
+                                                                                                                                <complexType>
+                                                                                                                                    <element name="waarde">
+                                                                                                                                        <simpleType>
+                                                                                                                                            <restriction base="string">
+                                                                                                                                                <tox-scan path="[$st/niveau4]">
+                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                </tox-scan>
+                                                                                                                                            </restriction>
+                                                                                                                                        </simpleType>
+                                                                                                                                    </element>
+                                                                                                                                    <tox-if expr="DIF([$st/niveau5],'')">
+                                                                                                                                        <tox-then>
+                                                                                                                                            <element name="opvolger">
+                                                                                                                                                <complexType>
+                                                                                                                                                    <element name="waarde">
+                                                                                                                                                        <simpleType>
+                                                                                                                                                            <restriction base="string">
+                                                                                                                                                                <tox-scan path="[$st/niveau5]">
+                                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                                </tox-scan>
+                                                                                                                                                            </restriction>
+                                                                                                                                                        </simpleType>
+                                                                                                                                                    </element>
+                                                                                                                                                    <tox-if expr="DIF([$st/niveau6],'')">
+                                                                                                                                                        <tox-then>
+                                                                                                                                                            <element name="opvolger">
+                                                                                                                                                                <complexType>
+                                                                                                                                                                    <element name="waarde">
+                                                                                                                                                                        <simpleType>
+                                                                                                                                                                            <restriction base="string">
+                                                                                                                                                                                <tox-scan path="[$st/niveau6]">
+                                                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                                                </tox-scan>
+                                                                                                                                                                            </restriction>
+                                                                                                                                                                        </simpleType>
+                                                                                                                                                                    </element>
+                                                                                                                                                                </complexType>
+                                                                                                                                                            </element>
+                                                                                                                                                        </tox-then>
+                                                                                                                                                    </tox-if>
+                                                                                                                                                </complexType>
+                                                                                                                                            </element>
+                                                                                                                                        </tox-then>
+                                                                                                                                    </tox-if>
+                                                                                                                                </complexType>
+                                                                                                                            </element>
+                                                                                                                        </tox-then>
+                                                                                                                    </tox-if>
+                                                                                                                </complexType>
+                                                                                                            </element>                                                                                                                    
+                                                                                                        </tox-then> 
+                                                                                                    </tox-if>
+                                                                                                </complexType>
+                                                                                            </element>
+                                                                                        </tox-then>
+                                                                                    </tox-if>
+                                                                                </tox-scan>
+                                                                            </complexType>    
+                                                                        </element>
+                                                                        <element name="hoofdwaarde" minOccurs="0">
+                                                                            <complexType>
+                                                                                <tox-scan path="[$sc/schooltypes/schooltype2]" name="st">
+                                                                                    <element name="waarde">
+                                                                                        <simpleType>
+                                                                                            <restriction base="string">
+                                                                                                <tox-scan path="[$st/niveau1]">
+                                                                                                    <tox-expr value="[!]"/>
+                                                                                                </tox-scan>
+                                                                                            </restriction>
+                                                                                        </simpleType>
+                                                                                    </element>
+                                                                                    <tox-if expr="DIF([$st/niveau2],'')">
+                                                                                        <tox-then>
+                                                                                            <element name="opvolger">
+                                                                                                <complexType>
+                                                                                                    <element name="waarde">
+                                                                                                        <simpleType>
+                                                                                                            <restriction base="string">
+                                                                                                                <tox-scan path="[$st/niveau2]">
+                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                </tox-scan>
+                                                                                                            </restriction>
+                                                                                                        </simpleType>
+                                                                                                    </element>
+                                                                                                    <tox-if expr="DIF([$st/niveau3],'')">
+                                                                                                        <tox-then>
+                                                                                                            <element name="opvolger">
+                                                                                                                <complexType>
+                                                                                                                    <element name="waarde">
+                                                                                                                        <simpleType>
+                                                                                                                            <restriction base="string">
+                                                                                                                                <tox-scan path="[$st/niveau3]">
+                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                </tox-scan>
+                                                                                                                            </restriction>
+                                                                                                                        </simpleType>
+                                                                                                                    </element>                                                                                                                
+                                                                                                                    <tox-if expr="DIF([$st/niveau4],'')">
+                                                                                                                        <tox-then>
+                                                                                                                            <element name="opvolger">
+                                                                                                                                <complexType>
+                                                                                                                                    <element name="waarde">
+                                                                                                                                        <simpleType>
+                                                                                                                                            <restriction base="string">
+                                                                                                                                                <tox-scan path="[$st/niveau4]">
+                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                </tox-scan>
+                                                                                                                                            </restriction>
+                                                                                                                                        </simpleType>
+                                                                                                                                    </element>
+                                                                                                                                    <tox-if expr="DIF([$st/niveau5],'')">
+                                                                                                                                        <tox-then>
+                                                                                                                                            <element name="opvolger">
+                                                                                                                                                <complexType>
+                                                                                                                                                    <element name="waarde">
+                                                                                                                                                        <simpleType>
+                                                                                                                                                            <restriction base="string">
+                                                                                                                                                                <tox-scan path="[$st/niveau5]">
+                                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                                </tox-scan>
+                                                                                                                                                            </restriction>
+                                                                                                                                                        </simpleType>
+                                                                                                                                                    </element>
+                                                                                                                                                    <tox-if expr="DIF([$st/niveau6],'')">
+                                                                                                                                                        <tox-then>
+                                                                                                                                                            <element name="opvolger">
+                                                                                                                                                                <complexType>
+                                                                                                                                                                    <element name="waarde">
+                                                                                                                                                                        <simpleType>
+                                                                                                                                                                            <restriction base="string">
+                                                                                                                                                                                <tox-scan path="[$st/niveau6]">
+                                                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                                                </tox-scan>
+                                                                                                                                                                            </restriction>
+                                                                                                                                                                        </simpleType>
+                                                                                                                                                                    </element>
+                                                                                                                                                                </complexType>
+                                                                                                                                                            </element>
+                                                                                                                                                        </tox-then>
+                                                                                                                                                    </tox-if>
+                                                                                                                                                </complexType>
+                                                                                                                                            </element>
+                                                                                                                                        </tox-then>
+                                                                                                                                    </tox-if>
+                                                                                                                                </complexType>
+                                                                                                                            </element>
+                                                                                                                        </tox-then>
+                                                                                                                    </tox-if>
+                                                                                                                </complexType>
+                                                                                                            </element>                                                                                                                    
+                                                                                                        </tox-then> 
+                                                                                                    </tox-if>
+                                                                                                </complexType>
+                                                                                            </element>
+                                                                                        </tox-then>
+                                                                                    </tox-if>
+                                                                                </tox-scan>
+                                                                            </complexType>    
+                                                                        </element>
+                                                                        <element name="hoofdwaarde" minOccurs="0">
+                                                                            <complexType>
+                                                                                <tox-scan path="[$sc/schooltypes/schooltype3]" name="st">
+                                                                                    <element name="waarde">
+                                                                                        <simpleType>
+                                                                                            <restriction base="string">
+                                                                                                <tox-scan path="[$st/niveau1]">
+                                                                                                    <tox-expr value="[!]"/>
+                                                                                                </tox-scan>
+                                                                                            </restriction>
+                                                                                        </simpleType>
+                                                                                    </element>
+                                                                                    <tox-if expr="DIF([$st/niveau2],'')">
+                                                                                        <tox-then>
+                                                                                            <element name="opvolger">
+                                                                                                <complexType>
+                                                                                                    <element name="waarde">
+                                                                                                        <simpleType>
+                                                                                                            <restriction base="string">
+                                                                                                                <tox-scan path="[$st/niveau2]">
+                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                </tox-scan>
+                                                                                                            </restriction>
+                                                                                                        </simpleType>
+                                                                                                    </element>
+                                                                                                    <tox-if expr="DIF([$st/niveau3],'')">
+                                                                                                        <tox-then>
+                                                                                                            <element name="opvolger">
+                                                                                                                <complexType>
+                                                                                                                    <element name="waarde">
+                                                                                                                        <simpleType>
+                                                                                                                            <restriction base="string">
+                                                                                                                                <tox-scan path="[$st/niveau3]">
+                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                </tox-scan>
+                                                                                                                            </restriction>
+                                                                                                                        </simpleType>
+                                                                                                                    </element>                                                                                                                
+                                                                                                                    <tox-if expr="DIF([$st/niveau4],'')">
+                                                                                                                        <tox-then>
+                                                                                                                            <element name="opvolger">
+                                                                                                                                <complexType>
+                                                                                                                                    <element name="waarde">
+                                                                                                                                        <simpleType>
+                                                                                                                                            <restriction base="string">
+                                                                                                                                                <tox-scan path="[$st/niveau4]">
+                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                </tox-scan>
+                                                                                                                                            </restriction>
+                                                                                                                                        </simpleType>
+                                                                                                                                    </element>
+                                                                                                                                    <tox-if expr="DIF([$st/niveau5],'')">
+                                                                                                                                        <tox-then>
+                                                                                                                                            <element name="opvolger">
+                                                                                                                                                <complexType>
+                                                                                                                                                    <element name="waarde">
+                                                                                                                                                        <simpleType>
+                                                                                                                                                            <restriction base="string">
+                                                                                                                                                                <tox-scan path="[$st/niveau5]">
+                                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                                </tox-scan>
+                                                                                                                                                            </restriction>
+                                                                                                                                                        </simpleType>
+                                                                                                                                                    </element>
+                                                                                                                                                    <tox-if expr="DIF([$st/niveau6],'')">
+                                                                                                                                                        <tox-then>
+                                                                                                                                                            <element name="opvolger">
+                                                                                                                                                                <complexType>
+                                                                                                                                                                    <element name="waarde">
+                                                                                                                                                                        <simpleType>
+                                                                                                                                                                            <restriction base="string">
+                                                                                                                                                                                <tox-scan path="[$st/niveau6]">
+                                                                                                                                                                                    <tox-expr value="[!]"/>
+                                                                                                                                                                                </tox-scan>
+                                                                                                                                                                            </restriction>
+                                                                                                                                                                        </simpleType>
+                                                                                                                                                                    </element>
+                                                                                                                                                                </complexType>
+                                                                                                                                                            </element>
+                                                                                                                                                        </tox-then>
+                                                                                                                                                    </tox-if>
+                                                                                                                                                </complexType>
+                                                                                                                                            </element>
+                                                                                                                                        </tox-then>
+                                                                                                                                    </tox-if>
+                                                                                                                                </complexType>
+                                                                                                                            </element>
+                                                                                                                        </tox-then>
+                                                                                                                    </tox-if>
+                                                                                                                </complexType>
+                                                                                                            </element>                                                                                                                    
+                                                                                                        </tox-then> 
+                                                                                                    </tox-if>
+                                                                                                </complexType>
+                                                                                            </element>
+                                                                                        </tox-then>
+                                                                                    </tox-if>
+                                                                                </tox-scan>
+                                                                            </complexType>    
+                                                                        </element>
+                                                                    </complexType>
+                                                                </element>
+                                                            </complexType>
+                                                        </element>
+                                                        
+						</tox-scan>
+					</complexType>
+				</element>
+			</complexType>
+		</element>
+	</tox-document>
+
+</tox-template>
