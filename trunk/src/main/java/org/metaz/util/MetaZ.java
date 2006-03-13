@@ -1,5 +1,18 @@
 package org.metaz.util;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.PropertyConfigurator;
+
+import org.hibernate.SessionFactory;
+
+import org.hibernate.cfg.Configuration;
+
+import org.metaz.repository.Facade;
+import org.metaz.repository.FacadeFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -11,67 +24,43 @@ import java.net.URLClassLoader;
 
 import java.util.Properties;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.PropertyConfigurator;
-
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import org.metaz.repository.Facade;
-import org.metaz.repository.FacadeFactory;
-
 /**
- * 
- * This is the Meta/Z application instance (implemented as a singleton object).
- * This class offers "global" services to application modules.
- * The singleton pattern assures that only one instance will exist in the VM.
- * Please note that there are some special cases where this may not be true.
- * Fortunally, these cases are very rare and it's not likely w'll have to deal with this.
- * See http://www.javaworld.com/javaworld/jw-01-2001/jw-0112-singleton.html for a discussion.
+ * This is the Meta/Z application instance (implemented as a singleton object). This class offers "global" services
+ * to application modules. The singleton pattern assures that only one instance will exist in the VM. Please note that
+ * there are some special cases where this may not be true. Fortunally, these cases are very rare and it's not likely
+ * w'll have to deal with this. See http://www.javaworld.com/javaworld/jw-01-2001/jw-0112-singleton.html for a
+ * discussion.
  *
- * @author Falco Paul, Open University Netherlands, OTO Meta/Z project 
+ * @author Falco Paul, Open University Netherlands, OTO Meta/Z project
  * @version $Revision$
  */
-
-public class MetaZ
+public final class MetaZ
   implements java.io.Serializable
 {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-  public static final String METAZ_PROPERTIES_FILE = "metaz.props";
-  public static final String METAZ_CONFIG_FILE_PATH = "config/metaz";
-  public static final String PROP_LOG4J_CONFIG_FILE = "log4j.config.file";
-  public static final String PROP_ROOT_DIR = "root.dir";
-
-  /** Global Meta/Z application instance, private and static to force singleton pattern */
-  private static MetaZ instance;
-  private static Logger logger = Logger.getLogger(MetaZ.class); // logger
-
-  // instance for this class
-  private static Facade         facadeInst; // Facade object of the Repository
-  private static SessionFactory hibernateSessionFactory;
+  public static final String    METAZ_PROPERTIES_FILE = "metaz.props"; // name of the metaz properties file
+  public static final String    METAZ_CONFIG_FILE_PATH = "config/metaz"; // metaz configuration directory (relative)
+  public static final String    PROP_LOG4J_CONFIG_FILE = "log4j.config.file"; // default log4j config file propety
+  public static final String    PROP_ROOT_DIR = "root.dir"; // root directory property key
+  private static MetaZ          instance; // Global Meta/Z application instance (singleton)
+  private static Logger         logger = Logger.getLogger(MetaZ.class); // logger
+  private static Facade         facadeInst; // instance for this class
+  private static SessionFactory hibernateSessionFactory; // Facade object of the Repository
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  // a stream pointing to the actual property file in use
-  private InputStream propertyStream = null;
-  
-  // application properties loaded from the above stream
-  private Properties properties = null;
-
-  // log4J configuration file  
-  private String log4JConfigFile = null;
-
-  // set true if logging does not work
-  private boolean verboseOutput = false;
+  private InputStream propertyStream = null; // a stream pointing to the actual property file in use
+  private Properties  properties = null; // application properties loaded from the above stream
+  private String      log4JConfigFile = null; // log4J configuration file
+  private boolean     verboseOutput = false; // set true if logging does not work
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  // private constructor
+  /**
+   * private constructor
+   */
   private MetaZ() {
 
     // set up a default logging style, to be used as a fallback style in
@@ -92,9 +81,11 @@ public class MetaZ
     properties = readProperties();
     log4JConfigFile = getRelativeFileSpec(getProperties().getProperty(PROP_LOG4J_CONFIG_FILE));
 
-    if (log4JConfigFile == null)
+    if (log4JConfigFile == null) {
+
       logger.warn("Could not seed log4J with a configuration file, using default output settings");
-    else {
+
+    } else {
 
       PropertyConfigurator.configure(log4JConfigFile);
       logger.info("Seeded log4J with configuration file <" + log4JConfigFile + ">");
@@ -173,18 +164,17 @@ public class MetaZ
    *
    * @return Logger a fully configured logger object
    */
-  public static Logger getLogger(Class clazz) {
+  public static Logger getLogger(final Class clazz) {
 
     // this next line actually forces initialization of the MetaZ singleton
     // object, which in turns sets up the logger properties
-
     MetaZ metaz = getInstance();
 
-    Logger logger = Logger.getLogger(clazz);
+    Logger newLogger = Logger.getLogger(clazz);
 
-    logger.info("Created Logger object <" + format(logger) + ">");
+    newLogger.info("Created Logger object <" + format(newLogger) + ">");
 
-    return logger;
+    return newLogger;
 
   }
 
@@ -196,7 +186,7 @@ public class MetaZ
    *
    * @return String stringified object
    */
-  public static String format(Object object) {
+  public static String format(final Object object) {
 
     return object.getClass().getName() + '@' + Integer.toHexString(object.hashCode());
 
@@ -221,11 +211,13 @@ public class MetaZ
    * @return A canonical path string (in location file system notation) representing the given file object, or null if
    *         the file object is not representable in the file system
    */
-  public String getPath(File fileObject) {
+  public String getPath(final File fileObject) {
 
-    if (fileObject == null)
+    if (fileObject == null) {
 
       return null;
+
+    }
 
     try {
 
@@ -233,9 +225,8 @@ public class MetaZ
 
     } catch (Exception e) {
 
-      logger.warn("Could not construct a canonical path for this file object <" + 
-                  fileObject.toString() + "> because of an error: " + 
-                  Debug.prettyException(e));
+      logger.warn("Could not construct a canonical path for this file object <" + fileObject.toString() +
+                  "> because of an error: " + Debug.prettyException(e));
 
       return null;
 
@@ -266,22 +257,27 @@ public class MetaZ
     String root = null;
 
     try {
-    
-      if (fileObject == null)
+
+      if (fileObject == null) {
+
         throw new Exception("Could not construct a file object");
 
+      }
+
       root = fileObject.getCanonicalPath();
-      
-      if (root == null)
+
+      if (root == null) {
+
         throw new Exception("Could not retrieve the canonical path");
+
+      }
 
       return fileObject;
 
     } catch (Exception e) {
 
-      logger.warn("Could not construct a canonical path for the MetaZ root directory <" + 
-                  getRootSpec() + "> because of an error: " + 
-                  Debug.prettyException(e));
+      logger.warn("Could not construct a canonical path for the MetaZ root directory <" + getRootSpec() +
+                  "> because of an error: " + Debug.prettyException(e));
 
       return null;
 
@@ -296,11 +292,13 @@ public class MetaZ
    *
    * @return A String representing the complete path for the relative file specification This is _NOT_ a verified path
    */
-  public String getRelativeFileSpec(String relativeFileName) {
+  public String getRelativeFileSpec(final String relativeFileName) {
 
-    if (relativeFileName == null)
+    if (relativeFileName == null) {
 
       return null;
+
+    }
 
     return getPath(getRoot()) + File.separator + relativeFileName;
 
@@ -314,32 +312,39 @@ public class MetaZ
    * @return A File object representing the given file name (file name is relative to the root) Returns null if the
    *         file canonical path could not be constructed
    */
-  public File getRelativeFile(String relativeFileName) {
+  public File getRelativeFile(final String relativeFileName) {
 
-    if (relativeFileName == null)
+    if (relativeFileName == null) {
 
       return null;
+
+    }
 
     File   fileObject = new File(getRelativeFileSpec(relativeFileName));
     String file = null;
 
     try {
-    
-      if (fileObject == null)
+
+      if (fileObject == null) {
+
         throw new Exception("Could not construct a file object");
 
+      }
+
       file = fileObject.getCanonicalPath();
-      
-      if (file == null)
+
+      if (file == null) {
+
         throw new Exception("Could not retrieve the canonical path");
+
+      }
 
       return fileObject;
 
     } catch (Exception e) {
 
       logger.warn("Could not construct a canonical path for the relative file <" +
-                  getRelativeFileSpec(relativeFileName) + "> because of an error: " + 
-                  Debug.prettyException(e));
+                  getRelativeFileSpec(relativeFileName) + "> because of an error: " + Debug.prettyException(e));
 
       return null;
 
@@ -366,9 +371,9 @@ public class MetaZ
    */
   private Properties readProperties() {
 
-    Properties properties = new Properties(System.getProperties());
+    properties = new Properties(System.getProperties());
 
-    String     fileName = System.getProperty("user.home") + File.separator + METAZ_PROPERTIES_FILE;
+    String fileName = System.getProperty("user.home") + File.separator + METAZ_PROPERTIES_FILE;
 
     InputStream propStream = null;
 
@@ -379,8 +384,11 @@ public class MetaZ
 
     } catch (Exception e) {
 
-      if (verboseOutput)
+      if (verboseOutput) {
+
         logger.info("Could not open properties resource file from the user home <" + fileName + ">");
+
+      }
 
     }
 
@@ -395,8 +403,11 @@ public class MetaZ
 
       } catch (Exception e) {
 
-        if (verboseOutput)
+        if (verboseOutput) {
+
           logger.info("Could not open properties resource file from the current directory <" + fileName + ">");
+
+        }
 
       }
 
@@ -407,12 +418,15 @@ public class MetaZ
       // try to load from somewhere in the classpath
       propStream = getResourceStream(METAZ_PROPERTIES_FILE);
 
-      if (propStream == null)
+      if (propStream == null) {
+
         logger.warn("Could not open properties resource file from anywhere in the classpath location <" +
                     getClassPathString(getClassPath()) + ">");
 
+      }
+
     }
-    
+
     propertyStream = null;
 
     // attempt to load, if we obtained a valid stream
@@ -460,29 +474,42 @@ public class MetaZ
    *
    * @return InputStream the located resoruce
    *
-   * @throws IllegalArgumentException DOCUMENT ME!
+   * @throws IllegalArgumentException Thrown if the supplied resource name is null
    */
-  public static InputStream getResourceStream(String resourceName, ClassLoader loader) {
+  public static InputStream getResourceStream(final String resourceName, final ClassLoader loader) {
 
-    if (resourceName == null)
+    if (resourceName == null) {
 
       throw new IllegalArgumentException("Null input for name argument");
 
+    }
+
     StringBuffer name = new StringBuffer(resourceName);
 
-    if (name.charAt(0) == '/')
+    if (name.charAt(0) == '/') {
+
       name.deleteCharAt(0);
+
+    }
 
     // Returns null on lookup failures:
     InputStream in = null;
 
-    if (loader == null)
-      loader = ClassLoader.getSystemClassLoader();
+    ClassLoader classLoader = loader;
 
-    in = loader.getResourceAsStream(name.toString());
+    if (classLoader == null) {
 
-    if (in == null)
+      classLoader = ClassLoader.getSystemClassLoader();
+
+    }
+
+    in = classLoader.getResourceAsStream(name.toString());
+
+    if (in == null) {
+
       logger.info("Cannot open stream for resource <" + name.toString() + ">");
+
+    }
 
     return in;
 
@@ -496,7 +523,7 @@ public class MetaZ
    *
    * @return A Properties object seeded with the properties from the supplied file name
    */
-  public static InputStream getResourceStream(String resourceName) {
+  public static InputStream getResourceStream(final String resourceName) {
 
     return getResourceStream(resourceName, Thread.currentThread().getContextClassLoader());
 
@@ -509,12 +536,17 @@ public class MetaZ
    *
    * @return the array of URL's representing the classpath
    */
-  public static URL[] getClassPath(ClassLoader loader) {
+  public static URL[] getClassPath(final ClassLoader loader) {
 
-    if (loader == null)
-      loader = ClassLoader.getSystemClassLoader();
+    ClassLoader classLoader = loader;
 
-    return ((URLClassLoader) loader).getURLs();
+    if (classLoader == null) {
+
+      classLoader = ClassLoader.getSystemClassLoader();
+
+    }
+
+    return ((URLClassLoader) classLoader).getURLs();
 
   }
 
@@ -537,14 +569,17 @@ public class MetaZ
    *
    * @return Stringified classpath
    */
-  public static String getClassPathString(URL[] classPath) {
+  public static String getClassPathString(final URL[] classPath) {
 
     StringBuffer path = new StringBuffer();
 
     for (int i = 0; i < classPath.length; i++) {
 
-      if (path.length() > 0)
+      if (path.length() > 0) {
+
         path.append(System.getProperty("path.separator"));
+
+      }
 
       path.append(classPath[i].toString());
 

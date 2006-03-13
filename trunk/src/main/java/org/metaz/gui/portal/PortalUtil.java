@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author $author$
  * @version $Revision$
-  */
+ */
 public class PortalUtil {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
@@ -592,7 +592,7 @@ public class PortalUtil {
 
     for (i = 0; i < s1.length(); ++i) {
 
-      char   ch = s1.charAt(i);
+      char ch = s1.charAt(i);
 
       String entity = (String) i2e.get(new Integer((int) ch));
 
@@ -687,10 +687,7 @@ public class PortalUtil {
 
   /**
    * Prepares a string for output inside a JavaScript string, e.g. for use inside a document.write("") command.
-   * Example:<pre>
-input string: He didn't say, "Stop!"
-output string: He didn\'t say, \"Stop!\"
-</pre>Deals with
+   * Example:<pre> input string: He didn't say, "Stop!" output string: He didn\'t say, \"Stop!\" </pre>Deals with
    * quotes and control-chars (tab, backslash, cr, ff, etc.) Bug: does not yet properly escape Unicode / high-bit
    * characters.
    *
@@ -719,7 +716,7 @@ output string: He didn\'t say, \"Stop!\"
   }
 
   /**
-   * 
+   *
    * @see #javaEscape(String, Writer)
    */
   public static String javaEscape(String source) {
@@ -834,8 +831,7 @@ output string: He didn\'t say, \"Stop!\"
             out.write("\\u");
             zeroPad(out, Integer.toHexString(ch).toUpperCase(), 4);
 
-          }
-          else {
+          } else {
 
             out.write(ch);
 
@@ -851,10 +847,7 @@ output string: He didn\'t say, \"Stop!\"
 
   /**
    * Prepares a string for output inside a JavaScript string, e.g. for use inside a document.write("") command.
-   * Example:<pre>
-input string: He didn't say, "stop!"
-output string: He didn\'t say, \"stop!\"
-</pre>Deals with
+   * Example:<pre> input string: He didn't say, "stop!" output string: He didn\'t say, \"stop!\" </pre>Deals with
    * quotes and control-chars (tab, backslash, cr, ff, etc.)
    *
    * @see #jsEscape(String)
@@ -868,12 +861,9 @@ output string: He didn\'t say, \"stop!\"
   }
 
   /**
-   * Prepares a string for output inside a Java string, Example:
-   * <pre>
-input string: He didn't say, "stop!"
-output string: He didn't say, \"stop!\"
-</pre>Deals with quotes
-   * and control-chars (tab, backslash, cr, ff, etc.)
+   * Prepares a string for output inside a Java string, Example:<pre> input string: He didn't say, "stop!"
+   *  output string: He didn't say, \"stop!\" </pre>Deals with quotes and control-chars (tab, backslash, cr, ff,
+   * etc.)
    *
    * @see #jsEscape(String,Writer)
    */
