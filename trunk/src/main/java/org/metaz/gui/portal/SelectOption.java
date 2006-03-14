@@ -1,12 +1,12 @@
 package org.metaz.gui.portal;
 
 /**
- * This class is a HTML "select option" abstraction
+ * This class represents EXACTLY ONE "select option"
+ * Very usefull to represent HTML select options
  *
  * @author Falco Paul
  * @version $Revision$
  */
- 
 public final class SelectOption {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
@@ -18,6 +18,14 @@ public final class SelectOption {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
+/**
+   * Contructor
+   *
+   * @param selected Is option selected?
+   * @param value Option value
+   * @param description Option description
+   * @param object Optional payload
+   */
   public SelectOption(boolean selected, String value, String description, Object object) {
 
     this.selected = selected;
@@ -27,16 +35,35 @@ public final class SelectOption {
 
   }
 
+/**
+   * Contructor
+   *
+   * @param selected Is option selected?
+   * @param value Option value
+   * @param description Option description
+   */
   public SelectOption(boolean selected, String value, String description) {
     this(selected, value, description, null);
 
   }
 
+/**
+   * Contructor
+   *
+   * @param value Option value
+   * @param description Option description
+   */
   public SelectOption(String value, String description) {
     this(false, value, description, null);
 
   }
 
+/**
+   * Contructor
+   *
+   * @param selected Is option selected?
+   * @param description Option description
+   */
   public SelectOption(boolean selected, String description) {
     // warning: hashcode() can be negative!!!
     // to prevent "ugly" values I generate "Long" hexadecimal values
@@ -44,6 +71,11 @@ public final class SelectOption {
 
   }
 
+/**
+   * Contructor
+   *
+   * @param description Option description
+   */
   public SelectOption(String description) {
     // warning: hashcode() can be negative!!!
     // to prevent "ugly" values I generate "Long" hexadecimal values
@@ -79,7 +111,6 @@ public final class SelectOption {
    * Wrapper for toHtml(SelectOption option)
    *
    * @return HMTL representation of the invoking instance
-   *
    */
   public String toHtml() {
 

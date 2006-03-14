@@ -7,14 +7,18 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /**
+ * This class represents a list of select options
+ *
  * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public final class SelectOptionList extends ArrayList<SelectOption> {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
+   * Returns a HTML representation for the given list of select options
+   *
    * @param options a list of options
    *
    * @return HTML representation of the given options

@@ -1,7 +1,5 @@
 package org.metaz.gui.portal;
 
-import org.apache.log4j.Logger;
-
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
@@ -10,7 +8,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  *
  * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public class SetPortalContentTag extends BodyTagSupport {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
@@ -42,9 +40,7 @@ public class SetPortalContentTag extends BodyTagSupport {
   }
 
   /**
-   * TagSupport contract method ... 
-   * 
-   * Used to mark the start of an injectable source
+   * TagSupport contract method ...   Used to mark the start of an injectable source
    *
    * @return EVAL_BODY_BUFFERED constant
    */
@@ -57,10 +53,8 @@ public class SetPortalContentTag extends BodyTagSupport {
   }
 
   /**
-   * TagSupport contract method ... 
-   * 
-   * Used to mark the end of an injectable source
-   * Stores the injectable source as a request attribute
+   * TagSupport contract method ...   Used to mark the end of an injectable source Stores the injectable source
+   * as a request attribute
    *
    * @return SKIP_BODY constant
    *

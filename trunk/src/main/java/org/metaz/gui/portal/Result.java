@@ -1,11 +1,10 @@
 package org.metaz.gui.portal;
 
-
-// @author: Falco Paul
 /**
- * DOCUMENT ME!
+ * This class represents EXACTLY ONE search result
+ * A search result is defined of all the information that represents a match
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
   */
 public final class Result {
@@ -18,31 +17,38 @@ public final class Result {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  public Result(String name, String productType, String description) {
+  /**
+   * Constructor that takes the most common parameters
+   *
+   * @param setName Name
+   * @param setProductType Product type
+   * @param setDescription Description
+   */
+  public Result(String setName, String setProductType, String setDescription) {
 
-    this.name = name;
-    this.productType = productType;
-    this.description = description;
+    this.name = setName;
+    this.productType = setProductType;
+    this.description = setDescription;
 
   }
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Name setter
    *
-   * @param name DOCUMENT ME!
+   * @param setName Name
    */
-  public void setName(String name) {
+  public void setName(String setName) {
 
-    this.name = name;
+    this.name = setName;
 
   }
 
   /**
-   * DOCUMENT ME!
+   * Name getter
    *
-   * @return DOCUMENT ME!
+   * @return Name
    */
   public String getName() {
 
@@ -51,20 +57,20 @@ public final class Result {
   }
 
   /**
-   * DOCUMENT ME!
+   * Product type setter
    *
-   * @param productType DOCUMENT ME!
+   * @param setProductType Product type
    */
-  public void setProductType(String productType) {
+  public void setProductType(String setProductType) {
 
-    this.productType = productType;
+    this.productType = setProductType;
 
   }
 
   /**
-   * DOCUMENT ME!
+   * Product type getter
    *
-   * @return DOCUMENT ME!
+   * @return Product type
    */
   public String getProductType() {
 
@@ -73,20 +79,20 @@ public final class Result {
   }
 
   /**
-   * DOCUMENT ME!
+   * Description setter
    *
-   * @param description DOCUMENT ME!
+   * @param setDescription Description
    */
-  public void setDescription(String description) {
+  public void setDescription(String setDescription) {
 
-    this.description = description;
+    this.description = setDescription;
 
   }
 
   /**
-   * DOCUMENT ME!
+   * Description getter
    *
-   * @return DOCUMENT ME!
+   * @return Description
    */
   public String getDescription() {
 

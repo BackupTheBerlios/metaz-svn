@@ -2,27 +2,30 @@ package org.metaz.gui.portal;
 
 import org.metaz.domain.Record;
 
-import java.net.URL;
-
 import java.util.ArrayList;
 
-// @author: Falco Paul
 /**
- * DOCUMENT ME!
+ * This class represents a list of record details
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public final class RecordDetailsList extends ArrayList<RecordDetail> {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  // empty constructor
+  /**
+   * empty constructor
+   */
   public RecordDetailsList() {
 
   }
 
-  // Constructor based on a Record
+  /**
+   * Constructor based on a given Record
+   *
+   * @param record Input record
+   */
   public RecordDetailsList(Record record) {
 
     // Sample

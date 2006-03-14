@@ -1,21 +1,20 @@
 package org.metaz.gui.portal;
 
-import org.metaz.domain.Record;
-
 import java.util.ArrayList;
 
-// @author: Falco Paul
 /**
- * DOCUMENT ME!
+ * This class represents a list of search results
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
   */
 public final class ResultList extends ArrayList<Result> {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  // empty constructor
+  /**
+   * empty constructor
+   */
   public ResultList() {
 
   }

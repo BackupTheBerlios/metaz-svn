@@ -1,13 +1,11 @@
 package org.metaz.gui.portal;
 
-
-// @author: Falco Paul
 /**
- * DOCUMENT ME!
+ * This class represents EXACTLY ONE detail of a retrieved search record
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public final class RecordDetail {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
@@ -17,30 +15,36 @@ public final class RecordDetail {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  public RecordDetail(String name, Object value) {
+/**
+   * Constructor that accepts the basic "record detail" values
+   *
+   * @param setName Name
+   * @param setValue Value
+   */
+  public RecordDetail(String setName, Object setValue) {
 
-    this.name = name;
-    this.value = value;
+    this.name = setName;
+    this.value = setValue;
 
   }
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Name setter
    *
-   * @param name DOCUMENT ME!
+   * @param setName Name
    */
-  public void setName(String name) {
+  public void setName(String setName) {
 
-    this.name = name;
+    this.name = setName;
 
   }
 
   /**
-   * DOCUMENT ME!
+   * Name getter
    *
-   * @return DOCUMENT ME!
+   * @return Name
    */
   public String getName() {
 
@@ -49,20 +53,20 @@ public final class RecordDetail {
   }
 
   /**
-   * DOCUMENT ME!
+   * Value setter
    *
-   * @param value DOCUMENT ME!
+   * @param setValue Value
    */
-  public void setValue(String value) {
+  public void setValue(String setValue) {
 
-    this.value = value;
+    this.value = setValue;
 
   }
 
   /**
-   * DOCUMENT ME!
+   * Value getter
    *
-   * @return DOCUMENT ME!
+   * @return Value
    */
   public Object getValue() {
 
