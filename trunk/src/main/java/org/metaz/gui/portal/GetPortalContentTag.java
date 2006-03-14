@@ -1,5 +1,3 @@
-// This is an abstract class that is used to set "forward" content in a JSP page
-// Author: Falco Paul
 package org.metaz.gui.portal;
 
 import org.apache.log4j.Logger;
@@ -10,9 +8,10 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * DOCUMENT ME!
+ * Tag class that allows "forward" definition of content in JSP pages ('getter')
+ * This class will inject previously 'set' forward content
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
   */
 public class GetPortalContentTag extends TagSupport {
@@ -29,7 +28,7 @@ public class GetPortalContentTag extends TagSupport {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Setter for name
    *
    * @param setName DOCUMENT ME!
    */
@@ -40,7 +39,7 @@ public class GetPortalContentTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * Getter for name
    *
    * @return DOCUMENT ME!
    */
@@ -51,7 +50,7 @@ public class GetPortalContentTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * Sets default value
    *
    * @param setDefaultValue DOCUMENT ME!
    */
@@ -65,7 +64,7 @@ public class GetPortalContentTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * Gets default value
    *
    * @return DOCUMENT ME!
    */
@@ -76,7 +75,7 @@ public class GetPortalContentTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * Tag contract method: starts tag
    *
    * @return DOCUMENT ME!
    */
@@ -87,7 +86,7 @@ public class GetPortalContentTag extends TagSupport {
   }
 
   /**
-   * DOCUMENT ME!
+   * Tag contract method: ends tag
    *
    * @return DOCUMENT ME!
    *
@@ -112,7 +111,8 @@ public class GetPortalContentTag extends TagSupport {
 
     } catch (IOException e) {
 
-      // ignore
+      logger.info("I/O error on tag output", e);
+
     }
 
     return EVAL_PAGE;

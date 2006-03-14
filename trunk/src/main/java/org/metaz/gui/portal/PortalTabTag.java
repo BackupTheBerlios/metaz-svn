@@ -1,4 +1,3 @@
-// @author: Falco Paul
 package org.metaz.gui.portal;
 
 import java.io.IOException;
@@ -10,9 +9,9 @@ import javax.servlet.jsp.tagext.TagSupport;
 /**
  * JSP tag file to support 'tabbed' interface
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public class PortalTabTag extends TagSupport {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
@@ -28,7 +27,7 @@ public class PortalTabTag extends TagSupport {
   public static final String TAB_HELP = "HELP";
   public static final String TAB_INFO = "INFO";
   public static final String TAB_RDMC = "RDMC";
-  
+
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
@@ -43,7 +42,7 @@ public class PortalTabTag extends TagSupport {
   }
 
   /**
-   * TagSupport contract method ... 
+   * TagSupport contract method ...
    *
    * @return SKIP_BODY constant
    */
@@ -55,6 +54,8 @@ public class PortalTabTag extends TagSupport {
 
   /**
    * Helper function... print html to the page context
+   *
+   * @param html the HTML to print
    */
   private void printHtml(String html) {
 
@@ -65,13 +66,18 @@ public class PortalTabTag extends TagSupport {
     } catch (IOException e) {
 
       return; // no special handling
-      
+
     }
 
   }
 
   /**
    * Helper function... 'adds' a tab to the output
+   *
+   * @param tabId the tab ID that's being added
+   * @param text the text to appear on the tab
+   * @param url URL that the tab is pointing to
+   * @param tooltip the tab's tooltip
    */
   private void addTab(String tabId, String text, String url, String tooltip) {
 
@@ -93,6 +99,10 @@ public class PortalTabTag extends TagSupport {
 
   /**
    * Helper function: generates a proper URL based on the web container environment
+   *
+   * @param url the basic URL that will be extended
+   *
+   * @return the extended URL, which includes the web container
    */
   private String url(String url) {
 
@@ -101,9 +111,7 @@ public class PortalTabTag extends TagSupport {
   }
 
   /**
-   * TagSupport contract method ... 
-   * 
-   * Injects the tabbed interface into the page
+   * TagSupport contract method ...   Injects the tabbed interface into the page
    *
    * @return EVAL_PAGE constant
    *

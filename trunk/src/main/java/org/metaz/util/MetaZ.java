@@ -168,11 +168,11 @@ public final class MetaZ
 
     // this next line actually forces initialization of the MetaZ singleton
     // object, which in turns sets up the logger properties
-    MetaZ metaz = getInstance();
+    getInstance();
 
     Logger newLogger = Logger.getLogger(clazz);
 
-    newLogger.info("Created Logger object <" + format(newLogger) + ">");
+    logger.info("Created Logger object <" + format(newLogger) + ">");
 
     return newLogger;
 

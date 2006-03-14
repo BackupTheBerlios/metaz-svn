@@ -1,4 +1,3 @@
-// @author: Falco Paul
 package org.metaz.gui.portal;
 
 import org.apache.log4j.Logger;
@@ -18,244 +17,244 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * DOCUMENT ME!
+ * Utility functions for the portal package
  *
- * @author $author$
+ * @author Falco Paul
  * @version $Revision$
  */
-public class PortalUtil {
+public final class PortalUtil {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   // entities for HTML escaping
   // see http://hotwired.lycos.com/webmonkey/reference/special_characters/
-  static Object[][] entities = {
-                                 // {"#39", new Integer(39)},       // ' - apostrophe
-                                 {"quot", new Integer(34)
-                                 },
-                                 { // " - double-quote
+  private static Object[][] entities = {
+                                         // {"#39", new Integer(39)},       // ' - apostrophe
+                                         {"quot", new Integer(34)
+                                         },
+                                         { // " - double-quote
     "amp", new Integer(38)
-                                 },
-                                 { // & - ampersand
+                                         },
+                                         { // & - ampersand
     "lt", new Integer(60)
-                                 },
-                                 { // < - less-than
+                                         },
+                                         { // < - less-than
     "gt", new Integer(62)
-                                 },
-                                 { // > - greater-than
+                                         },
+                                         { // > - greater-than
     "nbsp", new Integer(160)
-                                 },
-                                 { // non-breaking space
+                                         },
+                                         { // non-breaking space
     "copy", new Integer(169)
-                                 },
-                                 { // © - copyright
+                                         },
+                                         { // © - copyright
     "reg", new Integer(174)
-                                 },
-                                 { // ® - registered trademark
+                                         },
+                                         { // ® - registered trademark
     "Agrave", new Integer(192)
-                                 },
-                                 { // À - uppercase A, grave accent
+                                         },
+                                         { // À - uppercase A, grave accent
     "Aacute", new Integer(193)
-                                 },
-                                 { // Á - uppercase A, acute accent
+                                         },
+                                         { // Á - uppercase A, acute accent
     "Acirc", new Integer(194)
-                                 },
-                                 { // Â - uppercase A, circumflex accent
+                                         },
+                                         { // Â - uppercase A, circumflex accent
     "Atilde", new Integer(195)
-                                 },
-                                 { // Ã - uppercase A, tilde
+                                         },
+                                         { // Ã - uppercase A, tilde
     "Auml", new Integer(196)
-                                 },
-                                 { // Ä - uppercase A, umlaut
+                                         },
+                                         { // Ä - uppercase A, umlaut
     "Aring", new Integer(197)
-                                 },
-                                 { // Å - uppercase A, ring
+                                         },
+                                         { // Å - uppercase A, ring
     "AElig", new Integer(198)
-                                 },
-                                 { // Æ - uppercase AE
+                                         },
+                                         { // Æ - uppercase AE
     "Ccedil", new Integer(199)
-                                 },
-                                 { // Ç - uppercase C, cedilla
+                                         },
+                                         { // Ç - uppercase C, cedilla
     "Egrave", new Integer(200)
-                                 },
-                                 { // È - uppercase E, grave accent
+                                         },
+                                         { // È - uppercase E, grave accent
     "Eacute", new Integer(201)
-                                 },
-                                 { // É - uppercase E, acute accent
+                                         },
+                                         { // É - uppercase E, acute accent
     "Ecirc", new Integer(202)
-                                 },
-                                 { // Ê - uppercase E, circumflex accent
+                                         },
+                                         { // Ê - uppercase E, circumflex accent
     "Euml", new Integer(203)
-                                 },
-                                 { // Ë - uppercase E, umlaut
+                                         },
+                                         { // Ë - uppercase E, umlaut
     "Igrave", new Integer(204)
-                                 },
-                                 { // Ì - uppercase I, grave accent
+                                         },
+                                         { // Ì - uppercase I, grave accent
     "Iacute", new Integer(205)
-                                 },
-                                 { // Í - uppercase I, acute accent
+                                         },
+                                         { // Í - uppercase I, acute accent
     "Icirc", new Integer(206)
-                                 },
-                                 { // Î - uppercase I, circumflex accent
+                                         },
+                                         { // Î - uppercase I, circumflex accent
     "Iuml", new Integer(207)
-                                 },
-                                 { // Ï - uppercase I, umlaut
+                                         },
+                                         { // Ï - uppercase I, umlaut
     "ETH", new Integer(208)
-                                 },
-                                 { // Ð - uppercase Eth, Icelandic
+                                         },
+                                         { // Ð - uppercase Eth, Icelandic
     "Ntilde", new Integer(209)
-                                 },
-                                 { // Ñ - uppercase N, tilde
+                                         },
+                                         { // Ñ - uppercase N, tilde
     "Ograve", new Integer(210)
-                                 },
-                                 { // Ò - uppercase O, grave accent
+                                         },
+                                         { // Ò - uppercase O, grave accent
     "Oacute", new Integer(211)
-                                 },
-                                 { // Ó - uppercase O, acute accent
+                                         },
+                                         { // Ó - uppercase O, acute accent
     "Ocirc", new Integer(212)
-                                 },
-                                 { // Ô - uppercase O, circumflex accent
+                                         },
+                                         { // Ô - uppercase O, circumflex accent
     "Otilde", new Integer(213)
-                                 },
-                                 { // Õ - uppercase O, tilde
+                                         },
+                                         { // Õ - uppercase O, tilde
     "Ouml", new Integer(214)
-                                 },
-                                 { // Ö - uppercase O, umlaut
+                                         },
+                                         { // Ö - uppercase O, umlaut
     "Oslash", new Integer(216)
-                                 },
-                                 { // Ø - uppercase O, slash
+                                         },
+                                         { // Ø - uppercase O, slash
     "Ugrave", new Integer(217)
-                                 },
-                                 { // Ù - uppercase U, grave accent
+                                         },
+                                         { // Ù - uppercase U, grave accent
     "Uacute", new Integer(218)
-                                 },
-                                 { // Ú - uppercase U, acute accent
+                                         },
+                                         { // Ú - uppercase U, acute accent
     "Ucirc", new Integer(219)
-                                 },
-                                 { // Û - uppercase U, circumflex accent
+                                         },
+                                         { // Û - uppercase U, circumflex accent
     "Uuml", new Integer(220)
-                                 },
-                                 { // Ü - uppercase U, umlaut
+                                         },
+                                         { // Ü - uppercase U, umlaut
     "Yacute", new Integer(221)
-                                 },
-                                 { // Ý - uppercase Y, acute accent
+                                         },
+                                         { // Ý - uppercase Y, acute accent
     "THORN", new Integer(222)
-                                 },
-                                 { // Þ - uppercase THORN, Icelandic
+                                         },
+                                         { // Þ - uppercase THORN, Icelandic
     "szlig", new Integer(223)
-                                 },
-                                 { // ß - lowercase sharps, German
+                                         },
+                                         { // ß - lowercase sharps, German
     "agrave", new Integer(224)
-                                 },
-                                 { // à - lowercase a, grave accent
+                                         },
+                                         { // à - lowercase a, grave accent
     "aacute", new Integer(225)
-                                 },
-                                 { // á - lowercase a, acute accent
+                                         },
+                                         { // á - lowercase a, acute accent
     "acirc", new Integer(226)
-                                 },
-                                 { // â - lowercase a, circumflex accent
+                                         },
+                                         { // â - lowercase a, circumflex accent
     "atilde", new Integer(227)
-                                 },
-                                 { // ã - lowercase a, tilde
+                                         },
+                                         { // ã - lowercase a, tilde
     "auml", new Integer(228)
-                                 },
-                                 { // ä - lowercase a, umlaut
+                                         },
+                                         { // ä - lowercase a, umlaut
     "aring", new Integer(229)
-                                 },
-                                 { // å - lowercase a, ring
+                                         },
+                                         { // å - lowercase a, ring
     "aelig", new Integer(230)
-                                 },
-                                 { // æ - lowercase ae
+                                         },
+                                         { // æ - lowercase ae
     "ccedil", new Integer(231)
-                                 },
-                                 { // ç - lowercase c, cedilla
+                                         },
+                                         { // ç - lowercase c, cedilla
     "egrave", new Integer(232)
-                                 },
-                                 { // è - lowercase e, grave accent
+                                         },
+                                         { // è - lowercase e, grave accent
     "eacute", new Integer(233)
-                                 },
-                                 { // é - lowercase e, acute accent
+                                         },
+                                         { // é - lowercase e, acute accent
     "ecirc", new Integer(234)
-                                 },
-                                 { // ê - lowercase e, circumflex accent
+                                         },
+                                         { // ê - lowercase e, circumflex accent
     "euml", new Integer(235)
-                                 },
-                                 { // ë - lowercase e, umlaut
+                                         },
+                                         { // ë - lowercase e, umlaut
     "igrave", new Integer(236)
-                                 },
-                                 { // ì - lowercase i, grave accent
+                                         },
+                                         { // ì - lowercase i, grave accent
     "iacute", new Integer(237)
-                                 },
-                                 { // í - lowercase i, acute accent
+                                         },
+                                         { // í - lowercase i, acute accent
     "icirc", new Integer(238)
-                                 },
-                                 { // î - lowercase i, circumflex accent
+                                         },
+                                         { // î - lowercase i, circumflex accent
     "iuml", new Integer(239)
-                                 },
-                                 { // ï - lowercase i, umlaut
+                                         },
+                                         { // ï - lowercase i, umlaut
     "igrave", new Integer(236)
-                                 },
-                                 { // ì - lowercase i, grave accent
+                                         },
+                                         { // ì - lowercase i, grave accent
     "iacute", new Integer(237)
-                                 },
-                                 { // í - lowercase i, acute accent
+                                         },
+                                         { // í - lowercase i, acute accent
     "icirc", new Integer(238)
-                                 },
-                                 { // î - lowercase i, circumflex accent
+                                         },
+                                         { // î - lowercase i, circumflex accent
     "iuml", new Integer(239)
-                                 },
-                                 { // ï - lowercase i, umlaut
+                                         },
+                                         { // ï - lowercase i, umlaut
     "eth", new Integer(240)
-                                 },
-                                 { // ð - lowercase eth, Icelandic
+                                         },
+                                         { // ð - lowercase eth, Icelandic
     "ntilde", new Integer(241)
-                                 },
-                                 { // ñ - lowercase n, tilde
+                                         },
+                                         { // ñ - lowercase n, tilde
     "ograve", new Integer(242)
-                                 },
-                                 { // ò - lowercase o, grave accent
+                                         },
+                                         { // ò - lowercase o, grave accent
     "oacute", new Integer(243)
-                                 },
-                                 { // ó - lowercase o, acute accent
+                                         },
+                                         { // ó - lowercase o, acute accent
     "ocirc", new Integer(244)
-                                 },
-                                 { // ô - lowercase o, circumflex accent
+                                         },
+                                         { // ô - lowercase o, circumflex accent
     "otilde", new Integer(245)
-                                 },
-                                 { // õ - lowercase o, tilde
+                                         },
+                                         { // õ - lowercase o, tilde
     "ouml", new Integer(246)
-                                 },
-                                 { // ö - lowercase o, umlaut
+                                         },
+                                         { // ö - lowercase o, umlaut
     "oslash", new Integer(248)
-                                 },
-                                 { // ø - lowercase o, slash
+                                         },
+                                         { // ø - lowercase o, slash
     "ugrave", new Integer(249)
-                                 },
-                                 { // ù - lowercase u, grave accent
+                                         },
+                                         { // ù - lowercase u, grave accent
     "uacute", new Integer(250)
-                                 },
-                                 { // ú - lowercase u, acute accent
+                                         },
+                                         { // ú - lowercase u, acute accent
     "ucirc", new Integer(251)
-                                 },
-                                 { // û - lowercase u, circumflex accent
+                                         },
+                                         { // û - lowercase u, circumflex accent
     "uuml", new Integer(252)
-                                 },
-                                 { // ü - lowercase u, umlaut
+                                         },
+                                         { // ü - lowercase u, umlaut
     "yacute", new Integer(253)
-                                 },
-                                 { // ý - lowercase y, acute accent
+                                         },
+                                         { // ý - lowercase y, acute accent
     "thorn", new Integer(254)
-                                 },
-                                 { // þ - lowercase thorn, Icelandic
+                                         },
+                                         { // þ - lowercase thorn, Icelandic
     "yuml", new Integer(255)
-                                 },
-                                 { // ÿ - lowercase y, umlaut
+                                         },
+                                         { // ÿ - lowercase y, umlaut
     "euro", new Integer(8364)
-                                 }, // Euro symbol
-                               
+                                         }, // Euro symbol
+
   };
-  static Map        e2i = new HashMap();
-  static Map        i2e = new HashMap();
+  private static Map        e2i = new HashMap();
+  private static Map        i2e = new HashMap();
 
   static {
 
@@ -268,21 +267,29 @@ public class PortalUtil {
 
   }
 
-  private static Logger      logger = Logger.getLogger(PortalUtil.class); // logger instance for this class
-  public final static String REQUEST_URL_KEY = "Request.Url";
+  private static Logger logger = Logger.getLogger(PortalUtil.class); // logger instance for this class
+
+  //~ Constructors -----------------------------------------------------------------------------------------------------
+
+/**
+   * A private constructor to prevent external instantiation
+   */
+  private PortalUtil() {
+
+  }
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * DOCUMENT ME!
+   * Generates a HTML "link" string
    *
-   * @param text DOCUMENT ME!
-   * @param tooltip DOCUMENT ME!
-   * @param url DOCUMENT ME!
-   * @param styleClass DOCUMENT ME!
-   * @param target DOCUMENT ME!
+   * @param text Text for the link
+   * @param tooltip Tooltip for the link
+   * @param url URL for the link
+   * @param styleClass CSS class to attach to the link
+   * @param target target for the link
    *
-   * @return DOCUMENT ME!
+   * @return a HTML "link" string for the given parameters
    */
   public static String linkHtml(String text, String tooltip, String url, String styleClass, String target) {
 
@@ -308,11 +315,11 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Returns the portal host name, based on the given request data
    *
-   * @param request DOCUMENT ME!
+   * @param request The request object
    *
-   * @return DOCUMENT ME!
+   * @return The host name that this request is requesting for
    */
   public static String getPortalHostName(HttpServletRequest request) {
 
@@ -320,11 +327,10 @@ public class PortalUtil {
 
   }
 
-  // warning: this function uses the localhost function
   /**
-   * DOCUMENT ME!
+   * Returns the portal host name (searches for the localhost host name)
    *
-   * @return DOCUMENT ME!
+   * @return the portal host name
    */
   public static String getPortalHostName() {
 
@@ -345,11 +351,11 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Returns the portal base URL, based on the given request data
    *
-   * @param request DOCUMENT ME!
+   * @param request The request object
    *
-   * @return DOCUMENT ME!
+   * @return The portal base URL (http://...)
    */
   public static String getPortalBaseUrl(HttpServletRequest request) {
 
@@ -384,11 +390,11 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Returns the secure portal base URL, based on the given request data
    *
-   * @param request DOCUMENT ME!
+   * @param request The request object
    *
-   * @return DOCUMENT ME!
+   * @return the secure portal base URL (https://...)
    */
   public static String getDefaultSecurePortalBaseUrl(HttpServletRequest request) {
 
@@ -396,14 +402,13 @@ public class PortalUtil {
 
   }
 
-  // returns a string with just the URL path?query#ref part
   /**
-   * DOCUMENT ME!
+   * Transforms a full URL to a relative URL
    *
-   * @param request DOCUMENT ME!
-   * @param url DOCUMENT ME!
+   * @param request The request object
+   * @param url the URL (String) that must be made relative
    *
-   * @return DOCUMENT ME!
+   * @return The 'portal' relative URL (URL just includes the path?query#ref parts)
    */
   public static String relativeUrl(HttpServletRequest request, String url) {
 
@@ -444,12 +449,12 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Transforms a full URL to a relative URL
    *
-   * @param request DOCUMENT ME!
-   * @param url DOCUMENT ME!
+   * @param request The request object
+   * @param url the URL object that must be made relative
    *
-   * @return DOCUMENT ME!
+   * @return The 'portal' relative URL (URL just includes the path?query#ref parts)
    */
   public static String relativeUrl(HttpServletRequest request, URL url) {
 
@@ -462,11 +467,11 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Sets an attribute in the given request object
    *
-   * @param request DOCUMENT ME!
-   * @param key DOCUMENT ME!
-   * @param value DOCUMENT ME!
+   * @param request The request object
+   * @param key Key
+   * @param value Value (will be associated with the given key)
    */
   public static void setRequestObject(ServletRequest request, String key, Object value) {
 
@@ -475,13 +480,13 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Gets an attribute from the given request object
    *
-   * @param request DOCUMENT ME!
-   * @param key DOCUMENT ME!
-   * @param defaultValue DOCUMENT ME!
+   * @param request The request object
+   * @param key Key
+   * @param defaultValue Default value (returned if no value is associated with the given key)
    *
-   * @return DOCUMENT ME!
+   * @return either the value associated with key, or the default value, if no association exists
    */
   public static Object getRequestObject(ServletRequest request, String key, Object defaultValue) {
 
@@ -496,10 +501,10 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Removes an attribute from the given request object
    *
-   * @param request DOCUMENT ME!
-   * @param key DOCUMENT ME!
+   * @param request The request object
+   * @param key Key
    */
   public static void removeRequestObject(ServletRequest request, String key) {
 
@@ -508,11 +513,11 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Sets an attribute in the given session object
    *
-   * @param session DOCUMENT ME!
-   * @param key DOCUMENT ME!
-   * @param value DOCUMENT ME!
+   * @param session The session object
+   * @param key Key
+   * @param value Value (will be associated with the given key)
    */
   public static void setSessionObject(HttpSession session, String key, Object value) {
 
@@ -521,13 +526,13 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Gets an attribute from the given session object
    *
-   * @param session DOCUMENT ME!
-   * @param key DOCUMENT ME!
-   * @param defaultValue DOCUMENT ME!
+   * @param session The session object
+   * @param key Key
+   * @param defaultValue Default value (returned if no value is associated with the given key)
    *
-   * @return DOCUMENT ME!
+   * @return either the value associated with key, or the default value, if no association exists
    */
   public static Object getSessionObject(HttpSession session, String key, Object defaultValue) {
 
@@ -542,10 +547,10 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
+   * Removes an attribute from the given session object
    *
-   * @param session DOCUMENT ME!
-   * @param key DOCUMENT ME!
+   * @param session The session object
+   * @param key Key
    */
   public static void removeSessionObject(HttpSession session, String key) {
 
@@ -554,45 +559,23 @@ public class PortalUtil {
   }
 
   /**
-   * DOCUMENT ME!
-   *
-   * @param request DOCUMENT ME!
-   *
-   * @return DOCUMENT ME!
-   */
-  public static String getRequestUrl(HttpServletRequest request) {
-
-    return (String) getRequestObject(request, REQUEST_URL_KEY, request.getRequestURL().toString());
-
-  }
-
-  /**
-   * DOCUMENT ME!
-   *
-   * @param request DOCUMENT ME!
-   */
-  public static void setRequestUrl(HttpServletRequest request) {
-
-    setRequestObject(request, PortalUtil.REQUEST_URL_KEY, request.getRequestURL().toString());
-
-  }
-
-  /**
    * Turns funky characters into HTML entity equivalents<p>e.g. <tt>"bread" & "butter"</tt> =>
    * <tt>&amp;quot;bread&amp;quot; &amp;amp; &amp;quot;butter&amp;quot;</tt>. Update: supports nearly all HTML
    * entities, including funky accents. See the source code for more detail.</p>
    *
-   * @see #htmlunescape(String)
+   * @param source String to escape
+   *
+   * @return Escaped string
    */
-  public static String htmlEscape(String s1) {
+  public static String htmlEscape(String source) {
 
     StringBuffer buf = new StringBuffer();
 
     int          i;
 
-    for (i = 0; i < s1.length(); ++i) {
+    for (i = 0; i < source.length(); ++i) {
 
-      char ch = s1.charAt(i);
+      char ch = source.charAt(i);
 
       String entity = (String) i2e.get(new Integer((int) ch));
 
@@ -624,21 +607,23 @@ public class PortalUtil {
    * Given a string containing entity escapes, returns a string containing the actual Unicode characters
    * corresponding to the escapes.
    *
-   * @see #htmlEscape(String)
+   * @param source String to unescape
+   *
+   * @return Unescaped string
    */
-  public static String htmlUnescape(String s1) {
+  public static String htmlUnescape(String source) {
 
     StringBuffer buf = new StringBuffer();
 
     int          i;
 
-    for (i = 0; i < s1.length(); ++i) {
+    for (i = 0; i < source.length(); ++i) {
 
-      char ch = s1.charAt(i);
+      char ch = source.charAt(i);
 
       if (ch == '&') {
 
-        int semi = s1.indexOf(';', i + 1);
+        int semi = source.indexOf(';', i + 1);
 
         if (semi == -1) {
 
@@ -648,7 +633,7 @@ public class PortalUtil {
 
         }
 
-        String  entity = s1.substring(i + 1, semi);
+        String  entity = source.substring(i + 1, semi);
         Integer iso;
 
         if (entity.charAt(0) == '#') {
@@ -691,7 +676,9 @@ public class PortalUtil {
    * quotes and control-chars (tab, backslash, cr, ff, etc.) Bug: does not yet properly escape Unicode / high-bit
    * characters.
    *
-   * @see #jsEscape(String, Writer)
+   * @param source String to escape
+   *
+   * @return Escaped string
    */
   public static String jsEscape(String source) {
 
@@ -716,8 +703,11 @@ public class PortalUtil {
   }
 
   /**
+   * Escapes a java string
    *
-   * @see #javaEscape(String, Writer)
+   * @param source String to escape
+   *
+   * @return Escaped string
    */
   public static String javaEscape(String source) {
 
@@ -741,7 +731,15 @@ public class PortalUtil {
 
   }
 
-  // Little helper function
+  /**
+   * Little helper function that writes a string (zero padded, for a given width)
+   *
+   * @param out A Writer object
+   * @param s String to write
+   * @param width Zero padding length
+   *
+   * @throws IOException Thrown on I/O exceptions
+   */
   private static void zeroPad(Writer out, String s, int width)
                        throws IOException
   {
@@ -757,7 +755,15 @@ public class PortalUtil {
 
   }
 
-  // helper function for escaping strings
+  /**
+   * helper function that writes an escaped string
+   *
+   * @param source String to escape
+   * @param out A writer
+   * @param escapeSingleQuote true: write "\\'", false: write "'"
+   *
+   * @throws IOException Thrown on I/O errors
+   */
   private static void stringEscape(String source, Writer out, boolean escapeSingleQuote)
                             throws IOException
   {
@@ -850,7 +856,10 @@ public class PortalUtil {
    * Example:<pre> input string: He didn't say, "stop!" output string: He didn\'t say, \"stop!\" </pre>Deals with
    * quotes and control-chars (tab, backslash, cr, ff, etc.)
    *
-   * @see #jsEscape(String)
+   * @param source String to escape
+   * @param out A writer
+   *
+   * @throws IOException Thrown on I/O exceptions
    */
   public static void jsEscape(String source, Writer out)
                        throws IOException
@@ -862,10 +871,13 @@ public class PortalUtil {
 
   /**
    * Prepares a string for output inside a Java string, Example:<pre> input string: He didn't say, "stop!"
-   *  output string: He didn't say, \"stop!\" </pre>Deals with quotes and control-chars (tab, backslash, cr, ff,
+   * output string: He didn't say, \"stop!\" </pre>Deals with quotes and control-chars (tab, backslash, cr, ff,
    * etc.)
    *
-   * @see #jsEscape(String,Writer)
+   * @param source String to escape
+   * @param out A writer
+   *
+   * @throws IOException Thrown on I/O exceptions
    */
   public static void javaEscape(String source, Writer out)
                          throws IOException

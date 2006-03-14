@@ -1,4 +1,3 @@
-// @author: Falco Paul
 package org.metaz.gui.portal;
 
 import org.apache.log4j.Logger;
@@ -7,7 +6,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
- * JSP tag that allows template injection
+ * Tag class that allows "forward" definition of content in JSP pages ('setter')
  *
  * @author Falco Paul
  * @version $Revision$
