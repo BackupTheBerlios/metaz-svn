@@ -1,13 +1,5 @@
 package org.metaz.util;
 
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-
-import org.apache.log4j.Logger;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -26,10 +18,6 @@ import java.util.Iterator;
  * @author Falco Paul
  */
 public final class LibraryDirectoryGenerator {
-
-  //~ Static fields/initializers ---------------------------------------------------------------------------------------
-
-  private static Logger logger = MetaZ.getLogger(LibraryDirectoryGenerator.class);
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -152,7 +140,7 @@ public final class LibraryDirectoryGenerator {
 
       if (! libDir.isDirectory()) {
 
-        logger.error("Not a directory: " + libDirSpec);
+        System.out.println("Not a directory: " + libDirSpec);
 
         return;
 
@@ -179,44 +167,14 @@ public final class LibraryDirectoryGenerator {
 
     System.out.println("Library directory generator by Falco Paul");
 
-    Options     options = new Options();
-    BasicParser parser = new BasicParser();
-    CommandLine cmd = null;
+    if (args.length < 2) {
 
-    Option sourceOpt = new Option("r", "repo", false, "Maven repository root dir, containing JAR files");
-
-    sourceOpt.setArgs(1);
-    sourceOpt.setType(new String());
-    sourceOpt.setRequired(true);
-    options.addOption(sourceOpt);
-
-    Option libDirOpt = new Option("l", "libdir", false, "Library directory to populate");
-
-    libDirOpt.setArgs(1);
-    libDirOpt.setType(new String());
-    libDirOpt.setRequired(true);
-    options.addOption(libDirOpt);
-
-    // Reading of the input
-    try {
-
-      cmd = parser.parse(options, args);
-
-    } catch (Exception e) {
-
-      System.out.println("Command line option parsing failed");
-      System.out.println("Option error: " + e.toString());
-
-      HelpFormatter f = new HelpFormatter();
-
-      f.printHelp("Option format:", options);
-      logger.error("Option error: " + e.getMessage());
-      java.lang.System.exit(0);
+      System.out.println("Usage: LibraryDirectoryGenerator MavenRootDir LibraryTargetDir");
 
     }
 
-    String source = cmd.getOptionValue(sourceOpt.getOpt());
-    String libDir = cmd.getOptionValue(libDirOpt.getOpt());
+    String source = args[0];
+    String libDir = args[1];
 
     LibraryDirectoryGenerator.createLibrary(source, libDir);
 

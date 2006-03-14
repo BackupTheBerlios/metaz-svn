@@ -113,7 +113,7 @@ public class Debug extends Object {
 
           try {
 
-            value = ms[i].invoke(obj, null);
+            value = ms[i].invoke(obj, (Object[]) null);
 
           } catch (Exception e) {
 
