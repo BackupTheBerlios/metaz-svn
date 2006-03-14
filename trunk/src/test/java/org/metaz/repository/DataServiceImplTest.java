@@ -16,6 +16,7 @@ import org.metaz.domain.HierarchicalStructuredTextMetaData;
 import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.MetaData;
+import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 
@@ -91,12 +92,20 @@ public class DataServiceImplTest extends TestCase {
 		hierStrucSet.addHierarchy(hierStrucText);
 		hierStrucSet.setName("schoolTypes");
 
+        NumericMetaData requiredTime = new NumericMetaData();
+        requiredTime.setName("requiredTime");
+        requiredTime.setValue(new Long(100));
+        
+        
+        
 		Record rec = new Record(title, secured, fileFormat, didacticalFunction,
 				productType, uri);
 		rec.setProfessionalSituation(hierStrucText);
 		rec.setSchoolType(hierStrucSet);
+        rec.setRequiredTime(requiredTime);
 		List<Record> l = new ArrayList<Record>();
 		l.add(rec);
+                
 		dataService.doUpdate(l);
 	}
 
