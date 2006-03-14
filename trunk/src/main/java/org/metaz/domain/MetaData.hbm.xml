@@ -39,7 +39,7 @@
 			<property name="value" column="HMD_metadata_value" type="string"/>
 		</subclass>
 		<subclass name="org.metaz.domain.NumericMetaData" discriminator-value="NMD" lazy="false">
-			<property name="value" column="NMD_metadata_value" type="int"/>
+			<property name="value" column="NMD_metadata_value" type="long"/>
 		</subclass>
 		<subclass name="org.metaz.domain.TextMetaData" discriminator-value="TMD" lazy="false">
 			<property name="value" column="TMD_metadata_value" type="string"/>
