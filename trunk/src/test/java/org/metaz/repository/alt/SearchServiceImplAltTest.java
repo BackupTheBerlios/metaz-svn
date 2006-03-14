@@ -289,8 +289,8 @@ public class SearchServiceImplAltTest extends TestCase {
 
     //optional metadata required time
     NumericMetaData time2 = new NumericMetaData();
-
-    time2.setValue(60);
+    long time2value = 60;
+    time2.setValue(time2value);
     rec2.setRequiredTime(time2);
 
     //optional metadata rights
@@ -301,14 +301,14 @@ public class SearchServiceImplAltTest extends TestCase {
 
     //optional metadata file size
     NumericMetaData size = new NumericMetaData();
-
-    size.setValue(550);
+    long sizevalue = 550;
+    size.setValue(sizevalue);
     rec2.setFileSize(size);
 
     //optional metadata playing time
     NumericMetaData plTime = new NumericMetaData();
-
-    plTime.setValue(40);
+    long plTimevalue = 40;
+    plTime.setValue(plTimevalue);
     rec2.setPlayingTime(plTime);
 
     //optional metadata technical requirements

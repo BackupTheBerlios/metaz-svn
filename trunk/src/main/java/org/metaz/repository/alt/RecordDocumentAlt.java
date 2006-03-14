@@ -205,7 +205,7 @@ public class RecordDocumentAlt {
 
     if (requiredTime != null) {
 
-      doc.add(Field.UnIndexed(MetaData.REQUIREDTIME, ((Integer) requiredTime.getValue()).toString()));
+      doc.add(Field.UnIndexed(MetaData.REQUIREDTIME, ((Long) requiredTime.getValue()).toString()));
 
     }
 
@@ -221,7 +221,7 @@ public class RecordDocumentAlt {
 
     if (fileSize != null) {
 
-      doc.add(Field.UnIndexed(MetaData.FILESIZE, ((Integer) fileSize.getValue()).toString()));
+      doc.add(Field.UnIndexed(MetaData.FILESIZE, ((Long) fileSize.getValue()).toString()));
 
     }
 
@@ -229,7 +229,7 @@ public class RecordDocumentAlt {
 
     if (playingTime != null) {
 
-      doc.add(Field.UnIndexed(MetaData.PLAYINGTIME, ((Integer) playingTime.getValue()).toString()));
+      doc.add(Field.UnIndexed(MetaData.PLAYINGTIME, ((Long) playingTime.getValue()).toString()));
 
     }
 

@@ -407,7 +407,7 @@ public class SearchServiceImplAlt
 
           NumericMetaData requiredTime = new NumericMetaData();
 
-          requiredTime.setValue(new Integer(doc.get(MetaData.REQUIREDTIME)));
+          requiredTime.setValue(new Long(doc.get(MetaData.REQUIREDTIME)));
           rec.setRequiredTime(requiredTime);
 
         }
@@ -425,7 +425,7 @@ public class SearchServiceImplAlt
 
           NumericMetaData fileSize = new NumericMetaData();
 
-          fileSize.setValue(new Integer(doc.get(MetaData.FILESIZE)));
+          fileSize.setValue(new Long(doc.get(MetaData.FILESIZE)));
           rec.setFileSize(fileSize);
 
         }
@@ -434,7 +434,7 @@ public class SearchServiceImplAlt
 
           NumericMetaData playingTime = new NumericMetaData();
 
-          playingTime.setValue(new Integer(doc.get(MetaData.PLAYINGTIME)));
+          playingTime.setValue(new Long(doc.get(MetaData.PLAYINGTIME)));
           rec.setPlayingTime(playingTime);
 
         }
