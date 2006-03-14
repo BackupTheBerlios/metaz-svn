@@ -98,19 +98,6 @@ public class PortalTabTag extends TagSupport {
   }
 
   /**
-   * Helper function: generates a proper URL based on the web container environment
-   *
-   * @param url the basic URL that will be extended
-   *
-   * @return the extended URL, which includes the web container
-   */
-  private String url(String url) {
-
-    return PortalUtil.getPortalBaseUrl((HttpServletRequest) pageContext.getRequest()) + "/" + url;
-
-  }
-
-  /**
    * TagSupport contract method ...   Injects the tabbed interface into the page
    *
    * @return EVAL_PAGE constant
