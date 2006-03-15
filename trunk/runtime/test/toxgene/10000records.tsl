@@ -42,33 +42,6 @@
         <tox-list name="bestandsformaat_list" readFrom="test/toxgene/input/bestandsformaten.xml">
             <element name="bestandsformaat" type="string"/>
         </tox-list>
-        <!--<tox-list name="htmlOpmaakElement_list" readFrom="test/toxgene/input/htmlOpmaakElementen.xml">
-            <element name="htmlOpmaakElement" type="string"/>
-        </tox-list>-->
-        <tox-list name="omschrijving_list">
-            <element name="omschrijving" minOccurs="10000" maxOccurs="10000">
-                <complexType>
-                    <!--<element name="htmlOpmaakElement">
-                        <simpleType>
-                            <restriction base="string">
-                                <tox-sample path="[htmlOpmaakElement_list/htmlOpmaakElement]">
-                                    <tox-expr value="[!]"/>
-		    		</tox-sample>
-                            </restriction>
-                        </simpleType>
-                    </element>-->
-                    <element name="zin">
-                        <simpleType>
-                            <restriction base="string">
-                                <minLength value="1"/>
-                                <maxLength value="50"/>
-                                <tox-string type="tekst"/>
-                            </restriction>
-                        </simpleType>
-                    </element>
-                </complexType>
-            </element>
-        </tox-list>
         <tox-list name="sleutelwoorden_list">
             <element name="sleutelwoord" minOccurs="10000" maxOccurs="10000">
                 <simpleType>
@@ -309,81 +282,14 @@
                                         </restriction>
                                     </simpleType>
                                 </element>
-                                <!--<element name="omschrijving">
+                                <element name="omschrijving">
                                     <simpleType>
                                         <restriction base="string">
-                                            <tox-sample path="[omschrijving_list/omschrijving]">
-                                                <tox-expr value="[htmlOpmaakElement]#' '#[zin]"/>
-                                            </tox-sample>
+                                            <minLength value="100"/>
+                                            <maxLength value="1000"/>
+                                            <tox-string type="tekst"/>
                                         </restriction>
                                     </simpleType>
-                                </element>-->
-                                <element name="omschrijving">
-                                    <complexType>
-                                        <element name="zin1" minOccurs="1">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-sample path="[omschrijving_list/omschrijving]">
-                                                        <tox-expr value="[zin]"/>
-                                                    </tox-sample>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="B" minOccurs="1">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <minLength value="1"/>
-                                                    <maxLength value="20"/>
-                                                    <tox-string type="tekst"/>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="zin2" minOccurs="1">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-sample path="[omschrijving_list/omschrijving]">
-                                                        <tox-expr value="[zin]"/>
-                                                    </tox-sample>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="I" minOccurs="1">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <minLength value="1"/>
-                                                    <maxLength value="20"/>
-                                                    <tox-string type="tekst"/>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="zin3" minOccurs="1">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-sample path="[omschrijving_list/omschrijving]">
-                                                        <tox-expr value="[zin]"/>
-                                                    </tox-sample>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="U" minOccurs="1">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <minLength value="1"/>
-                                                    <maxLength value="20"/>
-                                                    <tox-string type="tekst"/>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                        <element name="zin4" minOccurs="1">
-                                            <simpleType>
-                                                <restriction base="string">
-                                                    <tox-sample path="[omschrijving_list/omschrijving]">
-                                                        <tox-expr value="[zin]"/>
-                                                    </tox-sample>
-                                                </restriction>
-                                            </simpleType>
-                                        </element>
-                                    </complexType>
                                 </element>
                                 <element name="beoogdeEindgebruiker">
                                     <complexType>
@@ -600,33 +506,8 @@
                                                         <element name="bestandsformaat" minOccurs="0">
                                                             <tox-expr value="[bestandsformaat]"/>
                                                         </element>
-                                                        <!--<element name="omschrijving" minOccurs="0">
-                                                            <tox-expr value="[omschrijving]"/>
-                                                        </element>-->
                                                         <element name="omschrijving" minOccurs="0">
-                                                            <complexType mixed="true">
-                                                                <tox-scan path="[$sc/omschrijving/zin1]">
-                                                                    <tox-expr value="[!]"/>
-                                                                </tox-scan>
-                                                                <element name="b" minOccurs="0">
-                                                                    <tox-expr value="[omschrijving/B]"/>
-                                                                </element>
-                                                                <tox-scan path="[$sc/omschrijving/zin2]">
-                                                                    <tox-expr value="[!]"/>
-                                                                </tox-scan>
-                                                                <element name="i" minOccurs="0">
-                                                                    <tox-expr value="[omschrijving/I]"/>
-                                                                </element>
-                                                                <tox-scan path="[$sc/omschrijving/zin3]">
-                                                                    <tox-expr value="[!]"/>
-                                                                </tox-scan>
-                                                                <element name="u">
-                                                                    <tox-expr value="[omschrijving/U]"/>
-                                                                </element>
-                                                                <tox-scan path="[$sc/omschrijving/zin4]">
-                                                                    <tox-expr value="[!]"/>
-                                                                </tox-scan>
-                                                            </complexType>
+                                                            <tox-expr value="[omschrijving]"/>
                                                         </element>
                                                         <element name="beoogdeEindgebruiker" minOccurs="0">
                                                             <complexType>

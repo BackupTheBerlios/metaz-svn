@@ -46,7 +46,7 @@
               <xs:element minOccurs="0" maxOccurs="1" name="afspeelduur" type="xs:long" />
               <xs:element minOccurs="0" maxOccurs="1" name="versie" type="xs:string" />
               <xs:element minOccurs="0" maxOccurs="1" name="status" type="xs:string" />
-              <xs:element minOccurs="0" maxOccurs="1" name="omschrijving" type="omschrijvingType" />
+              <xs:element minOccurs="0" maxOccurs="1" name="omschrijving" type="xs:string" />
               <xs:element minOccurs="1" maxOccurs="1" name="bestandsformaat" type="xs:string" />
             </xs:all>
             <xs:attribute name="URI" use="required" />
@@ -113,13 +113,6 @@
         </xs:complexType>
       </xs:element>
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="omschrijvingType" mixed="true">
-    <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="b" type="xs:string" />
-      <xs:element name="i" type="xs:string" />
-      <xs:element name="u" type="xs:string" />
-    </xs:choice>
   </xs:complexType>
   <xs:element name="opvolger">
     <xs:complexType>
