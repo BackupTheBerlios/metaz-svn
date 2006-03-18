@@ -8,79 +8,83 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Handles advanced search page form submits.  In fact redirects most of the work to the SearchBean...
- *
+ * Handles advanced search page form submits. In fact redirects most of the work
+ * to the SearchBean...
+ * 
  * @author Falco Paul
  * @version $Revision$
  */
 public class SearchHandler extends HttpServlet {
+	
+	private static final boolean BASIC_SEARCH = false;
 
-  //~ Methods ----------------------------------------------------------------------------------------------------------
+	// ~ Methods
+	// ----------------------------------------------------------------------------------------------------------
 
-  /**
-   * Empty HttpServlet override
-   */
-  public void init() {
+	/**
+	 * Empty HttpServlet override
+	 */
+	public void init() {
 
-  }
+	}
 
-  /**
-   * retrieve the Session SearchBean instance Will create a Session SearchBean if for some reasons this instance
-   * is not available
-   *
-   * @param req The request object
-   *
-   * @return The SearchBean instance that is assoicated with the request (possibly newly instantiated)
-   */
-  protected SearchBean getSearchBean(HttpServletRequest req) {
+	// retrieve the Session SearchBean instance, or create one if for some
+	// reasons this instance is not available yey
+	protected SearchBean getSearchBean(HttpServletRequest req) {
 
-    SearchBean searchBean = (SearchBean) req.getSession(true).getAttribute(SearchBean.SEARCH_BEAN_SESSION_KEY);
+		SearchBean searchBean = (SearchBean) req.getSession(true).getAttribute(
+				SearchBean.SEARCH_BEAN_SESSION_KEY);
 
-    if (searchBean == null) {
+		if (searchBean == null) {
 
-      searchBean = new SearchBean();
-      req.getSession().setAttribute(SearchBean.SEARCH_BEAN_SESSION_KEY, searchBean);
+			searchBean = new SearchBean();
+			req.getSession().setAttribute(SearchBean.SEARCH_BEAN_SESSION_KEY,
+					searchBean);
 
-    }
+		}
 
-    return searchBean;
+		return searchBean;
 
-  }
+	}
 
-  /**
-   * Forwards handling to post
-   *
-   * @param req request
-   * @param res response
-   *
-   * @throws ServletException On servlet error
-   * @throws IOException On I/O error
-   */
-  public void doGet(HttpServletRequest req, HttpServletResponse res)
-             throws ServletException,
-                    IOException
-  {
+	/**
+	 * Forwards handling to post
+	 * 
+	 * @param req
+	 *            request
+	 * @param res
+	 *            response
+	 * 
+	 * @throws ServletException
+	 *             On servlet error
+	 * @throws IOException
+	 *             On I/O error
+	 */
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
 
-    doPost(req, res);
+		doPost(req, res);
 
-  }
+	}
 
-  /**
-   * Forwards hanlding to SearchBean
-   *
-   * @param req request
-   * @param res response
-   *
-   * @throws ServletException On servlet error
-   * @throws IOException On I/O error
-   */
-  public void doPost(HttpServletRequest req, HttpServletResponse res)
-              throws ServletException,
-                     IOException
-  {
+	/**
+	 * Forwards hanlding to SearchBean
+	 * 
+	 * @param req
+	 *            request
+	 * @param res
+	 *            response
+	 * 
+	 * @throws ServletException
+	 *             On servlet error
+	 * @throws IOException
+	 *             On I/O error
+	 */
+	public void doPost(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
 
-    getSearchBean(req).search(req, res);
+		getSearchBean(req).search(req, res, BASIC_SEARCH);
 
-  }
+	}
 
 }

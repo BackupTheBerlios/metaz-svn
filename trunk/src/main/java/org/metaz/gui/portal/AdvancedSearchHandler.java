@@ -7,31 +7,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Handles advanced search page form submits. In fact redirects most of the work to the SearchBean...
- *
+ * Handles advanced search page form submits.
+ * 
  * @author Falco Paul
+ * @author Erik-Jan Spaans
  * @version $Revision$
  */
 public class AdvancedSearchHandler extends SearchHandler {
 
-  //~ Methods ----------------------------------------------------------------------------------------------------------
+	private static final boolean ADVANCED_SEARCH = true;
 
-  /**
-   * Forwards hanlding to SearchBean
-   *
-   * @param req request
-   * @param res response
-   *
-   * @throws ServletException On servlet error
-   * @throws IOException On I/O error
-   */
-  public final void doPost(HttpServletRequest req, HttpServletResponse res)
-                    throws ServletException,
-                           IOException
-  {
-
-    getSearchBean(req).advancedSearch(req, res);
-
-  }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
+	 *      javax.servlet.http.HttpServletResponse)
+	 */
+	public final void doPost(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		getSearchBean(req).search(req, res, ADVANCED_SEARCH);
+	}
 
 }

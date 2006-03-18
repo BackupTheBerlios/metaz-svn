@@ -3,10 +3,25 @@
 	xmlns:deploy="deploy">
 	<postGoal name="war:war">
 		<ant:copy file="metaz.props" todir="target/metaz/WEB-INF/classes" failonerror="false"/>
+		<ant:copy file="log4j-config.xml" todir="target/metaz/WEB-INF/classes" failonerror="false"/>
+		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="target/metaz/WEB-INF/classes" failonerror="true"/>
+		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
+		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
 	</postGoal>
 	<preGoal name="test:test">
 		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="target/test-classes" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="target/test-classes/org/metaz/domain" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="target/test-classes/org/metaz/domain" failonerror="true"/>
 	</preGoal>
+	<goal name="generateTestXml">
+		<attainGoal name="test:compile"/>
+		<attainGoal name="java:compile"/>
+		<ant:java classname="org.metaz.test.toxgene.GenerateTestXml">
+			<arg path="test/toxgene/300records.tsl"/>
+			<classpath>
+				<pathelement path="${basedir}/target/test-classes"/>
+				<pathelement path="${basedir}/target/classes"/>
+			</classpath>
+		</ant:java>
+	</goal>
 </project>

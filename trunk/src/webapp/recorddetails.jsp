@@ -1,5 +1,8 @@
 <%@ include file="includes.jsp" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:set var="currentRecord" value="${searchBean.metazResults[param.record]}"/>
 
 <portal:SetContent name="ActiveTab">
   <% out.print(org.metaz.gui.portal.PortalTabTag.TAB_SEARCH_RESULTS); %>
@@ -8,10 +11,133 @@
 <portal:SetContent name="PageContent">
 
 	<center>
-		<display:table name="${searchBean.recordDetailsList}" class="results" export="true" sort="list">
-			<display:column property="name" title="Eigenchap" group="1" sortable="true" headerClass="sortable" />
-			<display:column property="value" title="Waarde" group="2" sortable="true" headerClass="sortable" />
-		</display:table>
+		<span class="pagebanner">Producten van het Ruud de Moor Centrum: objectomschrijving</span>
+		<table class="results">
+			<thead>
+				<tr>
+					<th colspan="2">&nbsp;</th>
+				</tr>
+			</thead>
+			<tr class="odd">
+				<td>
+					Beveiligd:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.secured.value}"/>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>
+					Omschrijving:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.title.value}"/>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					Sleutelwoorden:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.keywords.value}"/>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>
+					Didactisch scenario:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.didacticScenario.value}"/>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					Benodigde tijd:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.title.value}"/>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>
+					Aggregatieniveau:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.aggregationLevel.value}"/>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					Rechten:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.rights.value}"/>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>
+					Type product:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.productType.value}"/>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>
+					Bestandsformaat:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.fileFormat.value}"/>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					Bestandsgrootte:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.fileSize.value}"/>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>
+					Afspeelduur:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.playingTime.value}"/>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td>
+					Technische vereisten:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.technicalRequirements.value}"/>
+				</td>
+			</tr>
+			<tr class="even">
+				<td>
+					Laatst gewijzgd:
+				</td>
+				<td>
+					<c:out value="${currentRecord.object.lastChangedDate.value}"/>
+				</td>
+			</tr>
+			<tr class="odd">
+				<td colspan="2">
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+				<td>
+					<a href="searchresults.jsp">Terug naar de resultatenlijst</a>
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					<a href="search.jsp">Opnieuw zoeken</a>
+				</td>
+			</tr>
+		</table>
 	</center>
 
 </portal:SetContent>

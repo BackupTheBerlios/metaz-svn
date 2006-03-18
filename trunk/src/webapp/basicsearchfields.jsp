@@ -5,8 +5,8 @@
   <p class="last">Beperkt het zoekresultaat tot leerobjecten die bestemd zijn voor een bepaalde rol</p>
 </div>
 <div class="optional">
-  <label for="targetEndUser">Ik ben een:</label>
-  <select name="targetEndUser" id="targetEndUser" class="selectOne">
+  <label for="<%= org.metaz.domain.MetaData.TARGETENDUSER %>">Ik ben een:</label>
+  <select name="<%= org.metaz.domain.MetaData.TARGETENDUSER %>" id="<%= org.metaz.domain.MetaData.TARGETENDUSER %>" class="selectOne">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getTargetEndUserOptions())); %>
   </select>
 </div>
@@ -17,8 +17,8 @@
   <p class="last">Selecteer leerobjecten voor een bepaald schooltype</p>
 </div>
 <div class="optional">
-  <label for="schoolType">Mijn schooltype:</label>
-  <select name="schoolType" id="schoolType" class="selectOne">
+  <label for="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>">Mijn schooltype:</label>
+  <select name="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>" id="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>" class="selectOne">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getSchoolTypeOptions())); %>
   </select>
 </div>
@@ -30,8 +30,8 @@
     Vakleergebieden zijn afhankelijk van schooltypes</p>
 </div>
 <div class="optional">
-  <label for="schoolDiscipline">Vakleergebied:</label>
-  <select name="schoolDiscipline" id="schoolDiscipline" class="selectOne">
+  <label for="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>">Vakleergebied:</label>
+  <select name="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>" id="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>" class="selectOne">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getSchoolDisciplineOptions())); %>
   </select>
 </div>
