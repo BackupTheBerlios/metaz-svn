@@ -242,6 +242,9 @@
          <artifactId>dom4j</artifactId>
          <version>1.6.1</version>
          <url>http://dom4j.org/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -396,6 +399,9 @@
          <artifactId>antlr</artifactId>
          <version>2.7.6rc1</version>
          <url>http://www.antlr.org/</url>
+		  <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
       </dependency>
 	   <dependency>
@@ -424,6 +430,9 @@
          <artifactId>jta</artifactId>
          <version>1.0</version>
          <url>http://java.sun.com/products/jta/</url>
+		   <properties>
+			   <war.bundle>true</war.bundle>
+		   </properties>
          <type>jar</type>
      </dependency>
 	   <dependency>
