@@ -25,10 +25,6 @@
 	</goal>
 	<goal name="war-inplace">
 		<attainGoal name="java:compile" />
-		<ant:copy file="metaz.props" todir="src/webapp/WEB-INF/classes" failonerror="false"/>
-		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="src/webapp/WEB-INF/classes" failonerror="true"/>
-		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="src/webapp/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
-		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="scr/webapp/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
 		<j:forEach var="lib" items="${pom.artifacts}">
 			<j:set var="dep" value="${lib.dependency}"/>
 			<j:if test="${dep.getProperty('war.bundle')=='true'}">
@@ -43,5 +39,16 @@
 			dir="${basedir}/src/webapp/WEB-INF">
 			<ant:arg line="classes ${maven.build.dest}"/>
 		</ant:exec>
+		<ant:copy file="metaz.props" todir="src/webapp/WEB-INF/classes" failonerror="false"/>
+		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="src/webapp/WEB-INF/classes" failonerror="true"/>
+		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="src/webapp/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
+		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="src/webapp/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
 	</goal>
+	<preGoal name="clean:clean">
+		<ant:exec executable="linkd.exe"
+			dir="${basedir}/src/webapp/WEB-INF">
+			<ant:arg line="classes /d"/>
+		</ant:exec>
+		<ant:delete dir="${basedir}/src/webapp/WEB-INF/lib" />
+	</preGoal>
 </project>
