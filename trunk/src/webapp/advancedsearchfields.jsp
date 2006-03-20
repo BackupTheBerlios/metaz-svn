@@ -4,8 +4,8 @@
   <p class="last">Zoekt leerobjecten bestemd voor een bepaalde didactische functie of toepassing</p>
 </div>
 <div class="optional">
-  <label for="didacticFunction">Didactische functie:</label>
-  <select name="didacticFunction" id="didacticFunction" class="selectOne">
+  <label for="<%= org.metaz.domain.MetaData.DIDACTICFUNCTION %>">Didactische functie:</label>
+  <select name="<%= org.metaz.domain.MetaData.DIDACTICFUNCTION %>" id="<%= org.metaz.domain.MetaData.DIDACTICFUNCTION %>" class="selectOne">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getDidacticFunctionOptions())); %>
   </select>
 </div>
@@ -16,8 +16,8 @@
   <p class="last">Zoek naar bepaalde type media, zoals afbeeldingen, video of audio (meerdere keuzen mogelijk)</p>
 </div>
 <div class="optional">
-  <label for="productType">Product type:</label>
-  <select multiple size="3" name="productType" id="productType" class="selectMultiple">
+  <label for="<%= org.metaz.domain.MetaData.PRODUCTTYPE %>">Product type:</label>
+  <select multiple size="3" name="<%= org.metaz.domain.MetaData.PRODUCTTYPE %>" id="<%= org.metaz.domain.MetaData.PRODUCTTYPE %>" class="selectMultiple">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getProductTypeOptions())); %>
   </select>
   <small>Gebruik de <kbd>CTRL</kbd> toets om meerdere opties te kiezen </small>
@@ -29,8 +29,8 @@
   <p class="last">Zoek leerobjecten die relevant zijn voor uw specifieke situatie (meerdere keuzen mogelijk)</p>
 </div>
 <div class="optional">
-  <label for="professionalSituation">Vakleergebied:</label>
-  <select multiple size="10" name="professionalSituation" id="professionalSituation" class="selectMultiple">
+  <label for="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>">Vakleergebied:</label>
+  <select multiple size="10" name="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>" id="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>" class="selectMultiple">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getProfessionalSituationOptions())); %>
   </select>
   <small>Gebruik de <kbd>CTRL</kbd> toets om meerdere opties te kiezen </small>
@@ -42,8 +42,8 @@
   <p class="last">Competentie gericht zoeken (meerdere keuzen mogelijk)</p>
 </div>
 <div class="optional">
-  <label for="competence">Competentie</label>
-  <select multiple size="3" name="competence" id="competence" class="selectMultiple">
+  <label for="<%= org.metaz.domain.MetaData.COMPETENCE %>">Competentie</label>
+  <select multiple size="3" name="<%= org.metaz.domain.MetaData.COMPETENCE %>" id="<%= org.metaz.domain.MetaData.COMPETENCE %>" class="selectMultiple">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getCompetenceOptions())); %>
   </select>
   <small>Gebruik de <kbd>CTRL</kbd> toets om meerdere opties te kiezen </small>
