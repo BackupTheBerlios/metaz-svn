@@ -43,11 +43,12 @@ import java.text.*;
 import java.util.*;
 
 /**
- * The class Harvester initiates a check of an offered xml file to check on xml schema conformity, extract all
+ * The  Harvester class initiates a check of an offered xml file to check on xml schema conformity, extract all
  * Learnobjects, transform them to records of metadata and pass them to the repository facade.
  *
  * @author Lars Oosterloo
- * @version 0.1 The Harvester class is responsible for parsing xml data files into a collection of LearningObjects and passing this collection to the repository interface
+ * @version 0.1 The Harvester class is responsible for parsing xml data files into a collection of LearningObjects 
+ * and passing this collection to the repository interface
  */
 public class Harvester {
 
@@ -97,6 +98,8 @@ public class Harvester {
     harvester.setXMLFile(filename);
 
   }
+  
+  
 
   /**
    * sets the name of the file to parse and initiates parsing of the file
@@ -130,7 +133,7 @@ public class Harvester {
 
         if (parseFile(xmlfile)) {
 
-          //if parsing was successfull the file is already saved to the success
+          //if parsing was successful the file is already saved to the success
           //folder, so we need to remove the file from the staging folder
           xmlfile.delete();
 

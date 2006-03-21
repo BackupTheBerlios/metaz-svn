@@ -10,6 +10,11 @@ import org.hibernate.SessionFactory;
 
 import org.hibernate.cfg.Configuration;
 
+import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.SchedulerFactory;
+import org.quartz.SchedulerException;
+import org.quartz.Scheduler;
+
 import org.metaz.repository.Facade;
 import org.metaz.repository.FacadeFactory;
 
@@ -48,6 +53,8 @@ public final class MetaZ
   private static Logger         logger = Logger.getLogger(MetaZ.class); // logger
   private static Facade         facadeInst; // instance for this class
   private static SessionFactory hibernateSessionFactory; // Facade object of the Repository
+  private static Scheduler      scheduler; // the Meta/Z scheduler 
+
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
@@ -156,6 +163,28 @@ public final class MetaZ
     return hibernateSessionFactory;
 
   }
+  
+
+  /**
+    * Returns the Meta/Z Scheduler instance
+    *
+    * @return Scheduler instance
+    * @throws SchedulerException
+    */
+   public static synchronized Scheduler getScheduler() {
+     if (scheduler == null) {
+     	  SchedulerFactory schedFact = new StdSchedulerFactory();
+     	  try {
+     		  scheduler = schedFact.getScheduler();
+     	  }
+     	  catch (SchedulerException exc) {
+     		  logger.fatal("Unable to create the Meta-Z scheduler: " + exc.getMessage());
+     	  }
+       logger.info("Created Meta-Z Scheduler singleton instance: <" + format(scheduler) + ">");
+     }
+     return scheduler;
+   }
+
 
   /**
    * Gets a logger instance and initializes the logger "look and feel"
