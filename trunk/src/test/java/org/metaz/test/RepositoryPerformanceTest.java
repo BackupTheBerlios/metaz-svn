@@ -4,6 +4,8 @@ import java.io.File;
 
 import java.util.HashMap;
 
+import java.util.List;
+
 import org.apache.lucene.index.IndexReader;
 
 import org.metaz.repository.Facade;
@@ -45,6 +47,7 @@ public class RepositoryPerformanceTest {
             int numberOfSearches = 0;
             long totalFacadeTime = 0;
             long totalSearchServiceTime = 0;
+            int numberOfResults = 0;
             for (int i=0; i<keywords.length; i++){
                 HashMap hashMap = new HashMap();
                 hashMap.put("",keywords[i]);
@@ -52,13 +55,19 @@ public class RepositoryPerformanceTest {
                 totalFacadeTime = totalFacadeTime + facadeSearchTime;
                 long searchServiceSearchTime = timeSearch(hashMap,ssi);
                 totalSearchServiceTime = totalSearchServiceTime + searchServiceSearchTime;
+                List list = ssi.doSearch(hashMap);
+                numberOfResults = numberOfResults + list.size();
                 numberOfSearches++;
             }
             System.out.println("Performed a number of "+numberOfSearches+" full text searches.");
+            int averageResults = numberOfResults/numberOfSearches;
+            System.out.println("Found on average "+averageResults+ " results.");
             long averageFacadeTime = totalFacadeTime/numberOfSearches;
-            System.out.println("Average Facade search time: "+averageFacadeTime+ " ms");
+            long averageResultFacadeTime = averageFacadeTime/averageResults;
+            System.out.println("Average Facade search time: "+averageFacadeTime+ " ms ("+averageResultFacadeTime+ " ms per result)");
             long averageSearchServiceTime = totalSearchServiceTime/numberOfSearches;
-            System.out.println("Average SearchService search time: "+averageSearchServiceTime+" ms");
+            long averageResultSearchServiceTime = averageSearchServiceTime/averageResults;
+            System.out.println("Average SearchService search time: "+averageSearchServiceTime+" ms ("+averageResultSearchServiceTime+ " ms per result");
             long percent = averageSearchServiceTime*100/averageFacadeTime;
             System.out.println("SearchService seek takes "+percent+ "% of total search time");
         }
