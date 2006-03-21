@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.apache.lucene.index.IndexReader;
 
 import org.metaz.repository.Facade;
+import org.metaz.repository.FacadeFactory;
 import org.metaz.repository.SearchService;
 import org.metaz.repository.SearchServiceImpl;
 import org.metaz.util.MetaZ;
@@ -23,18 +24,24 @@ public class RepositoryPerformanceTest {
         
         try{
             MetaZ app = MetaZ.getInstance();
-            Facade facade = app.getRepositoryFacade();
+            //Facade facade = app.getRepositoryFacade();
+            Facade facade = FacadeFactory.createFacade();
             SearchService ssi = new SearchServiceImpl();
             File f = app.getRelativeFile("repository/searchservice/searchindex");
             IndexReader reader = IndexReader.open(f);
             int records = reader.numDocs();
+            reader.close();
             System.out.println("Number of records present in Application Z: "+ records);
+            
             long fileSize = f.length();
             System.out.println("Size of search index is: "+fileSize);
             if(records<100){
                 System.out.println("Insufficient records to run test !");
                 System.exit(0);
             }
+            //primer
+            facade.doSearch("niks");
+            ssi.doSearch("niks");
             int numberOfSearches = 0;
             long totalFacadeTime = 0;
             long totalSearchServiceTime = 0;
