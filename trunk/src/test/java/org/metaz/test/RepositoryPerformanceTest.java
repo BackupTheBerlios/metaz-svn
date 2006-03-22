@@ -12,6 +12,7 @@ import org.metaz.repository.Facade;
 import org.metaz.repository.FacadeFactory;
 import org.metaz.repository.SearchService;
 import org.metaz.repository.SearchServiceImpl;
+import org.metaz.repository.alt.FacadeFactoryAlt;
 import org.metaz.util.MetaZ;
 
 public class RepositoryPerformanceTest {
@@ -26,9 +27,9 @@ public class RepositoryPerformanceTest {
         
         try{
             MetaZ app = MetaZ.getInstance();
-            //Facade facade = app.getRepositoryFacade();
             Facade facade = FacadeFactory.createFacade();
             SearchService ssi = new SearchServiceImpl();
+            Facade facadeAlt = FacadeFactoryAlt.createFacade();
             File f = app.getRelativeFile("repository/searchservice/searchindex");
             IndexReader reader = IndexReader.open(f);
             int records = reader.numDocs();
@@ -44,9 +45,11 @@ public class RepositoryPerformanceTest {
             //primer
             facade.doSearch("niks");
             ssi.doSearch("niks");
+            facadeAlt.doSearch("niks");
             int numberOfSearches = 0;
             long totalFacadeTime = 0;
             long totalSearchServiceTime = 0;
+            long totalFacadeAltTime = 0;
             int numberOfResults = 0;
             for (int i=0; i<keywords.length; i++){
                 HashMap hashMap = new HashMap();
@@ -55,6 +58,8 @@ public class RepositoryPerformanceTest {
                 totalFacadeTime = totalFacadeTime + facadeSearchTime;
                 long searchServiceSearchTime = timeSearch(hashMap,ssi);
                 totalSearchServiceTime = totalSearchServiceTime + searchServiceSearchTime;
+                long facadeAltSearchTime = timeSearch(hashMap,facadeAlt);
+                totalFacadeAltTime = totalFacadeAltTime + facadeAltSearchTime;
                 List list = ssi.doSearch(hashMap);
                 numberOfResults = numberOfResults + list.size();
                 numberOfSearches++;
@@ -70,6 +75,9 @@ public class RepositoryPerformanceTest {
             System.out.println("Average SearchService search time: "+averageSearchServiceTime+" ms ("+averageResultSearchServiceTime+ " ms per result");
             long percent = averageSearchServiceTime*100/averageFacadeTime;
             System.out.println("SearchService seek takes "+percent+ "% of total search time");
+            long averageFacadeAltTime = totalFacadeAltTime/numberOfSearches;
+            long averageResultFacadeAltTime = averageFacadeAltTime/averageResults;
+            System.out.println("Average FacadeAlt search time: "+averageFacadeAltTime+ " ms ("+averageResultFacadeAltTime+ " ms per record)");
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());

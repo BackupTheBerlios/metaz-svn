@@ -56,7 +56,7 @@ public class SearchServiceImplAlt
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   private static Logger       logger = MetaZ.getLogger(SearchServiceImpl.class);
-  private static final String INDEXPATH = "repository/searchservice/searchindex";
+  private static final String INDEXPATH = "repository/searchservice/altsearchindex";
   private static final String TERMDELIMITER = ":";
   private static final String WHITESPACE = " ";
   private static final String VALUESEPARATOR = "%";
@@ -158,6 +158,7 @@ public class SearchServiceImplAlt
       writer.close();
 
       //for testing purposes
+      /*
       IndexReader reader = IndexReader.open(f);
 
       for (int i = 0; i < reader.numDocs(); i++) {
@@ -166,7 +167,7 @@ public class SearchServiceImplAlt
 
       }
 
-      reader.close();
+      reader.close();*/
 
     } // end try
     catch (Exception ex) {

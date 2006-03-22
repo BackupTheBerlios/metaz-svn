@@ -229,9 +229,9 @@ public class FacadeImpl
    *
    * @param service DOCUMENT ME!
    */
-  public void setSearchService(SearchService service) {
+  public void setSearchService(RepositoryService service) {
 
-    searchService = service;
+    searchService = (SearchService) service;
 
   }
 
@@ -243,9 +243,9 @@ public class FacadeImpl
    *
    * @param service DOCUMENT ME!
    */
-  public void setDataService(DataService service) {
+  public void setDataService(RepositoryService service) {
 
-    dataService = service;
+    dataService = (DataService) service;
 
   }
 

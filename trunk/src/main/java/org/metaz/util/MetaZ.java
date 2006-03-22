@@ -17,6 +17,7 @@ import org.quartz.Scheduler;
 
 import org.metaz.repository.Facade;
 import org.metaz.repository.FacadeFactory;
+import org.metaz.repository.alt.FacadeFactoryAlt;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -134,6 +135,7 @@ public final class MetaZ
     if (facadeInst == null) {
 
       facadeInst = FacadeFactory.createFacade();
+      //facadeInst = FacadeFactoryAlt.createFacade();
 
       logger.info("Created Meta-Z Facade singleton instance: <" + format(facadeInst) + ">");
 

@@ -315,14 +315,14 @@ public class SearchServiceImpl
           Result<URI> result = new Result<URI>(uri, score);
 
           resultList.add(result);
-          logger.info(i + 1 + ": " + suri + ":" + score);
+          //logger.info(i + 1 + ": " + suri + ":" + score);
 
         } // end if
 
       } // end for
 
       searcher.close();
-      logger.info("resultList contains " + resultList.size() + " elements");
+      //logger.info("resultList contains " + resultList.size() + " elements");
 
       return resultList;
 

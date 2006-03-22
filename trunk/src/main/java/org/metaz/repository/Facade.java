@@ -131,13 +131,13 @@ public interface Facade {
    *
    * @param service A SearchService implementation.
    */
-  public void setSearchService(SearchService service);
+  public void setSearchService(RepositoryService service);
 
   /**
    * Sets the DataService implementation to be used.
    *
    * @param service A DataService implementation.
    */
-  public void setDataService(DataService service);
+  public void setDataService(RepositoryService service);
 
 }
