@@ -503,7 +503,7 @@
                                                         <element name="versie" minOccurs="0">
                                                             <tox-expr value="[versie]"/>
                                                         </element>
-                                                        <element name="bestandsformaat" minOccurs="0">
+                                                        <element name="bestandsformaat">
                                                             <tox-expr value="[bestandsformaat]"/>
                                                         </element>
                                                         <element name="omschrijving" minOccurs="0">
