@@ -625,15 +625,15 @@ public class Harvester {
     writer.close();
 
     // Pretty print the document to System.out
-    OutputFormat format = OutputFormat.createPrettyPrint();
+    //OutputFormat format = OutputFormat.createPrettyPrint();
 
-    writer = new XMLWriter(System.out, format);
-    writer.write(document);
+    //writer = new XMLWriter(System.out, format);
+    //writer.write(document);
 
     // Compact format to System.out
-    format = OutputFormat.createCompactFormat();
-    writer = new XMLWriter(System.out, format);
-    writer.write(document);
+    //format = OutputFormat.createCompactFormat();
+    //writer = new XMLWriter(System.out, format);
+    //writer.write(document);
 
   }
 
