@@ -17,7 +17,6 @@ import org.quartz.Scheduler;
 
 import org.metaz.repository.Facade;
 import org.metaz.repository.FacadeFactory;
-import org.metaz.repository.alt.FacadeFactoryAlt;
 
 import java.io.File;
 import java.io.FileInputStream;
