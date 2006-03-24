@@ -3,17 +3,23 @@ package org.metaz.gui.portal;
 
 import org.apache.log4j.Logger;
 
+import org.metaz.domain.HierarchicalStructuredTextMetaData;
 import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
+import org.metaz.domain.TextMetaData;
 import org.metaz.repository.Result;
 import org.metaz.repository.Facade;
+import org.metaz.util.HierarchicalStructuredMetaDataValueParser;
 import org.metaz.util.MetaZ;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,6 +60,8 @@ public class SearchBean {
 	// Search results
 	private List<Result<Record>> metazResults;
 
+	private Facade facade;
+
 	// internal representation of "select" options
 	private SelectOptionList targetEndUserOptions;
 
@@ -79,24 +87,34 @@ public class SearchBean {
 	// -----------------------------------------------------------------------------------------------------
 
 	public SearchBean() {
-		
+
+		facade = MetaZ.getRepositoryFacade();
+
 		populateTargetEndUserOptions();
-	    populateSchoolTypeOptions();
-	    populateSchoolDisciplineOptions();
-	    populateDidacticFunctionOptions();
-	    populateProductTypeOptions();
-	    populateProfessionalSituationOptions();
-	    populateCompetenceOptions();
-	    
-	    keywords = new String("");
-	    errorMessage = new String("");
+		populateSchoolTypeOptions();
+		populateSchoolDisciplineOptions();
+		populateDidacticFunctionOptions();
+		populateProductTypeOptions();
+		populateProfessionalSituationOptions();
+		populateCompetenceOptions();
+
+		keywords = new String("");
+		errorMessage = new String("");
 
 	}
 
 	// ~ Methods
 	// ----------------------------------------------------------------------------------------------------------
-	
-	public Record getRecord(int id){
+
+	/**
+	 * Retrieves the n'th object from the list, where n is the id specified.
+	 * Used to show a single record in the details view.
+	 * 
+	 * @param id
+	 *            the index of the object in the list of searchresults
+	 * @return the Record indexed by id.
+	 */
+	public Record getRecord(int id) {
 		return metazResults.get(id).getObject();
 	}
 
@@ -153,8 +171,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * Processes the request to retrieve user input.
-	 * Prepares this input to be sent to Repository.
+	 * Processes the request to retrieve user input. Prepares this input to be
+	 * sent to Repository.
+	 * 
 	 * @param req
 	 * @return
 	 */
@@ -499,85 +518,121 @@ public class SearchBean {
 	}
 
 	private void populateTargetEndUserOptions() {
-
 		targetEndUserOptions = new SelectOptionList();
-		targetEndUserOptions.add(new SelectOption(true, "*", "Alles"));
-		targetEndUserOptions.add(new SelectOption("Docent"));
-		targetEndUserOptions.add(new SelectOption("Begeleider"));
-		targetEndUserOptions.add(new SelectOption("Manager"));
-
+		targetEndUserOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			List l = facade.getTargetEndUserValues();
+			Iterator it = l.iterator();
+			while (it.hasNext()) {
+				String option = (String) it.next();
+				targetEndUserOptions.add(new SelectOption(option, option));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void populateSchoolTypeOptions() {
 
 		schoolTypeOptions = new SelectOptionList();
-		schoolTypeOptions.add(new SelectOption(true, "*", "Alles"));
-		schoolTypeOptions.add(new SelectOption("VMBO"));
-		schoolTypeOptions.add(new SelectOption("HAVO"));
-		schoolTypeOptions.add(new SelectOption("VWO"));
-
+		schoolTypeOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			List l = facade.getSchoolTypesValues();
+			Iterator it = l.iterator();
+			while (it.hasNext()) {
+				String option = (String) it.next();
+				schoolTypeOptions.add(new SelectOption(option, option));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void populateSchoolDisciplineOptions() {
-
 		schoolDisciplineOptions = new SelectOptionList();
-		schoolDisciplineOptions.add(new SelectOption(true, "*", "Alles"));
-		schoolDisciplineOptions.add(new SelectOption("Rekenen"));
-		schoolDisciplineOptions.add(new SelectOption("Lezen"));
-		schoolDisciplineOptions.add(new SelectOption("Schrijven"));
-
+		schoolDisciplineOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			List l = facade.getSchoolDisciplineValues();
+			Iterator it = l.iterator();
+			while (it.hasNext()) {
+				String option = (String) it.next();
+				schoolDisciplineOptions.add(new SelectOption(option, option));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void populateDidacticFunctionOptions() {
 
 		didacticFunctionOptions = new SelectOptionList();
-		didacticFunctionOptions.add(new SelectOption(true, "*", "Alles"));
-		didacticFunctionOptions.add(new SelectOption("Oefening"));
-		didacticFunctionOptions.add(new SelectOption("Simulatie"));
-		didacticFunctionOptions.add(new SelectOption("Vragenlijst"));
-
+		didacticFunctionOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			List l = facade.getDidacticFunctionValues();
+			Iterator it = l.iterator();
+			while (it.hasNext()) {
+				String option = (String) it.next();
+				// set both value and description to metadata value
+				didacticFunctionOptions.add(new SelectOption(option, option));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void populateProductTypeOptions() {
 
 		productTypeOptions = new SelectOptionList();
-		productTypeOptions.add(new SelectOption(true, "Document"));
-		productTypeOptions.add(new SelectOption("Afbeelding"));
-		productTypeOptions.add(new SelectOption("Video"));
-
+		productTypeOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			List l = facade.getProductTypeValues();
+			Iterator it = l.iterator();
+			while (it.hasNext()) {
+				String option = (String) it.next();
+				productTypeOptions.add(new SelectOption(option, option));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void populateProfessionalSituationOptions() {
 
 		professionalSituationOptions = new SelectOptionList();
-		professionalSituationOptions.add(new SelectOption(true,
-				"Groep: omgaan met een grote groep"));
-		professionalSituationOptions.add(new SelectOption(
-				"Groep: omgaan met een kleine groep"));
-		professionalSituationOptions.add(new SelectOption(
-				"Groep: orde handhaven"));
-		professionalSituationOptions.add(new SelectOption(
-				"Lessen: voorbereiden van een les"));
-		professionalSituationOptions.add(new SelectOption(
-				"Lessen: start van de les"));
-		professionalSituationOptions
-				.add(new SelectOption("Lessen: uitvoering"));
-		professionalSituationOptions.add(new SelectOption(
-				"Opvoeden op school: schoolregels"));
-		professionalSituationOptions.add(new SelectOption(
-				"Opvoeden op school: toezicht in de gangen en pauzes"));
-		professionalSituationOptions.add(new SelectOption(
-				"Opvoeden op school: veiligheid op school"));
-
+		professionalSituationOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			List l = facade.getProfessionalSituationValues();
+			Iterator it = l.iterator();
+			while (it.hasNext()) {
+				String option = (String) it.next();
+				professionalSituationOptions.add(new SelectOption(option, option));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void populateCompetenceOptions() {
 
 		competenceOptions = new SelectOptionList();
-		competenceOptions.add(new SelectOption(true, "Interpersoonlijk"));
-		competenceOptions.add(new SelectOption("Pedagogisch"));
-		competenceOptions.add(new SelectOption("Didactisch"));
-
+		competenceOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			List l = facade.getCompetenceValues();
+			Iterator it = l.iterator();
+			while (it.hasNext()) {
+				String option = (String) it.next();
+				competenceOptions.add(new SelectOption(option, option));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public List<Result<Record>> getMetazResults() {
