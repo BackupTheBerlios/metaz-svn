@@ -4,6 +4,7 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="org.metaz.domain.MetaData" table="metadata" abstract="true" lazy="false">
+		<cache usage="read-only" region="org.metaz"/>
 		<id name="id" type="long" column="ID" >
 			<generator class="increment"/>
 		</id>
@@ -13,35 +14,37 @@
 		<property name="mandatory" column="metadata_mandatory" type="yes_no"/>
 		<property name="optional" column="metadata_optional" type="yes_no"/>
 		
-		<subclass name="org.metaz.domain.BooleanMetaData" discriminator-value="BMD" lazy="false">
+		<subclass name="org.metaz.domain.BooleanMetaData" discriminator-value="BMD">
 			<property name="value" column="BMD_metadata_value" type="boolean"/>
 		</subclass>
-		<subclass name="org.metaz.domain.DateMetaData" discriminator-value="DMD" lazy="false">
+		<subclass name="org.metaz.domain.DateMetaData" discriminator-value="DMD">
 			<property name="value" column="DMD_metadata_value" type="date"/>
 		</subclass>
-		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaData" discriminator-value="HSTM" lazy="false">
-			<list name="value" lazy="false" table="HIERARCHICAL_METADATA_LIST_ITEMS" cascade="all">
+		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaData" discriminator-value="HSTM" lazy="true">
+			<list name="value" table="HIERARCHICAL_METADATA_LIST_ITEMS" cascade="all" lazy="true">
+				<cache usage="read-only" region="org.metaz"/>
 				<key column="ID"/>
 				<index column="ITEM_POSITION"/>
 				<element type="string" column="ITEM_VALUE"/>
 			</list>
 		</subclass>
-		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" discriminator-value="HSTMS" lazy="false" >			
-			<set name="value" table="HIERARCHICAL_METADATA_SET_ITEMS" cascade="all" lazy="false">
+		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" discriminator-value="HSTMS" lazy="true">			
+			<set name="value" table="HIERARCHICAL_METADATA_SET_ITEMS" cascade="all" lazy="true">
+						<cache usage="read-only" region="org.metaz"/>
 	        	<key column="SET_ID"/>
         		<many-to-many column="LIST_ID" unique="true" class="org.metaz.domain.HierarchicalStructuredTextMetaData" />
     		</set>						
 		</subclass>
-		<subclass name="org.metaz.domain.HtmlTextMetaData" discriminator-value="HTMD" lazy="false">
+		<subclass name="org.metaz.domain.HtmlTextMetaData" discriminator-value="HTMD">
 			<property name="value" column="HTMD_metadata_value" type="string"/>
 		</subclass>
-		<subclass name="org.metaz.domain.HyperlinkMetaData" discriminator-value="HMD" lazy="false">
+		<subclass name="org.metaz.domain.HyperlinkMetaData" discriminator-value="HMD">
 			<property name="value" column="HMD_metadata_value" type="string"/>
 		</subclass>
-		<subclass name="org.metaz.domain.NumericMetaData" discriminator-value="NMD" lazy="false">
+		<subclass name="org.metaz.domain.NumericMetaData" discriminator-value="NMD">
 			<property name="value" column="NMD_metadata_value" type="long"/>
 		</subclass>
-		<subclass name="org.metaz.domain.TextMetaData" discriminator-value="TMD" lazy="false">
+		<subclass name="org.metaz.domain.TextMetaData" discriminator-value="TMD">			
 			<property name="value" column="TMD_metadata_value" type="string"/>
 		</subclass>
 	</class>
