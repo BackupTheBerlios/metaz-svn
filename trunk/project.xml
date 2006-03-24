@@ -45,7 +45,7 @@
    <inceptionYear>2005</inceptionYear>
    <package>org.metaz</package>
    <!-- a short description of what the project does -->
-   <shortDescription>Meta/Z is een software engineering team of OTO. We are developing software that will act as an aggregating web front-end to retrieve information from several content databases. The web application offers its users an efficient way of searching and accessing the content. The content is organized with metadata.</shortDescription>
+   <shortDescription>Meta/Z is a software engineering team from OTO (http://www.open.ou.nl/otonet/). We are developing software that harvests (meta) data from several content databases and facilitate aggregrated search through a web portal to allow easy browsing and content access.</shortDescription>
    <!-- the project home page -->
    <url>http://metaz.berlios.de/</url>
    <siteAddress>metaz.berlios.de</siteAddress>
