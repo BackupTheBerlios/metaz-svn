@@ -4,7 +4,7 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="org.metaz.domain.MetaData" table="metadata" abstract="true" lazy="false">
-		<cache usage="read-only" region="org.metaz"/>
+		<cache usage="read-write" region="org.metaz"/>
 		<id name="id" type="long" column="ID" >
 			<generator class="increment"/>
 		</id>
@@ -22,7 +22,7 @@
 		</subclass>
 		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaData" discriminator-value="HSTM" lazy="true">
 			<list name="value" table="HIERARCHICAL_METADATA_LIST_ITEMS" cascade="all" lazy="true">
-				<cache usage="read-only" region="org.metaz"/>
+				<cache usage="read-write" region="org.metaz"/>
 				<key column="ID"/>
 				<index column="ITEM_POSITION"/>
 				<element type="string" column="ITEM_VALUE"/>
@@ -30,7 +30,7 @@
 		</subclass>
 		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" discriminator-value="HSTMS" lazy="true">			
 			<set name="value" table="HIERARCHICAL_METADATA_SET_ITEMS" cascade="all" lazy="true">
-						<cache usage="read-only" region="org.metaz"/>
+						<cache usage="read-write" region="org.metaz"/>
 	        	<key column="SET_ID"/>
         		<many-to-many column="LIST_ID" unique="true" class="org.metaz.domain.HierarchicalStructuredTextMetaData" />
     		</set>						

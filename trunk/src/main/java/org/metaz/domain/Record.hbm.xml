@@ -4,7 +4,7 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="org.metaz.domain.Record" table="records" lazy="false">
-		<cache usage="read-only" region="org.metaz"/>
+		<cache usage="read-write" region="org.metaz"/>
 		<id name="id" type="long" column="ID">
 			<generator class="increment"/>
 		</id>
