@@ -135,7 +135,6 @@ public final class MetaZ
     if (facadeInst == null) {
 
       facadeInst = FacadeFactory.createFacade();
-      //facadeInst = FacadeFactoryAlt.createFacade();
 
       logger.info("Created Meta-Z Facade singleton instance: <" + format(facadeInst) + ">");
 

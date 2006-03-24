@@ -1,4 +1,4 @@
-package org.metaz.repository.alt;
+package org.metaz.repository;
 
 import org.apache.log4j.Logger;
 
@@ -163,7 +163,7 @@ public class SearchServiceImplAlt
 
       for (int i = 0; i < reader.numDocs(); i++) {
 
-        logger.info((reader.document(i)).toString());
+        logger.debug((reader.document(i)).toString());
 
       }
 
@@ -497,7 +497,7 @@ public class SearchServiceImplAlt
         String suri = doc.get(MetaData.URI);
         float  score = hits.score(i);
 
-        logger.info(i + 1 + ": " + suri + ":" + score);
+        logger.debug(i + 1 + ": " + suri + ":" + score);
         resultList.add(new Result<Record>(rec, hits.score(i)));
 
       } // end for
@@ -569,7 +569,7 @@ public class SearchServiceImplAlt
       terms.close();
       reader.close();
 
-      String[] distinctValues = new String[] {""};
+      String[] distinctValues = new String[0];
 
       if (values.size() != 0) {
 

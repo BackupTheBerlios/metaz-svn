@@ -44,8 +44,8 @@ public class FacadeFactory {
 	public static Facade createFacade(){
 
 		Facade facade = null;
-		SearchService search = null;
-		DataService data = null;
+		RepositoryService search = null;
+		RepositoryService data = null;
 
 		Properties props = MetaZ.getInstance().getProperties();
 
@@ -56,10 +56,10 @@ public class FacadeFactory {
 			facade = (Facade) (Class.forName(cls).newInstance());
 			cls = props.getProperty(SEARCH_PROP, SEARCH_DEF_PROP);
 			logger.debug(SEARCH_PROP + " " + cls);
-			search = (SearchService) (Class.forName(cls).newInstance());
+			search = (RepositoryService) (Class.forName(cls).newInstance());
 			cls = props.getProperty(DATA_PROP, DATA_DEF_PROP);
 			logger.debug(DATA_PROP + " " + cls);
-			data = (DataService) (Class.forName(cls).newInstance());
+			data = (RepositoryService) (Class.forName(cls).newInstance());
 
 			//inject the appropriate services
 			facade.setSearchService(search);

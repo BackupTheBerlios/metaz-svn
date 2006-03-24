@@ -1,4 +1,4 @@
-package org.metaz.repository.alt;
+package org.metaz.repository;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;

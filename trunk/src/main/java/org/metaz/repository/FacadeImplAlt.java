@@ -1,4 +1,4 @@
-package org.metaz.repository.alt;
+package org.metaz.repository;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
@@ -8,20 +8,16 @@ import org.metaz.domain.MetaData;
 
 import org.metaz.util.MetaZ;
 
-import java.net.URI;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.metaz.repository.DataService;
 import org.metaz.repository.Facade;
 import org.metaz.repository.FacadeImpl;
 import org.metaz.repository.RepositoryService;
 import org.metaz.repository.Result;
-import org.metaz.repository.SearchService;
 
 /**
  * Implementation of the Facade.
@@ -33,18 +29,18 @@ class FacadeImplAlt implements Facade {
 
     //~ Instance fields --------------------------------------------------------------------------------------------------
 
-    /* The SearchService implementation to be used
+    /** The SearchService implementation to be used
      */
     private SearchServiceAlt searchServiceAlt;
 
-    /* Read-write lock  to avoid incosistent search results
+    /** Read-write lock  to avoid incosistent search results
      * during the update of the Repository
      */
     private ReadWriteLock rwLock;
 
     //~ Constructors -----------------------------------------------------------------------------------------------------
 
-    /*
+    /**
      * Default constructor
      */
     public FacadeImplAlt() {
