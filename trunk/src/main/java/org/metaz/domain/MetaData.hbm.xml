@@ -14,10 +14,10 @@
 		<property name="mandatory" column="metadata_mandatory" type="yes_no"/>
 		<property name="optional" column="metadata_optional" type="yes_no"/>
 		
-		<subclass name="org.metaz.domain.BooleanMetaData" discriminator-value="BMD">
+		<subclass name="org.metaz.domain.BooleanMetaData" discriminator-value="BMD" lazy="false">
 			<property name="value" column="BMD_metadata_value" type="boolean"/>
 		</subclass>
-		<subclass name="org.metaz.domain.DateMetaData" discriminator-value="DMD">
+		<subclass name="org.metaz.domain.DateMetaData" discriminator-value="DMD" lazy="false">
 			<property name="value" column="DMD_metadata_value" type="date"/>
 		</subclass>
 		<subclass name="org.metaz.domain.HierarchicalStructuredTextMetaData" discriminator-value="HSTM" lazy="true">
@@ -35,16 +35,16 @@
         		<many-to-many column="LIST_ID" unique="true" class="org.metaz.domain.HierarchicalStructuredTextMetaData" />
     		</set>						
 		</subclass>
-		<subclass name="org.metaz.domain.HtmlTextMetaData" discriminator-value="HTMD">
+		<subclass name="org.metaz.domain.HtmlTextMetaData" discriminator-value="HTMD" lazy="false">
 			<property name="value" column="HTMD_metadata_value" type="string"/>
 		</subclass>
-		<subclass name="org.metaz.domain.HyperlinkMetaData" discriminator-value="HMD">
+		<subclass name="org.metaz.domain.HyperlinkMetaData" discriminator-value="HMD" lazy="false">
 			<property name="value" column="HMD_metadata_value" type="string"/>
 		</subclass>
-		<subclass name="org.metaz.domain.NumericMetaData" discriminator-value="NMD">
+		<subclass name="org.metaz.domain.NumericMetaData" discriminator-value="NMD" lazy="false">
 			<property name="value" column="NMD_metadata_value" type="long"/>
 		</subclass>
-		<subclass name="org.metaz.domain.TextMetaData" discriminator-value="TMD">			
+		<subclass name="org.metaz.domain.TextMetaData" discriminator-value="TMD" lazy="false">			
 			<property name="value" column="TMD_metadata_value" type="string"/>
 		</subclass>
 	</class>
