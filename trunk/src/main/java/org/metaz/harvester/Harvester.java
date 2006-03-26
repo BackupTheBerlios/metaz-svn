@@ -594,7 +594,7 @@ public class Harvester {
    * @throws Exception any exception whilst creating a Dom4J Document
    */
   private Document getDom4jDocument(File f)
-                             throws Exception
+                             throws Exception, IOException
   {
 
     {
