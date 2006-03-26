@@ -9,7 +9,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import org.dom4j.io.OutputFormat;
+//import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.SAXWriter;
 import org.dom4j.io.XMLWriter;
@@ -47,24 +47,25 @@ import java.util.*;
  * Learnobjects, transform them to records of metadata and pass them to the repository facade.
  *
  * @author Lars Oosterloo
- * @version 0.1 The Harvester class is responsible for parsing xml data files into a collection of LearningObjects 
- * and passing this collection to the repository interface
+ * @version 0.1 The Harvester class is responsible for parsing xml data files into a collection of LearningObjects  and passing this collection to the repository interface
  */
 public class Harvester {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-  private static Logger       logger = MetaZ.getLogger(Harvester.class);
+  private static Logger logger = MetaZ.getLogger(Harvester.class);
+
   // default file and directory settings
   private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
   private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
   private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
   private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
   private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
-  
+
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   private File xmlfile;
+
   // file and directory settings to be read from runtime properties file (metaz.props)
   private String applicationz_schema_prop;
   private String applicationz_transfer_path_prop;
@@ -81,28 +82,49 @@ public class Harvester {
    * values are set.
    */
   public Harvester() {
-	  MetaZ app = MetaZ.getInstance();
-	  applicationz_schema_prop = app.getProperties().getProperty("applicationz_schema");
-	  if (applicationz_schema_prop == null) {
-		  applicationz_schema_prop = APPLICATIONZ_SCHEMA;
-	  }
-	  applicationz_transfer_path_prop = app.getProperties().getProperty("applicationz_transfer_path");
-	  if (applicationz_transfer_path_prop == null) {
-		  applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
-	  }
-	  applicationz_processed_path_prop = app.getProperties().getProperty("applicationz_processed_path");
-	  if (applicationz_processed_path_prop == null) {
-		  applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
-	  }
-	  applicationz_rejected_path_prop = app.getProperties().getProperty("applicationz_rejected_path");
-	  if (applicationz_rejected_path_prop == null) {
-		  applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
-	  }
-	  applicationz_transferstaging_path_prop = app.getProperties().getProperty("applicationz_transferstaging_path");
-	  if (applicationz_transferstaging_path_prop == null) {
-		  applicationz_transferstaging_path_prop = APPLICATIONZ_TRANSFERSTAGING_PATH;
-	  }
-	  
+
+    MetaZ app = MetaZ.getInstance();
+
+    applicationz_schema_prop = app.getProperties().getProperty("applicationz_schema");
+
+    if (applicationz_schema_prop == null) {
+
+      applicationz_schema_prop = APPLICATIONZ_SCHEMA;
+
+    }
+
+    applicationz_transfer_path_prop = app.getProperties().getProperty("applicationz_transfer_path");
+
+    if (applicationz_transfer_path_prop == null) {
+
+      applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
+
+    }
+
+    applicationz_processed_path_prop = app.getProperties().getProperty("applicationz_processed_path");
+
+    if (applicationz_processed_path_prop == null) {
+
+      applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
+
+    }
+
+    applicationz_rejected_path_prop = app.getProperties().getProperty("applicationz_rejected_path");
+
+    if (applicationz_rejected_path_prop == null) {
+
+      applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
+
+    }
+
+    applicationz_transferstaging_path_prop = app.getProperties().getProperty("applicationz_transferstaging_path");
+
+    if (applicationz_transferstaging_path_prop == null) {
+
+      applicationz_transferstaging_path_prop = APPLICATIONZ_TRANSFERSTAGING_PATH;
+
+    }
+
   }
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
@@ -129,8 +151,6 @@ public class Harvester {
     harvester.setXMLFile(filename);
 
   }
-  
-  
 
   /**
    * sets the name of the file to parse and initiates parsing of the file
@@ -665,7 +685,6 @@ public class Harvester {
     //format = OutputFormat.createCompactFormat();
     //writer = new XMLWriter(System.out, format);
     //writer.write(document);
-
   }
 
   /**
