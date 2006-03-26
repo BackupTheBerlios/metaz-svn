@@ -32,13 +32,13 @@
    </mailingLists>
    <id>MetaZ</id>
    <!-- a short but descriptive name for the project -->
-   <name>Meta&#47;Z</name>
+   <name>Meta/Z</name>
    <!-- The version of the project under development, e.g.
        1.1, 1.2, 2.0-SNAPSHOT -->
    <currentVersion>0.1</currentVersion>
    <!-- details about the organization that 'owns' the project -->
    <organization>
-      <name>Meta&#47;Z team OTO</name>
+      <name>Meta/Z team OTO</name>
       <url>http://www.open.ou.nl/otonet/</url>
    </organization>
    <!-- the year the project started -->
@@ -196,18 +196,18 @@
          <version>1.2.8</version>
          <url>http://logging.apache.org/log4j/docs/</url>
          <type>jar</type>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
       </dependency>
       <dependency>
          <groupId>lucene</groupId>
          <artifactId>lucene</artifactId>
          <version>1.4.3</version>
          <url>http://lucene.apache.org/java/docs/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -215,9 +215,9 @@
          <artifactId>hsqldb</artifactId>
          <version>1.8.0.1</version>
          <url>http://hsqldb.org/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -225,9 +225,9 @@
          <artifactId>hibernate</artifactId>
          <version>3.0.5</version>
          <url>http://www.hibernate.org/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -242,9 +242,9 @@
          <artifactId>dom4j</artifactId>
          <version>1.6.1</version>
          <url>http://dom4j.org/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -252,9 +252,9 @@
          <artifactId>msv</artifactId>
          <version>20030225</version>
          <url>https://msv.dev.java.net/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -270,9 +270,9 @@
          <version>1.0.4</version>
          <url>http://jakarta.apache.org/commons/logging/</url>
          <type>jar</type>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
       </dependency>
       <dependency>
          <groupId>commons-collections</groupId>
@@ -280,9 +280,9 @@
          <version>2.1.1</version>
          <url>http://jakarta.apache.org/commons/collections/</url>
          <type>jar</type>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
       </dependency>
       <dependency>
          <groupId>commons-beanutils</groupId>
@@ -290,9 +290,9 @@
          <version>1.7.0</version>
          <url>http://jakarta.apache.org/commons/beanutils/</url>
          <type>jar</type>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
       </dependency>
       <dependency>
          <groupId>commons-lang</groupId>
@@ -300,18 +300,18 @@
          <version>2.1</version>
          <url>http://jakarta.apache.org/commons/lang/</url>
          <type>jar</type>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
       </dependency>
       <dependency>
          <groupId>jstl</groupId>
          <artifactId>jstl</artifactId>
          <version>1.1.2</version>
          <url>http://jakarta.apache.org/taglibs/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -319,9 +319,9 @@
          <artifactId>standard</artifactId>
          <version>1.1.2</version>
          <url>http://jakarta.apache.org/taglibs/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -330,18 +330,18 @@
          <version>1.3.1</version>
          <url>http://www.lowagie.com/iText</url>
          <type>jar</type>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
       </dependency>
       <dependency>
          <groupId>cglib</groupId>
          <artifactId>cglib</artifactId>
          <version>2.1_3</version>
          <url>http://cglib.sourceforge.net/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -349,9 +349,9 @@
          <artifactId>relaxngDatatype</artifactId>
          <version>20030807</version>
          <url>https://msv.dev.java.net/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -359,9 +359,9 @@
          <artifactId>isorelax</artifactId>
          <version>20030108</version>
          <url>https://msv.dev.java.net/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -369,9 +369,9 @@
          <artifactId>xsdlib</artifactId>
          <version>20030807</version>
          <url>https://msv.dev.java.net/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -379,9 +379,9 @@
          <artifactId>ehcache</artifactId>
          <version>1.1</version>
          <url>http://ehcache.sourceforge.net/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -389,9 +389,9 @@
          <artifactId>asm</artifactId>
          <version>1.5.3</version>
          <url>http://asm.objectweb.org/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
       <dependency>
@@ -399,52 +399,52 @@
          <artifactId>antlr</artifactId>
          <version>2.7.6rc1</version>
          <url>http://www.antlr.org/</url>
-		  <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
-	   <dependency>
+      <dependency>
          <groupId>quartz</groupId>
          <artifactId>quartz</artifactId>
          <version>1.5.1</version>
-		   <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
-	   <dependency>
+      <dependency>
          <groupId>displaytag</groupId>
          <artifactId>displaytag</artifactId>
          <version>1.1</version>
          <url>http://displaytag.sourceforge.net/11/</url>
-		   <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
       </dependency>
-	   <dependency>
-      <groupId>displaytag</groupId>
-      <artifactId>displaytag-export-poi</artifactId>
-      <version>1.1</version>
-		   <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
-		   <type>jar</type>
-    </dependency>
-	   <!-- dependencies to be found in metaz maven repo 
+      <dependency>
+         <groupId>displaytag</groupId>
+         <artifactId>displaytag-export-poi</artifactId>
+         <version>1.1</version>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
+         <type>jar</type>
+      </dependency>
+      <!-- dependencies to be found in metaz maven repo 
 		    All libs are versioned 1.0 -->
-	   <dependency>
+      <dependency>
          <groupId>jta</groupId>
          <artifactId>jta</artifactId>
          <version>1.0</version>
          <url>http://java.sun.com/products/jta/</url>
-		   <properties>
-			   <war.bundle>true</war.bundle>
-		   </properties>
+         <properties>
+            <war.bundle>true</war.bundle>
+         </properties>
          <type>jar</type>
-     </dependency>
-	   <dependency>
+      </dependency>
+      <dependency>
          <groupId>toxgene</groupId>
          <artifactId>toxgene</artifactId>
          <version>1.0</version>
