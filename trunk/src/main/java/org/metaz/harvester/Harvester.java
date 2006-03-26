@@ -56,11 +56,16 @@ public class Harvester {
   private static Logger logger = MetaZ.getLogger(Harvester.class);
 
   // default file and directory settings
-  private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
-  private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
-  private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
-  private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
-  private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
+//  private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
+//  private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
+//  private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
+//  private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
+//  private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
+  private final String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
+  private final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
+  private final String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
+  private final String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
+  private final String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
