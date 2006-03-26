@@ -36,18 +36,29 @@ import org.metaz.util.MetaZ;
 //import com.sun.msv.grammar.relaxng.datatype.*;
 //import org.xml.sax.ErrorHandler;
 //import org.xml.sax.SAXParseException;
-import java.io.*;
+//import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-import java.text.*;
+import java.text.SimpleDateFormat;
 
-import java.util.*;
+import java.util.Date;
+import java.util.Iterator;
+
+//import java.util.*;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * The  Harvester class initiates a check of an offered xml file to check on xml schema conformity, extract all
  * Learnobjects, transform them to records of metadata and pass them to the repository facade.
  *
+ * The Harvester class is responsible for parsing xml data files into a  collection of
+ * LearningObjects  and passing this collection to the repository interface
+ *
  * @author Lars Oosterloo
- * @version 0.1 The Harvester class is responsible for parsing xml data files into a collection of LearningObjects  and passing this collection to the repository interface
+ * @version 0.1
  */
 public class Harvester {
 
@@ -55,21 +66,20 @@ public class Harvester {
 
   private static Logger logger = MetaZ.getLogger(Harvester.class);
 
+  //~ Instance fields --------------------------------------------------------------------------------------------------
+
   // default file and directory settings
-//  private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
-//  private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
-//  private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
-//  private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
-//  private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
+  //  private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
+  //  private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
+  //  private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
+  //  private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
+  //  private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
   private final String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
   private final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
   private final String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
   private final String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
   private final String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
-
-  //~ Instance fields --------------------------------------------------------------------------------------------------
-
-  private File xmlfile;
+  private File         xmlfile;
 
   // file and directory settings to be read from runtime properties file (metaz.props)
   private String applicationz_schema_prop;
@@ -245,19 +255,11 @@ public class Harvester {
 
     try {
 
-      //validate and create document
       logger.info("start parsing");
-
-      //repeat for each learnObject in the xml file
-      //create a ne document for each learnObject
-      //parse each learnobject xml part
+      //repeat for each learnObject in the xml file, create a new document
+      //for each learnObject and parse each learnobject xml part
       Document doc = getDom4jDocument(f);
 
-      //if (doc == null) {
-
-      //return false;
-
-      //}
       logger.info("doc created");
 
       //convert to collection of LearningObjects
@@ -288,8 +290,7 @@ public class Harvester {
             //save ldoc to errordir
             try {
 
-              logger.fatal(element.element("titel").getText() + " is an invalid node.");
-              logger.info(ex.getMessage());
+              logger.fatal(element.element("titel").getText() + " is an invalid node./n" + ex.getMessage());
               writeDocument2File(ldoc, ex.getMessage(), f.getName());
 
             } catch (Exception ignore) {
@@ -302,47 +303,16 @@ public class Harvester {
 
           if (validated) {
 
-            //create new record from mandatory elements
-            TextMetaData tmdt1 = new TextMetaData();
-
-            tmdt1.setValue(element.element("titel").getText());
-
-            TextMetaData tmdt2 = new TextMetaData();
-
-            tmdt2.setValue(element.element("bestandsformaat").getText());
-
-            TextMetaData tmdt3 = new TextMetaData();
-
-            tmdt3.setValue(element.element("didactischeFunctie").getText());
-
-            TextMetaData tmdt4 = new TextMetaData();
-
-            tmdt4.setValue(element.element("producttype").getText());
-
-            HyperlinkMetaData hper = new HyperlinkMetaData();
-
-            hper.setValue(element.attributeValue("URI"));
-
-            BooleanMetaData bln = new BooleanMetaData();
-
-            bln.setValue(Boolean.valueOf(element.element("beveiligd").getText()));
-
-            Record rec = new org.metaz.domain.Record(tmdt1, bln, tmdt2, tmdt3, tmdt4, hper);
-
-            logger.info("record created" + element.attributeValue("URI"));
-
+            Record                rec = createNewRecord(element);
             RecordAttributeSetter recset = new RecordAttributeSetter(rec);
 
             try {
 
               for (Iterator k = recset.iterator(); k.hasNext();) {
 
-                logger.info("in iterator");
-
                 MetaData metadata = (MetaData) k.next();
 
                 logger.info("metadata :" + metadata.getMetaDataType() + " - " + metadata.getXMLTagName());
-                logger.info("mandatory :" + metadata.isMandatory());
 
                 if (! metadata.isMandatory()) {
 
@@ -350,204 +320,49 @@ public class Harvester {
 
                   if (metadata.getMetaDataType().equals("TextMetaData")) {
 
-                    try {
-
-                      logger.info("textmetadata");
-
-                      TextMetaData tmdt = new TextMetaData();
-
-                      //sleutelwoorden
-                      if (metadata.getName().equals("keywords")) {
-
-                        String keywords = "";
-
-                        for (Iterator j = element.element("sleutelwoorden").elementIterator(); j.hasNext();) {
-
-                          Element keyword = (Element) j.next();
-
-                          keywords = keyword.getText() + ";";
-                          //.element("sleutelwoord")
-                          logger.info(keywords);
-
-                        }
-
-                        tmdt.setValue(keywords);
-
-                      } else if (metadata.getName().equals("roleName")) {
-
-                        //rolEnNaam
-                        String rolenames = "";
-
-                        for (Iterator m = element.element("rolEnNaam").elementIterator(); k.hasNext();) {
-
-                          Element rolename = (Element) m.next();
-
-                          rolenames = "Rol: " + rolename.element("rol").getText() + "\n Naam: " +
-                                      rolename.element("naam").getText() + "\n";
-                          logger.info(rolenames);
-
-                        }
-
-                        tmdt.setValue(rolenames);
-
-                      } else {
-
-                        tmdt.setValue(element.element(metadata.getXMLTagName()).getText());
-
-                      }
-
-                      recset.setValue(metadata.getXMLTagName(), tmdt);
-                      logger.info(metadata.getXMLTagName() + " : " + tmdt.getValue().toString());
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 1:" + ignore.toString());
-
-                    }
+                    parseTextMetaData(element, metadata, recset);
 
                   }
 
                   if (metadata.getMetaDataType().equals("BooleanMetaData")) {
 
-                    try {
-
-                      logger.info("boolmetadata");
-
-                      BooleanMetaData bmdt = new BooleanMetaData();
-
-                      bmdt.setValue(element.element(metadata.getXMLTagName()).getText());
-                      recset.setValue(metadata.getXMLTagName(), bmdt);
-                      logger.info(metadata.getXMLTagName());
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 2:" + ignore.toString());
-
-                    }
+                    parseBoolMetaData(element, metadata, recset);
 
                   }
 
                   if (metadata.getMetaDataType().equals("HtmlTextMetaData")) {
 
-                    try {
-
-                      logger.info("htmlmetadata");
-
-                      HtmlTextMetaData hmdt = new HtmlTextMetaData();
-
-                      hmdt.setValue(element.element(metadata.getXMLTagName()).getText());
-                      recset.setValue(metadata.getXMLTagName(), hmdt);
-                      logger.info(metadata.getXMLTagName() + " : " + hmdt.getValue().toString());
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 3:" + ignore.toString());
-
-                    }
+                    parseHtmlTextMetaData(element, metadata, recset);
 
                   }
 
                   if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaData")) {
 
-                    try {
-
-                      logger.info("hstmetadata");
-
-                      HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData();
-
-                      addNodeRecursive(element.element(metadata.getXMLTagName()).element("hoofdwaarden"),
-                                       element.element(metadata.getXMLTagName()).element("hoofdwaarden"), hMetaData);
-                      recset.setValue(metadata.getXMLTagName(), hMetaData);
-                      logger.info(metadata.getXMLTagName());
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 4:" + ignore.toString());
-
-                    }
+                    parseHierarchicalStructuredTextMetaData(element, metadata, recset);
 
                   }
 
                   if (metadata.getMetaDataType().equals("HierarchicalStructuredTextMetaDataSet")) {
 
-                    try {
-
-                      logger.info("hstmetadataSet");
-
-                      HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
-
-                      addNodeRecursive(element.element("schooltype").element("hoofdwaarden"),
-                                       element.element("schooltype").element("hoofdwaarden"), hSet);
-                      recset.setValue(metadata.getXMLTagName(), hSet);
-                      logger.info(metadata.getXMLTagName());
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 5:" + ignore.toString());
-
-                    }
+                    parseHierarchicalStructuredTextMetaDataSet(element, metadata, recset);
 
                   }
 
                   if (metadata.getMetaDataType().equals("HyperlinkMetaData")) {
 
-                    try {
-
-                      logger.info("hyperlinkmetadata");
-
-                      HyperlinkMetaData hlmdt = new HyperlinkMetaData();
-
-                      hlmdt.setValue(element.element(metadata.getXMLTagName()).getText());
-                      recset.setValue(metadata.getXMLTagName(), hlmdt);
-                      logger.info(metadata.getXMLTagName());
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 6:" + ignore.toString());
-
-                    }
+                    parseHyperlinkMetaData(element, metadata, recset);
 
                   }
 
                   if (metadata.getMetaDataType().equals("NumericMetaData")) {
 
-                    try {
-
-                      logger.info("nummetadata");
-
-                      NumericMetaData nmdt = new NumericMetaData();
-
-                      nmdt.setValue(Long.parseLong(element.element(metadata.getXMLTagName()).getText()));
-                      recset.setValue(metadata.getXMLTagName(), nmdt);
-                      logger.info(metadata.getXMLTagName() + ": " + nmdt.getValue());
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 7:" + ignore.toString() + element.element(metadata.getXMLTagName()).getText());
-
-                    }
+                    parseNumericMetaData(element, metadata, recset);
 
                   }
 
                   if (metadata.getMetaDataType().equals("DateMetaData")) {
 
-                    logger.info("datemetadata");
-
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    DateMetaData     dmdt = new DateMetaData();
-
-                    try {
-
-                      Date d = sdf.parse(element.element(metadata.getXMLTagName()).getText());
-
-                      dmdt.setValue(d);
-                      recset.setValue(metadata.getXMLTagName(), dmdt);
-
-                    } catch (Exception ignore) {
-
-                      logger.error("here 8:" + ignore.toString());
-
-                    }
+                    parseDateMetaData(element, metadata, recset);
 
                   }
 
@@ -597,31 +412,31 @@ public class Harvester {
                              throws IOException
   {
 
-      Document document = null;
+    Document document = null;
 
-      try {
+    try {
 
-        SAXReader reader = new SAXReader();
+      SAXReader reader = new SAXReader();
 
-        document = reader.read(f);
-        logger.info("doc read");
-        //validation will not trigger move of complete file to error
-        //directory. This will be done later on a leerObject level
-        //remarks will be logged
-        processValidation(document);
-        logger.info("document created and validated");
+      document = reader.read(f);
+      logger.info("doc read");
+      //validation will not trigger move of complete file to error
+      //directory. This will be done later on a leerObject level
+      //remarks will be logged
+      processValidation(document);
+      logger.info("document created and validated");
 
-      } catch (DocumentException ex) {
+    } catch (DocumentException ex) {
 
-        logger.error(ex.getMessage());
+      logger.error(ex.getMessage());
 
-      } catch (Exception exc) {
+    } catch (Exception exc) {
 
-        logger.error(exc.getMessage());
+      logger.error(exc.getMessage());
 
-      }
+    }
 
-      return document;
+    return document;
 
   }
 
@@ -650,7 +465,7 @@ public class Harvester {
    * @param error string which hold the error why validation failed
    * @param file name of the file to write the content of document to
    *
-   * @throws IOException
+   * @throws IOException can be thrown for the file argument
    */
   public void writeDocument2File(Document document, String error, String file)
                           throws IOException
@@ -912,6 +727,305 @@ public class Harvester {
     }
 
     return;
+
+  }
+
+  /**
+   * Parses a TxtMetaData node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseTextMetaData(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    try {
+
+      logger.info("textmetadata");
+
+      TextMetaData tmdt = new TextMetaData();
+
+      //sleutelwoorden
+      if (metadata.getName().equals("keywords")) {
+
+        String keywords = "";
+
+        for (Iterator j = e.element("sleutelwoorden").elementIterator(); j.hasNext();) {
+
+          Element keyword = (Element) j.next();
+
+          keywords = keyword.getText() + ";";
+          //.element("sleutelwoord")
+          logger.info(keywords);
+
+        }
+
+        tmdt.setValue(keywords);
+
+      } else if (metadata.getName().equals("roleName")) {
+
+        //rolEnNaam
+        String rolenames = "";
+
+        for (Iterator m = e.element("rolEnNaam").elementIterator(); m.hasNext();) {
+
+          Element rolename = (Element) m.next();
+
+          rolenames = "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() +
+                      "\n";
+          logger.info(rolenames);
+
+        }
+
+        tmdt.setValue(rolenames);
+
+      } else {
+
+        tmdt.setValue(e.element(metadata.getXMLTagName()).getText());
+
+      }
+
+      recset.setValue(metadata.getXMLTagName(), tmdt);
+      logger.info(metadata.getXMLTagName() + " : " + tmdt.getValue().toString());
+
+    } catch (Exception ignore) {
+
+      logger.error("here 1:" + ignore.toString());
+
+    }
+
+  }
+
+  /**
+   * Parses a BoolMetaData node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseBoolMetaData(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    try {
+
+      logger.info("boolmetadata");
+
+      BooleanMetaData bmdt = new BooleanMetaData();
+
+      bmdt.setValue(e.element(metadata.getXMLTagName()).getText());
+      recset.setValue(metadata.getXMLTagName(), bmdt);
+      logger.info(metadata.getXMLTagName());
+
+    } catch (Exception ignore) {
+
+      logger.error("here 2:" + ignore.toString());
+
+    }
+
+  }
+
+  /**
+   * Parses a HtmlTextMetaData node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseHtmlTextMetaData(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    try {
+
+      logger.info("htmlmetadata");
+
+      HtmlTextMetaData hmdt = new HtmlTextMetaData();
+
+      hmdt.setValue(e.element(metadata.getXMLTagName()).getText());
+      recset.setValue(metadata.getXMLTagName(), hmdt);
+      logger.info(metadata.getXMLTagName() + " : " + hmdt.getValue().toString());
+
+    } catch (Exception ignore) {
+
+      logger.error("here 3:" + ignore.toString());
+
+    }
+
+  }
+
+  /**
+   * Parses a HierarchicalStructuredTextMetaData node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseHierarchicalStructuredTextMetaData(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    try {
+
+      logger.info("hstmetadata");
+
+      HierarchicalStructuredTextMetaData hMetaData = new HierarchicalStructuredTextMetaData();
+
+      addNodeRecursive(e.element(metadata.getXMLTagName()).element("hoofdwaarden"),
+                       e.element(metadata.getXMLTagName()).element("hoofdwaarden"), hMetaData);
+      recset.setValue(metadata.getXMLTagName(), hMetaData);
+      logger.info(metadata.getXMLTagName());
+
+    } catch (Exception ignore) {
+
+      logger.error("here 4:" + ignore.toString());
+
+    }
+
+  }
+
+  /**
+   * Parses a HierarchicalStructuredTextMetaDataSet node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseHierarchicalStructuredTextMetaDataSet(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    try {
+
+      logger.info("hstmetadataSet");
+
+      HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
+
+      addNodeRecursive(e.element("schooltype").element("hoofdwaarden"),
+                       e.element("schooltype").element("hoofdwaarden"), hSet);
+      recset.setValue(metadata.getXMLTagName(), hSet);
+      logger.info(metadata.getXMLTagName());
+
+    } catch (Exception ignore) {
+
+      logger.error("here 5:" + ignore.toString());
+
+    }
+
+  }
+
+  /**
+   * Parses a HyperlinkMetaData node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseHyperlinkMetaData(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    try {
+
+      logger.info("hyperlinkmetadata");
+
+      HyperlinkMetaData hlmdt = new HyperlinkMetaData();
+
+      hlmdt.setValue(e.element(metadata.getXMLTagName()).getText());
+      recset.setValue(metadata.getXMLTagName(), hlmdt);
+      logger.info(metadata.getXMLTagName());
+
+    } catch (Exception ignore) {
+
+      logger.error("here 6:" + ignore.toString());
+
+    }
+
+  }
+
+  /**
+   * Parses a NumericMetaData node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseNumericMetaData(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    try {
+
+      logger.info("nummetadata");
+
+      NumericMetaData nmdt = new NumericMetaData();
+
+      nmdt.setValue(Long.parseLong(e.element(metadata.getXMLTagName()).getText()));
+      recset.setValue(metadata.getXMLTagName(), nmdt);
+      logger.info(metadata.getXMLTagName() + ": " + nmdt.getValue());
+
+    } catch (Exception ignore) {
+
+      logger.error("here 7:" + ignore.toString() + e.element(metadata.getXMLTagName()).getText());
+
+    }
+
+  }
+
+  /**
+   * Parses a DateMetaData node in an xml Document
+   *
+   * @param e current element in the xml document
+   * @param metadata current metatdata type
+   * @param recset Record Attribute setter to identify the attributes of the current metadata
+   */
+  private void parseDateMetaData(Element e, MetaData metadata, RecordAttributeSetter recset) {
+
+    logger.info("datemetadata");
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    DateMetaData     dmdt = new DateMetaData();
+
+    try {
+
+      Date d = sdf.parse(e.element(metadata.getXMLTagName()).getText());
+
+      dmdt.setValue(d);
+      recset.setValue(metadata.getXMLTagName(), dmdt);
+
+    } catch (Exception ignore) {
+
+      logger.error("here 8:" + ignore.toString());
+
+    }
+
+  }
+
+  /**
+   * Creates a new record from anDom4J Document node
+   * @param e cutten node in the Dom4J Document
+   * @return newly created record
+   */
+  private Record createNewRecord(Element e) {
+
+    //create new record from mandatory elements
+    TextMetaData tmdt1 = new TextMetaData();
+
+    tmdt1.setValue(e.element("titel").getText());
+
+    TextMetaData tmdt2 = new TextMetaData();
+
+    tmdt2.setValue(e.element("bestandsformaat").getText());
+
+    TextMetaData tmdt3 = new TextMetaData();
+
+    tmdt3.setValue(e.element("didactischeFunctie").getText());
+
+    TextMetaData tmdt4 = new TextMetaData();
+
+    tmdt4.setValue(e.element("producttype").getText());
+
+    HyperlinkMetaData hper = new HyperlinkMetaData();
+
+    hper.setValue(e.attributeValue("URI"));
+
+    BooleanMetaData bln = new BooleanMetaData();
+
+    bln.setValue(Boolean.valueOf(e.element("beveiligd").getText()));
+
+    Record rec = new org.metaz.domain.Record(tmdt1, bln, tmdt2, tmdt3, tmdt4, hper);
+
+    logger.info("record created" + e.attributeValue("URI"));
+
+    return rec;
 
   }
 
