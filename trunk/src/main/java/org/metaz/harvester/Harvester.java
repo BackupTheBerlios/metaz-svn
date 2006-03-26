@@ -64,7 +64,7 @@ public class Harvester {
   
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  protected File xmlfile;
+  private File xmlfile;
   // file and directory settings to be read from runtime properties file (metaz.props)
   private String applicationz_schema_prop;
   private String applicationz_transfer_path_prop;
