@@ -591,13 +591,11 @@ public class Harvester {
    *
    * @return the DOM4J document to return, null if an error occurs
    *
-   * @throws Exception any exception whilst creating a Dom4J Document
+   * @throws IOException any input output exception whilst creating a Dom4J Document
    */
   private Document getDom4jDocument(File f)
                              throws IOException
   {
-
-    {
 
       Document document = null;
 
@@ -624,8 +622,6 @@ public class Harvester {
       }
 
       return document;
-
-    }
 
   }
 
@@ -728,7 +724,7 @@ public class Harvester {
 
     //Do not catch validation exceptions, simply propagate the error
 /**
-     * 
+     *
      verifier.setErrorHandler(
 
     new ErrorHandler() {
@@ -896,7 +892,7 @@ public class Harvester {
 
         }
 
-        //reverselist 
+        //reverselist
         for (int j = branch.size(); j > 0; j--) {
 
           //add listelements to HierarchicalMetaDataText
