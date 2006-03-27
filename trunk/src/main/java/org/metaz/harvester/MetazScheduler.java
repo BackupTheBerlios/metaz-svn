@@ -10,9 +10,10 @@ import org.quartz.*;
 /**
  * The Scheduler class is responsible for starting a Harvester at a regular
  * interval. The harvest start date and time and the harvest interval can be set
- * by an administrator. At a later stage, the directory to harvest from can also
- * be set by an administrator, but currently, this is read from the runtime
- * properties file (metaz.props).
+ * by an administrator. The administrator can also start an immediate harvest.
+ * At a later stage, the directory to harvest from can also be set by an
+ * administrator, but currently, this is read from the runtime properties file
+ * (metaz.props). This class makes use of the Quartz Enterprise Job Scheduler.
  * 
  * @author Peter van Dorp, Open University Netherlands, OTO Meta/Z project
  * @version 0.3
@@ -33,10 +34,7 @@ public class MetazScheduler {
 
 	private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer"; // default
 
-	// directory
-	// for
-	// XML
-	// files
+	// directory for XML files
 
 	// Note: if this setting is changed, it has to be changed in the Harvester
 	// as well!
@@ -45,23 +43,34 @@ public class MetazScheduler {
 
 	private Scheduler scheduler = MetaZ.getScheduler();
 
-	private JobDetail jobDetail = new JobDetail("RdMC_harvest_job", null,
+	private JobDetail RdMCJobDetail = new JobDetail("RdMC_harvest_job", null,
 			MetazJob.class); // details for the default job
 
-	private Trigger trigger; // trigger to start the scheduled default task
+	private SimpleTrigger trigger; // trigger to start the scheduled default
+
+	// task
 
 	private Date startTime; // start time for the scheduled task
 
 	private long interval; // interval for the scheduled task
 
 	/**
-	 * Constructor: creates and activates the scheduler. Creates the default
-	 * setting for the harvest start time and interval and assigns this to the
-	 * trigger. Schedules the default harvest job with this trigger.
+	 * Constructor. Creates and activates the scheduler. Creates a new default
+	 * trigger and assigns it the default setting for the harvest start time and
+	 * interval. Retrieves from the MetaZ properties file the relative directory
+	 * the XML files are harvested from and stores this setting in the default
+	 * job detail. Schedules the default harvest job with this default trigger
+	 * and job detail.
 	 * 
 	 */
 	public MetazScheduler() {
+		// create the default trigger
+		trigger = new SimpleTrigger("RdMC_harvest_trigger", null, startTime,
+				null, SimpleTrigger.REPEAT_INDEFINITELY, interval);
 		resetTrigger(); // set the default harvest start time and interval
+
+		// define the default job detail, which only contains the transfer path
+		RdMCJobDetail.getJobDataMap().put("transferpath", getTransferPath());
 
 		try {
 			scheduler.start(); // get the scheduler running
@@ -106,8 +115,7 @@ public class MetazScheduler {
 		cal.set(java.util.GregorianCalendar.MILLISECOND, 0);
 		startTime = cal.getTime();
 		// refresh the trigger of the default job
-		trigger = new SimpleTrigger("RdMC_harvest_trigger", null, startTime,
-				null, SimpleTrigger.REPEAT_INDEFINITELY, interval);
+		trigger.setStartTime(startTime);
 	}
 
 	/**
@@ -122,9 +130,7 @@ public class MetazScheduler {
 		if (interval != intv * 1000L * 60L * 60L) {
 			// if the interval changed, refresh the trigger
 			interval = intv * 1000L * 60L * 60L;
-			trigger = new SimpleTrigger("RdMC_harvest_trigger", null,
-					startTime, null, SimpleTrigger.REPEAT_INDEFINITELY,
-					interval);
+			trigger.setRepeatInterval(interval);
 		}
 	}
 
@@ -157,7 +163,8 @@ public class MetazScheduler {
 	 * Sets the name of the directory where the files to be harvested are put.
 	 * This method is not used. If the transferpath is changed, the scheduled
 	 * job will start using the new transferpath immediately (it must be
-	 * assigned to the JobDataMap).
+	 * assigned to the JobDataMap and NOTE that this will only work is the job
+	 * is made into a StatefulJob!).
 	 * 
 	 * @param pathname
 	 *            the name of the directory
@@ -166,24 +173,37 @@ public class MetazScheduler {
 	 */
 
 	/**
-	 * Schedules the default job by defining (1) the directory to harvest from,
-	 * (2) the trigger, which contains the time to start the harvesting and the
-	 * harvest interval. The relative directory the XML files are harvested from
-	 * is retrieved from the MetaZ properties file. The current trigger settings
-	 * are assigned. If the administrator has not set these parameters, the
-	 * default values will be used.
+	 * Schedules the default job with the default trigger (which defines start
+	 * date and interval) and the default job detail (which defines the harvest
+	 * directory). If the administrator has not changed the trigger and job
+	 * detail settings, the default values will be used.
 	 */
 	public void scheduleJob() {
-		// define the job detail, which only contains the transfer path
-		jobDetail.getJobDataMap().put("transferpath", getTransferPath());
-
 		try {
-			scheduler.scheduleJob(jobDetail, trigger);
+			scheduler.scheduleJob(RdMCJobDetail, trigger);
 		} catch (SchedulerException exc) {
 			logger.fatal("Unable to schedule the RdMC harvest job: "
 					+ exc.getMessage());
 		}
+	}
 
+	/**
+	 * Executes the default job with a 10 second delay from the time this method
+	 * is called.
+	 */
+	public void executeJob() {
+		// create a once-only trigger that fires in 10 seconds
+		long immediateStartTime = System.currentTimeMillis() + 10000L;
+		SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger",
+				null, new Date(immediateStartTime), null, 0, 0L);
+		// schedule the default job with this trigger
+		try {
+			scheduler.scheduleJob(RdMCJobDetail, immediateTrigger);
+		} catch (SchedulerException exc) {
+			logger
+					.fatal("Unable to schedule the RdMC harvest job for immediate execution: "
+							+ exc.getMessage());
+		}
 	}
 
 }
