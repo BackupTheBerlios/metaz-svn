@@ -76,6 +76,7 @@ public class Harvester {
   //  private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
   private final String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
   private final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
+  // NOTE: if the default transfer path is changed, it has to be changed in the MetazScheduler as well!
   private final String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
   private final String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
   private final String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
@@ -101,35 +102,35 @@ public class Harvester {
 		MetaZ app = MetaZ.getInstance();
 
 		applicationz_schema_prop = app.getProperties().getProperty(
-				"applicationz_schema");
+				"applicationz.schema");
 
 		if (applicationz_schema_prop == null)
 
 			applicationz_schema_prop = APPLICATIONZ_SCHEMA;
 
 		applicationz_transfer_path_prop = app.getProperties().getProperty(
-				"applicationz_transfer_path");
+				"applicationz.transfer.path");
 
 		if (applicationz_transfer_path_prop == null)
 
 			applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
 
 		applicationz_processed_path_prop = app.getProperties().getProperty(
-				"applicationz_processed_path");
+				"applicationz.processed.path");
 
 		if (applicationz_processed_path_prop == null)
 
 			applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
 
 		applicationz_rejected_path_prop = app.getProperties().getProperty(
-				"applicationz_rejected_path");
+				"applicationz.rejected.path");
 
 		if (applicationz_rejected_path_prop == null)
 
 			applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
 
 		applicationz_transferstaging_path_prop = app.getProperties()
-				.getProperty("applicationz_transferstaging_path");
+				.getProperty("applicationz.transferstaging.path");
 
 		if (applicationz_transferstaging_path_prop == null)
 

@@ -11,7 +11,7 @@ import org.quartz.*;
 /**
  * The MetazScheduler class is responsible for starting a Harvester, either at a
  * regular interval or for immediate execution. The harvest start date and time
- * and the harvest interval can be set by an administrator, and default to 2.00
+ * and the harvest interval can be set by an administrator; they default to 2.00
  * a.m. and 24 hrs. The administrator can also start an immediate harvest. At a
  * later stage, the directory to harvest from can also be set by an
  * administrator, but currently, this is read from the runtime properties file
@@ -62,7 +62,6 @@ public class MetazScheduler {
 	 * properties file the relative directory the XML files are harvested from
 	 * and stores this setting in the default job detail. Schedules the default
 	 * harvest job with this default trigger and job detail.
-	 * 
 	 */
 	public MetazScheduler() {
 		// create the Quartz scheduler
@@ -130,7 +129,7 @@ public class MetazScheduler {
 
 	/**
 	 * Sets the interval of the scheduled job. If the interval is changed, this
-	 * change will take effect immediately because the trigger of the default
+	 * change will take effect immediately, because the trigger of the default
 	 * job is updated.
 	 * 
 	 * @param intv
@@ -162,7 +161,7 @@ public class MetazScheduler {
 	private String getTransferPath() {
 		MetaZ app = MetaZ.getInstance();
 		String path = app.getProperties().getProperty(
-				"applicationz_transfer_path");
+				"applicationz.transfer.path");
 		if (path == null) {
 			path = APPLICATIONZ_TRANSFER_PATH;
 		}
@@ -173,7 +172,7 @@ public class MetazScheduler {
 	 * Sets the name of the directory where the files to be harvested are put.
 	 * This method is not used. If the transferpath is changed, the scheduled
 	 * job will start using the new transferpath immediately (it must be
-	 * assigned to the JobDataMap and NOTE that this will only work is the job
+	 * assigned to the JobDataMap and NOTE that this will only work if the job
 	 * is made into a StatefulJob!).
 	 * 
 	 * @param pathname

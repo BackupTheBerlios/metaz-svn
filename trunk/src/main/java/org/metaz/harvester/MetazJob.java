@@ -21,7 +21,7 @@ import java.io.*;
  */
 public class MetazJob implements org.quartz.Job {
 
-	private static Logger logger = MetaZ.getLogger(MetazScheduler.class);
+	private static Logger logger = MetaZ.getLogger(MetazJob.class);
 
 	private Harvester harvester = new Harvester();
 
