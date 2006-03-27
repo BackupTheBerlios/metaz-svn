@@ -14,6 +14,15 @@ public class FunctionTest extends WebTestCase {
 
   /** The base URL of the web application */
   public static final String BASE_URL = "http://metaz.dyndns.org:8080/metaz/";
+  public static String endUser = ""; // beoogdeEindgebruiker
+  public static String schoolType = ""; // schooltype
+  public static String schoolDiscipline = ""; // vakleergebied         
+  public static String didacticFunction = ""; // didactischeFunctie
+  public static String productType = ""; // producttype
+  public static String professionalSituation = ""; // beroepssituatie  
+  public static String competence = ""; // competentie  
+  public static String keywords = "onderging"; // trefwoord
+  public static String resultTitel = "gefaseerd koopmans waterdieren verhindert b?ta neervalt";
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -140,9 +149,9 @@ public class FunctionTest extends WebTestCase {
     setFormElement("beoogdeEindgebruiker", "");
     setFormElement("schooltype", "");
     setFormElement("vakleergebied", "");
-    setFormElement("sleutelwoorden", "onderging");
+    setFormElement("sleutelwoorden", keywords);
     submit();
-    assertTextPresent("koopmans");
+    assertTextInTable("row", resultTitel);
 
   } // end testSimpleSearch()
 
@@ -159,9 +168,52 @@ public class FunctionTest extends WebTestCase {
     setFormElement("producttype", "");
     setFormElement("beroepssituatie", "");
     setFormElement("competentie", "");
-    setFormElement("sleutelwoorden", "onderging");
+    setFormElement("sleutelwoorden", keywords);
     submit();
-    assertTextPresent("koopmans");
+    assertTextInTable("row", resultTitel);
+
+  }
+
+  /**
+   * Tests for correct printing of the search results
+   */
+  public void testResultScreen() {
+
+    beginAt("search.jsp");
+    setFormElement("sleutelwoorden", keywords);
+    submit();
+    assertTextPresent("Nr");
+    assertTextPresent("Score");
+    assertTextPresent("Type product");
+    assertTextPresent("Titel");
+    assertTextPresent("Meer gegevens");
+    // check if results XML contains the records
+    clickLinkWithText("XML");
+    assertTextPresent(resultTitel);
+
+  }
+
+  /**
+   * Tests for correct printing of the record details
+   */
+  public void testResultDetail() {
+
+    beginAt("search.jsp");
+    setFormElement("sleutelwoorden", keywords);
+    submit();
+    clickLinkWithTextAfterText("Meer...", resultTitel);
+    assertTextPresent("Beveiligd");
+    assertTextPresent("Sleutelwoorden");
+    assertTextPresent("Type product");
+    assertTextPresent("Didactisch scenario:");
+    assertTextPresent("Benodigde tijd");
+    assertTextPresent("Aggregatieniveau");
+    assertTextPresent("Type product");
+    assertTextPresent("Bestandsformaat");
+    assertTextPresent("Bestandsgrootte");
+    assertTextPresent("Afspeelduur");
+    assertTextPresent("Technische vereisten");
+    assertTextPresent("Laatst gewijzgd");
 
   }
 
@@ -170,6 +222,7 @@ public class FunctionTest extends WebTestCase {
    */
   public void testSearchCorrectness() {
 
+    // not yet implemented
   }
 
 } // end FunctionTest
