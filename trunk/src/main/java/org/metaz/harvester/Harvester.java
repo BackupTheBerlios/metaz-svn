@@ -203,7 +203,7 @@ public class Harvester {
           //folder, so we need to remove the file from the staging folder
           xmlfile.delete();
 
-          //xmlfile.renameTo(app.getRelativeFile(APPLICATIONZ_PROCESSED_PATH + "/" + Long.toString(timestamp) + f));
+          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" + Long.toString(timestamp) + f));
         } else {
 
           xmlfile.renameTo(app.getRelativeFile(applicationz_rejected_path_prop + "/" + Long.toString(timestamp) +
@@ -242,6 +242,82 @@ public class Harvester {
 
   }
 
+  /**
+   * Processes the file to parse and initiates parsing of the file
+   * 
+   *
+   * @param f the file to parse
+   */
+  protected void processXMLFile(File f) {
+	xmlfile = f;
+
+    //copy file to gain exclusive rights
+    MetaZ app = MetaZ.getInstance();
+
+    try {
+
+      logger.info(xmlfile.getAbsoluteFile().toString());
+
+      if (! xmlfile.exists()) {
+
+        logger.info("File does not exist!");
+
+        return;
+
+      } else if (xmlfile.canWrite()) {
+
+        xmlfile.renameTo(app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f));
+        logger.info("after rename" + xmlfile.getAbsolutePath());
+        xmlfile = app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f);
+
+        long timestamp = System.currentTimeMillis();
+
+        if (parseFile(xmlfile)) {
+
+          //if parsing was successful the file is already saved to the success
+          //folder, so we need to remove the file from the staging folder
+          xmlfile.delete();
+
+          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" + Long.toString(timestamp) + f));
+        } else {
+
+          xmlfile.renameTo(app.getRelativeFile(applicationz_rejected_path_prop + "/" + Long.toString(timestamp) +
+                                               "_complete_" + f));
+
+        }
+
+        logger.info("after parsing" + xmlfile.getAbsolutePath());
+
+      } else {
+
+        logger.fatal("The file " + xmlfile.getName() + " was locked or not available!");
+
+      }
+
+    } catch (Exception ex) {
+
+      logger.error(ex.toString());
+
+      try {
+
+        xmlfile = app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f);
+
+        long timestamp = System.currentTimeMillis();
+
+        xmlfile.renameTo(app.getRelativeFile(applicationz_rejected_path_prop + "/" + Long.toString(timestamp) +
+                                             "_complete_" + f));
+
+      } catch (Exception ignore) {
+
+        logger.fatal("Unable to move the file: " + ignore.getMessage());
+
+      }
+
+    }
+
+  }
+
+  
   /**
    * Is responsible for parsing file f and transforming  the contents to a collection of records
    *
