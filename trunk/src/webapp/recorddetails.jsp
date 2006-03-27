@@ -1,8 +1,10 @@
 <%@ include file="includes.jsp" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:set var="currentRecord" value="${searchBean.metazResults[param.record]}"/>
+<fmt:setLocale value="nl_NL" />
 
 <portal:SetContent name="ActiveTab">
   <% out.print(org.metaz.gui.portal.PortalTabTag.TAB_SEARCH_RESULTS); %>
@@ -55,7 +57,7 @@
 					Benodigde tijd:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.title.value}"/>
+					<c:out value="${currentRecord.object.requiredTime.value}"/>
 				</td>
 			</tr>
 			<tr class="even">
@@ -119,7 +121,7 @@
 					Laatst gewijzgd:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.lastChangedDate.value}"/>
+					<fmt:formatDate value="${currentRecord.object.lastChangedDate.value}" type="date" pattern="dd MMMM yyyy" />
 				</td>
 			</tr>
 			<tr class="odd">

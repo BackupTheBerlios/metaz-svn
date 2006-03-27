@@ -1,6 +1,9 @@
 <%@ include file="includes.jsp" %>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<fmt:setLocale value="nl_NL" />
 
 <portal:SetContent name="ActiveTab">
   <% out.print(org.metaz.gui.portal.PortalTabTag.TAB_SEARCH_RESULTS); %>
@@ -11,7 +14,7 @@
 	<center>
 			<span class="pagebanner">Producten van het Ruud de Moor Centrum: objectomschrijving</span>
 			<br/>
-			<display:table name="${searchBean.metazResults}" id="row" class="results" export="true" sort="list" pagesize="8">
+			<display:table name="${searchBean.metazResults}" id="row" class="results" export="true" sort="list" pagesize="8" >
 				<display:column title="Nr" >
 	      			<c:out value="${row_rowNum}"/>
 	    		</display:column>
