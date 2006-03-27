@@ -1,3 +1,8 @@
+#########################################################
+#	Demo properties file. Adapt the settings to			#
+#	your own environment and rename toe metaz.props		#
+#########################################################
+
 #Runtime dir
 root.dir=D:/development/projects/metaz/runtime
 log4j.config.file=log4j.properties
