@@ -13,12 +13,12 @@ import org.quartz.JobDataMap;
 import java.io.*;
 
 /**
- * The class MetazJob represents a scheduled Meta/Z job.
- * The execution of this job involves feeding the latest xml
- * file in the transfer directory to the (Meta/Z) Harvester.
+ * The class MetazJob represents a scheduled Meta/Z job. The execution of this
+ * job involves feeding the latest xml file in the transfer directory to the
+ * (Meta/Z) Harvester.
  * 
  * @author Peter van Dorp, Open University Netherlands, OTO Meta/Z project
- * @version 0.1
+ * @version 0.2
  */
 public class MetazJob implements org.quartz.Job {
 
@@ -57,21 +57,28 @@ public class MetazJob implements org.quartz.Job {
 		else
 			throw new JobExecutionException("No file found to harvest");
 	}
-	
+
 	/**
-	 * Auxiliary method to return the xml file with the largest name (this should
-	 * be the latest addition to the transfer directory) from a given relative directory
-	 * @param reldir the relative directory from which the XML file must be picked
-	 * @return a file object representing the XML file with the largest filename in the 
-	 * given directory, or null, if there is no such file.
+	 * Auxiliary method to return the xml file with the largest name (this
+	 * should be the latest addition to the transfer directory) from a given
+	 * relative directory
+	 * 
+	 * @param reldir
+	 *            the relative directory from which the XML file must be picked
+	 * @return a file object representing the XML file with the largest filename
+	 *         in the given directory, or null, if there is no such file.
 	 */
 	private File getXMLFile(String reldir) {
 		MetaZ app = MetaZ.getInstance();
 		File absoluteDir = app.getRelativeFile(reldir);
-		String[] list = absoluteDir.list(new XMLFilter()); // names of all XML files in the given directory
-		if (list.length == 0) return null;
+		// list the names of all XML files in the given directory
+		String[] list = absoluteDir.list(new XMLFilter());
+		if (list.length == 0)
+			return null;
 		java.util.Arrays.sort(list);
-		String filename = list[list.length - 1]; // the filename of the latest file according to the naming convention
+		// establish the filename of the latest file according to the naming
+		// convention
+		String filename = list[list.length - 1];
 		return new File(filename);
 	}
 }

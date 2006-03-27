@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * This class implements the FilenameFilter interface
  * The accept method only returns true for .xml files.
- * @author dorp
+ * @author Peter van Dorp, Open University Netherlands, OTO Meta/Z project
  *
  */
 public class XMLFilter implements FilenameFilter {

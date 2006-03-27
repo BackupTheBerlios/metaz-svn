@@ -98,51 +98,47 @@ public class Harvester {
    */
   public Harvester() {
 
-    MetaZ app = MetaZ.getInstance();
+		MetaZ app = MetaZ.getInstance();
 
-    applicationz_schema_prop = app.getProperties().getProperty("applicationz_schema");
+		applicationz_schema_prop = app.getProperties().getProperty(
+				"applicationz_schema");
 
-    if (applicationz_schema_prop == null) {
+		if (applicationz_schema_prop == null)
 
-      applicationz_schema_prop = APPLICATIONZ_SCHEMA;
+			applicationz_schema_prop = APPLICATIONZ_SCHEMA;
 
-    }
+		applicationz_transfer_path_prop = app.getProperties().getProperty(
+				"applicationz_transfer_path");
 
-    applicationz_transfer_path_prop = app.getProperties().getProperty("applicationz_transfer_path");
+		if (applicationz_transfer_path_prop == null)
 
-    if (applicationz_transfer_path_prop == null) {
+			applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
 
-      applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
+		applicationz_processed_path_prop = app.getProperties().getProperty(
+				"applicationz_processed_path");
 
-    }
+		if (applicationz_processed_path_prop == null)
 
-    applicationz_processed_path_prop = app.getProperties().getProperty("applicationz_processed_path");
+			applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
 
-    if (applicationz_processed_path_prop == null) {
+		applicationz_rejected_path_prop = app.getProperties().getProperty(
+				"applicationz_rejected_path");
 
-      applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
+		if (applicationz_rejected_path_prop == null)
 
-    }
+			applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
 
-    applicationz_rejected_path_prop = app.getProperties().getProperty("applicationz_rejected_path");
+		applicationz_transferstaging_path_prop = app.getProperties()
+				.getProperty("applicationz_transferstaging_path");
 
-    if (applicationz_rejected_path_prop == null) {
+		if (applicationz_transferstaging_path_prop == null)
 
-      applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
-
-    }
-
-    applicationz_transferstaging_path_prop = app.getProperties().getProperty("applicationz_transferstaging_path");
-
-    if (applicationz_transferstaging_path_prop == null) {
-
-      applicationz_transferstaging_path_prop = APPLICATIONZ_TRANSFERSTAGING_PATH;
-
-    }
+			applicationz_transferstaging_path_prop = APPLICATIONZ_TRANSFERSTAGING_PATH;
 
   }
 
-  //~ Methods ----------------------------------------------------------------------------------------------------------
+  // ~ Methods
+	// ----------------------------------------------------------------------------------------------------------
 
   /**
    * Only used as a temporary start-up
