@@ -10,13 +10,9 @@ import org.hibernate.SessionFactory;
 
 import org.hibernate.cfg.Configuration;
 
-import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.SchedulerFactory;
-import org.quartz.SchedulerException;
-import org.quartz.Scheduler;
-
 import org.metaz.repository.Facade;
 import org.metaz.repository.FacadeFactory;
+import org.metaz.harvester.MetazScheduler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +29,7 @@ import java.util.Properties;
  * This is the Meta/Z application instance (implemented as a singleton object). This class offers "global" services
  * to application modules. The singleton pattern assures that only one instance will exist in the VM. Please note that
  * there are some special cases where this may not be true. Fortunally, these cases are very rare and it's not likely
- * w'll have to deal with this. See http://www.javaworld.com/javaworld/jw-01-2001/jw-0112-singleton.html for a
+ * we'll have to deal with this. See http://www.javaworld.com/javaworld/jw-01-2001/jw-0112-singleton.html for a
  * discussion.
  *
  * @author Falco Paul, Open University Netherlands, OTO Meta/Z project
@@ -53,7 +49,7 @@ public final class MetaZ
   private static Logger         logger = Logger.getLogger(MetaZ.class); // logger
   private static Facade         facadeInst; // instance for this class
   private static SessionFactory hibernateSessionFactory; // Facade object of the Repository
-  private static Scheduler      scheduler; // the Meta/Z scheduler 
+  private static MetazScheduler scheduler; // the Meta/Z scheduler 
 
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
@@ -168,18 +164,11 @@ public final class MetaZ
   /**
     * Returns the Meta/Z Scheduler instance
     *
-    * @return Scheduler instance
-    * @throws SchedulerException
+    * @return MetazScheduler instance
     */
-   public static synchronized Scheduler getScheduler() {
+   public static synchronized MetazScheduler getScheduler() {
      if (scheduler == null) {
-     	  SchedulerFactory schedFact = new StdSchedulerFactory();
-     	  try {
-     		  scheduler = schedFact.getScheduler();
-     	  }
-     	  catch (SchedulerException exc) {
-     		  logger.fatal("Unable to create the Meta-Z scheduler: " + exc.getMessage());
-     	  }
+     	  scheduler = new MetazScheduler();
        logger.info("Created Meta-Z Scheduler singleton instance: <" + format(scheduler) + ">");
      }
      return scheduler;
@@ -189,7 +178,7 @@ public final class MetaZ
   /**
    * Gets a logger instance and initializes the logger "look and feel"
    *
-   * @param clazz classname where you would like a logger for
+   * @param clazz classname you would like a logger for
    *
    * @return Logger a fully configured logger object
    */

@@ -5,15 +5,17 @@ import org.metaz.util.MetaZ;
 
 import java.util.*;
 
+import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.*;
 
 /**
- * The Scheduler class is responsible for starting a Harvester at a regular
- * interval. The harvest start date and time and the harvest interval can be set
- * by an administrator. The administrator can also start an immediate harvest.
- * At a later stage, the directory to harvest from can also be set by an
- * administrator, but currently, this is read from the runtime properties file
- * (metaz.props). This class makes use of the Quartz Enterprise Job Scheduler.
+ * The MetazScheduler class is responsible for starting a Harvester, either at a
+ * regular interval or for immediate execution. The harvest start date and time
+ * and the harvest interval can be set by an administrator. The administrator
+ * can also start an immediate harvest. At a later stage, the directory to
+ * harvest from can also be set by an administrator, but currently, this is read
+ * from the runtime properties file (metaz.props). This class makes use of the
+ * Quartz Enterprise Job Scheduler.
  * 
  * @author Peter van Dorp, Open University Netherlands, OTO Meta/Z project
  * @version 0.3
@@ -41,10 +43,9 @@ public class MetazScheduler {
 
 	private static Logger logger = MetaZ.getLogger(MetazScheduler.class);
 
-	private Scheduler scheduler = MetaZ.getScheduler();
+	private Scheduler scheduler; // Quartz scheduler
 
-	private JobDetail RdMCJobDetail = new JobDetail("RdMC_harvest_job", null,
-			MetazJob.class); // details for the default job
+	private JobDetail RdMCJobDetail; // details for the default job
 
 	private SimpleTrigger trigger; // trigger to start the scheduled default
 
@@ -57,19 +58,29 @@ public class MetazScheduler {
 	/**
 	 * Constructor. Creates and activates the scheduler. Creates a new default
 	 * trigger and assigns it the default setting for the harvest start time and
-	 * interval. Retrieves from the MetaZ properties file the relative directory
-	 * the XML files are harvested from and stores this setting in the default
-	 * job detail. Schedules the default harvest job with this default trigger
-	 * and job detail.
+	 * interval. Creates a new default job detail. Retrieves from the MetaZ
+	 * properties file the relative directory the XML files are harvested from
+	 * and stores this setting in the default job detail. Schedules the default
+	 * harvest job with this default trigger and job detail.
 	 * 
 	 */
 	public MetazScheduler() {
-		// create the default trigger
+		// create the Quartz scheduler
+		SchedulerFactory schedFact = new StdSchedulerFactory();
+		try {
+			scheduler = schedFact.getScheduler();
+		} catch (SchedulerException exc) {
+			logger.fatal("Unable to create the Meta-Z scheduler: "
+					+ exc.getMessage());
+		}
+
+		// create the default trigger with default settings
 		trigger = new SimpleTrigger("RdMC_harvest_trigger", null, startTime,
 				null, SimpleTrigger.REPEAT_INDEFINITELY, interval);
 		resetTrigger(); // set the default harvest start time and interval
 
-		// define the default job detail, which only contains the transfer path
+		// create the default job detail, which only contains the transfer path
+		RdMCJobDetail = new JobDetail("RdMC_harvest_job", null, MetazJob.class);
 		RdMCJobDetail.getJobDataMap().put("transferpath", getTransferPath());
 
 		try {
@@ -90,8 +101,7 @@ public class MetazScheduler {
 	 * problems if the start time is earlier than the current time. For that
 	 * reason, starting on the next day is the default. If the start time is
 	 * changed, the change takes effect immediately, because the trigger of the
-	 * default job is refreshed. NOTE: ALSO ALLOW FOR AN IMMEDIATE START OF THE
-	 * HARVESTING BY A DIFFERENT TRIGGER
+	 * default job is refreshed.
 	 * 
 	 * @param hour
 	 *            the hour to start harvesting (on a 24h scale).
