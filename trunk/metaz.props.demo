@@ -1,0 +1,16 @@
+#Runtime dir
+root.dir=D:/development/projects/metaz/runtime
+log4j.config.file=log4j.properties
+
+!org.metaz.repository.facade.impl = org.metaz.repository.FacadeImpl
+org.metaz.repository.facade.impl = org.metaz.repository.FacadeImplAlt
+!org.metaz.repository.search.service.impl = org.metaz.repository.SearchServiceImpl
+org.metaz.repository.search.service.impl = org.metaz.repository.SearchServiceImplAlt
+!org.metaz.repository.data.service.impl = org.metaz.repository.DataServiceImpl
+org.metaz.repository.data.service.impl = org.metaz.repository.SearchServiceImplAlt
+
+applicationz.schema.prop=xml/schema/metaz.xsd
+applicationz.transfer.path.prop=xml/transfer
+applicationz.processed.path.prop=xml/log/processed
+applicationz.rejected.path.prop=xml/log/error
+applicationz.transferstaging.path.prop=xml/transferstaging
