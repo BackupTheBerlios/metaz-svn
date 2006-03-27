@@ -11,11 +11,11 @@ import org.quartz.*;
 /**
  * The MetazScheduler class is responsible for starting a Harvester, either at a
  * regular interval or for immediate execution. The harvest start date and time
- * and the harvest interval can be set by an administrator. The administrator
- * can also start an immediate harvest. At a later stage, the directory to
- * harvest from can also be set by an administrator, but currently, this is read
- * from the runtime properties file (metaz.props). This class makes use of the
- * Quartz Enterprise Job Scheduler.
+ * and the harvest interval can be set by an administrator, and default to 2.00
+ * a.m. and 24 hrs. The administrator can also start an immediate harvest. At a
+ * later stage, the directory to harvest from can also be set by an
+ * administrator, but currently, this is read from the runtime properties file
+ * (metaz.props). This class makes use of the Quartz Enterprise Job Scheduler.
  * 
  * @author Peter van Dorp, Open University Netherlands, OTO Meta/Z project
  * @version 0.3
@@ -95,13 +95,13 @@ public class MetazScheduler {
 	}
 
 	/**
-	 * Sets the start time of the scheduled job. It it can either be set to
-	 * start on the NEXT day, or on the same day, at the given time. Starting on
-	 * the same day should only be used for test purposes, because it may cause
-	 * problems if the start time is earlier than the current time. For that
-	 * reason, starting on the next day is the default. If the start time is
-	 * changed, the change takes effect immediately, because the trigger of the
-	 * default job is refreshed.
+	 * Sets the start time of the scheduled job. It either be set to start on
+	 * the NEXT day, or on the same day, at the given time. Starting on the same
+	 * day should only be used for test purposes, because it may cause problems
+	 * if the start time is earlier than the current time. For that reason,
+	 * starting on the next day is the default. If the start time is changed,
+	 * the change takes effect immediately, because the trigger of the default
+	 * job is refreshed.
 	 * 
 	 * @param hour
 	 *            the hour to start harvesting (on a 24h scale).

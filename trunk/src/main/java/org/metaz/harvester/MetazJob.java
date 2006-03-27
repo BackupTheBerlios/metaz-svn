@@ -5,7 +5,6 @@ import org.metaz.util.XMLFilter;
 
 import org.apache.log4j.Logger;
 
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.JobDataMap;
@@ -26,13 +25,7 @@ public class MetazJob implements org.quartz.Job {
 
 	private Harvester harvester = new Harvester();
 
-	/**
-	 * Constructor does nothing
-	 * 
-	 */
-	public void MetazJob() {
-
-	}
+	
 
 	/**
 	 * Carry out the job. This means: identify the XML file to be harvested and
@@ -50,10 +43,12 @@ public class MetazJob implements org.quartz.Job {
 		// identify the file to harvest
 		File xmlFile = getXMLFile(transferpath);
 
-		if (xmlFile != null)
+		if (xmlFile != null) {
 			// provide the harvester with the file (if there is one)
 			// so that it starts harvesting
+			logger.info("Default harvest started.");
 			harvester.processXMLFile(xmlFile);
+		}
 		else
 			throw new JobExecutionException("No file found to harvest");
 	}
