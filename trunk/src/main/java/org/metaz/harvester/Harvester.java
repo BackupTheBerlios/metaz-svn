@@ -2,14 +2,23 @@ package org.metaz.harvester;
 
 import com.sun.msv.verifier.jarv.TheFactoryImpl;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+
 import org.apache.log4j.Logger;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-
-//import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.SAXWriter;
 import org.dom4j.io.XMLWriter;
@@ -30,32 +39,21 @@ import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.RecordAttributeSetter;
 import org.metaz.domain.TextMetaData;
-
 import org.metaz.util.MetaZ;
 
+
+//import org.dom4j.io.OutputFormat;
 //import com.sun.msv.grammar.relaxng.datatype.*;
 //import org.xml.sax.ErrorHandler;
 //import org.xml.sax.SAXParseException;
 //import java.io.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-import java.util.Iterator;
-
 //import java.util.*;
-import java.util.List;
-import java.util.Vector;
 
 /**
  * The  Harvester class initiates a check of an offered xml file to check on xml schema conformity, extract all
- * Learnobjects, transform them to records of metadata and pass them to the repository facade.
- *
- * The Harvester class is responsible for parsing xml data files into a  collection of
- * LearningObjects  and passing this collection to the repository interface
+ * Learnobjects, transform them to records of metadata and pass them to the repository facade. The Harvester class is
+ * responsible for parsing xml data files into a  collection of LearningObjects  and passing this collection to the
+ * repository interface
  *
  * @author Lars Oosterloo
  * @version 0.1
@@ -69,20 +67,24 @@ public class Harvester {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   // default file and directory settings
-  //  private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
-  //  private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
-  //  private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
-  //  private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
-  //  private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
+  // private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
+  // private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
+  // private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
+  // private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
+  // private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
+  
   private final String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
   private final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
+
   // NOTE: if the default transfer path is changed, it has to be changed in the MetazScheduler as well!
+  
   private final String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
   private final String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
   private final String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
   private File         xmlfile;
 
   // file and directory settings to be read from runtime properties file (metaz.props)
+  
   private String applicationz_schema_prop;
   private String applicationz_transfer_path_prop;
   private String applicationz_processed_path_prop;
@@ -99,48 +101,39 @@ public class Harvester {
    */
   public Harvester() {
 
-		MetaZ app = MetaZ.getInstance();
+    MetaZ app = MetaZ.getInstance();
 
-		applicationz_schema_prop = app.getProperties().getProperty(
-				"applicationz.schema");
+    applicationz_schema_prop = app.getProperties().getProperty("applicationz.schema");
 
-		if (applicationz_schema_prop == null)
+    if (applicationz_schema_prop == null)
+      applicationz_schema_prop = APPLICATIONZ_SCHEMA;
 
-			applicationz_schema_prop = APPLICATIONZ_SCHEMA;
+    applicationz_transfer_path_prop = app.getProperties().getProperty("applicationz.transfer.path");
 
-		applicationz_transfer_path_prop = app.getProperties().getProperty(
-				"applicationz.transfer.path");
+    if (applicationz_transfer_path_prop == null)
+      applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
 
-		if (applicationz_transfer_path_prop == null)
+    applicationz_processed_path_prop = app.getProperties().getProperty("applicationz.processed.path");
 
-			applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
+    if (applicationz_processed_path_prop == null)
+      applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
 
-		applicationz_processed_path_prop = app.getProperties().getProperty(
-				"applicationz.processed.path");
+    applicationz_rejected_path_prop = app.getProperties().getProperty("applicationz.rejected.path");
 
-		if (applicationz_processed_path_prop == null)
+    if (applicationz_rejected_path_prop == null)
+      applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
 
-			applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
+    applicationz_transferstaging_path_prop = app.getProperties().getProperty("applicationz.transferstaging.path");
 
-		applicationz_rejected_path_prop = app.getProperties().getProperty(
-				"applicationz.rejected.path");
-
-		if (applicationz_rejected_path_prop == null)
-
-			applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
-
-		applicationz_transferstaging_path_prop = app.getProperties()
-				.getProperty("applicationz.transferstaging.path");
-
-		if (applicationz_transferstaging_path_prop == null)
-
-			applicationz_transferstaging_path_prop = APPLICATIONZ_TRANSFERSTAGING_PATH;
+    if (applicationz_transferstaging_path_prop == null)
+      applicationz_transferstaging_path_prop = APPLICATIONZ_TRANSFERSTAGING_PATH;
 
   }
 
-  // ~ Methods
-	// ----------------------------------------------------------------------------------------------------------
+  //~ Methods ----------------------------------------------------------------------------------------------------------
 
+  // ~ Methods
+  // ----------------------------------------------------------------------------------------------------------
   /**
    * Only used as a temporary start-up
    *
@@ -241,12 +234,12 @@ public class Harvester {
 
   /**
    * Processes the file to parse and initiates parsing of the file
-   * 
    *
    * @param f the file to parse
    */
   protected void processXMLFile(File f) {
-	xmlfile = f;
+
+    xmlfile = f;
 
     //copy file to gain exclusive rights
     MetaZ app = MetaZ.getInstance();
@@ -314,7 +307,6 @@ public class Harvester {
 
   }
 
-  
   /**
    * Is responsible for parsing file f and transforming  the contents to a collection of records
    *
@@ -329,6 +321,7 @@ public class Harvester {
     try {
 
       logger.info("start parsing");
+
       //repeat for each learnObject in the xml file, create a new document
       //for each learnObject and parse each learnobject xml part
       Document doc = getDom4jDocument(f);
@@ -1064,7 +1057,9 @@ public class Harvester {
 
   /**
    * Creates a new record from anDom4J Document node
+   *
    * @param e cutten node in the Dom4J Document
+   *
    * @return newly created record
    */
   private Record createNewRecord(Element e) {

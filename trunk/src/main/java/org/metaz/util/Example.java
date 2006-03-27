@@ -7,7 +7,6 @@ import java.io.File;
 
 import java.util.Arrays;
 
-// log4j stuff
 /**
  * Simple example class to demonstrate some org.metaz.util package features
  *
@@ -96,6 +95,14 @@ public class Example extends Object {
       logger.error(testFile, e);
 
     }
+
+    // a very simple demonstration of equals and hascode...
+    Example test = new Example();
+    boolean equals = test.testEquals(new Object());
+
+    equals = test.testEquals(test);
+
+    int result = test.testHashCode();
 
     // Make sure we actually see DEBUG output
     Logger rootLogger = Logger.getRootLogger();

@@ -10,9 +10,10 @@ import org.hibernate.SessionFactory;
 
 import org.hibernate.cfg.Configuration;
 
+import org.metaz.harvester.MetazScheduler;
+
 import org.metaz.repository.Facade;
 import org.metaz.repository.FacadeFactory;
-import org.metaz.harvester.MetazScheduler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,17 +52,15 @@ public final class MetaZ
   private static SessionFactory hibernateSessionFactory; // Facade object of the Repository
   private static MetazScheduler scheduler; // the Meta/Z scheduler 
 
-
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  private InputStream propertyStream = null; // a stream pointing to the actual property file in use
-  private Properties  properties = null; // application properties loaded from the above stream
-  private String      log4JConfigFile = null; // log4J configuration file
-  private boolean     verboseOutput = false; // set true if logging does not work
+  private Properties properties = null; // application properties loaded from the above stream
+  private String     log4JConfigFile = null; // log4J configuration file
+  private boolean    verboseOutput = false; // set true if logging does not work
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  /**
+/**
    * private constructor
    */
   private MetaZ() {
@@ -159,21 +158,24 @@ public final class MetaZ
     return hibernateSessionFactory;
 
   }
-  
 
   /**
-    * Returns the Meta/Z Scheduler instance
-    *
-    * @return MetazScheduler instance
-    */
-   public static synchronized MetazScheduler getScheduler() {
-     if (scheduler == null) {
-     	  scheduler = new MetazScheduler();
-       logger.info("Created Meta-Z Scheduler singleton instance: <" + format(scheduler) + ">");
-     }
-     return scheduler;
-   }
+   * Returns the Meta/Z Scheduler instance
+   *
+   * @return MetazScheduler instance
+   */
+  public static synchronized MetazScheduler getScheduler() {
 
+    if (scheduler == null) {
+
+      scheduler = new MetazScheduler();
+      logger.info("Created Meta-Z Scheduler singleton instance: <" + format(scheduler) + ">");
+
+    }
+
+    return scheduler;
+
+  }
 
   /**
    * Gets a logger instance and initializes the logger "look and feel"
@@ -445,15 +447,12 @@ public final class MetaZ
 
     }
 
-    propertyStream = null;
-
     // attempt to load, if we obtained a valid stream
     if (propStream != null) {
 
       try {
 
         properties.load(propStream);
-        propertyStream = propStream;
 
         if (verboseOutput) {
 
