@@ -9,7 +9,7 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import java.io.*;
+import java.io.File;
 
 /**
  * The class MetazJob represents a scheduled Meta/Z job. The execution of this job involves feeding the latest xml
@@ -35,7 +35,7 @@ public class MetazJob
   /**
    * Carry out the job. This means: identify the XML file to be harvested and feed it to the harvester.
    *
-   * @param context DOCUMENT ME!
+   * @param context contains the job detail, in our case, the directory to harvest from
    *
    * @throws JobExecutionException if there is no XML file to harvest
    */
@@ -52,8 +52,7 @@ public class MetazJob
 
     if (xmlFile != null) {
 
-      // provide the harvester with the file (if there is one)
-      // so that it starts harvesting
+      // provide the harvester with the file (if there is one) so that it starts harvesting
       logger.info("Default harvest started.");
       harvester.processXMLFile(xmlFile);
 
@@ -85,8 +84,7 @@ public class MetazJob
 
     java.util.Arrays.sort(list);
 
-    // establish the filename of the latest file according to the naming
-    // convention
+    // establish the filename of the latest file according to the naming convention
     String filename = list[list.length - 1];
 
     return new File(filename);
