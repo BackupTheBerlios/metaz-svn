@@ -17,7 +17,7 @@ public class XMLFilter
   /**
    * This method represents a file filter for .xml files.
    *
-   * @param dir the directory containing the files to filter 
+   * @param dir the directory containing the files to filter
    * @param s the filename to filter
    *
    * @return true if the file is accepted by the filter, else false

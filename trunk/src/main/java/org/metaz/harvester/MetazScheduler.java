@@ -12,7 +12,7 @@ import org.quartz.SimpleTrigger;
 
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.util.*;
+import java.util.Date;
 
 /**
  * The MetazScheduler class is responsible for starting a Harvester, either at a regular interval or for immediate
@@ -28,22 +28,22 @@ public class MetazScheduler {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-  private static final int START_TIME_HOUR = 2; // default start hour on 24 hr clock
+  private static final int START_TIME_HOUR = 2; // default start hour on 24 hr clock (2 a.m.)
 
   private static final int START_TIME_MINUTE = 0; // default start value for minutes
 
   private static final int HARVEST_INTERVAL = 24; // default interval value in hours
 
-  private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer"; // default directory for XML files
+  private static final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer"; // default directory for XML files
 
   // Note: if this setting is changed, it has to be changed in the Harvester as well!
-   
+
   private static Logger logger = MetaZ.getLogger(MetazScheduler.class);
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   private Scheduler     scheduler; // Quartz scheduler
-  private JobDetail     RdMCJobDetail; // details for the default job
+  private JobDetail     rdmcJobDetail; // details for the default job
   private SimpleTrigger trigger; // trigger to start the scheduled default job
   private Date          startTime; // start time for the scheduled job
   private long          interval; // interval for the scheduled job
@@ -51,12 +51,10 @@ public class MetazScheduler {
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
   /**
-   * Constructor. Creates and activates the scheduler. Creates a new default
-   * trigger and assigns it the default setting for the harvest start time and
-   * interval. Creates a new default job detail. Retrieves from the MetaZ
-   * properties file the relative directory the XML files are harvested from
-   * and stores this setting in the default job detail. Schedules the default
-   * harvest job with this default trigger and job detail.
+   * Constructor. Creates and activates the scheduler. Creates a new default trigger and assigns it the default setting
+   * for the harvest start time and interval. Creates a new default job detail. Retrieves from the MetaZ properties file
+   * the relative directory the XML files are harvested from and stores this setting in the default job detail. Schedules
+   * the default harvest job with this default trigger and job detail.
    */
   public MetazScheduler() {
 
@@ -79,8 +77,8 @@ public class MetazScheduler {
     resetTrigger(); // set the default harvest start time and interval
 
     // create the default job detail, which only contains the transfer path
-    RdMCJobDetail = new JobDetail("RdMC_harvest_job", null, MetazJob.class);
-    RdMCJobDetail.getJobDataMap().put("transferpath", getTransferPath());
+    rdmcJobDetail = new JobDetail("RdMC_harvest_job", null, MetazJob.class);
+    rdmcJobDetail.getJobDataMap().put("transferpath", getTransferPath());
 
     // start the scheduler and scheduler the job
     try {
@@ -179,9 +177,9 @@ public class MetazScheduler {
   }
 
   /**
-   * New method to be created: setTransferPath(String transferpath). Sets the name of the directory where the 
-   * files to be harvested are put. This method is not used. If the transferpath is changed, the scheduled job 
-   * will start using the new transferpath immediately (it must be assigned to the JobDataMap and NOTE that 
+   * New method to be created: setTransferPath(String transferpath). Sets the name of the directory where the
+   * files to be harvested are put. This method is not used. If the transferpath is changed, the scheduled job
+   * will start using the new transferpath immediately (it must be assigned to the JobDataMap and NOTE that
    * this will only work if the job is made into a StatefulJob!).
    */
   
@@ -194,7 +192,7 @@ public class MetazScheduler {
 
     try {
 
-      scheduler.scheduleJob(RdMCJobDetail, trigger);
+      scheduler.scheduleJob(rdmcJobDetail, trigger);
 
     } catch (SchedulerException exc) {
 
@@ -217,7 +215,7 @@ public class MetazScheduler {
     // schedule the default job with this trigger
     try {
 
-      scheduler.scheduleJob(RdMCJobDetail, immediateTrigger);
+      scheduler.scheduleJob(rdmcJobDetail, immediateTrigger);
 
     } catch (SchedulerException exc) {
 

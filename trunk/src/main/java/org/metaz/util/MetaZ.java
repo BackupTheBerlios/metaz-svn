@@ -50,7 +50,7 @@ public final class MetaZ
   private static Logger         logger = Logger.getLogger(MetaZ.class); // logger
   private static Facade         facadeInst; // instance for this class
   private static SessionFactory hibernateSessionFactory; // Facade object of the Repository
-  private static MetazScheduler scheduler; // the Meta/Z scheduler 
+  private static MetazScheduler scheduler; // the Meta/Z scheduler
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
