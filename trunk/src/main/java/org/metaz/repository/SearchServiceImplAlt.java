@@ -282,7 +282,7 @@ public class SearchServiceImplAlt
 
         Query fullTextQuery = QueryParser.parse(fullText, RecordDocument.MERGED, analyzer);
 
-        q.add(fullTextQuery, true, false);
+        q.add(fullTextQuery, false, false); // logical OR
 
       } // end if
 
