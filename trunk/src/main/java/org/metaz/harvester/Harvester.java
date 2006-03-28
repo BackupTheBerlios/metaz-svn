@@ -820,7 +820,7 @@ public class Harvester {
 
           Element keyword = (Element) j.next();
 
-          keywords = keyword.getText() + ";";
+          keywords = keywords + keyword.getText() + ";";
           //.element("sleutelwoord")
           logger.info(keywords);
 
