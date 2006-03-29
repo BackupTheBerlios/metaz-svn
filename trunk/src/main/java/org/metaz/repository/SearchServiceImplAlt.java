@@ -20,6 +20,8 @@ import org.apache.lucene.store.FSDirectory;
 
 import org.metaz.domain.BooleanMetaData;
 import org.metaz.domain.DateMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaData;
+import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
 import org.metaz.domain.HtmlTextMetaData;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.MetaData;
@@ -489,6 +491,115 @@ public class SearchServiceImplAlt
 
           roleName.setValue(doc.get(MetaData.ROLENAME));
           rec.setRoleName(roleName);
+
+        }
+
+        if (doc.get(MetaData.SUBJECT) != null) {
+
+          TextMetaData subject = new TextMetaData();
+
+          subject.setValue(doc.get(MetaData.SUBJECT));
+          rec.setSubject(subject);
+
+        }
+
+        if (doc.get(MetaData.DIDACTICFUNCTION) != null) {
+
+          TextMetaData didacticFunction = new TextMetaData();
+
+          didacticFunction.setValue(doc.get(MetaData.DIDACTICFUNCTION));
+          rec.setDidacticFunction(didacticFunction);
+
+        }
+
+        if (doc.get(MetaData.COMPETENCE) != null) {
+
+          TextMetaData competence = new TextMetaData();
+
+          competence.setValue(doc.get(MetaData.COMPETENCE));
+          rec.setCompetence(competence);
+
+        }
+
+        if (doc.get(MetaData.SCHOOLTYPE) != null) {
+
+          HierarchicalStructuredTextMetaDataSet schoolType = new HierarchicalStructuredTextMetaDataSet();
+          String[]                              schoolTypeLevelSet = doc.getValues(MetaData.SCHOOLTYPE + "_orig");
+
+          for (int j = 0; j < schoolTypeLevelSet.length; j++) {
+
+            HierarchicalStructuredTextMetaData schoolTypeSet = new HierarchicalStructuredTextMetaData();
+            String[]                           schoolTypeLevels = schoolTypeLevelSet[j].split("/");
+
+            for (int k = 1; k < schoolTypeLevels.length; k++) {
+
+              TextMetaData level = new TextMetaData();
+
+              level.setValue(schoolTypeLevels[k]);
+              schoolTypeSet.addChild(level);
+
+            }
+
+            schoolType.addHierarchy(schoolTypeSet);
+
+          }
+
+          rec.setSchoolType(schoolType);
+
+        }
+
+        if (doc.get(MetaData.SCHOOLDISCIPLINE) != null) {
+
+          HierarchicalStructuredTextMetaData schoolDiscipline = new HierarchicalStructuredTextMetaData();
+          String[]                           schoolDisciplineLevels = (doc.get(MetaData.SCHOOLDISCIPLINE + "_orig")).split("/");
+
+          for (int j = 1; j < schoolDisciplineLevels.length; j++) {
+
+            TextMetaData level = new TextMetaData();
+
+            level.setValue(schoolDisciplineLevels[j]);
+            schoolDiscipline.addChild(level);
+
+          }
+
+          rec.setSchoolDiscipline(schoolDiscipline);
+
+        }
+
+        if (doc.get(MetaData.PROFESSIONALSITUATION) != null) {
+
+          HierarchicalStructuredTextMetaData professionalSituation = new HierarchicalStructuredTextMetaData();
+          String[]                           professionalSituationLevels = doc.get(MetaData.PROFESSIONALSITUATION +
+                                                                                   "_orig").split("/");
+
+          for (int j = 1; j < professionalSituationLevels.length; j++) {
+
+            TextMetaData level = new TextMetaData();
+
+            level.setValue(professionalSituationLevels[j]);
+            professionalSituation.addChild(level);
+
+          }
+
+          rec.setProfessionalSituation(professionalSituation);
+
+        }
+
+        if (doc.get(MetaData.TARGETENDUSER) != null) {
+
+          HierarchicalStructuredTextMetaData targetEndUser = new HierarchicalStructuredTextMetaData();
+          String[]                           targetEndUserLevels = doc.get(MetaData.TARGETENDUSER + "_orig").split("/");
+
+          for (int j = 1; j < targetEndUserLevels.length; j++) {
+
+            TextMetaData level = new TextMetaData();
+
+            level.setValue(targetEndUserLevels[j]);
+            targetEndUser.addChild(level);
+
+          }
+
+          rec.setTargetEndUser(targetEndUser);
 
         }
 

@@ -19,7 +19,9 @@ import org.metaz.repository.Result;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -521,6 +523,29 @@ public class SearchServiceImplAltTest extends TestCase {
       if (uri != null) {
 
         System.out.println("uri: " + fileFormat.getValue());
+
+      }
+
+      HierarchicalStructuredTextMetaData schoolDiscipline = record.getSchoolDiscipline();
+
+      if (schoolDiscipline != null) {
+
+        System.out.println("vakleergebied: " + schoolDiscipline.toString());
+
+      }
+
+      HierarchicalStructuredTextMetaDataSet schoolType = record.getSchoolType();
+
+      if (schoolType != null) {
+
+        Set      schoolTypes = (Set) schoolType.getValue();
+        Iterator it = schoolTypes.iterator();
+
+        while (it.hasNext()) {
+
+          System.out.println("schooltype: " + it.next().toString());
+
+        }
 
       }
 

@@ -20,8 +20,8 @@ public interface Facade {
   /**
    * Searches for results that match the specified query.
    * <p>The query syntax is:<br>
-   * <code>Query ::= (Clause)+<br>
-   * *  Clause ::= [&lt;FULLTEXTSEARCHPHRASE&gt;] || [&lt;TERM&gt;:&lt;VALUE&gt;]+</code><br>
+   * <code>Query ::= (Clause)+</br>
+   * *  Clause ::= [&lt;FULLTEXTSEARCHPHRASE&gt;] || [&lt;TERM&gt;:&lt;VALUE&gt;]+</code></br>
    * <code>&lt;FULLTEXTSEARCHPHRASE&gt;</code> should always precede term-value combinations and shall not contain any
    * semicolon.</p>
    *  <p>NOTE: In case of multiple selection the values should be seperated by the character '%'.</p>
@@ -39,7 +39,7 @@ public interface Facade {
   /**
    * Searches for results that match the specified query.
    * <p>The parameter <code>termValuePairs</code> may contain the following
-   * keys:
+   * keys:</p>
    * <ul>
    * <li>MetaData.TARGETENDUSER</li>
    * <li>MetaData.SCHOOLTYPE</li>
@@ -49,16 +49,16 @@ public interface Facade {
    * <li>MetaData.PROFESSIONALSITUATION</li>
    * <li>MetaData.COMPETENCE</li>
    * </ul>
-   * The values of these items must match exactly the values returned by the 
+   * <p>The values of these items must match exactly the values returned by the 
    * methods getXValues(). Multiple search can be implemented by separating the
    * different values with &#37; (i.e. auto&#37;self will search for all occurences
    * of auto OR self for the specified key).</br>
    * For full text search one can add a key to <code>termValuePairs</code> with
-   * two doublequotes:
+   * two doublequotes:</p>
    * <ul>
    * <li>&quot;&quot;</li>
    * </ul>
-   * The value belonging to this key may contain any text. (See 
+   * <p>The value belonging to this key may contain any text. (See 
    * <a href="http://lucene.apache.org/java/docs/queryparsersyntax.html"
    * target="_blank">Lucene Query Syntax</a> for further information on wildcards,
    * fuzzy search, proximity search, boosting,...).
