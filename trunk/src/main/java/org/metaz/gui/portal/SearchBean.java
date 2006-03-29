@@ -1,6 +1,8 @@
 // @author: Falco Paul
 package org.metaz.gui.portal;
 
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import org.metaz.domain.HierarchicalStructuredTextMetaData;
@@ -188,13 +190,28 @@ public class SearchBean {
 		while (it.hasNext()) {
 			String key = (String) it.next();
 			String[] value = (String[]) parameterMap.get(key);
-			String metazSearchValue = metazSearchEnableStringArray(value);
+			String metazSearchValue = null;
+			// only work on the value if it isn't empty
+			if (!ArrayUtils.isEmpty(value) && !isEmptyStringArray(value)) {
+				if (needsMetazSearchEnabling(key)) {
+					metazSearchValue = metazSearchEnableStringArray(value);
+				} else {
+					metazSearchValue = getPlainSearchString(value);
+				}
+			}
 			logger.debug("Found parameter [" + key + "] with value ["
 					+ metazSearchValue + "]");
 			if (MetaData.KEYWORDS.equals(key)) {
 				key = "";
+				if (StringUtils.isBlank(metazSearchValue)) {
+					logger
+							.debug("No keywords specified. Ignoring Keyword search.");
+					continue;
+				}
 			}
-			metazSearchMap.put(key, metazSearchValue);
+			if (metazSearchValue != null) {
+				metazSearchMap.put(key, metazSearchValue);
+			}
 		}
 
 		// Example processing of SELECT ONE... targetEndUser
@@ -231,6 +248,40 @@ public class SearchBean {
 
 		return metazSearchMap;
 
+	}
+
+	private boolean isEmptyStringArray(String[] values) {
+		boolean isEmpty = true;
+		for (int i = 0; i < values.length; i++) {
+			String value = values[i];
+			if (StringUtils.isNotBlank(value)) {
+				isEmpty = false;
+			}
+		}
+		return isEmpty;
+	}
+
+	private String getPlainSearchString(String[] values) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < values.length; i++) {
+			String value = values[i];
+			sb.append(value);
+		}
+		return sb.toString();
+	}
+
+	private boolean needsMetazSearchEnabling(String key) {
+		if (MetaData.TARGETENDUSER.equals(key)
+				|| MetaData.SCHOOLTYPE.equals(key)
+				|| MetaData.SCHOOLDISCIPLINE.equals(key)
+				|| MetaData.DIDACTICFUNCTION.equals(key)
+				|| MetaData.PRODUCTTYPE.equals(key)
+				|| MetaData.PROFESSIONALSITUATION.equals(key)
+				|| MetaData.COMPETENCE.equals(key)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private String metazSearchEnableStringArray(String[] value) {
@@ -517,15 +568,29 @@ public class SearchBean {
 
 	}
 
+	private String displayHierarchy(String value) {
+		int levels = StringUtils.split(value, '/').length;
+		String levelIndicator = StringUtils.repeat("+", levels);
+		int lastIndex = StringUtils.lastIndexOf(value, "/");
+		int lastPos = value.length();
+		int stuffToGet = lastPos - lastIndex;
+		String displayPart = StringUtils.right(value, stuffToGet);
+		displayPart = StringUtils.remove(displayPart, "/");
+		StringBuffer hierarchifiedString = new StringBuffer();
+		hierarchifiedString.append(levelIndicator).append(" ").append(
+				displayPart);
+		return hierarchifiedString.toString();
+	}
+
 	private void populateTargetEndUserOptions() {
 		targetEndUserOptions = new SelectOptionList();
 		targetEndUserOptions.add(new SelectOption(true, "", "[Kies]"));
 		try {
-			List l = facade.getTargetEndUserValues();
-			Iterator it = l.iterator();
-			while (it.hasNext()) {
-				String option = (String) it.next();
-				targetEndUserOptions.add(new SelectOption(option, option));
+			String[] values = facade.getTargetEndUserValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				targetEndUserOptions.add(new SelectOption(
+						value, displayHierarchy(value)));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -538,11 +603,10 @@ public class SearchBean {
 		schoolTypeOptions = new SelectOptionList();
 		schoolTypeOptions.add(new SelectOption(true, "", "[Kies]"));
 		try {
-			List l = facade.getSchoolTypesValues();
-			Iterator it = l.iterator();
-			while (it.hasNext()) {
-				String option = (String) it.next();
-				schoolTypeOptions.add(new SelectOption(option, option));
+			String[] values = facade.getSchoolTypesValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				schoolTypeOptions.add(new SelectOption(value, displayHierarchy(value)));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -554,11 +618,10 @@ public class SearchBean {
 		schoolDisciplineOptions = new SelectOptionList();
 		schoolDisciplineOptions.add(new SelectOption(true, "", "[Kies]"));
 		try {
-			List l = facade.getSchoolDisciplineValues();
-			Iterator it = l.iterator();
-			while (it.hasNext()) {
-				String option = (String) it.next();
-				schoolDisciplineOptions.add(new SelectOption(option, option));
+			String[] values = facade.getSchoolDisciplineValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				schoolDisciplineOptions.add(new SelectOption(value, displayHierarchy(value)));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -571,12 +634,11 @@ public class SearchBean {
 		didacticFunctionOptions = new SelectOptionList();
 		didacticFunctionOptions.add(new SelectOption(true, "", "[Kies]"));
 		try {
-			List l = facade.getDidacticFunctionValues();
-			Iterator it = l.iterator();
-			while (it.hasNext()) {
-				String option = (String) it.next();
-				// set both value and description to metadata value
-				didacticFunctionOptions.add(new SelectOption(option, option));
+			String[] values = facade.getDidacticFunctionValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i]; // set both value and description to
+				// metadata value
+				didacticFunctionOptions.add(new SelectOption(value, value));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -589,11 +651,10 @@ public class SearchBean {
 		productTypeOptions = new SelectOptionList();
 		productTypeOptions.add(new SelectOption(true, "", "[Kies]"));
 		try {
-			List l = facade.getProductTypeValues();
-			Iterator it = l.iterator();
-			while (it.hasNext()) {
-				String option = (String) it.next();
-				productTypeOptions.add(new SelectOption(option, option));
+			String[] values = facade.getProductTypeValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				productTypeOptions.add(new SelectOption(value, value));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -606,11 +667,11 @@ public class SearchBean {
 		professionalSituationOptions = new SelectOptionList();
 		professionalSituationOptions.add(new SelectOption(true, "", "[Kies]"));
 		try {
-			List l = facade.getProfessionalSituationValues();
-			Iterator it = l.iterator();
-			while (it.hasNext()) {
-				String option = (String) it.next();
-				professionalSituationOptions.add(new SelectOption(option, option));
+			String[] values = facade.getProfessionalSituationValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				professionalSituationOptions
+						.add(new SelectOption(value, displayHierarchy(value)));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -623,11 +684,10 @@ public class SearchBean {
 		competenceOptions = new SelectOptionList();
 		competenceOptions.add(new SelectOption(true, "", "[Kies]"));
 		try {
-			List l = facade.getCompetenceValues();
-			Iterator it = l.iterator();
-			while (it.hasNext()) {
-				String option = (String) it.next();
-				competenceOptions.add(new SelectOption(option, option));
+			String values[] = facade.getCompetenceValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				competenceOptions.add(new SelectOption(value, value));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
