@@ -85,11 +85,11 @@ public class Harvester {
 
   // file and directory settings to be read from runtime properties file (metaz.props)
   
-  private String applicationz_schema_prop;
-  private String applicationz_transfer_path_prop;
-  private String applicationz_processed_path_prop;
-  private String applicationz_rejected_path_prop;
-  private String applicationz_transferstaging_path_prop;
+  private String applicationzSchemaProp;
+  private String applicationzTransferPathProp;
+  private String applicationzProcessedPathProp;
+  private String applicationzRejectedPathProp;
+  private String applicationzTransferstagingPathProp;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -103,30 +103,30 @@ public class Harvester {
 
     MetaZ app = MetaZ.getInstance();
 
-    applicationz_schema_prop = app.getProperties().getProperty("applicationz.schema");
+    applicationzSchemaProp = app.getProperties().getProperty("applicationz.schema");
 
-    if (applicationz_schema_prop == null)
-      applicationz_schema_prop = APPLICATIONZ_SCHEMA;
+    if (applicationzSchemaProp == null)
+      applicationzSchemaProp = APPLICATIONZ_SCHEMA;
 
-    applicationz_transfer_path_prop = app.getProperties().getProperty("applicationz.transfer.path");
+    applicationzTransferPathProp = app.getProperties().getProperty("applicationz.transfer.path");
 
-    if (applicationz_transfer_path_prop == null)
-      applicationz_transfer_path_prop = APPLICATIONZ_TRANSFER_PATH;
+    if (applicationzTransferPathProp == null)
+      applicationzTransferPathProp = APPLICATIONZ_TRANSFER_PATH;
 
-    applicationz_processed_path_prop = app.getProperties().getProperty("applicationz.processed.path");
+    applicationzProcessedPathProp = app.getProperties().getProperty("applicationz.processed.path");
 
-    if (applicationz_processed_path_prop == null)
-      applicationz_processed_path_prop = APPLICATIONZ_PROCESSED_PATH;
+    if (applicationzProcessedPathProp == null)
+      applicationzProcessedPathProp = APPLICATIONZ_PROCESSED_PATH;
 
-    applicationz_rejected_path_prop = app.getProperties().getProperty("applicationz.rejected.path");
+    applicationzRejectedPathProp = app.getProperties().getProperty("applicationz.rejected.path");
 
-    if (applicationz_rejected_path_prop == null)
-      applicationz_rejected_path_prop = APPLICATIONZ_REJECTED_PATH;
+    if (applicationzRejectedPathProp == null)
+      applicationzRejectedPathProp = APPLICATIONZ_REJECTED_PATH;
 
-    applicationz_transferstaging_path_prop = app.getProperties().getProperty("applicationz.transferstaging.path");
+    applicationzTransferstagingPathProp = app.getProperties().getProperty("applicationz.transferstaging.path");
 
-    if (applicationz_transferstaging_path_prop == null)
-      applicationz_transferstaging_path_prop = APPLICATIONZ_TRANSFERSTAGING_PATH;
+    if (applicationzTransferstagingPathProp == null)
+      applicationzTransferstagingPathProp = APPLICATIONZ_TRANSFERSTAGING_PATH;
 
   }
 
@@ -169,7 +169,7 @@ public class Harvester {
 
     try {
 
-      xmlfile = app.getRelativeFile(applicationz_transfer_path_prop + "/" + f);
+      xmlfile = app.getRelativeFile(applicationzTransferPathProp + "/" + f);
 
       logger.info(xmlfile.getAbsoluteFile().toString());
 
@@ -181,9 +181,9 @@ public class Harvester {
 
       } else if (xmlfile.canWrite()) {
 
-        xmlfile.renameTo(app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f));
+        xmlfile.renameTo(app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f));
         logger.info("after rename" + xmlfile.getAbsolutePath());
-        xmlfile = app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f);
+        xmlfile = app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f);
 
         long timestamp = System.currentTimeMillis();
 
@@ -196,7 +196,7 @@ public class Harvester {
           //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" + Long.toString(timestamp) + f));
         } else {
 
-          xmlfile.renameTo(app.getRelativeFile(applicationz_rejected_path_prop + "/" + Long.toString(timestamp) +
+          xmlfile.renameTo(app.getRelativeFile(applicationzRejectedPathProp + "/" + Long.toString(timestamp) +
                                                "_complete_" + f));
 
         }
@@ -215,11 +215,11 @@ public class Harvester {
 
       try {
 
-        xmlfile = app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f);
+        xmlfile = app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f);
 
         long timestamp = System.currentTimeMillis();
 
-        xmlfile.renameTo(app.getRelativeFile(applicationz_rejected_path_prop + "/" + Long.toString(timestamp) +
+        xmlfile.renameTo(app.getRelativeFile(applicationzRejectedPathProp + "/" + Long.toString(timestamp) +
                                              "_complete_" + f));
 
       } catch (Exception ignore) {
@@ -256,9 +256,9 @@ public class Harvester {
 
       } else if (xmlfile.canWrite()) {
 
-        xmlfile.renameTo(app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f));
+        xmlfile.renameTo(app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f));
         logger.info("after rename" + xmlfile.getAbsolutePath());
-        xmlfile = app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f);
+        xmlfile = app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f);
 
         long timestamp = System.currentTimeMillis();
 
@@ -271,7 +271,7 @@ public class Harvester {
           //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" + Long.toString(timestamp) + f));
         } else {
 
-          xmlfile.renameTo(app.getRelativeFile(applicationz_rejected_path_prop + "/" + Long.toString(timestamp) +
+          xmlfile.renameTo(app.getRelativeFile(applicationzRejectedPathProp + "/" + Long.toString(timestamp) +
                                                "_complete_" + f));
 
         }
@@ -290,11 +290,11 @@ public class Harvester {
 
       try {
 
-        xmlfile = app.getRelativeFile(applicationz_transferstaging_path_prop + "/" + f);
+        xmlfile = app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f);
 
         long timestamp = System.currentTimeMillis();
 
-        xmlfile.renameTo(app.getRelativeFile(applicationz_rejected_path_prop + "/" + Long.toString(timestamp) +
+        xmlfile.renameTo(app.getRelativeFile(applicationzRejectedPathProp + "/" + Long.toString(timestamp) +
                                              "_complete_" + f));
 
       } catch (Exception ignore) {
@@ -539,13 +539,13 @@ public class Harvester {
 
     Element root = document.getRootElement();
     long    timestamp = System.currentTimeMillis();
-    String  path = applicationz_processed_path_prop + "/" + Long.toString(timestamp) + file;
+    String  path = applicationzProcessedPathProp + "/" + Long.toString(timestamp) + file;
 
     if (! error.equals("")) {
 
       Element errEl = root.addElement("Error");
 
-      path = applicationz_rejected_path_prop + "/" + Long.toString(timestamp) + file;
+      path = applicationzRejectedPathProp + "/" + Long.toString(timestamp) + file;
       errEl.setText(error);
       logger.info("Error element created");
 
@@ -582,7 +582,7 @@ public class Harvester {
 
     MetaZ app = MetaZ.getInstance();
 
-    logger.info("Loaded schema document: " + applicationz_schema_prop);
+    logger.info("Loaded schema document: " + applicationzSchemaProp);
 
     //write validator to xml
     Element root = document.getRootElement();
@@ -595,7 +595,7 @@ public class Harvester {
 
     logger.info("after validation factory");
 
-    Schema schema = factory.compileSchema(app.getRelativeFile(applicationz_schema_prop));
+    Schema schema = factory.compileSchema(app.getRelativeFile(applicationzSchemaProp));
 
     logger.info("schema loaded");
 
