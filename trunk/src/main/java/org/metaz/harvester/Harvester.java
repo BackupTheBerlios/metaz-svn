@@ -50,7 +50,7 @@ import org.metaz.util.MetaZ;
 //import java.util.*;
 
 /**
- * The  Harvester class initiates a check of an offered xml file to check on xml schema conformity, extract all
+ * The  Harvester class initiates a check of an offered xml file to check on xml schema conformity, extracts all
  * Learnobjects, transform them to records of metadata and pass them to the repository facade. The Harvester class is
  * responsible for parsing xml data files into a  collection of LearningObjects  and passing this collection to the
  * repository interface
@@ -132,9 +132,7 @@ public class Harvester {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
-  // ~ Methods
-  // ----------------------------------------------------------------------------------------------------------
-  /**
+ /**
    * Only used as a temporary start-up
    *
    * @param args arguments, first one should contain xml file to parse
