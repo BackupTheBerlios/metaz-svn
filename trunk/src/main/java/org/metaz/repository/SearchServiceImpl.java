@@ -241,8 +241,8 @@ public class SearchServiceImpl
   } // end doSearch()
 
   /**
-   * Returns the URI's of Records that match the specified query<p>The query is a hashmap containing the term-value
-   * combinations to search for.</p>
+   * Returns the URI's of Records that match the specified query<p>The query is a hashmap containing the
+   * term-value combinations to search for.</p>
    *  <p>NOTE: In case of multiple selection the values should be seperated by the character '%".</p>
    *
    * @param hmquery the search query hashmap
@@ -273,14 +273,14 @@ public class SearchServiceImpl
 
         if (keywordValue != null) {
 
-          keywordValue = keywordValue.replaceAll("%%","temporaryvalue");
-          
+          keywordValue = keywordValue.replaceAll("%%", "temporaryvalue");
+
           String[] terms = keywordValue.split(VALUESEPARATOR);
 
           for (int j = 0; j < terms.length; j++) {
 
-            terms[j] = ((String)terms[j]).replaceAll("temporaryvalue","%");
-                    
+            terms[j] = ((String) terms[j]).replaceAll("temporaryvalue", "%");
+
             Term  keyword = new Term(keywords[i], terms[j]);
             Query keywordQuery = new TermQuery(keyword);
 
@@ -315,15 +315,15 @@ public class SearchServiceImpl
           Result<URI> result = new Result<URI>(uri, score);
 
           resultList.add(result);
-          //logger.info(i + 1 + ": " + suri + ":" + score);
 
+          //logger.info(i + 1 + ": " + suri + ":" + score);
         } // end if
 
       } // end for
 
       searcher.close();
-      //logger.info("resultList contains " + resultList.size() + " elements");
 
+      //logger.info("resultList contains " + resultList.size() + " elements");
       return resultList;
 
     } // end try

@@ -23,7 +23,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  * @author Jurgen Goelen
  */
-
 public class FacadeImpl
   implements Facade
 {
@@ -221,13 +220,10 @@ public class FacadeImpl
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#setSearchService(org.metaz.repository.SearchService)
-   */
   /**
-   * DOCUMENT ME!
+   * Sets the searchService to use in the repository
    *
-   * @param service DOCUMENT ME!
+   * @param service the searchService
    */
   public void setSearchService(RepositoryService service) {
 
@@ -235,13 +231,10 @@ public class FacadeImpl
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#setDataService(org.metaz.repository.DataService)
-   */
   /**
-   * DOCUMENT ME!
+   * Sets the dataService to use in the repository
    *
-   * @param service DOCUMENT ME!
+   * @param service the dataService
    */
   public void setDataService(RepositoryService service) {
 
@@ -249,143 +242,157 @@ public class FacadeImpl
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#getTargetEndUserValues()
-   */
   /**
-   * DOCUMENT ME!
+   * Returns a sorted array of unique TargetEndUser values
    *
-   * @return DOCUMENT ME!
+   * @return the sorted array
    *
    * @throws Exception DOCUMENT ME!
    */
-  public List getTargetEndUserValues()
-                              throws Exception
+  public String[] getTargetEndUserValues()
+                                  throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("targetEndUser");
+    List     values = dataService.getUniqueFieldValues("targetEndUser");
+    String[] svalues = new String[0];
 
-    return values;
+    values.toArray(svalues);
+
+    return svalues;
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#getSchoolTypesValues()
-   */
   /**
-   * DOCUMENT ME!
+   * Returns a sorted array of unique SchoolType values
    *
-   * @return DOCUMENT ME!
+   * @return the sorted array
    *
    * @throws Exception DOCUMENT ME!
    */
-  public List getSchoolTypesValues()
-                            throws Exception
+  public String[] getSchoolTypesValues()
+                                throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("schoolType");
+    List     values = dataService.getUniqueFieldValues("schoolType");
+    String[] svalues = new String[0];
 
-    return values;
+    values.toArray(svalues);
+
+    return svalues;
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#getSchoolDisciplineValues()
-   */
   /**
-   * DOCUMENT ME!
+   * Returns a sorted array of unique SchoolDiscipline values
    *
-   * @return DOCUMENT ME!
+   * @return the sorted array
    *
    * @throws Exception DOCUMENT ME!
    */
-  public List getSchoolDisciplineValues()
-                                 throws Exception
+  public String[] getSchoolDisciplineValues()
+                                     throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("schoolDiscipline");
+    List     values = dataService.getUniqueFieldValues("schoolDiscipline");
+    String[] svalues = new String[0];
 
-    return values;
+    values.toArray(svalues);
+
+    return svalues;
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#getDidacticFunctionValues()
-   */
   /**
-   * DOCUMENT ME!
+   * Returns a sorted array of unique DidacticFunction values
    *
-   * @return DOCUMENT ME!
+   * @return the sorted array
    *
    * @throws Exception DOCUMENT ME!
    */
-  public List getDidacticFunctionValues()
-                                 throws Exception
+  public String[] getDidacticFunctionValues()
+                                     throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("didacticFunction");
+    List     values = dataService.getUniqueFieldValues("didacticFunction");
+    String[] svalues = new String[0];
 
-    return values;
+    values.toArray(svalues);
+
+    return svalues;
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#getProductTypeValues()
-   */
   /**
-   * DOCUMENT ME!
+   * Returns a sorted array of unique ProductType values
    *
-   * @return DOCUMENT ME!
+   * @return the sorted array
    *
    * @throws Exception DOCUMENT ME!
    */
-  public List getProductTypeValues()
-                            throws Exception
+  public String[] getProductTypeValues()
+                                throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("productType");
+    List     values = dataService.getUniqueFieldValues("productType");
+    String[] svalues = new String[0];
 
-    return values;
+    values.toArray(svalues);
+
+    return svalues;
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#getProfessionalSituationValues()
-   */
+
   /**
-   * DOCUMENT ME!
+   * Returns a sorted array of unique ProfessionalSituation values
    *
-   * @return DOCUMENT ME!
+   * @return the sorted array
    *
    * @throws Exception DOCUMENT ME!
    */
-  public List getProfessionalSituationValues()
-                                      throws Exception
+  public String[] getProfessionalSituationValues()
+                                          throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("professionalSituation");
+    List     values = dataService.getUniqueFieldValues("professionalSituation");
+    String[] svalues = new String[0];
 
-    return values;
+    values.toArray(svalues);
+
+    return svalues;
 
   }
 
-  /* (non-Javadoc)
-   * @see org.metaz.repository.Facade#getCompetenceValues()
-   */
   /**
-   * DOCUMENT ME!
+   * Returns a sorted array of unique Competence values
    *
-   * @return DOCUMENT ME!
+   * @return the sorted array
    *
    * @throws Exception DOCUMENT ME!
    */
-  public List getCompetenceValues()
-                           throws Exception
+  public String[] getCompetenceValues()
+                               throws Exception
   {
 
-    List values = dataService.getUniqueFieldValues("competence");
+    List     values = dataService.getUniqueFieldValues("competence");
+    String[] svalues = new String[0];
 
-    return values;
+    values.toArray(svalues);
+
+    return svalues;
+
+  }
+
+  /**
+   * Returns a list of unique SchoolDiscipline values that are related  to the provided schooltype
+   *
+   * @param schooltype the schooltype dependency
+   *
+   * @return the list of related school disciplines
+   */
+  public String[] getSchoolDisciplineValues(String schooltype) {
+
+    return new String[0];
 
   }
 

@@ -44,6 +44,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.Vector;
 
 /**
@@ -110,7 +111,9 @@ public class SearchServiceImplAlt
       IndexReader reader = IndexReader.open(directory);
 
       for (int i = 0; i < reader.maxDoc(); i++) {
+
         reader.delete(i);
+
       }
 
       logger.info("Search Index cleared");
@@ -159,16 +162,11 @@ public class SearchServiceImplAlt
 
       //for testing purposes
       /*
-      IndexReader reader = IndexReader.open(f);
-
-      for (int i = 0; i < reader.numDocs(); i++) {
-
-        logger.debug((reader.document(i)).toString());
-
-      }
-
-      reader.close();*/
-
+         IndexReader reader = IndexReader.open(f);
+         for (int i = 0; i < reader.numDocs(); i++) {
+           logger.debug((reader.document(i)).toString());
+         }
+         reader.close();*/
     } // end try
     catch (Exception ex) {
 
@@ -286,29 +284,29 @@ public class SearchServiceImplAlt
 
       } // end if
 
-          for (int i = 0; i < keywords.length; i++) {
+      for (int i = 0; i < keywords.length; i++) {
 
-            String keywordValue = (String) hmquery.get(keywords[i]);
+        String keywordValue = (String) hmquery.get(keywords[i]);
 
-            if (keywordValue != null) {
+        if (keywordValue != null) {
 
-              String[] terms = keywordValue.split(VALUESEPARATOR);
+          String[] terms = keywordValue.split(VALUESEPARATOR);
 
-              for (int j = 0; j < terms.length; j++) {
+          for (int j = 0; j < terms.length; j++) {
 
-                Term  keyword = new Term(keywords[i], terms[j]);
-                Query keywordQuery = new TermQuery(keyword);
+            Term  keyword = new Term(keywords[i], terms[j]);
+            Query keywordQuery = new TermQuery(keyword);
 
-                q.add(keywordQuery, false, false); // logical OR
-                                                   /*
-                   q.add(keywordQuery, true, false); // logical AND
-                 */
+            q.add(keywordQuery, false, false); // logical OR
+                                               /*
+               q.add(keywordQuery, true, false); // logical AND
+             */
 
-              }
+          }
 
-            } // end if
+        } // end if
 
-          } // end for
+      } // end for
 
       logger.info("Searching for: " + q.toString());
 
@@ -549,41 +547,63 @@ public class SearchServiceImplAlt
 
       }
 
+      boolean hierarchical = false;
+
+      for (int i = 0; i < hierarchicalKeywords.length; i++) {
+
+        if (fieldName.equals(hierarchicalKeywords[i])) {
+
+          hierarchical = true;
+
+        }
+
+      }
+
+      if (hierarchical) {
+
+        fieldName = fieldName + "_orig";
+
+      }
+
       File        f = app.getRelativeFile(INDEXPATH);
       IndexReader reader = IndexReader.open(f);
       TermEnum    terms = reader.terms(new Term(fieldName, ""));
-      Vector      values = new Vector();
+      String[]    distinctValues = new String[0];
 
-      while (fieldName.equals(terms.term().field())) {
+      if (terms.term() != null) {
 
-        values.add(terms.term().text());
+        Vector values = new Vector();
 
-        if (! terms.next()) {
+        while (fieldName.equals(terms.term().field())) {
 
-          break;
+          values.add(terms.term().text());
+
+          if (! terms.next()) {
+
+            break;
+
+          }
 
         }
+
+        if (values.size() != 0) {
+
+          distinctValues = new String[values.size()];
+
+          for (int i = 0; i < values.size(); i++) {
+
+            distinctValues[i] = (String) values.elementAt(i);
+
+          }
+
+        }
+
+        Arrays.sort(distinctValues, String.CASE_INSENSITIVE_ORDER);
 
       }
 
       terms.close();
       reader.close();
-
-      String[] distinctValues = new String[0];
-
-      if (values.size() != 0) {
-
-        distinctValues = new String[values.size()];
-
-        for (int i = 0; i < values.size(); i++) {
-
-          distinctValues[i] = (String) values.elementAt(i);
-
-        }
-
-      }
-
-      Arrays.sort(distinctValues, String.CASE_INSENSITIVE_ORDER);
 
       return distinctValues;
 
@@ -598,75 +618,47 @@ public class SearchServiceImplAlt
   }
 
   /**
-   * Returns an alphabetical sorted array of distinct path strings of a hierarchical index field NOTE: the index
-   * field has to be one of the hierarchical keyword fields (targetEndUser, schoolType, schoolDiscipline, or
-   * professionalSituation).
+   * Returns an alphabetical sorted array of distinct values of the field SchoolDiscipline that are related to
+   * the field SchoolType with the provided parameter value
    *
-   * @param fieldName the index field name
+   * @param schooltype the SchoolType value
    *
    * @return the sorted array
    */
-  public String[] getDistinctHierarchicalPaths(String fieldName) {
+  public String[] getDistinctRelatedSchoolDisciplineValues(String schooltype) {
 
     try {
 
-      boolean valuable = false;
+      String[]  values = new String[0];
+      File      f = app.getRelativeFile(INDEXPATH);
+      Searcher  searcher = new IndexSearcher(f.getCanonicalPath());
+      Term      term = new Term(MetaData.SCHOOLTYPE + "_orig", schooltype);
+      TermQuery query = new TermQuery(term);
+      Hits      hits = searcher.search(query);
 
-      for (int i = 0; i < hierarchicalKeywords.length; i++) {
+      if (hits.length() != 0) {
 
-        if (fieldName.equals(hierarchicalKeywords[i])) {
+        TreeSet ts = new TreeSet();
 
-          valuable = true;
+        for (int i = 0; i < hits.length(); i++) {
 
-        }
+          String[] origValues = hits.doc(i).getValues(MetaData.SCHOOLDISCIPLINE + "_orig");
 
-      }
+          for (int j = 0; j < origValues.length; j++) {
 
-      if (! valuable) {
+            ts.add(origValues[j]);
 
-        return null;
-
-      }
-
-      fieldName = fieldName + "_orig";
-
-      File        f = app.getRelativeFile(INDEXPATH);
-      IndexReader reader = IndexReader.open(f);
-      TermEnum    terms = reader.terms(new Term(fieldName, ""));
-      Vector      values = new Vector();
-
-      while (fieldName.equals(terms.term().field())) {
-
-        values.add(terms.term().text());
-
-        if (! terms.next()) {
-
-          break;
+          }
 
         }
 
-      }
-
-      terms.close();
-      reader.close();
-
-      String[] distinctValues = new String[] {""};
-
-      if (values.size() != 0) {
-
-        distinctValues = new String[values.size()];
-
-        for (int i = 0; i < values.size(); i++) {
-
-          distinctValues[i] = (String) values.elementAt(i);
-
-        }
+        values = (String[]) ts.toArray(values);
 
       }
 
-      Arrays.sort(distinctValues, String.CASE_INSENSITIVE_ORDER);
+      searcher.close();
 
-      return distinctValues;
+      return values;
 
     } catch (Exception ex) {
 
@@ -678,4 +670,5 @@ public class SearchServiceImplAlt
 
   }
 
-} // end SearchServiceImpl
+}
+// end SearchServiceImpl

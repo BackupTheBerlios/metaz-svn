@@ -287,7 +287,8 @@ public class SearchServiceImplTest extends TestCase {
 
     //optional metadata required time
     NumericMetaData time2 = new NumericMetaData();
-    long time2value = 60;
+    long            time2value = 60;
+
     time2.setValue(time2value);
     rec2.setRequiredTime(time2);
 
@@ -299,13 +300,15 @@ public class SearchServiceImplTest extends TestCase {
 
     //optional metadata file size
     NumericMetaData size = new NumericMetaData();
-    long sizevalue = 550;
+    long            sizevalue = 550;
+
     size.setValue(sizevalue);
     rec2.setFileSize(size);
 
     //optional metadata playing time
     NumericMetaData plTime = new NumericMetaData();
-    long plTimevalue = 40;
+    long            plTimevalue = 40;
+
     plTime.setValue(plTimevalue);
     rec2.setPlayingTime(plTime);
 
@@ -405,7 +408,7 @@ public class SearchServiceImplTest extends TestCase {
 
     hm.put(MetaData.PRODUCTTYPE, "Document");
     hm.put("", "nederlands");
-    assertEquals(1, ((List) ssi.doSearch(hm)).size());
+    assertEquals(2, ((List) ssi.doSearch(hm)).size());
 
   } // end testDoSearch2()
 
@@ -420,20 +423,21 @@ public class SearchServiceImplTest extends TestCase {
 
     assertEquals(2, ((List) ssi.doSearch(MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document")).size());
     assertEquals(1, ((List) ssi.doSearch("nederlands")).size());
-    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLDISCIPLINE + FIELDDELIMITER + "Nederlands")).size());
-    assertEquals(1,
+    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLDISCIPLINE + FIELDDELIMITER + "/Nederlands")).size());
+    assertEquals(2,
                  ((List) ssi.doSearch("nederlands" + WHITESPACE + MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document")).size());
-    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "VMBO")).size());
-    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"Voortgezet onderwijs\"")).size());
     assertEquals(1,
+                 ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"/Voortgezet onderwijs/VBO/VMBO\"")).size());
+    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"/Voortgezet onderwijs\"")).size());
+    assertEquals(2,
                  ((List) ssi.doSearch("nederlands" + WHITESPACE + MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document" +
-                                      WHITESPACE + MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"Voortgezet onderwijs\"")).size());
+                                      WHITESPACE + MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"/Voortgezet onderwijs\"")).size());
     assertEquals(1, ((List) ssi.doSearch("Buisonjé")).size());
     assertEquals(2,
                  ((List) ssi.doSearch(MetaData.DIDACTICFUNCTION + FIELDDELIMITER + "Leestekst" + WHITESPACE +
                                       MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document" + WHITESPACE +
                                       MetaData.PROFESSIONALSITUATION + FIELDDELIMITER +
-                                      "\"Leiding geven aan groepsprocessen\"")).size());
+                                      "\"/Omgaan met een groep/Leiding geven aan groepsprocessen\"")).size());
     assertEquals(0, ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "onbestaand")).size());
     assertEquals(1, ((List) ssi.doSearch("Ray*")).size()); //raymann //wildcard search
     assertEquals(2, ((List) ssi.doSearch("h?ef")).size()); //href //wildcard search
@@ -443,7 +447,6 @@ public class SearchServiceImplTest extends TestCase {
     assertEquals(3, ((List) ssi.doSearch("monarchie OR uitzending OR nederlands.nl")).size()); //boolean
     assertEquals(1, ((List) ssi.doSearch("\"Surinaamse mannen\"")).size()); //phrase
     assertEquals(1, ((List) ssi.doSearch("(monarchie OR uitzending) AND nederlands")).size()); //grouping
-    assertEquals(3, ((List) ssi.doSearch(MetaData.DIDACTICFUNCTION + FIELDDELIMITER + "\"Leestekst%Oefening%Het%%-teken\"")).size()); // multiselection search
 
   } // end testDoSearch()
 

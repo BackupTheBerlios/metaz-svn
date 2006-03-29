@@ -1,14 +1,13 @@
 package org.metaz.repository;
 
-import java.net.URI;
-
-import java.util.HashMap;
-
 import org.metaz.domain.Record;
 
 import org.metaz.repository.RepositoryService;
 import org.metaz.repository.Result;
 
+import java.net.URI;
+
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ public interface SearchServiceAlt extends RepositoryService {
    * @return Returns a List of records sorted by their relevance score.
    */
   public List<Result<Record>> doSearch(String query);
-  
+
   /**
    * Searches for results that match the specified query.
    *
@@ -38,7 +37,7 @@ public interface SearchServiceAlt extends RepositoryService {
    * @return Returns a List of results (URI's) sorted by their relevance score.
    */
   public List<Result<Record>> doSearch(HashMap termValuePairs);
-  
+
   /**
    * Returns an alphabetical sorted array of distinct values of an index field NOTE: the index field has to be
    * one of the keyword fields (targetEndUser, schoolType, schoolDiscipline, didacticFunction, productType,
@@ -49,5 +48,15 @@ public interface SearchServiceAlt extends RepositoryService {
    * @return the sorted array
    */
   public String[] getDistinctValues(String fieldName);
+
+  /**
+   * Returns an alphabetical sorted array of distinct values of the field SchoolDiscipline that are related to
+   * the field SchoolType with the provided parameter value
+   *
+   * @param schooltype the SchoolType value
+   *
+   * @return the sorted array
+   */
+  public String[] getDistinctRelatedSchoolDisciplineValues(String schooltype);
 
 } // end SearchService

@@ -6,6 +6,8 @@ import org.apache.lucene.document.Field;
 import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
 
+import org.metaz.util.HierarchicalStructuredMetaDataValueParser;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -93,9 +95,9 @@ public class RecordDocumentAlt {
 
       doc.add(Field.Keyword(MetaData.TARGETENDUSER + "_orig", targetEndUserString));
 
-      String[] targetEndUserLevels = targetEndUser.toString().split(LEVELSEPARATOR);
+      String[] targetEndUserLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(targetEndUserString);
 
-      for (int i = 1; i < targetEndUserLevels.length; i++) {
+      for (int i = 0; i < targetEndUserLevels.length; i++) {
 
         doc.add(Field.Keyword(MetaData.TARGETENDUSER, targetEndUserLevels[i]));
 
@@ -116,9 +118,9 @@ public class RecordDocumentAlt {
 
         doc.add(Field.Keyword(MetaData.SCHOOLTYPE + "_orig", schType));
 
-        String[] schoolTypeLevels = schType.split(LEVELSEPARATOR);
+        String[] schoolTypeLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schType);
 
-        for (int j = 1; j < schoolTypeLevels.length; j++) {
+        for (int j = 0; j < schoolTypeLevels.length; j++) {
 
           doc.add(Field.Keyword(MetaData.SCHOOLTYPE, schoolTypeLevels[j]));
 
@@ -136,9 +138,9 @@ public class RecordDocumentAlt {
 
       doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE + "_orig", schoolDisciplineString));
 
-      String[] schoolDisciplineLevels = schoolDiscipline.toString().split(LEVELSEPARATOR);
+      String[] schoolDisciplineLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schoolDisciplineString);
 
-      for (int i = 1; i < schoolDisciplineLevels.length; i++) {
+      for (int i = 0; i < schoolDisciplineLevels.length; i++) {
 
         doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE, schoolDisciplineLevels[i]));
 
@@ -162,9 +164,9 @@ public class RecordDocumentAlt {
 
       doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION + "_orig", professionalSituationString));
 
-      String[] professionalSituationLevels = professionalSituation.toString().split(LEVELSEPARATOR);
+      String[] professionalSituationLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(professionalSituationString);
 
-      for (int i = 1; i < professionalSituationLevels.length; i++) {
+      for (int i = 0; i < professionalSituationLevels.length; i++) {
 
         doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION, professionalSituationLevels[i]));
 

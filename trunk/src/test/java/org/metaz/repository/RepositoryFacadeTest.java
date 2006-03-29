@@ -1,8 +1,5 @@
 package org.metaz.repository;
 
-import java.util.List;
-import java.util.Vector;
-
 import junit.framework.TestCase;
 
 import org.metaz.domain.BooleanMetaData;
@@ -11,278 +8,372 @@ import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
 import org.metaz.domain.HyperlinkMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
+
 import org.metaz.util.MetaZ;
 
+import java.util.List;
+import java.util.Vector;
+
 /**
+ * Class for testing the Repository by means of the interface provided by Facade
+ *
  * @author Jurgen Goelen
  */
 public class RepositoryFacadeTest extends TestCase {
 
-    Facade facade;
+  //~ Instance fields --------------------------------------------------------------------------------------------------
 
-    public RepositoryFacadeTest() {
-        facade = MetaZ.getRepositoryFacade();
-    }
+  Facade facade;
 
-    @Override
-    protected void setUp() throws Exception {
-        // clean repository
-        facade.doUpdate(new Vector<Record>());
-    }
+  //~ Constructors -----------------------------------------------------------------------------------------------------
 
-    private Record createRecord(String title, boolean secured,
-            String fileFormat, String dictaticFunc, String productType,
-            String uri,String schoolType) {
-        Record record = null;
+  public RepositoryFacadeTest() {
 
-        TextMetaData metaTitle = new TextMetaData();
-        metaTitle.setName("titel");
-        metaTitle.setValue(title);
-        metaTitle.setMandatory(true);
+    facade = MetaZ.getRepositoryFacade();
 
-        BooleanMetaData metaSecured = new BooleanMetaData();
-        metaSecured.setName("beveiligd");
-        metaSecured.setValue(secured);
-        metaSecured.setMandatory(true);
+  }
 
-        TextMetaData metaFileFormat = new TextMetaData();
-        metaFileFormat.setName("bestandsformaat");
-        metaFileFormat.setValue(fileFormat);
-        metaFileFormat.setMandatory(true);
+  //~ Methods ----------------------------------------------------------------------------------------------------------
 
-        TextMetaData metaDidactiFunc = new TextMetaData();
-        metaDidactiFunc.setName("didactischeFunctie");
-        metaDidactiFunc.setValue(dictaticFunc);
-        metaDidactiFunc.setMandatory(true);
+  @Override
+  protected void setUp()
+                throws Exception
+  {
 
-        TextMetaData metaProductType = new TextMetaData();
-        metaProductType.setName("producttype");
-        metaProductType.setValue(productType);
-        metaProductType.setMandatory(true);
+    // clean repository
+    facade.doUpdate(new Vector<Record>());
 
-        HyperlinkMetaData metaUri = new HyperlinkMetaData();
-        metaUri.setName("URI");
-        metaUri.setValue(uri);
-        
-        
-        HierarchicalStructuredTextMetaData hv1 = new HierarchicalStructuredTextMetaData();
-        for (int i = 0; i < 4; i++) {
-            TextMetaData tm = new TextMetaData();
-            tm.setValue(schoolType + i);
-            hv1.addChild(tm);            
-        }
-        HierarchicalStructuredTextMetaDataSet metaSchoolType = new HierarchicalStructuredTextMetaDataSet();
-        metaSchoolType.addHierarchy(hv1);
-        
-        
+  }
 
-        record = new Record(metaTitle, metaSecured, metaFileFormat,
-                metaDidactiFunc, metaProductType, metaUri);
-        
-        record.setSchoolType(metaSchoolType);
+  private Record createRecord(String title, boolean secured, String fileFormat, String dictaticFunc,
+                              String productType, String uri, String schoolType) {
 
-        return record;
-    }
+    Record record = null;
 
-    private List<Record> createSamples(){
-        
-        List<Record> records = new Vector<Record>();
+    TextMetaData metaTitle = new TextMetaData();
 
-        records.add(createRecord("title1", true, "pdf", "didac1", "type1",
-                "uri1","type_a"));
-        records.add(createRecord("title2", true, "txt", "didac2", "type4",
-                "uri2","type_b"));
-        records.add(createRecord("title3", true, "htm", "didac4", "type5",
-                "uri3","type_c"));
-        records.add(createRecord("title4", true, "xml", "didac1", "type4",
-                "uri4","type_d"));
-        records.add(createRecord("title5", true, "pdf", "didac2", "type2",
-                "uri5","type_e"));
-        records.add(createRecord("title6", true, "doc", "didac3", "type1",
-                "uri6","type_f"));
-        records.add(createRecord("title7", true, "xls", "didac1", "type3",
-                "uri7","type_a"));
-        records.add(createRecord("title8", true, "htm", "didac2", "type1",
-                "uri8","type_b"));
-        
-        return records;
-        
-    }
-    
-    /*
-     * Test method for 'org.metaz.repository.FacadeImpl.doUpdate(List<Record>)'
-     */
-    public void testDoUpdate() {
-        // FIXME: extend test criteria
-        List<Record> records = createSamples();
-        
-        try {
-            facade.doUpdate(records);
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+    metaTitle.setName("titel");
+    metaTitle.setValue(title);
+    metaTitle.setMandatory(true);
 
-    /*
-     * Test method for 'org.metaz.repository.FacadeImpl.doSearch(String)'
-     */
-    public void testDoSearch() {
-        // FIXME: extend test criteria
-        try {
+    BooleanMetaData metaSecured = new BooleanMetaData();
 
-            List<Record> records =  createSamples();            
-            
-            facade.doUpdate(records);
+    metaSecured.setName("beveiligd");
+    metaSecured.setValue(secured);
+    metaSecured.setMandatory(true);
 
-            List<Result<Record>> hits = facade.doSearch("titel:title1");
-            assertNotNull(hits.get(0));
+    TextMetaData metaFileFormat = new TextMetaData();
 
-            hits = facade.doSearch("producttype:type1");
-            assertNotNull(hits.get(0));
+    metaFileFormat.setName("bestandsformaat");
+    metaFileFormat.setValue(fileFormat);
+    metaFileFormat.setMandatory(true);
 
-            hits = facade.doSearch("producttype:jjjjjjjj");
-            assertEquals(0, hits.size());
+    TextMetaData metaDidactiFunc = new TextMetaData();
 
-            hits = facade.doSearch("title?");
-            assertEquals(8, hits.size());
+    metaDidactiFunc.setName("didactischeFunctie");
+    metaDidactiFunc.setValue(dictaticFunc);
+    metaDidactiFunc.setMandatory(true);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
+    TextMetaData metaProductType = new TextMetaData();
 
-    public void testGetCompetenceValues() throws Exception {
+    metaProductType.setName("producttype");
+    metaProductType.setValue(productType);
+    metaProductType.setMandatory(true);
 
-        try {
+    HyperlinkMetaData metaUri = new HyperlinkMetaData();
 
-            List<Record> records =  createSamples();
+    metaUri.setName("URI");
+    metaUri.setValue(uri);
 
-            facade.doUpdate(records);
+    HierarchicalStructuredTextMetaData hv1 = new HierarchicalStructuredTextMetaData();
 
-            List values = null;
+    for (int i = 0; i < 4; i++) {
 
-            values = facade.getCompetenceValues();
-            assertEquals(0, values.size());
+      TextMetaData tm = new TextMetaData();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
+      tm.setValue(schoolType + i);
+      hv1.addChild(tm);
 
     }
 
-    public void testGetDidacticFunctionValues() throws Exception {
-        
-        try {
+    HierarchicalStructuredTextMetaDataSet metaSchoolType = new HierarchicalStructuredTextMetaDataSet();
 
-            List<Record> records =  createSamples();
+    metaSchoolType.addHierarchy(hv1);
 
-            facade.doUpdate(records);
+    record = new Record(metaTitle, metaSecured, metaFileFormat, metaDidactiFunc, metaProductType, metaUri);
 
-            List values = null;
+    record.setSchoolType(metaSchoolType);
 
-            values = facade.getDidacticFunctionValues();
-            assertEquals(4, values.size());
+    return record;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
-    
-    public void testGetProductTypeValues() throws Exception {
-    
-        try {
+  }
 
-            List<Record> records =  createSamples();
+  private List<Record> createSamples() {
 
-            facade.doUpdate(records);
+    List<Record> records = new Vector<Record>();
 
-            List values = null;
+    records.add(createRecord("title1", true, "pdf", "didac1", "type1", "uri1", "type_a"));
+    records.add(createRecord("title2", true, "txt", "didac2", "type4", "uri2", "type_b"));
+    records.add(createRecord("title3", true, "htm", "didac4", "type5", "uri3", "type_c"));
+    records.add(createRecord("title4", true, "xml", "didac1", "type4", "uri4", "type_d"));
+    records.add(createRecord("title5", true, "pdf", "didac2", "type2", "uri5", "type_e"));
+    records.add(createRecord("title6", true, "doc", "didac3", "type1", "uri6", "type_f"));
+    records.add(createRecord("title7", true, "xls", "didac1", "type3", "uri7", "type_a"));
+    records.add(createRecord("title8", true, "htm", "didac2", "type1", "uri8", "type_b"));
 
-            values = facade.getProductTypeValues();
-            assertEquals(5, values.size());
+    return records;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-        
-    }
-    
-    public void testGetProfessionalSituationValues() throws Exception {
-        
-        try {
+  }
 
-            List<Record> records =  createSamples();
+  /**
+   * Test method for 'org.metaz.repository.FacadeImpl.doUpdate(List<Record>)'
+   */
+  public void testDoUpdate() {
 
-            facade.doUpdate(records);
+    // FIXME: extend test criteria
+    List<Record> records = createSamples();
 
-            List values = null;
+    try {
 
-            values = facade.getProfessionalSituationValues();
-            assertEquals(0, values.size());
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
-    }
-    
-    public void testGetSchoolDisciplineValues() throws Exception {
-        try {
+      facade.doUpdate(records);
 
-            List<Record> records =  createSamples();
+    } catch (Exception e) {
 
-            facade.doUpdate(records);
+      e.printStackTrace();
+      fail();
 
-            List values = null;
-
-            values = facade.getSchoolDisciplineValues();
-            assertEquals(0, values.size());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }    
-    }
-    
-    public void testGetSchoolTypesValues() throws Exception {
-        try {
-
-            List<Record> records =  createSamples();
-
-            facade.doUpdate(records);
-
-            List values = null;
-
-            values = facade.getSchoolTypesValues();
-            assertEquals(6, values.size());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }    
     }
 
-    public void testGetTargetEndUserValues() throws Exception {
-        try {
+  }
 
-            List<Record> records =  createSamples();
+  /**
+   * Test method for 'org.metaz.repository.FacadeImpl.doSearch(String)'
+   */
+  public void testDoSearch() {
 
-            facade.doUpdate(records);
+    // FIXME: extend test criteria
+    try {
 
-            List values = null;
+      List<Record> records = createSamples();
 
-            values = facade.getTargetEndUserValues();
-            assertEquals(0, values.size());
+      facade.doUpdate(records);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
+      List<Result<Record>> hits = facade.doSearch("titel:title1");
+
+      assertNotNull(hits.get(0));
+
+      hits = facade.doSearch("producttype:type1");
+      assertNotNull(hits.get(0));
+
+      hits = facade.doSearch("producttype:jjjjjjjj");
+      assertEquals(0, hits.size());
+
+      hits = facade.doSearch("title?");
+      assertEquals(8, hits.size());
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
     }
-    
+
+  }
+
+  /**
+   * Test for method getComptenceValues
+   *
+   * @throws Exception DOCUMENT ME!
+   */
+  public void testGetCompetenceValues()
+                               throws Exception
+  {
+
+    try {
+
+      List<Record> records = createSamples();
+
+      facade.doUpdate(records);
+
+      String[] values = facade.getCompetenceValues();
+
+      assertEquals(0, values.length);
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
+    }
+
+  }
+
+  /**
+   * Test for methdo getDidacticFunctionValues
+   *
+   * @throws Exception DOCUMENT ME!
+   */
+  public void testGetDidacticFunctionValues()
+                                     throws Exception
+  {
+
+    try {
+
+      List<Record> records = createSamples();
+
+      facade.doUpdate(records);
+
+      String[] values = facade.getDidacticFunctionValues();
+
+      assertEquals(4, values.length);
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
+    }
+
+  }
+
+  /**
+   * Test for method getProductTypeValues
+   *
+   * @throws Exception DOCUMENT ME!
+   */
+  public void testGetProductTypeValues()
+                                throws Exception
+  {
+
+    try {
+
+      List<Record> records = createSamples();
+
+      facade.doUpdate(records);
+
+      String[] values = facade.getProductTypeValues();
+
+      assertEquals(5, values.length);
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
+    }
+
+  }
+
+  /**
+   * Test for method getProfessionalSituationValues
+   *
+   * @throws Exception DOCUMENT ME!
+   */
+  public void testGetProfessionalSituationValues()
+                                          throws Exception
+  {
+
+    try {
+
+      List<Record> records = createSamples();
+
+      facade.doUpdate(records);
+
+      String[] values = facade.getProfessionalSituationValues();
+
+      assertEquals(0, values.length);
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
+    }
+
+  }
+
+  /**
+   * Test for method getSchoolDisciplineValues
+   *
+   * @throws Exception DOCUMENT ME!
+   */
+  public void testGetSchoolDisciplineValues()
+                                     throws Exception
+  {
+
+    try {
+
+      List<Record> records = createSamples();
+
+      facade.doUpdate(records);
+
+      String[] values = facade.getSchoolDisciplineValues();
+
+      assertEquals(0, values.length);
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
+    }
+
+  }
+
+  /**
+   * Test for method getSchoolTypeValues
+   *
+   * @throws Exception DOCUMENT ME!
+   */
+  public void testGetSchoolTypesValues()
+                                throws Exception
+  {
+
+    try {
+
+      List<Record> records = createSamples();
+
+      facade.doUpdate(records);
+
+      String[] values = facade.getSchoolTypesValues();
+
+      assertEquals(6, values.length);
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
+    }
+
+  }
+
+  /**
+   * Test for method getTargetEndUserValues
+   *
+   * @throws Exception DOCUMENT ME!
+   */
+  public void testGetTargetEndUserValues()
+                                  throws Exception
+  {
+
+    try {
+
+      List<Record> records = createSamples();
+
+      facade.doUpdate(records);
+
+      String[] values = facade.getTargetEndUserValues();
+
+      assertEquals(0, values.length);
+
+    } catch (Exception e) {
+
+      e.printStackTrace();
+      fail();
+
+    }
+
+  }
+
 }

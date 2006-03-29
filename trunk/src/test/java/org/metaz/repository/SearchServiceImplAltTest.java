@@ -289,7 +289,8 @@ public class SearchServiceImplAltTest extends TestCase {
 
     //optional metadata required time
     NumericMetaData time2 = new NumericMetaData();
-    long time2value = 60;
+    long            time2value = 60;
+
     time2.setValue(time2value);
     rec2.setRequiredTime(time2);
 
@@ -301,13 +302,15 @@ public class SearchServiceImplAltTest extends TestCase {
 
     //optional metadata file size
     NumericMetaData size = new NumericMetaData();
-    long sizevalue = 550;
+    long            sizevalue = 550;
+
     size.setValue(sizevalue);
     rec2.setFileSize(size);
 
     //optional metadata playing time
     NumericMetaData plTime = new NumericMetaData();
-    long plTimevalue = 40;
+    long            plTimevalue = 40;
+
     plTime.setValue(plTimevalue);
     rec2.setPlayingTime(plTime);
 
@@ -407,7 +410,8 @@ public class SearchServiceImplAltTest extends TestCase {
 
     hm.put(MetaData.PRODUCTTYPE, "Document");
     hm.put("", "nederlands");
-    assertEquals(1, ((List) ssi.doSearch(hm)).size());
+    hm.put(MetaData.SCHOOLTYPE, "/Speciaal onderwijs");
+    assertEquals(3, ((List) ssi.doSearch(hm)).size());
 
   } // end testDoSearch2()
 
@@ -422,20 +426,21 @@ public class SearchServiceImplAltTest extends TestCase {
 
     assertEquals(2, ((List) ssi.doSearch(MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document")).size());
     assertEquals(1, ((List) ssi.doSearch("nederlands")).size());
-    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLDISCIPLINE + FIELDDELIMITER + "Nederlands")).size());
-    assertEquals(1,
+    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLDISCIPLINE + FIELDDELIMITER + "/Nederlands")).size());
+    assertEquals(2,
                  ((List) ssi.doSearch("nederlands" + WHITESPACE + MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document")).size());
-    //assertEquals(1,((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "VMBO")).size());
-    //assertEquals(1,((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"Voortgezet onderwijs\"")).size());
     assertEquals(1,
+                 ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"/Voortgezet onderwijs/VBO/VMBO\"")).size());
+    assertEquals(1, ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"/Voortgezet onderwijs\"")).size());
+    assertEquals(2,
                  ((List) ssi.doSearch("nederlands" + WHITESPACE + MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document" +
-                                      WHITESPACE + MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"Voortgezet onderwijs\"")).size());
+                                      WHITESPACE + MetaData.SCHOOLTYPE + FIELDDELIMITER + "\"/Voortgezet onderwijs\"")).size());
     assertEquals(1, ((List) ssi.doSearch("Buisonjé")).size());
     assertEquals(2,
                  ((List) ssi.doSearch(MetaData.DIDACTICFUNCTION + FIELDDELIMITER + "Leestekst" + WHITESPACE +
                                       MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document" + WHITESPACE +
                                       MetaData.PROFESSIONALSITUATION + FIELDDELIMITER +
-                                      "\"Leiding geven aan groepsprocessen\"")).size());
+                                      "\"/Omgaan met een groep/Leiding geven aan groepsprocessen\"")).size());
     assertEquals(0, ((List) ssi.doSearch(MetaData.SCHOOLTYPE + FIELDDELIMITER + "onbestaand")).size());
     assertEquals(1, ((List) ssi.doSearch("Ray*")).size()); //raymann //wildcard search
     assertEquals(2, ((List) ssi.doSearch("h?ef")).size()); //href //wildcard search
@@ -449,8 +454,7 @@ public class SearchServiceImplAltTest extends TestCase {
   } // end testDoSearch()
 
   /**
-   * Tests the method PresentResults.
-   * The result presentation fields are send to standard output.   
+   * Tests the method PresentResults. The result presentation fields are send to standard output.
    */
   public void testPresentResults() {
 
@@ -527,10 +531,9 @@ public class SearchServiceImplAltTest extends TestCase {
   }
 
   /**
-   * Tests the method getDistinctValues().
-   * The lists of possible values are send to standard out.
+   * Tests the method getDistinctValues(). The lists of possible values are send to standard out.
    */
-  public void testGetDistinctValues() {
+  public void testgetDistinctValues() {
 
     assertNotNull(ssi.getDistinctValues(MetaData.DIDACTICFUNCTION));
     System.out.println("De mogelijke waarden voor didactische functie zijn:");
@@ -606,54 +609,62 @@ public class SearchServiceImplAltTest extends TestCase {
     assertNull(ssi.getDistinctValues(MetaData.CREATIONDATE));
     assertNull(ssi.getDistinctValues(MetaData.TITLE));
 
+    assertNotNull(ssi.getDistinctValues(MetaData.PROFESSIONALSITUATION));
+    System.out.println("De mogelijke padwaarden voor beroepssituatie zijn:");
+
+    distinct = ssi.getDistinctValues(MetaData.PROFESSIONALSITUATION);
+
+    for (int i = 0; i < distinct.length; i++) {
+
+      System.out.println(distinct[i]);
+
+    }
+
+    assertNotNull(ssi.getDistinctValues(MetaData.SCHOOLTYPE));
+    System.out.println("De mogelijke padwaarden voor schooltype zijn:");
+    distinct = ssi.getDistinctValues(MetaData.SCHOOLTYPE);
+
+    for (int i = 0; i < distinct.length; i++) {
+
+      System.out.println(distinct[i]);
+
+    }
+
+    assertNotNull(ssi.getDistinctValues(MetaData.SCHOOLDISCIPLINE));
+    System.out.println("De mogelijke padwaarden voor vakleergebied zijn:");
+    distinct = ssi.getDistinctValues(MetaData.SCHOOLDISCIPLINE);
+
+    for (int i = 0; i < distinct.length; i++) {
+
+      System.out.println(distinct[i]);
+
+    }
+
+    assertNotNull(ssi.getDistinctValues(MetaData.TARGETENDUSER));
+    System.out.println("De mogelijke padwaarden voor beoogde eindgebruiker zijn:");
+    distinct = ssi.getDistinctValues(MetaData.TARGETENDUSER);
+
+    for (int i = 0; i < distinct.length; i++) {
+
+      System.out.println(distinct[i]);
+
+    }
+
   }
 
   /**
-   * Tests the method getDistinctHierarchicalPaths().
-   * The lists of possible hierarchical values are send to standard out.   
+   * Tests the method getDistinctRelatedSchoolDisciplineValues
    */
-  public void testGetDistinctHierarchicalPaths() {
+  public void testGetDistinctRelatedSchoolDisciplineValues() {
 
-    assertNull(ssi.getDistinctHierarchicalPaths(MetaData.COMPETENCE));
-    assertNull(ssi.getDistinctHierarchicalPaths(MetaData.AGGREGATIONLEVEL));
-    assertNotNull(ssi.getDistinctHierarchicalPaths(MetaData.PROFESSIONALSITUATION));
-    System.out.println("De mogelijke padwaarden voor beroepssituatie zijn:");
+    assertNotNull(ssi.getDistinctRelatedSchoolDisciplineValues("/Speciaal onderwijs"));
+    System.out.println("De vakleergebieden behorend bij /Speciaal onderwijs zijn:");
 
-    String[] distinct = ssi.getDistinctHierarchicalPaths(MetaData.PROFESSIONALSITUATION);
+    String[] values = ssi.getDistinctRelatedSchoolDisciplineValues("/Speciaal onderwijs");
 
-    for (int i = 0; i < distinct.length; i++) {
+    for (int i = 0; i < values.length; i++) {
 
-      System.out.println(distinct[i]);
-
-    }
-
-    assertNotNull(ssi.getDistinctHierarchicalPaths(MetaData.SCHOOLTYPE));
-    System.out.println("De mogelijke padwaarden voor schooltype zijn:");
-    distinct = ssi.getDistinctHierarchicalPaths(MetaData.SCHOOLTYPE);
-
-    for (int i = 0; i < distinct.length; i++) {
-
-      System.out.println(distinct[i]);
-
-    }
-
-    assertNotNull(ssi.getDistinctHierarchicalPaths(MetaData.SCHOOLDISCIPLINE));
-    System.out.println("De mogelijke padwaarden voor vakleergebied zijn:");
-    distinct = ssi.getDistinctHierarchicalPaths(MetaData.SCHOOLDISCIPLINE);
-
-    for (int i = 0; i < distinct.length; i++) {
-
-      System.out.println(distinct[i]);
-
-    }
-
-    assertNotNull(ssi.getDistinctHierarchicalPaths(MetaData.TARGETENDUSER));
-    System.out.println("De mogelijke padwaarden voor beoogde eindgebruiker zijn:");
-    distinct = ssi.getDistinctHierarchicalPaths(MetaData.TARGETENDUSER);
-
-    for (int i = 0; i < distinct.length; i++) {
-
-      System.out.println(distinct[i]);
+      System.out.println(values[i]);
 
     }
 

@@ -6,6 +6,8 @@ import org.apache.lucene.document.Field;
 import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
 
+import org.metaz.util.HierarchicalStructuredMetaDataValueParser;
+
 import java.util.Iterator;
 import java.util.Set;
 
@@ -88,7 +90,7 @@ public class RecordDocument {
 
     if (targetEndUser != null) {
 
-      String[] targetEndUserLevels = targetEndUser.toString().split(LEVELSEPARATOR);
+      String[] targetEndUserLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(targetEndUser.toString());
 
       for (int i = 0; i < targetEndUserLevels.length; i++) {
 
@@ -108,9 +110,9 @@ public class RecordDocument {
       while (it.hasNext()) {
 
         String   schType = it.next().toString();
-        String[] schoolTypeLevels = schType.split(LEVELSEPARATOR);
+        String[] schoolTypeLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schType);
 
-        for (int j = 1; j < schoolTypeLevels.length; j++) {
+        for (int j = 0; j < schoolTypeLevels.length; j++) {
 
           doc.add(Field.Keyword(MetaData.SCHOOLTYPE, schoolTypeLevels[j]));
 
@@ -124,7 +126,7 @@ public class RecordDocument {
 
     if (schoolDiscipline != null) {
 
-      String[] schoolDisciplineLevels = schoolDiscipline.toString().split(LEVELSEPARATOR);
+      String[] schoolDisciplineLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schoolDiscipline.toString());
 
       for (int i = 0; i < schoolDisciplineLevels.length; i++) {
 
@@ -146,7 +148,7 @@ public class RecordDocument {
 
     if (professionalSituation != null) {
 
-      String[] professionalSituationLevels = professionalSituation.toString().split(LEVELSEPARATOR);
+      String[] professionalSituationLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(professionalSituation.toString());
 
       for (int i = 0; i < professionalSituationLevels.length; i++) {
 
