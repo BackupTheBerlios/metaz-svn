@@ -2,6 +2,10 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="java.util.List" %>
+<%@page import="org.metaz.repository.Result" %>
+<%@page import="org.metaz.domain.BooleanMetaData" %>
+<%@page import="org.metaz.domain.Record" %>
 
 <fmt:setLocale value="nl_NL" />
 
@@ -20,10 +24,26 @@
 	    		</display:column>
 	    		<display:column property="score" title="Score" sortable="false" />
 	    		<display:column property="object.productType.value" title="Type product" sortable="false" />
-				<display:column property="object.secured.value" title="Beveiligd" sortable="false" />
+				<display:column title="Beveiligd" sortable="false">
+				<% List results = searchBean.getMetazResults();
+				   Result result = (Result)results.get(row_rowNum.intValue()-1);
+				   Record r = (Record)result.getObject();
+				   BooleanMetaData btmd = r.getSecured();
+				   boolean b = ((Boolean) btmd.getValue()).booleanValue();
+					if(b){
+				%>
+					<c:out value="Ja"/>
+				<%
+					} else {
+				%>
+					<c:out value="Nee"/>
+				<%
+					}
+				%>
+				</display:column>
 				<display:column property="object.title.value" title="Titel" sortable="false" />
-				<display:column title="Meer gegevens" href="recorddetails.jsp?record=${row_rowNum}">
-					Meer...
+				<display:column title="Meer gegevens">
+					<a href="recorddetails.jsp?record=${row_rowNum}">Meer...</a>
 				</display:column>
 			</display:table>
 	</center>
