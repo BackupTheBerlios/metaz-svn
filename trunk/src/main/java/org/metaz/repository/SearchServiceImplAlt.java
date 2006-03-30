@@ -672,7 +672,7 @@ public class SearchServiceImplAlt
 
       if (hierarchical) {
 
-        fieldName = fieldName + "_orig";
+        //fieldName = fieldName + "_orig";
 
       }
 
