@@ -743,7 +743,8 @@ public class SearchServiceImplAlt
       String[]  values = new String[0];
       File      f = app.getRelativeFile(INDEXPATH);
       Searcher  searcher = new IndexSearcher(f.getCanonicalPath());
-      Term      term = new Term(MetaData.SCHOOLTYPE + "_orig", schooltype);
+      //Term      term = new Term(MetaData.SCHOOLTYPE + "_orig", schooltype);
+      Term      term = new Term(MetaData.SCHOOLTYPE,schooltype);
       TermQuery query = new TermQuery(term);
       Hits      hits = searcher.search(query);
 
