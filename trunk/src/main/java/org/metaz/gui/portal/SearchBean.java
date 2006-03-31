@@ -570,7 +570,8 @@ public class SearchBean {
 
 	private String displayHierarchy(String value) {
 		int levels = StringUtils.split(value, '/').length;
-		String levelIndicator = StringUtils.repeat("+", levels);
+		// No '+' before first level
+		String levelIndicator = StringUtils.repeat("+", levels - 1);
 		int lastIndex = StringUtils.lastIndexOf(value, "/");
 		int lastPos = value.length();
 		int stuffToGet = lastPos - lastIndex;
@@ -589,8 +590,10 @@ public class SearchBean {
 			String[] values = facade.getTargetEndUserValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				targetEndUserOptions.add(new SelectOption(
-						value, displayHierarchy(value)));
+				if (StringUtils.isNotBlank(value)) {
+					targetEndUserOptions.add(new SelectOption(value,
+							displayHierarchy(value)));
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -606,7 +609,10 @@ public class SearchBean {
 			String[] values = facade.getSchoolTypesValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				schoolTypeOptions.add(new SelectOption(value, displayHierarchy(value)));
+				if (StringUtils.isNotBlank(value)) {
+					schoolTypeOptions.add(new SelectOption(value,
+							displayHierarchy(value)));
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -621,7 +627,10 @@ public class SearchBean {
 			String[] values = facade.getSchoolDisciplineValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				schoolDisciplineOptions.add(new SelectOption(value, displayHierarchy(value)));
+				if (StringUtils.isNotBlank(value)) {
+					schoolDisciplineOptions.add(new SelectOption(value,
+							displayHierarchy(value)));
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -638,7 +647,9 @@ public class SearchBean {
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i]; // set both value and description to
 				// metadata value
-				didacticFunctionOptions.add(new SelectOption(value, value));
+				if (StringUtils.isNotBlank(value)) {
+					didacticFunctionOptions.add(new SelectOption(value, value));
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -654,7 +665,9 @@ public class SearchBean {
 			String[] values = facade.getProductTypeValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				productTypeOptions.add(new SelectOption(value, value));
+				if (StringUtils.isNotBlank(value)) {
+					productTypeOptions.add(new SelectOption(value, value));
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -670,8 +683,10 @@ public class SearchBean {
 			String[] values = facade.getProfessionalSituationValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				professionalSituationOptions
-						.add(new SelectOption(value, displayHierarchy(value)));
+				if (StringUtils.isNotBlank(value)) {
+					professionalSituationOptions.add(new SelectOption(value,
+							displayHierarchy(value)));
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -687,7 +702,9 @@ public class SearchBean {
 			String values[] = facade.getCompetenceValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				competenceOptions.add(new SelectOption(value, value));
+				if (StringUtils.isNotBlank(value)) {
+					competenceOptions.add(new SelectOption(value, value));
+				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -43,7 +43,7 @@
 				</td>
 				<td valign="middle">
 					<c:url value="${currentRecord.object.uri.value}" var="url"/>
-					<a href="${url}">
+					<a href="${url}" target="_blank">
 						<c:out value="${currentRecord.object.title.value}"/>
 					</a>
 				</td>
