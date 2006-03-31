@@ -45,7 +45,7 @@ public class MetazScheduler {
   private Scheduler     scheduler; // Quartz scheduler
   private JobDetail     rdmcJobDetail; // details for the default job
   private SimpleTrigger trigger; // trigger to start the scheduled default job
-  private Date          startTime; // start time for the default scheduled job
+  private Date          startTime = new Date(); // start time for the default scheduled job
   private long          interval; // interval for the scheduled default job
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
@@ -107,13 +107,8 @@ public class MetazScheduler {
 	  boolean today = false;
 	  boolean now = false;
 	  
-	  if (args[0] != null) 
-		  hr = Integer.parseInt(args[0]);
-	  if (args[1] != null)
-		  min = Integer.parseInt(args[1]);
-	  if (args[2] != null)
-		  intv = Long.parseLong(args[2]);
-	  if (args[3] != null) {
+	  switch(args.length) {
+	  case 4: {
 		  
 		  if (args[3].equals("today")) 
 			  today = true;
@@ -121,6 +116,16 @@ public class MetazScheduler {
 			  now = true;
 		  
 	  }
+	  case 3:
+		  intv = Long.parseLong(args[2]);
+	  case 2:
+		  min = Integer.parseInt(args[1]);
+	  case 1: 
+		  hr = Integer.parseInt(args[0]);
+	  
+	  }
+	  
+	logger.debug("CLI used with arguments hr: " + hr + ", min: " + min + ", intv: "+ intv + ", today: " + today + ", now: " + now);
 
     // instantiate the MetazScheduler class
     MetazScheduler sch = new MetazScheduler();
@@ -142,7 +147,7 @@ public class MetazScheduler {
 	  try {
 		  
 		  scheduler.start(); // gets the scheduler running
-	      logger.info("Scheduler started.");
+	      logger.info("Meta-Z scheduler started.");
 		  return true;
 		  
 	  } catch (SchedulerException exc) {
@@ -163,7 +168,7 @@ public class MetazScheduler {
 	  try {
 		  
 		  scheduler.standby(); // pauses the scheduler
-	      logger.info("Scheduler paused.");
+	      logger.info("Meta-Z scheduler paused.");
 		  return true;
 		  
 	  } catch (SchedulerException exc) {
@@ -246,13 +251,15 @@ public class MetazScheduler {
   private String getTransferPath() {
 
     MetaZ  app = MetaZ.getInstance();
-    String path = app.getProperties().getProperty("applicationz.transfer.path");
+    String path = app.getProperties().getProperty("applicationz.transfer.path.prop");
 
     if (path == null) {
 
       path = APPLICATIONZ_TRANSFER_PATH;
 
     }
+    
+    logger.debug("Transfer path is " + path);
 
     return path;
 

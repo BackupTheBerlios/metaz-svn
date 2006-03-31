@@ -111,8 +111,6 @@ public final class MetaZ
 
       instance = new MetaZ();
 
-      logger.info("Created Meta-Z application singleton instance: <" + format(instance) + ">");
-
     }
 
     return instance;
