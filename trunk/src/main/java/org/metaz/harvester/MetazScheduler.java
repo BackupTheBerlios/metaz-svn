@@ -208,7 +208,7 @@ public class MetazScheduler {
     startTime = cal.getTime();
     // refresh the trigger of the default job
     trigger.setStartTime(startTime);
-    logger.debug("Set harvest start time at: " + startTime.toString());
+    logger.debug("Set harvest start time at " + startTime.toString());
 
   }
 
@@ -225,7 +225,7 @@ public class MetazScheduler {
       // if the interval changed, refresh the trigger
       interval = intv * 1000L * 60L * 60L;
       trigger.setRepeatInterval(interval);
-      logger.debug("Set harvest interval at: " + interval);
+      logger.debug("Set harvest interval at " + interval + " millis");
 
     }
 
@@ -260,7 +260,6 @@ public class MetazScheduler {
     }
     
     logger.debug("Transfer path is " + path);
-
     return path;
 
   }
@@ -292,24 +291,28 @@ public class MetazScheduler {
   }
 
   /**
-   * Executes the default job with a 10 second delay from the moment this method is called.
+   * Triggers the default job.
    */
   public void executeJob() {
 
     // create a once-only trigger that fires in 10 seconds
-    long          immediateStartTime = System.currentTimeMillis() + 10000L;
-    SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger", null, new Date(immediateStartTime), null, 0,
-                                                       0L);
+    //long          immediateStartTime = System.currentTimeMillis() + 10000L;
+    //SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger", null, new Date(immediateStartTime), null, 0,
+    //                                                   0L);
 
-    // schedule the default job with this trigger
+    // add this trigger to the default job, which has already been scheduled
     try {
 
-      scheduler.scheduleJob(rdmcJobDetail, immediateTrigger);
-      logger.debug("Scheduled immediate harvest.");
+      //scheduler.scheduleJob(rdmcJobDetail, immediateTrigger);
+    	  // NOTE: if the immediateTrigger is used, an error states:
+    	  // "Unable to store Job with name: 'RdMC_harvest_job' and group: 'DEFAULT',
+    	  // because one already exists with this identification"
+      scheduler.triggerJobWithVolatileTrigger("RdMC_harvest_job", null);
+      logger.debug("Triggered immediate harvest.");
 
     } catch (SchedulerException exc) {
 
-      logger.fatal("Unable to schedule the RdMC harvest job for immediate execution: " + exc.getMessage());
+      logger.error("Unable to trigger the RdMC harvest job: " + exc.getMessage());
 
     }
 

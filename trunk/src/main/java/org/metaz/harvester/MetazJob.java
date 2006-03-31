@@ -51,14 +51,20 @@ public class MetazJob
     File xmlFile = getXMLFile(transferpath);
 
     if (xmlFile != null) {
-
+    	
+    	  MetaZ app = MetaZ.getInstance();
+    	  logger.debug("XML file found to harvest (with full path): " + app.getPath(xmlFile));
       // provide the harvester with the file (if there is one) so that it starts harvesting
       logger.info("Default harvest started.");
       harvester.processXMLFile(xmlFile);
 
-    } else
-      throw new JobExecutionException("No file found to harvest");
-
+    } else {
+    	
+    	  // stop execution!!
+      logger.error("No file found to harvest!");
+      throw new JobExecutionException("No file found to harvest!");
+   
+    }
   }
 
   /**
@@ -86,8 +92,11 @@ public class MetazJob
 
     // establish the filename of the latest file according to the naming convention
     String filename = list[list.length - 1];
+    logger.debug("XML file found to harvest (without path): " + filename);
+    filename = reldir + "/" + filename;
+    logger.debug("XML file found to harvest (with relative path): " + filename);
 
-    return new File(filename);
+    return app.getRelativeFile(filename);
 
   }
 

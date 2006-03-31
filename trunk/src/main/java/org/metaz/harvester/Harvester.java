@@ -103,27 +103,27 @@ public class Harvester {
 
     MetaZ app = MetaZ.getInstance();
 
-    applicationzSchemaProp = app.getProperties().getProperty("applicationz.schema");
+    applicationzSchemaProp = app.getProperties().getProperty("applicationz.schema.prop");
 
     if (applicationzSchemaProp == null)
       applicationzSchemaProp = APPLICATIONZ_SCHEMA;
 
-    applicationzTransferPathProp = app.getProperties().getProperty("applicationz.transfer.path");
+    applicationzTransferPathProp = app.getProperties().getProperty("applicationz.transfer.path.prop");
 
     if (applicationzTransferPathProp == null)
       applicationzTransferPathProp = APPLICATIONZ_TRANSFER_PATH;
 
-    applicationzProcessedPathProp = app.getProperties().getProperty("applicationz.processed.path");
+    applicationzProcessedPathProp = app.getProperties().getProperty("applicationz.processed.path.prop");
 
     if (applicationzProcessedPathProp == null)
       applicationzProcessedPathProp = APPLICATIONZ_PROCESSED_PATH;
 
-    applicationzRejectedPathProp = app.getProperties().getProperty("applicationz.rejected.path");
+    applicationzRejectedPathProp = app.getProperties().getProperty("applicationz.rejected.path.prop");
 
     if (applicationzRejectedPathProp == null)
       applicationzRejectedPathProp = APPLICATIONZ_REJECTED_PATH;
 
-    applicationzTransferstagingPathProp = app.getProperties().getProperty("applicationz.transferstaging.path");
+    applicationzTransferstagingPathProp = app.getProperties().getProperty("applicationz.transferstaging.path.prop");
 
     if (applicationzTransferstagingPathProp == null)
       applicationzTransferstagingPathProp = APPLICATIONZ_TRANSFERSTAGING_PATH;
@@ -233,19 +233,18 @@ public class Harvester {
   /**
    * Processes the file to parse and initiates parsing of the file
    *
-   * @param f the file to parse
+   * @param fl the file to parse
    */
-  protected void processXMLFile(File f) {
-
-    xmlfile = f;
+  protected void processXMLFile(File fl) {
 
     //copy file to gain exclusive rights
     MetaZ app = MetaZ.getInstance();
+	xmlfile = fl;
+	String f = xmlfile.getName();
+    logger.info("processing " + xmlfile.getAbsoluteFile().toString());
 
     try {
-
-      logger.info(xmlfile.getAbsoluteFile().toString());
-
+    	  
       if (! xmlfile.exists()) {
 
         logger.info("File does not exist!");
@@ -255,9 +254,9 @@ public class Harvester {
       } else if (xmlfile.canWrite()) {
 
         xmlfile.renameTo(app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f));
-        logger.info("after rename" + xmlfile.getAbsolutePath());
         xmlfile = app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f);
-
+        logger.info("after rename: " + xmlfile.getAbsolutePath());
+  
         long timestamp = System.currentTimeMillis();
 
         if (parseFile(xmlfile)) {
@@ -274,7 +273,7 @@ public class Harvester {
 
         }
 
-        logger.info("after parsing" + xmlfile.getAbsolutePath());
+        logger.info("after parsing: " + xmlfile.getAbsolutePath());
 
       } else {
 
