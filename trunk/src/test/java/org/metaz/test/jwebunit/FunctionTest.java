@@ -13,7 +13,8 @@ public class FunctionTest extends WebTestCase {
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   /** The base URL of the web application */
-  public static final String BASE_URL = "http://metaz.dyndns.org:8080/metaz/";
+  //public static final String BASE_URL = "http://metaz.dyndns.org:8080/metaz/";
+  public static final String BASE_URL = "http://localhost:8080/metaz/";
   public static String endUser = ""; // beoogdeEindgebruiker
   public static String schoolType = ""; // schooltype
   public static String schoolDiscipline = ""; // vakleergebied         
@@ -21,8 +22,11 @@ public class FunctionTest extends WebTestCase {
   public static String productType = ""; // producttype
   public static String professionalSituation = ""; // beroepssituatie  
   public static String competence = ""; // competentie  
-  public static String keywords = "onderging"; // trefwoord
-  public static String resultTitel = "gefaseerd koopmans waterdieren verhindert b?ta neervalt";
+  //public static String keywords = "onderging"; // trefwoord
+  //public static String resultTitel = "gefaseerd koopmans waterdieren verhindert b?ta neervalt";
+
+  public static String keywords = "lesvoorbereiding"; // trefwoord
+  public static String resultTitel = "Kennisbank wiskunde";
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -202,18 +206,27 @@ public class FunctionTest extends WebTestCase {
     setFormElement("sleutelwoorden", keywords);
     submit();
     clickLinkWithTextAfterText("Meer...", resultTitel);
-    assertTextPresent("Beveiligd");
     assertTextPresent("Sleutelwoorden");
-    assertTextPresent("Type product");
+    assertTextPresent("Didactische functie");
     assertTextPresent("Didactisch scenario:");
-    assertTextPresent("Benodigde tijd");
+    assertTextPresent("Schooltype:");    
+    assertTextPresent("Vakleergebied");
+    assertTextPresent("Beroepssituatie");
+    assertTextPresent("Competentie");
     assertTextPresent("Aggregatieniveau");
-    assertTextPresent("Type product");
+    assertTextPresent("Beoogde eindgebruiker"); 
+    assertTextPresent("Rechten");    
+    assertTextPresent("Producttype");
+    assertTextPresent("Benodigde tijd");    
+    assertTextPresent("Afspeelduur");
     assertTextPresent("Bestandsformaat");
     assertTextPresent("Bestandsgrootte");
-    assertTextPresent("Afspeelduur");
     assertTextPresent("Technische vereisten");
-    assertTextPresent("Laatst gewijzgd");
+    assertTextPresent("Creatie datum");    
+    assertTextPresent("Laatst gewijzigd");
+    assertTextPresent("Versie");
+    assertTextPresent("Status");      
+    assertTextPresent("Rol en naam");
 
   }
 
@@ -223,6 +236,7 @@ public class FunctionTest extends WebTestCase {
   public void testSearchCorrectness() {
 
     // not yet implemented
+    // done by hand
   }
 
 } // end FunctionTest
