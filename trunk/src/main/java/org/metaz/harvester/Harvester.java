@@ -72,19 +72,19 @@ public class Harvester {
   // private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
   // private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
   // private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
-  
-  private final String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
-  private final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
+
+  private static final String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
+  private static final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
 
   // NOTE: if the default transfer path is changed, it has to be changed in the MetazScheduler as well!
-  
-  private final String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
-  private final String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
-  private final String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
+
+  private static final String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
+  private static final String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
+  private static final String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
   private File         xmlfile;
 
   // file and directory settings to be read from runtime properties file (metaz.props)
-  
+
   private String applicationzSchemaProp;
   private String applicationzTransferPathProp;
   private String applicationzProcessedPathProp;
@@ -191,7 +191,8 @@ public class Harvester {
           //folder, so we need to remove the file from the staging folder
           xmlfile.delete();
 
-          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" + Long.toString(timestamp) + f));
+          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" 
+          //+ Long.toString(timestamp) + f));
         } else {
 
           xmlfile.renameTo(app.getRelativeFile(applicationzRejectedPathProp + "/" + Long.toString(timestamp) +
@@ -244,7 +245,7 @@ public class Harvester {
     logger.info("processing " + xmlfile.getAbsoluteFile().toString());
 
     try {
-    	  
+
       if (! xmlfile.exists()) {
 
         logger.info("File does not exist!");
@@ -256,7 +257,7 @@ public class Harvester {
         xmlfile.renameTo(app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f));
         xmlfile = app.getRelativeFile(applicationzTransferstagingPathProp + "/" + f);
         logger.info("after rename: " + xmlfile.getAbsolutePath());
-  
+
         long timestamp = System.currentTimeMillis();
 
         if (parseFile(xmlfile)) {
@@ -265,7 +266,8 @@ public class Harvester {
           //folder, so we need to remove the file from the staging folder
           xmlfile.delete();
 
-          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" + Long.toString(timestamp) + f));
+          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" 
+          //+ Long.toString(timestamp) + f));
         } else {
 
           xmlfile.renameTo(app.getRelativeFile(applicationzRejectedPathProp + "/" + Long.toString(timestamp) +
