@@ -191,7 +191,7 @@ public class Harvester {
           //folder, so we need to remove the file from the staging folder
           xmlfile.delete();
 
-          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" 
+          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/"
           //+ Long.toString(timestamp) + f));
         } else {
 
@@ -266,7 +266,7 @@ public class Harvester {
           //folder, so we need to remove the file from the staging folder
           xmlfile.delete();
 
-          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/" 
+          //xmlfile.renameTo(app.getRelativeFile(applicationz_processed_path_prop + "/"
           //+ Long.toString(timestamp) + f));
         } else {
 
