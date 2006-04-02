@@ -48,9 +48,9 @@ public class RecordAttributeSetter {
 
 /**
   * Creates a new RecordAttributeSetter. This constructor ensures a record exists that can
-  * receive data. 
-  * 
-  * @param record
+  * receive data.
+  *
+  * @param record that receives data
   */
   public RecordAttributeSetter(Record record) {
 
@@ -237,11 +237,8 @@ public class RecordAttributeSetter {
    *
    * @param metadatafield the record metadata field
    * @param value the value
-   *
-   * @throws NullPointerException 
    */
   public void setValue(String metadatafield, Object value)
-                throws NullPointerException
   {
 
     if (metadatafield.equals(MetaData.AGGREGATIONLEVEL)) {
@@ -400,6 +397,6 @@ public class RecordAttributeSetter {
 
     } // end if
 
-  } // end setValue()	
+  } // end setValue()
 
 }
