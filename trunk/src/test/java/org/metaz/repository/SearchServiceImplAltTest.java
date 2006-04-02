@@ -156,7 +156,7 @@ public class SearchServiceImplAltTest extends TestCase {
     // optional metadata keywords
     TextMetaData keywords1 = new TextMetaData();
 
-    keywords1.setValue("19de eeuw, Willem I, Nederland, België, Luxemburg");
+    keywords1.setValue("19de eeuw;Willem I;Nederland;België;Luxemburg");
     rec1.setKeywords(keywords1);
 
     // optional metadata description
@@ -224,7 +224,7 @@ public class SearchServiceImplAltTest extends TestCase {
     //optional metadata keywords
     TextMetaData keywords2 = new TextMetaData();
 
-    keywords2.setValue("muziek, rap, video, uitzending, tv, battel, battle, thebattle, raymann is laat, Jurgen, comedian, young, urban, tante Esselien");
+    keywords2.setValue("muziek;rap;video;uitzending;tv;battel;battle;thebattle;raymann is laat;Jurgen;comedian;young;urban;tante Esselien");
     rec2.setKeywords(keywords2);
 
     //optional metadata targetEndUser
