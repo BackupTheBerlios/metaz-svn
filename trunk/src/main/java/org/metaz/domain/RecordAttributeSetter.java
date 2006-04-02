@@ -238,8 +238,7 @@ public class RecordAttributeSetter {
    * @param metadatafield the record metadata field
    * @param value the value
    */
-  public void setValue(String metadatafield, Object value)
-  {
+  public void setValue(String metadatafield, Object value) {
 
     if (metadatafield.equals(MetaData.AGGREGATIONLEVEL)) {
 
