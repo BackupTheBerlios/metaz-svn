@@ -56,7 +56,7 @@ public class RecordDocumentAlt {
 
     //full text searchable metadata
     doc.add(Field.Text(MetaData.TITLE, (String) r.getTitle().getValue()));
-    merged = merged + (String) r.getTitle().getValue();
+    merged = merged + r.getTitle().getValue().toString();
 
     MetaData subject = r.getSubject();
 
@@ -71,16 +71,16 @@ public class RecordDocumentAlt {
     if (description != null) {
 
       doc.add(Field.Text(MetaData.DESCRIPTION, (String) description.getValue()));
-      merged = merged + (String) description.getValue();
+      merged = merged + description.getValue().toString();
 
     } // end if
 
     MetaData keywords = r.getKeywords();
 
     if (keywords != null) {
-
-      doc.add(Field.Text(MetaData.KEYWORDS, (String) keywords.getValue()));
-      merged = merged + (String) keywords.getValue();
+      String kwords = ((String) keywords.getValue()).replace(';',' ');
+      doc.add(Field.Text(MetaData.KEYWORDS, kwords));
+      merged = merged + kwords;
 
     } // end if
 
