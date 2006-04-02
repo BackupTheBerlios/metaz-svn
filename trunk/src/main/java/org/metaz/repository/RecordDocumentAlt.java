@@ -25,6 +25,7 @@ public class RecordDocumentAlt {
   /** The name of the Document field containing the merged text fields that  will be full-text searched */
   public final static String MERGED = "merged";
   private final static String LEVELSEPARATOR = "/";
+  private final static char KEYWORDSEPARATOR = ';';
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -71,20 +72,20 @@ public class RecordDocumentAlt {
     if (description != null) {
 
       doc.add(Field.Text(MetaData.DESCRIPTION, (String) description.getValue()));
-      merged = merged + description.getValue().toString();
+      merged = merged + " " + description.getValue().toString();
 
     } // end if
 
     MetaData keywords = r.getKeywords();
 
     if (keywords != null) {
-      String kwords = ((String) keywords.getValue()).replace(';',' ');
+      String kwords = ((String) keywords.getValue()).replace(KEYWORDSEPARATOR,' ');
       doc.add(Field.Text(MetaData.KEYWORDS, kwords));
-      merged = merged + kwords;
+      merged = merged + " " + kwords;
 
     } // end if
 
-    doc.add(Field.UnStored(MERGED, merged));
+    doc.add(Field.Text(MERGED, merged));
 
     //keyword searchable metadata
     MetaData targetEndUser = r.getTargetEndUser();
