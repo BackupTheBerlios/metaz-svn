@@ -61,7 +61,7 @@
 					Omschrijving:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.title.value}"/>
+					<c:out value="${currentRecord.object.description.value}"/>
 				</td>
 			</tr>
 			<tr class="even">
@@ -208,7 +208,7 @@
 			</tr>
 			<tr class="odd">
 				<td>
-					Laatst gewijzgd:
+					Laatst gewijzigd:
 				</td>
 				<td>
 					<fmt:formatDate value="${currentRecord.object.lastChangedDate.value}" type="date" pattern="dd MMMM yyyy" />
