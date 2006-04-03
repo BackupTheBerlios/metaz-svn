@@ -43,7 +43,7 @@
 				</display:column>
 				<display:column property="object.title.value" title="Titel" sortable="false" />
 				<display:column title="Meer gegevens">
-					<a href="recorddetails.jsp?record=${row_rowNum}">Meer...</a>
+					<a href="recorddetails.jsp?record=${row_rowNum - 1}">Meer...</a>
 				</display:column>
 			</display:table>
 	</center>

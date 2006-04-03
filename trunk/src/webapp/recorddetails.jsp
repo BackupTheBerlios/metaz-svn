@@ -29,7 +29,7 @@
 				<%  
 					int i = Integer.parseInt(request.getParameter("record"));
 					List results = searchBean.getMetazResults();
-				   	Result result = (Result)results.get(i-1);
+				   	Result result = (Result)results.get(i);
 				   	Record r = (Record)result.getObject();
 					BooleanMetaData btmd = r.getSecured();
 				   boolean b = ((Boolean) btmd.getValue()).booleanValue();
