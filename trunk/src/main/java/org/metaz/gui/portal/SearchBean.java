@@ -590,7 +590,7 @@ public class SearchBean {
 			String[] values = facade.getTargetEndUserValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value)) {
+				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
 					targetEndUserOptions.add(new SelectOption(value,
 							displayHierarchy(value)));
 				}
@@ -609,7 +609,7 @@ public class SearchBean {
 			String[] values = facade.getSchoolTypesValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value)) {
+				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
 					schoolTypeOptions.add(new SelectOption(value,
 							displayHierarchy(value)));
 				}
@@ -627,7 +627,7 @@ public class SearchBean {
 			String[] values = facade.getSchoolDisciplineValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value)) {
+				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
 					schoolDisciplineOptions.add(new SelectOption(value,
 							displayHierarchy(value)));
 				}
@@ -647,7 +647,7 @@ public class SearchBean {
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i]; // set both value and description to
 				// metadata value
-				if (StringUtils.isNotBlank(value)) {
+				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
 					didacticFunctionOptions.add(new SelectOption(value, value));
 				}
 			}
@@ -665,7 +665,7 @@ public class SearchBean {
 			String[] values = facade.getProductTypeValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value)) {
+				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
 					productTypeOptions.add(new SelectOption(value, value));
 				}
 			}
@@ -683,7 +683,7 @@ public class SearchBean {
 			String[] values = facade.getProfessionalSituationValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value)) {
+				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
 					professionalSituationOptions.add(new SelectOption(value,
 							displayHierarchy(value)));
 				}
@@ -702,7 +702,7 @@ public class SearchBean {
 			String values[] = facade.getCompetenceValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value)) {
+				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
 					competenceOptions.add(new SelectOption(value, value));
 				}
 			}
