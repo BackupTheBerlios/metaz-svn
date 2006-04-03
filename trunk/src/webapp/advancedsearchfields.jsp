@@ -29,8 +29,8 @@
   <p class="last">Zoek leerobjecten die relevant zijn voor uw specifieke situatie (meerdere keuzen mogelijk)</p>
 </div>
 <div class="optional">
-  <label for="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>">Vakleergebied:</label>
-  <select multiple size="10" name="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>" id="<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>" class="selectMultiple">
+  <label for="<%= org.metaz.domain.MetaData.PROFESSIONALSITUATION %>">Beroepssituatie:</label>
+  <select multiple size="10" name="<%= org.metaz.domain.MetaData.PROFESSIONALSITUATION %>" id="<%= org.metaz.domain.MetaData.PROFESSIONALSITUATION %>" class="selectMultiple">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getProfessionalSituationOptions())); %>
   </select>
   <small>Gebruik de <kbd>CTRL</kbd> toets om meerdere opties te kiezen </small>
