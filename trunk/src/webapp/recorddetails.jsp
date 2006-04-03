@@ -125,7 +125,7 @@
 					Aggregatieniveau:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.schoolDiscipline.value}"/>
+					<c:out value="${currentRecord.object.aggregationLevel.value}"/>
 				</td>
 			</tr>
 			<tr class="even">
