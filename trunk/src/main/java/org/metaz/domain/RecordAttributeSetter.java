@@ -69,9 +69,27 @@ public class RecordAttributeSetter {
 
     if (recordMetadata.isEmpty()) {
 
+      //mandatory metadata fields
       title = new TextMetaData();
       setMetaDataMetaData(title,true,MetaData.TITLE,"title","TextMetaData");
       recordMetadata.add(title);
+      didacticFunction = new TextMetaData();
+      setMetaDataMetaData(didacticFunction,true,MetaData.DIDACTICFUNCTION,"didacticFunction","TextMetaData");
+      recordMetadata.add(didacticFunction);
+      productType = new TextMetaData();
+      setMetaDataMetaData(productType,true,MetaData.PRODUCTTYPE,"productType","TextMetaData");
+      recordMetadata.add(productType);
+      secured = new BooleanMetaData();
+      setMetaDataMetaData(secured,true,MetaData.SECURED,"secured","BooleanMetaData");
+      recordMetadata.add(secured);
+      fileFormat = new TextMetaData();
+      setMetaDataMetaData(fileFormat,true,MetaData.FILEFORMAT,"fileFormat","TextMetaData");
+      recordMetadata.add(fileFormat);
+      uri = new HyperlinkMetaData();
+      setMetaDataMetaData(uri,true,MetaData.URI,"uri","HyperlinkMetaData");
+      recordMetadata.add(uri);
+
+      //optional metadata elements
       subject = new TextMetaData();
       setMetaDataMetaData(subject,false,MetaData.SUBJECT,"subject","TextMetaData");
       recordMetadata.add(subject);
@@ -92,12 +110,6 @@ public class RecordAttributeSetter {
       setMetaDataMetaData(schoolDiscipline,false,MetaData.SCHOOLDISCIPLINE,
     		  "schoolDiscipline","HierarchicalStructuredTextMetaData");
       recordMetadata.add(schoolDiscipline);
-      didacticFunction = new TextMetaData();
-      setMetaDataMetaData(didacticFunction,true,MetaData.DIDACTICFUNCTION,"didacticFunction","TextMetaData");
-      recordMetadata.add(didacticFunction);
-      productType = new TextMetaData();
-      setMetaDataMetaData(productType,true,MetaData.PRODUCTTYPE,"productType","TextMetaData");
-      recordMetadata.add(productType);
       professionalSituation = new HierarchicalStructuredTextMetaData();
       setMetaDataMetaData(professionalSituation,false,MetaData.PROFESSIONALSITUATION,
     		  "professionalSituation","HierarchicalStructuredTextMetaData");
@@ -105,15 +117,6 @@ public class RecordAttributeSetter {
       competence = new TextMetaData();
       setMetaDataMetaData(competence,false,MetaData.COMPETENCE,"competence","TextMetaData");
       recordMetadata.add(competence);
-      secured = new BooleanMetaData();
-      setMetaDataMetaData(secured,true,MetaData.SECURED,"secured","BooleanMetaData");
-      recordMetadata.add(secured);
-      fileFormat = new TextMetaData();
-      setMetaDataMetaData(fileFormat,true,MetaData.FILEFORMAT,"fileFormat","TextMetaData");
-      recordMetadata.add(fileFormat);
-      uri = new HyperlinkMetaData();
-      setMetaDataMetaData(uri,true,MetaData.URI,"uri","HyperlinkMetaData");
-      recordMetadata.add(uri);
       aggregationLevel = new TextMetaData();
       setMetaDataMetaData(aggregationLevel,false,MetaData.AGGREGATIONLEVEL,"aggregationLevel","TextMetaData");
       recordMetadata.add(aggregationLevel);
