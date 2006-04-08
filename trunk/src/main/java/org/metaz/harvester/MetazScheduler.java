@@ -51,10 +51,10 @@ public class MetazScheduler {
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
   /**
-   * Constructor. Creates the scheduler. Creates a new default trigger and assigns it the default setting for the harvest
-   * start time and interval. Creates a new default job detail. Retrieves from the MetaZ properties file the relative
-   * directory the XML files are harvested from and stores this setting in the default job detail. Schedules the default
-   * harvest job with this default trigger and job detail. Does NOT start the scheduler yet.
+   * Constructor. Creates the scheduler. Creates a new default trigger and assigns it the default setting for the
+   * harvest start time and interval. Creates a new default job detail. Retrieves from the MetaZ properties file
+   * the relative directory the XML files are harvested from and stores this setting in the default job detail.
+   * Schedules the default harvest job with this default trigger and job detail. Does NOT start the scheduler yet.
    */
   public MetazScheduler() {
 
@@ -64,22 +64,22 @@ public class MetazScheduler {
     try {
 
       scheduler = schedFact.getScheduler();
-      
+
       // create the default trigger with default settings
       trigger = new SimpleTrigger("RdMC_harvest_trigger", null, startTime, null, SimpleTrigger.REPEAT_INDEFINITELY,
                                   interval);
       // set the default harvest start time and interval relative to the current moment
       resetTrigger();
-   
+
       // create the default job detail, which only contains the transfer path
       rdmcJobDetail = new JobDetail("RdMC_harvest_job", null, MetazJob.class);
       rdmcJobDetail.getJobDataMap().put("transferpath", getTransferPath());
-      
+
       // schedule the default job with the default settings
       scheduleJob();
-      
+
       logger.info("Created the Meta-Z scheduler and scheduled the default job.");
- 
+
     } catch (SchedulerException exc) {
 
       logger.fatal("Unable to create the Meta-Z scheduler: " + exc.getMessage());
@@ -96,9 +96,9 @@ public class MetazScheduler {
    *
    * @param args arguments, all are optional. First argument to contain the hour setting for the harvest start time.
    * Second argument to contain the minute setting for the harvest start time. Third argument to contain the interval
-   * setting for the harvest interval. The first three must be positive integers. Fourth argument may be "today" or 
+   * setting for the harvest interval. The first three must be positive integers. Fourth argument may be "today" or
    * "tomorrow", indicating the harvest start day, or "now" indicating that an immediate harvest is required.
-   * 
+   *
    */
   public static void main(String[] args) {
 	  int hr = START_TIME_HOUR;
@@ -106,26 +106,28 @@ public class MetazScheduler {
 	  long intv = HARVEST_INTERVAL;
 	  boolean today = false;
 	  boolean now = false;
-	  
+	  String fourthArgument = "none";
+
 	  switch(args.length) {
-	  case 4: {
-		  
-		  if (args[3].equals("today")) 
-			  today = true;
-		  else if (args[3].equals("now"))
-			  now = true;
-		  
-	  }
+
+	  case 4:
+		  fourthArgument = args[3];
 	  case 3:
 		  intv = Long.parseLong(args[2]);
 	  case 2:
 		  min = Integer.parseInt(args[1]);
 	  case 1: 
 		  hr = Integer.parseInt(args[0]);
-	  
+	  default:
+
 	  }
-	  
-	logger.debug("CLI used with arguments hr: " + hr + ", min: " + min + ", intv: "+ intv + ", today: " + today + ", now: " + now);
+
+    if (fourthArgument.equals("today")) 
+			  today = true;
+	else if (fourthArgument.equals("now"))
+			  now = true;
+    String info = hr + ", min: " + min + ", intv: "+ intv + ", today: " + today + ", now: " + now;
+	logger.debug("CLI used with arguments hr: " + info);
 
     // instantiate the MetazScheduler class
     MetazScheduler sch = new MetazScheduler();
@@ -133,53 +135,53 @@ public class MetazScheduler {
     sch.startScheduler();
     sch.setStartTime(hr,min,today);
     sch.setInterval(intv);
-    if(now) 
+    if(now)
     		sch.executeJob();
 
   }
   
   /**
    * Starts the scheduler, enabling execution of any triggered job.
-   * 
+   *
    * @return true if the MetazScheduler was started successfully, else false
    */
   public boolean startScheduler() {
 	  try {
-		  
+  
 		  scheduler.start(); // gets the scheduler running
 	      logger.info("Meta-Z scheduler started.");
 		  return true;
-		  
+ 
 	  } catch (SchedulerException exc) {
-		  
+
 		  logger.fatal("Unable to start the Meta-Z scheduler: " + exc.getMessage());
 		  return false;
-		  
+
 	  }
-	  
+
   }
-  
+
   /**
    * Pauses the scheduler, interrupting all job execution.
-   * 
+   *
    * @return true if the MetazScheduler was stopped successfully, else false
    */
   public boolean stopScheduler() {
 	  try {
-		  
+
 		  scheduler.standby(); // pauses the scheduler
 	      logger.info("Meta-Z scheduler paused.");
 		  return true;
-		  
+
 	  } catch (SchedulerException exc) {
-		  
+
 		  logger.fatal("Unable to pause the Meta-Z scheduler: " + exc.getMessage());
 		  return false;
-		  
+
 	  }
-	  
+
   }
-  
+
   /**
    * Sets the start time of the scheduled job. It either be set to start on the NEXT day, or on the same day, at
    * the given time. Starting on the same day should only be used for test purposes, because it may cause problems if
@@ -258,7 +260,7 @@ public class MetazScheduler {
       path = APPLICATIONZ_TRANSFER_PATH;
 
     }
-    
+ 
     logger.debug("Transfer path is " + path);
     return path;
 
@@ -270,7 +272,7 @@ public class MetazScheduler {
    * will start using the new transferpath immediately (it must be assigned to the JobDataMap and NOTE that
    * this will only work if the job is made into a StatefulJob!).
    */
-  
+
   /**
    * Schedules the default job with the default trigger (which defines start date and interval) and the default
    * job detail (which defines the harvest directory). If the administrator has not changed the trigger and job detail
@@ -297,7 +299,8 @@ public class MetazScheduler {
 
     // create a once-only trigger that fires in 10 seconds
     //long          immediateStartTime = System.currentTimeMillis() + 10000L;
-    //SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger", null, new Date(immediateStartTime), null, 0,
+    //SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger", 
+	//null, new Date(immediateStartTime), null, 0,
     //                                                   0L);
 
     // add this trigger to the default job, which has already been scheduled

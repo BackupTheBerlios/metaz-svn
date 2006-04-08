@@ -51,7 +51,7 @@ public class MetazJob
     File xmlFile = getXMLFile(transferpath);
 
     if (xmlFile != null) {
-    	
+
     	  MetaZ app = MetaZ.getInstance();
     	  logger.debug("XML file found to harvest (with full path): " + app.getPath(xmlFile));
       // provide the harvester with the file (if there is one) so that it starts harvesting
@@ -59,11 +59,11 @@ public class MetazJob
       harvester.processXMLFile(xmlFile);
 
     } else {
-    	
+
     	  // stop execution!!
       logger.error("No file found to harvest!");
       throw new JobExecutionException("No file found to harvest!");
-   
+
     }
   }
 
