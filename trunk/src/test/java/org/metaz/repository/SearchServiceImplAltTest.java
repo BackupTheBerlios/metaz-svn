@@ -1,7 +1,13 @@
 package org.metaz.repository;
 
-import junit.framework.TestCase;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.Vector;
 
+import junit.framework.TestCase;
 import junit.swingui.TestRunner;
 
 import org.metaz.domain.BooleanMetaData;
@@ -14,15 +20,6 @@ import org.metaz.domain.MetaData;
 import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
-
-import org.metaz.repository.Result;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.Vector;
 
 /**
  * Unit tests the class SearchServiceImpl
@@ -323,15 +320,18 @@ public class SearchServiceImplAltTest extends TestCase {
     rec2.setTechnicalRequirements(tech2);
 
     //optional metadata creation date
+    
+    SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-yyyy");
+    
     DateMetaData date1 = new DateMetaData();
-
-    date1.setValue(new Date(20051214));
+        
+    date1.setValue(dformat.parse("01-01-2005"));
     rec2.setCreationDate(date1);
 
     //optional metadata last changed date
     DateMetaData date2 = new DateMetaData();
 
-    date2.setValue(new Date(20060129));
+    date2.setValue(dformat.parse("01-02-2006"));
     rec2.setLastChangedDate(date2);
 
     //optional metadata version
@@ -460,9 +460,9 @@ public class SearchServiceImplAltTest extends TestCase {
    */
   public void testPresentResults() {
 
-    List<Result<Record>> results = ssi.doSearch(MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document");
+    List<Result<Record>> results = ssi.doSearch(MetaData.PRODUCTTYPE + FIELDDELIMITER + "Video");
 
-    assertEquals(2, results.size());
+    assertEquals(1, results.size());
     System.out.println("De gevonden resultaten zijn:");
 
     for (int i = 0; i < results.size(); i++) {
@@ -549,6 +549,23 @@ public class SearchServiceImplAltTest extends TestCase {
 
       }
 
+      DateMetaData creationDate = record.getCreationDate();
+      
+      if(creationDate != null){
+          
+          System.out.println("creation date: " + creationDate.toString());
+          
+      }
+      
+      DateMetaData lastChanged = record.getLastChangedDate();
+      
+      if(creationDate != null){
+          
+          System.out.println("last changed: " + lastChanged.toString());
+          
+      }
+      
+      
       System.out.println("en zo verder...");
 
     }
