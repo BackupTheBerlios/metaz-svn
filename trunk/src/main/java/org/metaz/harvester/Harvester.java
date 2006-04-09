@@ -836,7 +836,7 @@ public class Harvester {
 
           Element rolename = (Element) m.next();
 
-          rolenames = "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() +
+          rolenames += "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() +
                       "\n";
           logger.info(rolenames);
 
