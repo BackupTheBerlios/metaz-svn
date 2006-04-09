@@ -453,7 +453,7 @@ public class SearchServiceImplAlt
 
           DateMetaData creationDate = new DateMetaData();
 
-          creationDate.setValue(new Date((Integer.valueOf(doc.get(MetaData.CREATIONDATE)))));
+          creationDate.setValue(new Date((Long.valueOf(doc.get(MetaData.CREATIONDATE)))));
           rec.setCreationDate(creationDate);
 
         }
@@ -462,7 +462,7 @@ public class SearchServiceImplAlt
 
           DateMetaData lastChangedDate = new DateMetaData();
 
-          lastChangedDate.setValue(new Date((Integer.valueOf(doc.get(MetaData.LASTCHANGEDDATE)))));
+          lastChangedDate.setValue(new Date((Long.valueOf(doc.get(MetaData.LASTCHANGEDDATE)))));
           rec.setLastChangedDate(lastChangedDate);
 
         }
