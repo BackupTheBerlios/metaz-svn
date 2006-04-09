@@ -249,7 +249,7 @@ public class RecordDocumentAlt {
     if (creationDate != null) {
 
       doc.add(Field.UnIndexed(MetaData.CREATIONDATE,
-                              (Integer.toString((int) ((Date) creationDate.getValue()).getTime()))));
+                              (Long.toString(((Date) creationDate.getValue()).getTime()))));
 
     }
 
@@ -258,7 +258,7 @@ public class RecordDocumentAlt {
     if (lastChangedDate != null) {
 
       doc.add(Field.UnIndexed(MetaData.LASTCHANGEDDATE,
-                              (Integer.toString((int) ((Date) lastChangedDate.getValue()).getTime()))));
+                              (Long.toString(((Date) lastChangedDate.getValue()).getTime()))));
 
     }
 
