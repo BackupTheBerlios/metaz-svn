@@ -116,13 +116,13 @@ public class MetazScheduler {
 		  intv = Long.parseLong(args[2]);
 	  case 2:
 		  min = Integer.parseInt(args[1]);
-	  case 1: 
+	  case 1:
 		  hr = Integer.parseInt(args[0]);
 	  default:
 
 	  }
 
-    if (fourthArgument.equals("today")) 
+    if (fourthArgument.equals("today"))
 			  today = true;
 	else if (fourthArgument.equals("now"))
 			  now = true;
@@ -139,7 +139,7 @@ public class MetazScheduler {
     		sch.executeJob();
 
   }
-  
+
   /**
    * Starts the scheduler, enabling execution of any triggered job.
    *
@@ -147,11 +147,11 @@ public class MetazScheduler {
    */
   public boolean startScheduler() {
 	  try {
-  
+
 		  scheduler.start(); // gets the scheduler running
 	      logger.info("Meta-Z scheduler started.");
 		  return true;
- 
+
 	  } catch (SchedulerException exc) {
 
 		  logger.fatal("Unable to start the Meta-Z scheduler: " + exc.getMessage());
@@ -260,7 +260,7 @@ public class MetazScheduler {
       path = APPLICATIONZ_TRANSFER_PATH;
 
     }
- 
+
     logger.debug("Transfer path is " + path);
     return path;
 
@@ -299,7 +299,7 @@ public class MetazScheduler {
 
     // create a once-only trigger that fires in 10 seconds
     //long          immediateStartTime = System.currentTimeMillis() + 10000L;
-    //SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger", 
+    //SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger",
 	//null, new Date(immediateStartTime), null, 0,
     //                                                   0L);
 
