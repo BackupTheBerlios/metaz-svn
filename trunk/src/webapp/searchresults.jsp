@@ -5,6 +5,8 @@
 <%@page import="java.util.List" %>
 <%@page import="org.metaz.repository.Result" %>
 <%@page import="org.metaz.domain.BooleanMetaData" %>
+<%@page import="org.metaz.domain.HyperlinkMetaData" %>
+<%@page import="org.metaz.domain.TextMetaData" %>
 <%@page import="org.metaz.domain.Record" %>
 
 <fmt:setLocale value="nl_NL" />
@@ -22,6 +24,9 @@
 				<display:column title="Nr" >
 	      			<c:out value="${row_rowNum}"/>
 	    		</display:column>
+	    		<display:column title="Laatst gewijzigd:">
+	    			<fmt:formatDate value="${object.lastChangedDate.value}" type="date" pattern="dd MMMM yyyy" />
+	    		</display:column>
 	    		<display:column property="score" title="Score" sortable="false" />
 	    		<display:column property="object.productType.value" title="Type product" sortable="false" />
 				<display:column title="Beveiligd" sortable="false">
@@ -32,16 +37,27 @@
 				   boolean b = ((Boolean) btmd.getValue()).booleanValue();
 					if(b){
 				%>
-					<c:out value="Ja"/>
+					<img src="images/key.jpg" height="50" alt="Sleutel" 
+								title="Om dit product te kunnen gebruiken moet u inloggen."/>
 				<%
 					} else {
 				%>
-					<c:out value="Nee"/>
+					<c:out value="-"/>
 				<%
 					}
 				%>
 				</display:column>
-				<display:column property="object.title.value" title="Titel" sortable="false" />
+				<display:column title="Titel" sortable="false">
+					<% List results = searchBean.getMetazResults();
+				   Result result = (Result)results.get(row_rowNum.intValue()-1);
+				   Record r = (Record)result.getObject();
+				   HyperlinkMetaData hmd = r.getUri();
+				   String uriValue = (String)hmd.getValue();
+				   TextMetaData tmd = r.getTitle();
+				   String titleValue = (String)tmd.getValue();
+				%>
+				<a href="<%=uriValue%>"><%= titleValue %></a>
+				</display:column>
 				<display:column title="Meer gegevens">
 					<a href="recorddetails.jsp?record=${row_rowNum - 1}">Meer...</a>
 				</display:column>
