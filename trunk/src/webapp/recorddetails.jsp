@@ -93,7 +93,11 @@
 					Schooltype:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.schoolType.value}"/>
+					<ul>
+					<c:forEach items="${currentRecord.object.schoolType.value}" var="item">
+						<li><c:out value="${item}"/></li>
+					</c:forEach>
+					</ul>
 				</td>
 			</tr>
 			<tr class="even">
@@ -101,7 +105,11 @@
 					Vakleergebied:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.schoolDiscipline.value}"/>
+					<ul>
+					<c:forEach items="${currentRecord.object.schoolDiscipline.value}" var="item">
+						<li><c:out value="${item}"/></li>
+					</c:forEach>
+					</ul>
 				</td>
 			</tr>
 			<tr class="odd">
@@ -109,7 +117,11 @@
 					Beroepssituatie:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.professionalSituation.value}"/>
+					<ul>
+					<c:forEach items="${currentRecord.object.professionalSituation.value}" var="item">
+						<li><c:out value="${item}"/></li>
+					</c:forEach>
+					</ul>
 				</td>
 			</tr>
 			<tr class="even">
@@ -133,7 +145,11 @@
 					Beoogde eindgebruiker:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.targetEndUser.value}"/>
+					<ul>
+					<c:forEach items="${currentRecord.object.targetEndUser.value}" var="item">
+						<li><c:out value="${item}"/></li>
+					</c:forEach>
+					</ul>
 				</td>
 			</tr>
 			<tr class="odd">
