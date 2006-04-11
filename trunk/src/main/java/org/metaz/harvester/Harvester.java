@@ -2,23 +2,13 @@ package org.metaz.harvester;
 
 import com.sun.msv.verifier.jarv.TheFactoryImpl;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-
 import org.apache.log4j.Logger;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.SAXWriter;
 import org.dom4j.io.XMLWriter;
@@ -39,8 +29,19 @@ import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.RecordAttributeSetter;
 import org.metaz.domain.TextMetaData;
+
 import org.metaz.util.MetaZ;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 //import org.dom4j.io.OutputFormat;
 //import com.sun.msv.grammar.relaxng.datatype.*;
@@ -48,7 +49,6 @@ import org.metaz.util.MetaZ;
 //import org.xml.sax.SAXParseException;
 //import java.io.*;
 //import java.util.*;
-
 /**
  * The  Harvester class initiates a check of an offered xml file to check on xml schema conformity, extracts all
  * Learnobjects, transform them to records of metadata and pass them to the repository facade. The Harvester class is
@@ -64,27 +64,25 @@ public class Harvester {
 
   private static Logger logger = MetaZ.getLogger(Harvester.class);
 
-  //~ Instance fields --------------------------------------------------------------------------------------------------
-
   // default file and directory settings
   // private final static String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
   // private final static String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
   // private final static String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
   // private final static String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
   // private final static String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
-
   private static final String APPLICATIONZ_SCHEMA = "xml/schema/metaz.xsd";
   private static final String APPLICATIONZ_TRANSFER_PATH = "xml/transfer";
 
   // NOTE: if the default transfer path is changed, it has to be changed in the MetazScheduler as well!
-
   private static final String APPLICATIONZ_PROCESSED_PATH = "xml/log/processed";
   private static final String APPLICATIONZ_REJECTED_PATH = "xml/log/error";
   private static final String APPLICATIONZ_TRANSFERSTAGING_PATH = "xml/transferstaging";
-  private File         xmlfile;
+
+  //~ Instance fields --------------------------------------------------------------------------------------------------
+
+  private File xmlfile;
 
   // file and directory settings to be read from runtime properties file (metaz.props)
-
   private String applicationzSchemaProp;
   private String applicationzTransferPathProp;
   private String applicationzProcessedPathProp;
@@ -132,7 +130,7 @@ public class Harvester {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
- /**
+  /**
    * Only used as a temporary start-up
    *
    * @param args arguments, first one should contain xml file to parse
@@ -240,8 +238,11 @@ public class Harvester {
 
     //copy file to gain exclusive rights
     MetaZ app = MetaZ.getInstance();
-	xmlfile = fl;
-	String f = xmlfile.getName();
+
+    xmlfile = fl;
+
+    String f = xmlfile.getName();
+
     logger.info("processing " + xmlfile.getAbsoluteFile().toString());
 
     try {
@@ -673,9 +674,18 @@ public class Harvester {
 
         while (! etemp.equals(root) && ! etemp.getParent().equals(root)) {
 
-          if (! etemp.getName().equals("waarde")) {
+          if (! etemp.getName().equals("waarde") && ! etemp.getName().equals("eindgebruikerwaarde")) {
 
-            etemp = etemp.getParent().element("waarde");
+            if (root.getParent().getName().equals("beoogdeEindgebruiker") &&
+                etemp.getParent().getName().equals("hoofdwaarde")) {
+
+              etemp = etemp.getParent().element("eindgebruikerwaarde");
+
+            } else {
+
+              etemp = etemp.getParent().element("waarde");
+
+            }
 
           }
 
@@ -811,7 +821,7 @@ public class Harvester {
       TextMetaData tmdt = new TextMetaData();
 
       //sleutelwoorden
-      if (metadata.getName().equals("keywords")) {
+      if (metadata.getName().equals("keywords") || metadata.getName().equals("competentie")) {
 
         String keywords = "";
 
@@ -827,6 +837,23 @@ public class Harvester {
 
         tmdt.setValue(keywords);
 
+        //competentie
+      } else if (metadata.getName().equals("competenties")) {
+
+        String competences = "";
+
+        for (Iterator k = e.element("competenties").elementIterator(); k.hasNext();) {
+
+          Element competence = (Element) k.next();
+
+          competences = competences + competence.getText() + ";";
+          //.element("sleutelwoord")
+          logger.info(competences);
+
+        }
+
+        tmdt.setValue(competences);
+
       } else if (metadata.getName().equals("roleName")) {
 
         //rolEnNaam
@@ -836,8 +863,8 @@ public class Harvester {
 
           Element rolename = (Element) m.next();
 
-          rolenames += "Rol: " + rolename.element("rol").getText() + "\n Naam: " + rolename.element("naam").getText() +
-                      "\n";
+          rolenames += ("Rol: " + rolename.element("rol").getText() + ", Naam: " + rolename.element("naam").getText() +
+                       "; ");
           logger.info(rolenames);
 
         }
@@ -855,7 +882,7 @@ public class Harvester {
 
     } catch (Exception ignore) {
 
-      logger.error("here 1:" + ignore.toString());
+      logger.error("debug location 1:" + ignore.toString());
 
     }
 
@@ -882,7 +909,7 @@ public class Harvester {
 
     } catch (Exception ignore) {
 
-      logger.error("here 2:" + ignore.toString());
+      logger.error("debug location 2:" + ignore.toString());
 
     }
 
@@ -909,7 +936,7 @@ public class Harvester {
 
     } catch (Exception ignore) {
 
-      logger.error("here 3:" + ignore.toString());
+      logger.error("debug location 3:" + ignore.toString());
 
     }
 
@@ -937,7 +964,7 @@ public class Harvester {
 
     } catch (Exception ignore) {
 
-      logger.error("here 4:" + ignore.toString());
+      logger.error("debug location 4:" + ignore.toString());
 
     }
 
@@ -958,14 +985,14 @@ public class Harvester {
 
       HierarchicalStructuredTextMetaDataSet hSet = new HierarchicalStructuredTextMetaDataSet();
 
-      addNodeRecursive(e.element("schooltype").element("hoofdwaarden"),
-                       e.element("schooltype").element("hoofdwaarden"), hSet);
+      addNodeRecursive(e.element(metadata.getXMLTagName()).element("hoofdwaarden"),
+                       e.element(metadata.getXMLTagName()).element("hoofdwaarden"), hSet);
       recset.setValue(metadata.getXMLTagName(), hSet);
-      logger.info(metadata.getXMLTagName());
+      logger.info(metadata.getXMLTagName() + ": " + hSet.toString());
 
     } catch (Exception ignore) {
 
-      logger.error("here 5:" + ignore.toString());
+      logger.error("debug location 5:" + ignore.toString());
 
     }
 
@@ -992,7 +1019,7 @@ public class Harvester {
 
     } catch (Exception ignore) {
 
-      logger.error("here 6:" + ignore.toString());
+      logger.error("debug location 6:" + ignore.toString());
 
     }
 
@@ -1019,7 +1046,7 @@ public class Harvester {
 
     } catch (Exception ignore) {
 
-      logger.error("here 7:" + ignore.toString() + e.element(metadata.getXMLTagName()).getText());
+      logger.error("debug location 7:" + ignore.toString() + e.element(metadata.getXMLTagName()).getText());
 
     }
 
@@ -1046,9 +1073,12 @@ public class Harvester {
       dmdt.setValue(d);
       recset.setValue(metadata.getXMLTagName(), dmdt);
 
+      //logger.info(metadata.getXMLTagName() + ": " + dmdt.toString());
+
+      //logger.debug(metadata.getXMLTagName() + ": " + dmdt.toString());
     } catch (Exception ignore) {
 
-      logger.error("here 8:" + ignore.toString());
+      logger.error("debug location 8:" + ignore.toString());
 
     }
 
