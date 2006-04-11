@@ -19,12 +19,12 @@ public class RecordAttributeSetter {
   private TextMetaData                          subject;
   private HtmlTextMetaData                      description;
   private TextMetaData                          keywords;
-  private HierarchicalStructuredTextMetaData    targetEndUser;
+  private HierarchicalStructuredTextMetaDataSet targetEndUser;
   private HierarchicalStructuredTextMetaDataSet schoolType;
-  private HierarchicalStructuredTextMetaData    schoolDiscipline;
+  private HierarchicalStructuredTextMetaDataSet schoolDiscipline;
   private TextMetaData                          didacticFunction;
   private TextMetaData                          productType;
-  private HierarchicalStructuredTextMetaData    professionalSituation;
+  private HierarchicalStructuredTextMetaDataSet professionalSituation;
   private TextMetaData                          competence;
   private BooleanMetaData                       secured;
   private TextMetaData                          fileFormat;
@@ -71,89 +71,88 @@ public class RecordAttributeSetter {
 
       //mandatory metadata fields
       title = new TextMetaData();
-      setMetaDataMetaData(title,true,MetaData.TITLE,"title","TextMetaData");
+      setMetaDataMetaData(title, true, MetaData.TITLE, "title", "TextMetaData");
       recordMetadata.add(title);
       didacticFunction = new TextMetaData();
-      setMetaDataMetaData(didacticFunction,true,MetaData.DIDACTICFUNCTION,"didacticFunction","TextMetaData");
+      setMetaDataMetaData(didacticFunction, true, MetaData.DIDACTICFUNCTION, "didacticFunction", "TextMetaData");
       recordMetadata.add(didacticFunction);
       productType = new TextMetaData();
-      setMetaDataMetaData(productType,true,MetaData.PRODUCTTYPE,"productType","TextMetaData");
+      setMetaDataMetaData(productType, true, MetaData.PRODUCTTYPE, "productType", "TextMetaData");
       recordMetadata.add(productType);
       secured = new BooleanMetaData();
-      setMetaDataMetaData(secured,true,MetaData.SECURED,"secured","BooleanMetaData");
+      setMetaDataMetaData(secured, true, MetaData.SECURED, "secured", "BooleanMetaData");
       recordMetadata.add(secured);
       fileFormat = new TextMetaData();
-      setMetaDataMetaData(fileFormat,true,MetaData.FILEFORMAT,"fileFormat","TextMetaData");
+      setMetaDataMetaData(fileFormat, true, MetaData.FILEFORMAT, "fileFormat", "TextMetaData");
       recordMetadata.add(fileFormat);
       uri = new HyperlinkMetaData();
-      setMetaDataMetaData(uri,true,MetaData.URI,"uri","HyperlinkMetaData");
+      setMetaDataMetaData(uri, true, MetaData.URI, "uri", "HyperlinkMetaData");
       recordMetadata.add(uri);
 
       //optional metadata elements
       subject = new TextMetaData();
-      setMetaDataMetaData(subject,false,MetaData.SUBJECT,"subject","TextMetaData");
+      setMetaDataMetaData(subject, false, MetaData.SUBJECT, "subject", "TextMetaData");
       recordMetadata.add(subject);
       description = new HtmlTextMetaData();
-      setMetaDataMetaData(description,false,MetaData.DESCRIPTION,"description","HtmlTextMetaData");
+      setMetaDataMetaData(description, false, MetaData.DESCRIPTION, "description", "HtmlTextMetaData");
       recordMetadata.add(description);
       keywords = new TextMetaData();
-      setMetaDataMetaData(keywords,false,MetaData.KEYWORDS,"keywords","TextMetaData");
+      setMetaDataMetaData(keywords, false, MetaData.KEYWORDS, "keywords", "TextMetaData");
       recordMetadata.add(keywords);
-      targetEndUser = new HierarchicalStructuredTextMetaData();
-      setMetaDataMetaData(targetEndUser,false,MetaData.TARGETENDUSER,
-    		  "targetEndUser","HierarchicalStructuredTextMetaData");
+      targetEndUser = new HierarchicalStructuredTextMetaDataSet();
+      setMetaDataMetaData(targetEndUser, false, MetaData.TARGETENDUSER, "targetEndUser",
+                          "HierarchicalStructuredTextMetaDataSet");
       recordMetadata.add(targetEndUser);
       schoolType = new HierarchicalStructuredTextMetaDataSet();
-      setMetaDataMetaData(schoolType,false,MetaData.SCHOOLTYPE,"schoolType","HierarchicalStructuredTextMetaDataSet");
+      setMetaDataMetaData(schoolType, false, MetaData.SCHOOLTYPE, "schoolType", "HierarchicalStructuredTextMetaDataSet");
       recordMetadata.add(schoolType);
-      schoolDiscipline = new HierarchicalStructuredTextMetaData();
-      setMetaDataMetaData(schoolDiscipline,false,MetaData.SCHOOLDISCIPLINE,
-    		  "schoolDiscipline","HierarchicalStructuredTextMetaData");
+      schoolDiscipline = new HierarchicalStructuredTextMetaDataSet();
+      setMetaDataMetaData(schoolDiscipline, false, MetaData.SCHOOLDISCIPLINE, "schoolDiscipline",
+                          "HierarchicalStructuredTextMetaDataSet");
       recordMetadata.add(schoolDiscipline);
-      professionalSituation = new HierarchicalStructuredTextMetaData();
-      setMetaDataMetaData(professionalSituation,false,MetaData.PROFESSIONALSITUATION,
-    		  "professionalSituation","HierarchicalStructuredTextMetaData");
+      professionalSituation = new HierarchicalStructuredTextMetaDataSet();
+      setMetaDataMetaData(professionalSituation, false, MetaData.PROFESSIONALSITUATION, "professionalSituation",
+                          "HierarchicalStructuredTextMetaDataSet");
       recordMetadata.add(professionalSituation);
       competence = new TextMetaData();
-      setMetaDataMetaData(competence,false,MetaData.COMPETENCE,"competence","TextMetaData");
+      setMetaDataMetaData(competence, false, MetaData.COMPETENCE, "competence", "TextMetaData");
       recordMetadata.add(competence);
       aggregationLevel = new TextMetaData();
-      setMetaDataMetaData(aggregationLevel,false,MetaData.AGGREGATIONLEVEL,"aggregationLevel","TextMetaData");
+      setMetaDataMetaData(aggregationLevel, false, MetaData.AGGREGATIONLEVEL, "aggregationLevel", "TextMetaData");
       recordMetadata.add(aggregationLevel);
       didacticScenario = new TextMetaData();
-      setMetaDataMetaData(didacticScenario,false,MetaData.DIDACTICSCENARIO,"didacticScenario","TextMetaData");
+      setMetaDataMetaData(didacticScenario, false, MetaData.DIDACTICSCENARIO, "didacticScenario", "TextMetaData");
       recordMetadata.add(didacticScenario);
       requiredTime = new NumericMetaData();
-      setMetaDataMetaData(requiredTime,false,MetaData.REQUIREDTIME,"requiredTime","NumericMetaData");
+      setMetaDataMetaData(requiredTime, false, MetaData.REQUIREDTIME, "requiredTime", "NumericMetaData");
       recordMetadata.add(requiredTime);
       rights = new TextMetaData();
-      setMetaDataMetaData(rights,false,MetaData.RIGHTS,"rights","TextMetaData");
+      setMetaDataMetaData(rights, false, MetaData.RIGHTS, "rights", "TextMetaData");
       recordMetadata.add(rights);
       fileSize = new NumericMetaData();
-      setMetaDataMetaData(fileSize,false,MetaData.FILESIZE,"fileSize","NumericMetaData");
+      setMetaDataMetaData(fileSize, false, MetaData.FILESIZE, "fileSize", "NumericMetaData");
       recordMetadata.add(fileSize);
       playingTime = new NumericMetaData();
-      setMetaDataMetaData(playingTime,false,MetaData.PLAYINGTIME,"playingTime",
-    		  "NumericMetaData");
+      setMetaDataMetaData(playingTime, false, MetaData.PLAYINGTIME, "playingTime", "NumericMetaData");
       recordMetadata.add(playingTime);
       technicalRequirements = new TextMetaData();
-      setMetaDataMetaData(technicalRequirements,false,MetaData.TECHNICALREQUIREMENTS,
-    		  "technicalRequirements","TextMetaData");
+      setMetaDataMetaData(technicalRequirements, false, MetaData.TECHNICALREQUIREMENTS, "technicalRequirements",
+                          "TextMetaData");
       recordMetadata.add(technicalRequirements);
       creationDate = new DateMetaData();
-      setMetaDataMetaData(creationDate,false,MetaData.CREATIONDATE,"creationDate","DateMetaData");
+      setMetaDataMetaData(creationDate, false, MetaData.CREATIONDATE, "creationDate", "DateMetaData");
       recordMetadata.add(creationDate);
       lastChangedDate = new DateMetaData();
-      setMetaDataMetaData(lastChangedDate,false,MetaData.LASTCHANGEDDATE,"lastChangedDate","DateMetaData");
+      setMetaDataMetaData(lastChangedDate, false, MetaData.LASTCHANGEDDATE, "lastChangedDate", "DateMetaData");
       recordMetadata.add(lastChangedDate);
       version = new TextMetaData();
-      setMetaDataMetaData(version,false,MetaData.VERSION,"version","TextMetaData");
+      setMetaDataMetaData(version, false, MetaData.VERSION, "version", "TextMetaData");
       recordMetadata.add(version);
       status = new TextMetaData();
-      setMetaDataMetaData(status,false,MetaData.STATUS,"status","TextMetaData");
+      setMetaDataMetaData(status, false, MetaData.STATUS, "status", "TextMetaData");
       recordMetadata.add(status);
       roleName = new TextMetaData();
-      setMetaDataMetaData(roleName,false,MetaData.ROLENAME,"roleName","TextMetaData");
+      setMetaDataMetaData(roleName, false, MetaData.ROLENAME, "roleName", "TextMetaData");
       recordMetadata.add(roleName);
 
     } // end if
@@ -244,7 +243,7 @@ public class RecordAttributeSetter {
 
     if (metadatafield.equals(MetaData.PROFESSIONALSITUATION)) {
 
-      record.setProfessionalSituation((HierarchicalStructuredTextMetaData) value);
+      record.setProfessionalSituation((HierarchicalStructuredTextMetaDataSet) value);
 
     } // end if
 
@@ -266,83 +265,82 @@ public class RecordAttributeSetter {
 
     } // end if
 
-    setValue2(metadatafield,value);
+    setValue2(metadatafield, value);
 
   } // end setValue()
 
-
   /**
-   * Sets the value of the specified metadata field
-   * second part due to checkstyle restrictions
+   * Sets the value of the specified metadata field second part due to checkstyle restrictions
    *
    * @param metadatafield the record metadata field
    * @param value the value
    */
   private void setValue2(String metadatafield, Object value) {
 
-	  if (metadatafield.equals(MetaData.SCHOOLDISCIPLINE)) {
+    if (metadatafield.equals(MetaData.SCHOOLDISCIPLINE)) {
 
-	        record.setSchoolDiscipline((HierarchicalStructuredTextMetaData) value);
+      record.setSchoolDiscipline((HierarchicalStructuredTextMetaDataSet) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.SCHOOLTYPE)) {
+    if (metadatafield.equals(MetaData.SCHOOLTYPE)) {
 
-	        record.setSchoolType((HierarchicalStructuredTextMetaDataSet) value);
+      record.setSchoolType((HierarchicalStructuredTextMetaDataSet) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.SECURED)) {
+    if (metadatafield.equals(MetaData.SECURED)) {
 
-	        record.setSecured((BooleanMetaData) value);
+      record.setSecured((BooleanMetaData) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.STATUS)) {
+    if (metadatafield.equals(MetaData.STATUS)) {
 
-	        record.setStatus((TextMetaData) value);
+      record.setStatus((TextMetaData) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.SUBJECT)) {
+    if (metadatafield.equals(MetaData.SUBJECT)) {
 
-	        record.setSubject((TextMetaData) value);
+      record.setSubject((TextMetaData) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.TARGETENDUSER)) {
+    if (metadatafield.equals(MetaData.TARGETENDUSER)) {
 
-	        record.setTargetEndUser((HierarchicalStructuredTextMetaData) value);
+      record.setTargetEndUser((HierarchicalStructuredTextMetaDataSet) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.TECHNICALREQUIREMENTS)) {
+    if (metadatafield.equals(MetaData.TECHNICALREQUIREMENTS)) {
 
-	        record.setTechnicalRequirements((TextMetaData) value);
+      record.setTechnicalRequirements((TextMetaData) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.TITLE)) {
+    if (metadatafield.equals(MetaData.TITLE)) {
 
-	        record.setTitle((TextMetaData) value);
+      record.setTitle((TextMetaData) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.URI)) {
+    if (metadatafield.equals(MetaData.URI)) {
 
-	        record.setUri((HyperlinkMetaData) value);
+      record.setUri((HyperlinkMetaData) value);
 
-	      } // end if
+    } // end if
 
-	      if (metadatafield.equals(MetaData.VERSION)) {
+    if (metadatafield.equals(MetaData.VERSION)) {
 
-	        record.setVersion((TextMetaData) value);
+      record.setVersion((TextMetaData) value);
 
-	      } // end if
+    } // end if
 
   }
 
   /**
+   * DOCUMENT ME!
    *
    * @param m metadata object
    * @param mandatory set to true if mandatory, if optional set to false
@@ -350,11 +348,14 @@ public class RecordAttributeSetter {
    * @param name name of the metadata object
    * @param metadatatype type of metadata
    */
-  private void setMetaDataMetaData(MetaData m,boolean mandatory,String xmltag, String name, String metadatatype){
-	  m.setMandatory(mandatory);
-	  m.setOptional(!mandatory);
-      m.setXMLTagName(xmltag);
-      m.setName(name);
-      m.setMetaDataType(metadatatype);
+  private void setMetaDataMetaData(MetaData m, boolean mandatory, String xmltag, String name, String metadatatype) {
+
+    m.setMandatory(mandatory);
+    m.setOptional(! mandatory);
+    m.setXMLTagName(xmltag);
+    m.setName(name);
+    m.setMetaDataType(metadatatype);
+
   }
+
 }
