@@ -13,13 +13,19 @@
             <xs:all>
               <xs:element minOccurs="1" maxOccurs="1" name="didactischeFunctie" type="xs:string" />
               <xs:element minOccurs="1" maxOccurs="1" name="producttype" type="xs:string" />
-              <xs:element minOccurs="0" maxOccurs="1" name="beoogdeEindgebruiker" type="eindgebruikerGelaagdeWaarde" />
+              <xs:element minOccurs="0" maxOccurs="1" name="beoogdeEindgebruiker" type="eindgebruikerMeervoudigeGelaagdeWaarde" />
               <xs:element minOccurs="0" maxOccurs="1" name="schooltype" type="meervoudigeGelaagdeWaarde" />
-              <xs:element minOccurs="0" maxOccurs="1" name="vakleergebied" type="gelaagdeWaarde" />
+              <xs:element minOccurs="0" maxOccurs="1" name="vakleergebied" type="meervoudigeGelaagdeWaarde" />
               <xs:element minOccurs="0" maxOccurs="1" name="didactischScenario" type="xs:string" />
               <xs:element minOccurs="0" maxOccurs="1" name="aggregatieniveau" type="xs:string" />
-              <xs:element minOccurs="0" maxOccurs="1" name="beroepssituatie" type="gelaagdeWaarde" />
-              <xs:element minOccurs="0" maxOccurs="1" name="competentie" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="beroepssituatie" type="meervoudigeGelaagdeWaarde" />
+              <xs:element minOccurs="0" maxOccurs="1" name="competenties">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="competentie" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element minOccurs="0" maxOccurs="1" name="onderwerp" type="xs:string" />
               <xs:element minOccurs="0" maxOccurs="1" name="rolEnNaam">
                 <xs:complexType>
@@ -96,16 +102,16 @@
       </xs:restriction>
     </xs:simpleType>
   </xs:element>
-  <xs:complexType name="eindgebruikerGelaagdeWaarde">
+  <xs:complexType name="eindgebruikerMeervoudigeGelaagdeWaarde">
     <xs:sequence minOccurs="1" maxOccurs="1">
       <xs:element name="hoofdwaarden">
         <xs:complexType>
-          <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="hoofdwaarde">
               <xs:complexType>
                 <xs:sequence>
                   <xs:element minOccurs="1" maxOccurs="1" ref="eindgebruikerwaarde" />
-                  <xs:element minOccurs="0" maxOccurs="1" ref="simpelopvolger" />
+                  <xs:element minOccurs="0" maxOccurs="unbounded" ref="opvolger" />
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
