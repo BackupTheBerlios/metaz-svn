@@ -93,11 +93,7 @@
 					Schooltype:
 				</td>
 				<td>
-					<ul>
-					<c:forEach items="${currentRecord.object.schoolType.value}" var="item">
-						<li><c:out value="${item}"/></li>
-					</c:forEach>
-					</ul>
+					<c:out value="${currentRecord.object.schoolType.value}"/>
 				</td>
 			</tr>
 			<tr class="even">
@@ -105,11 +101,7 @@
 					Vakleergebied:
 				</td>
 				<td>
-					<ul>
-					<c:forEach items="${currentRecord.object.schoolDiscipline.value}" var="item">
-						<li><c:out value="${item}"/></li>
-					</c:forEach>
-					</ul>
+					<c:out value="${currentRecord.object.schoolDiscipline.value}"/>
 				</td>
 			</tr>
 			<tr class="odd">
@@ -117,11 +109,7 @@
 					Beroepssituatie:
 				</td>
 				<td>
-					<ul>
-					<c:forEach items="${currentRecord.object.professionalSituation.value}" var="item">
-						<li><c:out value="${item}"/></li>
-					</c:forEach>
-					</ul>
+					<c:out value="${currentRecord.object.professionalSituation.value}"/>
 				</td>
 			</tr>
 			<tr class="even">
@@ -145,11 +133,7 @@
 					Beoogde eindgebruiker:
 				</td>
 				<td>
-					<ul>
-					<c:forEach items="${currentRecord.object.targetEndUser.value}" var="item">
-						<li><c:out value="${item}"/></li>
-					</c:forEach>
-					</ul>
+					<c:out value="${currentRecord.object.targetEndUser.value}"/>
 				</td>
 			</tr>
 			<tr class="odd">
@@ -176,7 +160,7 @@
 					<jsp:useBean id="requiredTime" class="java.util.Date" />
 					<jsp:setProperty name="requiredTime" property="time" 
   						value="${currentRecord.object.requiredTime.value}" /> 
-					<fmt:formatDate value="${requiredTime}" type="time" timeStyle="medium"/>
+					<fmt:formatDate value="${requiredTime}" type="time" timeStyle="medium" timeZone="-1"/>
 				</td>
 			</tr>
 			<tr class="even">
@@ -187,7 +171,7 @@
 					<jsp:useBean id="playTime" class="java.util.Date" />
 					<jsp:setProperty name="playTime" property="time" 
   						value="${currentRecord.object.playingTime.value}" /> 
-					<fmt:formatDate value="${playTime}" type="time" timeStyle="medium"/>
+	  					<fmt:formatDate value="${playTime}" type="time" timeStyle="medium" timeZone="-1"/>
 				</td>
 			</tr>
 			<tr class="odd">
