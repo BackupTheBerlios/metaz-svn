@@ -157,14 +157,18 @@
                                         </restriction>
                                     </simpleType>
                                 </element>
-                                <element name="competentie">
-                                    <simpleType>
-                                        <restriction base="string">
-                                            <tox-sample path="[competentie_list/competentie]">
-                                                <tox-expr value="[!]"/>
-                                            </tox-sample>
-                                        </restriction>
-                                    </simpleType>
+                                <element name="competenties">
+                                    <complexType>
+                                        <element name="competentie" minOccurs="1" maxOccurs="10">
+                                            <simpleType>
+                                                <restriction base="string">
+                                                    <tox-sample path="[competentie_list/competentie]">
+                                                        <tox-expr value="[!]"/>
+                                                    </tox-sample>
+                                                </restriction>
+                                            </simpleType>
+                                        </element>
+                                    </complexType>
                                 </element>
                                 <element name="rechten">
 		  			<simpleType>
@@ -247,12 +251,18 @@
                                 </element>
                                 <element name="benodigdeTijd">
                                     <simpleType>
-                                        <restriction base="positiveInteger"/>
+                                        <restriction base="positiveInteger">
+                                            <minInclusive value="1"/>
+                                            <maxInclusive value="31536000000"/>
+                                        </restriction>
                                     </simpleType>
                                 </element>
                                 <element name="afspeelduur">
                                     <simpleType>
-                                        <restriction base="positiveInteger"/>
+                                        <restriction base="positiveInteger">
+                                            <minInclusive value="1"/>
+                                            <maxInclusive value="31536000000"/>
+                                        </restriction>
                                     </simpleType>
                                 </element>
                                 <element name="status">
@@ -291,7 +301,7 @@
                                         </restriction>
                                     </simpleType>
                                 </element>
-                                <element name="beoogdeEindgebruiker">
+                                <element name="beoogdeEindgebruiker" minOccurs="3" maxOccurs="3">
                                     <complexType>
                                         <tox-sample path="[beoogdeEindgebruiker_list/beoogdeEindgebruiker]" name="beg">
                                             <element name="groep">
@@ -399,7 +409,7 @@
                                         </tox-sample>
                                     </complexType>
                                 </element>
-                                <element name="beroepssituatie">
+                                <element name="beroepssituatie" minOccurs="3" maxOccurs="3">
                                     <complexType>
                                         <tox-sample path="[beroepssituatie_list/beroepssituatie]" name="brs">
                                             <element name="groep">
@@ -457,8 +467,18 @@
                                                         <element name="aggregatieniveau" minOccurs="0">
                                                             <tox-expr value="[aggregatieniveau]"/>
                                                         </element>
-                                                        <element name="competentie" minOccurs="0">
-                                                            <tox-expr value="[competentie]"/>
+                                                        <element name="competenties" minOccurs="0">
+                                                            <complexType>
+                                                                <element name="competentie" maxOccurs="unbounded">
+                                                                    <simpleType>
+                                                                        <restriction base="string">
+                                                                            <tox-scan path="[$sc/competenties/competentie]">
+                                                                                <tox-expr value="[!]"/>
+                                                                            </tox-scan>
+                                                                        </restriction>
+                                                                    </simpleType>
+                                                                </element>
+                                                            </complexType>
                                                         </element>
                                                         <element name="rechten" minOccurs="0">
                                                             <tox-expr value="[rechten]"/>
@@ -513,7 +533,7 @@
                                                             <complexType>
                                                                 <element name="hoofdwaarden">
                                                                     <complexType>
-                                                                        <element name="hoofdwaarde">
+                                                                        <element name="hoofdwaarde" maxOccurs="3">
                                                                             <complexType>
                                                                                 <element name="eindgebruikerwaarde">
                                                                                     <simpleType>
@@ -524,7 +544,7 @@
                                                                                         </restriction>
                                                                                     </simpleType>
                                                                                 </element>
-                                                                                <element name="simpelopvolger" minOccurs="0">
+                                                                                <element name="opvolger" minOccurs="0">
                                                                                     <complexType>
                                                                                         <element name="waarde">
                                                                                             <simpleType>
@@ -672,7 +692,7 @@
                                                                                         </restriction>
                                                                                     </simpleType>
                                                                                 </element>
-                                                                                <element name="simpelopvolger" minOccurs="0">
+                                                                                <element name="opvolger" minOccurs="0">
                                                                                     <complexType>
                                                                                         <element name="waarde">
                                                                                             <simpleType>
@@ -698,7 +718,7 @@
                                                             <complexType>
                                                                 <element name="hoofdwaarden">
                                                                     <complexType>
-                                                                        <element name="hoofdwaarde">
+                                                                        <element name="hoofdwaarde" maxOccurs="3">
                                                                             <complexType>
                                                                                 <element name="waarde">
                                                                                     <simpleType>
@@ -709,7 +729,7 @@
                                                                                         </restriction>
                                                                                     </simpleType>
                                                                                 </element>
-                                                                                <element name="simpelopvolger" minOccurs="0">
+                                                                                <element name="opvolger" minOccurs="0">
                                                                                     <complexType>
                                                                                         <element name="waarde">
                                                                                             <simpleType>

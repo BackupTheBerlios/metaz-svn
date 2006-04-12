@@ -380,7 +380,7 @@
                                                                                 </element>
                                                                                 <tox-if expr="DIF([$sc/vakleergebied/onderdeel],'')">
                                                                                     <tox-then>
-                                                                                        <element name="simpelopvolger">
+                                                                                        <element name="opvolger">
                                                                                             <complexType>
                                                                                                 <element name="waarde">
                                                                                                     <simpleType>
