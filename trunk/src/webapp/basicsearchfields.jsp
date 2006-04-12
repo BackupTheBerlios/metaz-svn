@@ -18,7 +18,7 @@
 </div>
 <div class="optional">
   <label for="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>">Mijn schooltype:</label>
-  <select name="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>" id="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>" class="selectOne">
+  <select name="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>" id="<%= org.metaz.domain.MetaData.SCHOOLTYPE %>" class="selectOne" onchange="javascript:update()">
     <% out.print(org.metaz.gui.portal.SelectOptionList.toHtml(searchBean.getSchoolTypeOptions())); %>
   </select>
 </div>

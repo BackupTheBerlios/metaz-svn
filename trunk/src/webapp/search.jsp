@@ -1,5 +1,4 @@
 <%@ include file="includes.jsp" %>
-
 <portal:SetContent name="ActiveTab">
   <% out.print(org.metaz.gui.portal.PortalTabTag.TAB_SIMPLE_SEARCH); %>
 </portal:SetContent>

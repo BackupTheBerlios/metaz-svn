@@ -94,7 +94,6 @@ public class SearchBean {
 
 		populateTargetEndUserOptions();
 		populateSchoolTypeOptions();
-		populateSchoolDisciplineOptions();
 		populateDidacticFunctionOptions();
 		populateProductTypeOptions();
 		populateProfessionalSituationOptions();
@@ -590,7 +589,7 @@ public class SearchBean {
 			String[] values = facade.getTargetEndUserValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
 					targetEndUserOptions.add(new SelectOption(value,
 							displayHierarchy(value)));
 				}
@@ -609,11 +608,12 @@ public class SearchBean {
 			String[] values = facade.getSchoolTypesValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
 					schoolTypeOptions.add(new SelectOption(value,
 							displayHierarchy(value)));
 				}
 			}
+			populateSchoolDisciplineOptions();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -622,20 +622,30 @@ public class SearchBean {
 
 	private void populateSchoolDisciplineOptions() {
 		schoolDisciplineOptions = new SelectOptionList();
-		schoolDisciplineOptions.add(new SelectOption(true, "", "[Kies]"));
+		schoolDisciplineOptions.add(new SelectOption(true, "",
+				"[Kies een schooltype]"));
+	}
+
+	/**
+	 * Creates a Map containing option/displayvalue pairs to fill the
+	 * schoolDiscipline dropDown list. This method is called from javascript (an
+	 * Ajax call). The HashMap can be interpreted client side.
+	 * 
+	 * @param schoolType
+	 *            the key to find disciplines for.
+	 * @return A map with option/displayvalue pairs.
+	 */
+	public Map<String, String> refreshSchoolDisciplineOptions(String schoolType) {
+		Map<String, String> map = new HashMap<String, String>();
 		try {
-			String[] values = facade.getSchoolDisciplineValues();
+			String[] values = facade.getSchoolDisciplineValues(schoolType);
 			for (int i = 0; i < values.length; i++) {
-				String value = values[i];
-				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
-					schoolDisciplineOptions.add(new SelectOption(value,
-							displayHierarchy(value)));
-				}
+				map.put(values[i], (displayHierarchy(values[i])));
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return map;
 	}
 
 	private void populateDidacticFunctionOptions() {
@@ -647,7 +657,7 @@ public class SearchBean {
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i]; // set both value and description to
 				// metadata value
-				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
 					didacticFunctionOptions.add(new SelectOption(value, value));
 				}
 			}
@@ -665,7 +675,7 @@ public class SearchBean {
 			String[] values = facade.getProductTypeValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
 					productTypeOptions.add(new SelectOption(value, value));
 				}
 			}
@@ -683,7 +693,7 @@ public class SearchBean {
 			String[] values = facade.getProfessionalSituationValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
 					professionalSituationOptions.add(new SelectOption(value,
 							displayHierarchy(value)));
 				}
@@ -702,7 +712,7 @@ public class SearchBean {
 			String values[] = facade.getCompetenceValues();
 			for (int i = 0; i < values.length; i++) {
 				String value = values[i];
-				if (StringUtils.isNotBlank(value) && (! "/".equals(value))) {
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
 					competenceOptions.add(new SelectOption(value, value));
 				}
 			}

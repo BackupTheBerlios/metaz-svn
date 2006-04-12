@@ -20,4 +20,61 @@
 	@import "stylesheets/form.css";
 	@import "stylesheets/displaytag.css";
 </style>
+
+  <script type='text/javascript'
+    src='/metaz/dwr/engine.js'>
+</script>
+<script type="text/javascript"
+    src="/metaz/dwr/interface/SearchBean.js"> </script>
+<script type='text/javascript'
+    src='/metaz/js/util.js'>
+</script>
+<script type="text/javascript">
+<!--
+ function update(){
+ 	var parameter = DWRUtil.getValue("<%= org.metaz.domain.MetaData.SCHOOLTYPE %>");
+ 	SearchBean.getSchoolDisplinesBySchoolType(parameter, createList);
+ }
+ 
+ function createList(data){
+ 	DWRUtil.removeAllOptions("<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>");
+ 	DWRUtil.addOptions("<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>", data);
+ }
+ 
+ 	function selectTargetEndUser(){
+	 	var parameter = DWRUtil.getValue("<%= org.metaz.domain.MetaData.TARGETENDUSER %>");
+ 		SearchBean.setSelectedTargetEndUserOption(parameter);
+ 	}
+
+	function selectSchoolType(){
+		var parameter = DWRUtil.getValue("<%= org.metaz.domain.MetaData.SCHOOLTYPE %>");
+		SearchBean.setSelectedSchoolTypeOption(parameter);
+	}
+	
+	function selectSchoolDiscipline(){
+		var parameter = DWRUtil.getValue("<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>");
+		SearchBean.setSelectedSchoolDisciplineOption(parameter);
+	}
+	
+	function selectDidacticFunction(){
+		var parameter = DWRUtil.getValue("<%= org.metaz.domain.MetaData.DIDACTICFUNCTION %>");
+		SearchBean.setSelectedDidacticFunctionOption(parameter);
+	}
+	
+	function selectProductType(){
+		var parameter = DWRUtil.getValues("<%= org.metaz.domain.MetaData.PRODUCTTYPE %>");
+		SearchBean.setSelectedProductTypeOption(parameter);
+	}
+	
+	function selectProfessionalSituation(){
+		var parameter = DWRUtil.getValues("<%= org.metaz.domain.MetaData.PROFESSIONALSITUATION %>");
+		SearchBean.setSelectedProfessionalSituationOption(parameter);
+	}
+	
+	function selectCompetence(){
+		var parameter = DWRUtil.getValues("<%= org.metaz.domain.MetaData.COMPETENCE %>");
+		SearchBean.setSelectedCompetenceOption(parameter);
+	}
+//-->
+</script>
 </head>
