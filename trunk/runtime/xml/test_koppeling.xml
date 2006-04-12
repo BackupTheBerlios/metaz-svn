@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<leerobjecten>
+   <leerobject URI="http://metaz.berlios.de/pesten.avi">
+      <aggregatieniveau>Cursus</aggregatieniveau>
+      <didactischeFunctie>Simulatie</didactischeFunctie>
+      <producttype>video</producttype>
+      <beoogdeEindgebruiker>
+         <hoofdwaarden>
+            <hoofdwaarde>
+               <eindgebruikerwaarde>docent</eindgebruikerwaarde>
+               <opvolger>
+                  <waarde>klasseleraar</waarde>
+               </opvolger>
+               <opvolger>
+                  <waarde>klasseleraartest</waarde>
+               </opvolger>
+            </hoofdwaarde>
+         </hoofdwaarden>
+      </beoogdeEindgebruiker>
+      <schooltype>
+         <hoofdwaarden>
+            <hoofdwaarde>
+               <waarde>voortgezet onderwijs</waarde>
+               <opvolger>
+                  <waarde>voorbereidend beroepsonderwijs</waarde>
+                  <opvolger>
+                     <waarde>VMBO</waarde>
+                  </opvolger>
+               </opvolger>
+               <opvolger>
+                  <waarde>voorbereidend onderwijs</waarde>
+                  <opvolger>
+                     <waarde>VWO</waarde>
+                  </opvolger>
+                  <opvolger>
+                     <waarde>HAVO</waarde>
+                  </opvolger>
+               </opvolger>
+            </hoofdwaarde>
+         </hoofdwaarden>
+      </schooltype>
+      <didactischScenario>Vertonen van de film met daarna discussie</didactischScenario>
+      <beroepssituatie>
+         <hoofdwaarden>
+            <hoofdwaarde>
+               <waarde>Hanteren van onverwachte situaties</waarde>
+               <opvolger>
+                  <waarde>situaties tussen leerlingen</waarde>
+                  <opvolger>
+                     <waarde>Pesten</waarde>
+                  </opvolger>
+               </opvolger>
+            </hoofdwaarde>
+         </hoofdwaarden>
+      </beroepssituatie>
+      <competenties>
+         <competentie>interpersoonlijk</competentie>
+         <competentie>extrapersoonlijk</competentie>
+      </competenties>
+      <onderwerp>Pesten</onderwerp>
+      <rolEnNaam>
+         <rolNaamParen>
+            <rol>leerling</rol>
+            <naam>Roel</naam>
+         </rolNaamParen>
+         <rolNaamParen>
+            <rol>docent</rol>
+            <naam>Jan</naam>
+         </rolNaamParen>
+         <rolNaamParen>
+            <rol>leerling</rol>
+            <naam>Koos</naam>
+         </rolNaamParen>
+      </rolEnNaam>
+      <rechten>deze video is alleen toegankelijk voor gebruikers van MMBase</rechten>
+      <sleutelwoorden>
+         <sleutelwoord>pesten</sleutelwoord>
+      </sleutelwoorden>
+      <technischeVereiste>Microsoft media player 10</technischeVereiste>
+      <titel>Hoe omgaan met pesten in klassikaal verband</titel>
+      <beveiligd>1</beveiligd>
+      <datumCreatie>2005-12-01</datumCreatie>
+      <datumLaatsteWijziging>2005-12-01</datumLaatsteWijziging>
+      <bestandsgrootte>1006543</bestandsgrootte>
+      <benodigdeTijd>31104000000</benodigdeTijd>
+      <afspeelduur>31104000000</afspeelduur>
+      <versie>1</versie>
+      <status>Goedgekeurd</status>
+      <omschrijving>ik &lt;b&gt;Pest&lt;/b&gt;en &lt;I&gt;Hoe ga je als docent om met pesten&lt;/I&gt;&lt;u&gt;in de klasl&lt;/u&gt;</omschrijving>
+      <bestandsformaat>video</bestandsformaat>
+      <vakleergebied>
+         <hoofdwaarden>
+            <hoofdwaarde>
+               <waarde>Bevorderen sociale vaardigheden</waarde>
+               <opvolger>
+                  <waarde>cognitieve communicatie</waarde>
+               </opvolger>
+            </hoofdwaarde>
+            <hoofdwaarde>
+               <waarde>Bevorderen sociale vaardigheden</waarde>
+               <opvolger>
+                  <waarde>cognitieve communicatie</waarde>
+               </opvolger>
+            </hoofdwaarde>
+         </hoofdwaarden>
+      </vakleergebied>
+   </leerobject>
+</leerobjecten>
