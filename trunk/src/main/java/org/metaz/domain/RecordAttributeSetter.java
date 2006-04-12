@@ -25,7 +25,7 @@ public class RecordAttributeSetter {
   private TextMetaData                          didacticFunction;
   private TextMetaData                          productType;
   private HierarchicalStructuredTextMetaDataSet professionalSituation;
-  private TextMetaData                          competence;
+  private TextMetaData                          competences;
   private BooleanMetaData                       secured;
   private TextMetaData                          fileFormat;
   private HyperlinkMetaData                     uri;
