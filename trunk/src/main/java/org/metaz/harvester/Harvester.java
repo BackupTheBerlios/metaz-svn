@@ -821,7 +821,7 @@ public class Harvester {
       TextMetaData tmdt = new TextMetaData();
 
       //sleutelwoorden
-      if (metadata.getName().equals("keywords") || metadata.getName().equals("competentie")) {
+      if (metadata.getName().equals("keywords") || metadata.getName().equals("competences")) {
 
         String keywords = "";
 
@@ -838,7 +838,7 @@ public class Harvester {
         tmdt.setValue(keywords);
 
         //competentie
-      } else if (metadata.getName().equals("competenties")) {
+      } else if (metadata.getName().equals("competences")) {
 
         String competences = "";
 
