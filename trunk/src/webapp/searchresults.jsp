@@ -27,7 +27,6 @@
 	    		<display:column title="Laatst gewijzigd:">
 	    			<fmt:formatDate value="${object.lastChangedDate.value}" type="date" pattern="dd MMMM yyyy" />
 	    		</display:column>
-	    		<display:column property="score" title="Score" sortable="false" />
 	    		<display:column property="object.productType.value" title="Type product" sortable="false" />
 				<display:column title="Beveiligd" sortable="false">
 				<% List results = searchBean.getMetazResults();
