@@ -24,8 +24,9 @@ public class RecordDocumentAlt {
 
   /** The name of the Document field containing the merged text fields that  will be full-text searched */
   public final static String MERGED = "merged";
-  private final static String LEVELSEPARATOR = "/";
   private final static char KEYWORDSEPARATOR = ';';
+  private final static String ORIG = "_orig";
+  private final static String WHITESPACE = " ";
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -57,13 +58,14 @@ public class RecordDocumentAlt {
 
     //full text searchable metadata
     doc.add(Field.Text(MetaData.TITLE, (String) r.getTitle().getValue()));
-    merged = merged + r.getTitle().getValue().toString();
+    merged = merged + r.getTitle().getValue().toString() + WHITESPACE;
 
     MetaData subject = r.getSubject();
 
     if (subject != null) {
 
       doc.add(Field.Text(MetaData.SUBJECT, (String) subject.getValue()));
+      merged = merged + subject.getValue() + WHITESPACE;
 
     } // end if
 
@@ -72,7 +74,7 @@ public class RecordDocumentAlt {
     if (description != null) {
 
       doc.add(Field.Text(MetaData.DESCRIPTION, (String) description.getValue()));
-      merged = merged + " " + description.getValue().toString();
+      merged = merged + description.getValue().toString() + WHITESPACE;
 
     } // end if
 
@@ -81,7 +83,7 @@ public class RecordDocumentAlt {
     if (keywords != null) {
       String kwords = ((String) keywords.getValue()).replace(KEYWORDSEPARATOR,' ');
       doc.add(Field.Text(MetaData.KEYWORDS, kwords));
-      merged = merged + " " + kwords;
+      merged = merged + kwords;
 
     } // end if
 
@@ -91,18 +93,16 @@ public class RecordDocumentAlt {
     MetaData targetEndUser = r.getTargetEndUser();
 
     if (targetEndUser != null) {
-
-      String targetEndUserString = targetEndUser.toString();
-
-      doc.add(Field.Keyword(MetaData.TARGETENDUSER + "_orig", targetEndUserString));
-
-      String[] targetEndUserLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(targetEndUserString);
-
-      for (int i = 0; i < targetEndUserLevels.length; i++) {
-
-        doc.add(Field.Keyword(MetaData.TARGETENDUSER, targetEndUserLevels[i]));
-
-      } // end for
+        Set targetEndUsers = (Set) targetEndUser.getValue();
+        Iterator it = targetEndUsers.iterator();
+        while (it.hasNext()){
+            String tgeu = it.next().toString();
+            doc.add(Field.Keyword(MetaData.TARGETENDUSER + ORIG, tgeu));
+            String[] targetEndUserLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(tgeu);
+            for(int i=0; i<targetEndUserLevels.length; i++) {
+                doc.add(Field.Keyword(MetaData.TARGETENDUSER, targetEndUserLevels[i]));
+            } // end for
+        } // end while
 
     } // end if
 
@@ -117,7 +117,7 @@ public class RecordDocumentAlt {
 
         String schType = it.next().toString();
 
-        doc.add(Field.Keyword(MetaData.SCHOOLTYPE + "_orig", schType));
+        doc.add(Field.Keyword(MetaData.SCHOOLTYPE + ORIG, schType));
 
         String[] schoolTypeLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schType);
 
@@ -134,18 +134,16 @@ public class RecordDocumentAlt {
     MetaData schoolDiscipline = r.getSchoolDiscipline();
 
     if (schoolDiscipline != null) {
-
-      String schoolDisciplineString = schoolDiscipline.toString();
-
-      doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE + "_orig", schoolDisciplineString));
-
-      String[] schoolDisciplineLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schoolDisciplineString);
-
-      for (int i = 0; i < schoolDisciplineLevels.length; i++) {
-
-        doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE, schoolDisciplineLevels[i]));
-
-      } // end for
+        Set schoolDisciplines = (Set) schoolDiscipline.getValue();
+        Iterator it = schoolDisciplines.iterator();
+        while(it.hasNext()){
+            String schDiscipline = it.next().toString();
+            doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE + ORIG, schDiscipline));
+            String[] schoolDisciplineLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schDiscipline);
+            for(int i=0; i<schoolDisciplineLevels.length; i++){
+                doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE, schoolDisciplineLevels[i]));
+            }// end for
+        } // end while
 
     } // end if
 
@@ -160,18 +158,16 @@ public class RecordDocumentAlt {
     MetaData professionalSituation = r.getProfessionalSituation();
 
     if (professionalSituation != null) {
-
-      String professionalSituationString = professionalSituation.toString();
-
-      doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION + "_orig", professionalSituationString));
-
-      String[] professionalSituationLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(professionalSituationString);
-
-      for (int i = 0; i < professionalSituationLevels.length; i++) {
-
-        doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION, professionalSituationLevels[i]));
-
-      } // end for
+        Set profSituations = (Set) professionalSituation.getValue();
+        Iterator it = profSituations.iterator();
+        while (it.hasNext()){
+            String profSituation = it.next().toString();
+            doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION + ORIG, profSituation));
+            String[] professionalSituationLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(profSituation);
+            for(int i=0; i<professionalSituationLevels.length; i++){
+                doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION, professionalSituationLevels[i]));
+            } // end for
+        } // end while
 
     } // end if
 
@@ -179,7 +175,8 @@ public class RecordDocumentAlt {
 
     if (competence != null) {
 
-      doc.add(Field.Keyword(MetaData.COMPETENCE, (String) competence.getValue()));
+        String competences = ((String) competence.getValue()).replace(KEYWORDSEPARATOR,' ');
+      doc.add(Field.Keyword(MetaData.COMPETENCE, competences));
 
     } // end if
 

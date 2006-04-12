@@ -100,7 +100,7 @@ public class DataServiceImplTest extends TestCase {
         
 		Record rec = new Record(title, secured, fileFormat, didacticalFunction,
 				productType, uri);
-		rec.setProfessionalSituation(hierStrucText);
+		//rec.setProfessionalSituation(hierStrucText);
 		rec.setSchoolType(hierStrucSet);
         rec.setRequiredTime(requiredTime);
 		List<Record> l = new ArrayList<Record>();

@@ -15,12 +15,12 @@ public class Record {
   private TextMetaData                          subject;
   private HtmlTextMetaData                      description;
   private TextMetaData                          keywords;
-  private HierarchicalStructuredTextMetaData    targetEndUser;
+  private HierarchicalStructuredTextMetaDataSet    targetEndUser;
   private HierarchicalStructuredTextMetaDataSet schoolType;
-  private HierarchicalStructuredTextMetaData    schoolDiscipline;
+  private HierarchicalStructuredTextMetaDataSet    schoolDiscipline;
   private TextMetaData                          didacticFunction;
   private TextMetaData                          productType;
-  private HierarchicalStructuredTextMetaData    professionalSituation;
+  private HierarchicalStructuredTextMetaDataSet    professionalSituation;
   private TextMetaData                          competence;
   private BooleanMetaData                       secured;
   private TextMetaData                          fileFormat;
@@ -162,7 +162,7 @@ public class Record {
    *
    * @return the target end users
    */
-  public HierarchicalStructuredTextMetaData getTargetEndUser() {
+  public HierarchicalStructuredTextMetaDataSet getTargetEndUser() {
 
     return targetEndUser;
 
@@ -173,7 +173,7 @@ public class Record {
    *
    * @param targetEndUser the target end users
    */
-  public void setTargetEndUser(HierarchicalStructuredTextMetaData targetEndUser) {
+  public void setTargetEndUser(HierarchicalStructuredTextMetaDataSet targetEndUser) {
 
     this.targetEndUser = targetEndUser;
 
@@ -206,7 +206,7 @@ public class Record {
    *
    * @return the school disciplines
    */
-  public HierarchicalStructuredTextMetaData getSchoolDiscipline() {
+  public HierarchicalStructuredTextMetaDataSet getSchoolDiscipline() {
 
     return schoolDiscipline;
 
@@ -217,7 +217,7 @@ public class Record {
    *
    * @param schoolDiscipline the school disciplines
    */
-  public void setSchoolDiscipline(HierarchicalStructuredTextMetaData schoolDiscipline) {
+  public void setSchoolDiscipline(HierarchicalStructuredTextMetaDataSet schoolDiscipline) {
 
     this.schoolDiscipline = schoolDiscipline;
 
@@ -272,7 +272,7 @@ public class Record {
    *
    * @return the professional situation
    */
-  public HierarchicalStructuredTextMetaData getProfessionalSituation() {
+  public HierarchicalStructuredTextMetaDataSet getProfessionalSituation() {
 
     return professionalSituation;
 
@@ -283,7 +283,7 @@ public class Record {
    *
    * @param professionalSituation the professional situation
    */
-  public void setProfessionalSituation(HierarchicalStructuredTextMetaData professionalSituation) {
+  public void setProfessionalSituation(HierarchicalStructuredTextMetaDataSet professionalSituation) {
 
     this.professionalSituation = professionalSituation;
 
