@@ -115,7 +115,7 @@ public class RecordAttributeSetter {
                           "HierarchicalStructuredTextMetaDataSet");
       recordMetadata.add(professionalSituation);
       competences = new TextMetaData();
-      setMetaDataMetaData(competences, false, MetaData.COMPETENCE, "competence", "TextMetaData");
+      setMetaDataMetaData(competences, false, MetaData.COMPETENCE, "competences", "TextMetaData");
       recordMetadata.add(competences);
       aggregationLevel = new TextMetaData();
       setMetaDataMetaData(aggregationLevel, false, MetaData.AGGREGATIONLEVEL, "aggregationLevel", "TextMetaData");
