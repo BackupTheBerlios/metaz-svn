@@ -29,6 +29,7 @@
 	    		</display:column>
 	    		<display:column property="object.productType.value" title="Type product" sortable="false" />
 				<display:column title="Beveiligd" sortable="false">
+				<center>
 				<% List results = searchBean.getMetazResults();
 				   Result result = (Result)results.get(row_rowNum.intValue()-1);
 				   Record r = (Record)result.getObject();
@@ -45,6 +46,7 @@
 				<%
 					}
 				%>
+				</center>
 				</display:column>
 				<display:column title="Titel" sortable="false">
 					<% List results = searchBean.getMetazResults();
