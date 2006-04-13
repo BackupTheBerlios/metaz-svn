@@ -2,7 +2,7 @@
 <project xmlns:j="jelly:core" xmlns:ant="jelly:ant"
 	xmlns:deploy="deploy">
 	<preGoal name="war:war">
-		<ant:copy file="metaz.props" todir="target/metaz/WEB-INF/classes" failonerror="false"/>
+		<!--<ant:copy file="metaz.props" todir="target/metaz/WEB-INF/classes" failonerror="false"/> -->
 		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="target/metaz/WEB-INF/classes" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
@@ -55,4 +55,34 @@
 		</ant:exec>
 		<ant:delete dir="${basedir}/src/webapp/WEB-INF/lib" />
 	</preGoal>
+	
+	<goal name="pkg">
+		<attainGoal name="war:war" />
+		<!-- root directory -->
+		<ant:mkdir dir="target/appz"/>
+		<!-- log4j directory -->
+		<ant:mkdir dir="target/appz/logs"/>
+		<!-- Harvester directories -->
+		<ant:mkdir dir="target/appz/xml/log/processed"/>
+		<ant:mkdir dir="target/appz/xml/log/error"/>
+		<ant:mkdir dir="target/appz/xml/schema"/>
+		<ant:mkdir dir="target/appz/xml/transferstaging"/>
+		<ant:mkdir dir="target/appz/xml/transfer"/>
+		<ant:mkdir dir="target/appz"/>
+		<!--  Schema -->
+		<ant:copy file="runtime/xml/schema/metaz.xsd" todir="target/appz/xml/schema" failonerror="false"/>
+		<!--  Lucene directories -->
+		<ant:mkdir dir="target/appz/repository/searchservice/altsearchindex"/>
+		<ant:mkdir dir="target/appz/repository/searchservice/searchindex"/>
+		<!--  property files -->
+		<ant:copy file="metaz.props.demo" todir="target/appz/" failonerror="false"/>
+		<ant:copy file="runtime/log4j.config.demo" todir="target/appz/" failonerror="false"/>
+				
+		<!-- package files -->
+		<ant:zip destfile="target/installation.zip">
+			<ant:fileset dir="target" includes="metaz.war appz/**"/>
+		</ant:zip>
+		
+	</goal>
+	
 </project>
