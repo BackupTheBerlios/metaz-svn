@@ -769,6 +769,7 @@ public class SearchServiceImplAlt
         }
 
         values = (String[]) ts.toArray(values);
+          Arrays.sort(values, String.CASE_INSENSITIVE_ORDER);
 
       }
 
