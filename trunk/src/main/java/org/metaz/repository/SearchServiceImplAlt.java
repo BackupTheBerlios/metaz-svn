@@ -46,6 +46,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.TreeSet;
 import java.util.Vector;
 
@@ -69,6 +70,8 @@ public class SearchServiceImplAlt
   private static final String LEVELSEPARATOR = "/";
   private static final String STEMDICT = "repository/searchservice/wordlists/wordstem.txt";
   private static final String STOPWORDS = "repository/searchservice/wordlists/stopwords.txt";
+  private static final String TERMREQUIREDPROP = "applicationz.search.term.required";
+  private static final String TERMPROHIBITEDPROP = "applicationz.search.term.prohibited";
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
@@ -83,6 +86,8 @@ public class SearchServiceImplAlt
                                                };
   private MetaZ         app = MetaZ.getInstance();
   private DutchAnalyzer analyzer;
+  private boolean required;
+  private boolean prohibited;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -98,6 +103,12 @@ public class SearchServiceImplAlt
     File stemdictFile = app.getRelativeFile(STEMDICT);
 
     analyzer.setStemDictionary(stemdictFile);
+    
+    Properties props = app.getProperties();
+    
+    required = Boolean.valueOf(props.getProperty(TERMREQUIREDPROP, "false"));
+    
+    prohibited = Boolean.valueOf(props.getProperty(TERMPROHIBITEDPROP,"false"));
 
   } // end SearchServiceImpl()
 
@@ -284,7 +295,7 @@ public class SearchServiceImplAlt
 
         Query fullTextQuery = QueryParser.parse(fullText, RecordDocument.MERGED, analyzer);
 
-        q.add(fullTextQuery, false, false); // logical OR
+        q.add(fullTextQuery, required, prohibited); // set with metaz.props
 
       } // end if
 
@@ -301,10 +312,7 @@ public class SearchServiceImplAlt
             Term  keyword = new Term(keywords[i], terms[j]);
             Query keywordQuery = new TermQuery(keyword);
 
-            q.add(keywordQuery, false, false); // logical OR
-                                               /*
-               q.add(keywordQuery, true, false); // logical AND
-             */
+            q.add(keywordQuery, required, prohibited); // set with metaz.props                        
 
           }
 

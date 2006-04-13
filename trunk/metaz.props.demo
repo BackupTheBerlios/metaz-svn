@@ -23,3 +23,7 @@ org.metaz.repository.facade.impl = org.metaz.repository.FacadeImplAlt
 org.metaz.repository.search.service.impl = org.metaz.repository.SearchServiceImplAlt
 !org.metaz.repository.data.service.impl = org.metaz.repository.DataServiceImpl
 org.metaz.repository.data.service.impl = org.metaz.repository.SearchServiceImplAlt
+
+#search configuration
+!applicationz.search.term.required=true
+applicationz.search.term.required=false

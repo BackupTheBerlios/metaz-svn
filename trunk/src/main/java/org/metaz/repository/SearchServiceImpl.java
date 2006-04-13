@@ -29,6 +29,7 @@ import java.net.URI;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.Vector;
 
 /**
@@ -49,6 +50,8 @@ public class SearchServiceImpl
   private static final String EMPTYSTRING = "";
   private static final String STEMDICT = "repository/searchservice/wordlists/wordstem.txt";
   private static final String STOPWORDS = "repository/searchservice/wordlists/stopwords.txt";
+    private static final String TERMREQUIREDPROP = "applicationz.search.term.required";
+    private static final String TERMPROHIBITEDPROP = "applicationz.search.term.prohibited";
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
@@ -59,6 +62,8 @@ public class SearchServiceImpl
                                    };
   private MetaZ         app = MetaZ.getInstance();
   private DutchAnalyzer analyzer;
+    private boolean required;
+    private boolean prohibited;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -74,6 +79,12 @@ public class SearchServiceImpl
     File stemdictFile = app.getRelativeFile(STEMDICT);
 
     analyzer.setStemDictionary(stemdictFile);
+    
+      Properties props = app.getProperties();
+      
+      required = Boolean.valueOf(props.getProperty(TERMREQUIREDPROP, "false"));
+      
+      prohibited = Boolean.valueOf(props.getProperty(TERMPROHIBITEDPROP,"false"));
 
   } // end SearchServiceImpl()
 
