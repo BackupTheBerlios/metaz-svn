@@ -87,7 +87,7 @@ public class RecordDocumentAlt {
 
     } // end if
 
-    doc.add(Field.Text(MERGED, merged));
+    doc.add(Field.UnIndexed(MERGED, merged));
 
     //keyword searchable metadata
     MetaData targetEndUser = r.getTargetEndUser();
