@@ -2,7 +2,7 @@
 <project xmlns:j="jelly:core" xmlns:ant="jelly:ant"
 	xmlns:deploy="deploy">
 	<preGoal name="war:war">
-		<!--<ant:copy file="metaz.props" todir="target/metaz/WEB-INF/classes" failonerror="false"/> -->
+		<ant:copy file="metaz.props" todir="target/metaz/WEB-INF/classes" failonerror="false"/>
 		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="target/metaz/WEB-INF/classes" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
