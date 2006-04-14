@@ -72,6 +72,7 @@ public class SearchServiceImplAlt
   private static final String STOPWORDS = "repository/searchservice/wordlists/stopwords.txt";
   private static final String TERMREQUIREDPROP = "applicationz.search.term.required";
   private static final String TERMPROHIBITEDPROP = "applicationz.search.term.prohibited";
+  private static final String ALLTERMSREQUIRED = "AllTermsRequired";
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
@@ -287,6 +288,11 @@ public class SearchServiceImplAlt
 
       File     f = app.getRelativeFile(INDEXPATH);
       Searcher searcher = new IndexSearcher(f.getCanonicalPath());
+      
+      String allTermsRequired = (String) hmquery.get(ALLTERMSREQUIRED);
+      if(allTermsRequired!=null){
+          required = Boolean.valueOf(allTermsRequired);
+      }
 
       BooleanQuery q = new BooleanQuery();
       String       fullText = (String) hmquery.get(EMPTYSTRING);

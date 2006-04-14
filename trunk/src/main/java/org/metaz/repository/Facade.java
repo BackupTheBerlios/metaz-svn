@@ -63,6 +63,10 @@ public interface Facade {
    * target="_blank">Lucene Query Syntax</a> for further information on wildcards,
    * fuzzy search, proximity search, boosting,...).
    * </p>
+   * <p>The parameter <code>termValuePairs</code> may also contain the key 
+   * <b>AllTermsRequired</b>. If the value is set to <code>false</code> the
+   * different terms will be combined by a logical OR, if set to <code>true</code>
+   * the different terms are combinded by a logical AND.</p>
    *
    * @param termValuePairs The query to be satisfied.
    *
