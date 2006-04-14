@@ -13,22 +13,22 @@ public class FunctionTest extends WebTestCase {
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   /** The base URL of the web application */
-  //public static final String BASE_URL = "http://metaz.dyndns.org:8080/metaz/";
-  public static final String BASE_URL = "http://localhost:8080/metaz/";
-  public static String endUser = ""; // beoogdeEindgebruiker
-  public static String schoolType = ""; // schooltype
-  public static String schoolDiscipline = ""; // vakleergebied         
-  public static String didacticFunction = ""; // didactischeFunctie
-  public static String productType = ""; // producttype
-  public static String professionalSituation = ""; // beroepssituatie  
-  public static String competence = ""; // competentie  
-  //public static String keywords = "onderging"; // trefwoord
-  //public static String resultTitel = "gefaseerd koopmans waterdieren verhindert b?ta neervalt";
-
-  public static String keywords = "lesvoorbereiding"; // trefwoord
-  public static String resultTitel = "Kennisbank wiskunde";
-
+  public static final String BASE_URL = "http://metaz.dyndns.org:8080/metaz/";
+  //private static final String BASE_URL = "http://localhost:8080/metaz/";
+  private static String endUser = ""; // beoogdeEindgebruiker
+  private static String schoolType = ""; // schooltype
+  private static String schoolDiscipline = ""; // vakleergebied         
+  private static String didacticFunction = ""; // didactischeFunctie
+  private static String productType = ""; // producttype
+  private static String professionalSituation = ""; // beroepssituatie  
+  private static String competence = ""; // competentie  
+  private static String keywords = "energiegebruikers"; // trefwoord
+  private static String resultTitel = "mengelt verbinden energiegebruikers";
+  //private static String keywords = "lesvoorbereiding"; // trefwoord
+  //private static String resultTitel = "Kennisbank wiskunde";
+  
   //~ Constructors -----------------------------------------------------------------------------------------------------
+
 
 /**
      * Creates a new FunctionTest object.
@@ -187,7 +187,6 @@ public class FunctionTest extends WebTestCase {
     setFormElement("sleutelwoorden", keywords);
     submit();
     assertTextPresent("Nr");
-    assertTextPresent("Score");
     assertTextPresent("Type product");
     assertTextPresent("Titel");
     assertTextPresent("Meer gegevens");
@@ -205,27 +204,27 @@ public class FunctionTest extends WebTestCase {
     beginAt("search.jsp");
     setFormElement("sleutelwoorden", keywords);
     submit();
-    clickLinkWithTextAfterText("Meer...", resultTitel);
+    clickLinkWithText("Meer...");
     assertTextPresent("Sleutelwoorden");
     assertTextPresent("Didactische functie");
     assertTextPresent("Didactisch scenario:");
-    assertTextPresent("Schooltype:");    
+    assertTextPresent("Schooltype:");
     assertTextPresent("Vakleergebied");
     assertTextPresent("Beroepssituatie");
     assertTextPresent("Competentie");
     assertTextPresent("Aggregatieniveau");
-    assertTextPresent("Beoogde eindgebruiker"); 
-    assertTextPresent("Rechten");    
+    assertTextPresent("Beoogde eindgebruiker");
+    assertTextPresent("Rechten");
     assertTextPresent("Producttype");
-    assertTextPresent("Benodigde tijd");    
+    assertTextPresent("Benodigde tijd");
     assertTextPresent("Afspeelduur");
     assertTextPresent("Bestandsformaat");
     assertTextPresent("Bestandsgrootte");
     assertTextPresent("Technische vereisten");
-    assertTextPresent("Creatie datum");    
+    assertTextPresent("Creatie datum");
     assertTextPresent("Laatst gewijzigd");
     assertTextPresent("Versie");
-    assertTextPresent("Status");      
+    assertTextPresent("Status");
     assertTextPresent("Rol en naam");
 
   }
