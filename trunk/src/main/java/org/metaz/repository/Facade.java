@@ -85,8 +85,8 @@ public interface Facade {
 
   /**
    * Returns a sorted array of unique TargetEndUser values that are  stored in the repository.
-   * <p>The array contains the original record values in a pathlike string representation
-   * (e.g. /a/b/c/d)</p>
+   * <p>The array contains all sublevel values in a pathlike string representation
+   * (e.g. /a/b/c/d and /a/b/c and /a/b and /a)</p>
    *
    * @return the sorted array
    *
@@ -97,8 +97,8 @@ public interface Facade {
 
   /**
    * Returns a sorted array of unique SchoolType values that are stored in the repository.
-   * <p>The array contains the original record values in a pathlike string representation
-   * (e.g. /a/b/c/d)</p>
+   * <p>The array contains all sublevel values in a pathlike string representation
+   * (e.g. /a/b/c/d and /a/b/c and /a/b and /a)</p>
    * 
    * @return the sorted array
    *
@@ -109,8 +109,8 @@ public interface Facade {
 
   /**
    * Returns a sorted array of unique SchoolDiscipline values that are stored in the repository.
-   * <p>The array contains the original record values in a pathlike string representation
-   * (e.g. /a/b/c/d)</p>
+   * <p>The array contains all sublevel values in a pathlike string representation
+   * (e.g. /a/b/c/d and /a/b/c and /a/b and /a)</p>
    * 
    * @return the sorted array
    *
@@ -124,8 +124,8 @@ public interface Facade {
    * stored in the repository.
    * <p>The parameter <code>schooltype</code> should contain the full path, i.e. someting
    * like <code>/a/b/c</code></p>
-   * <p>The returned array contains the original record values in a pathlike string representation
-   * (e.g. /a/b/c/d)</p>
+   * <p>The returned array contains all sublevel values in a pathlike string representation
+   * (e.g. /a/b/c/d and /a/b/c and /a/b and /a)</p>
    *
    * @param schooltype the dependent school type
    *
@@ -158,8 +158,8 @@ public interface Facade {
 
   /**
    * Returns a sorted array of unique ProfessionalSituation values that are stored in the repository.
-   * <p>The array contains the original record values in a pathlike string representation
-   * (e.g. /a/b/c/d)</p>
+   * <p>The array contains all sublevel values in a pathlike string representation
+   * (e.g. /a/b/c/d and /a/b/c and /a/b and /a)</p>
    * 
    * @return the sorted array
    *
