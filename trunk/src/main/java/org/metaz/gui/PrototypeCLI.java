@@ -31,6 +31,13 @@ public class PrototypeCLI {
   private static String   syntax = "PrototypeCLI -option [goal] [[-option goal][..]]";
   private static Logger   logger = MetaZ.getLogger(PrototypeCLI.class);
 
+  //~ Constructors -----------------------------------------------------------------------------------------------------
+
+  private PrototypeCLI() {
+
+    //empty
+  }
+
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
@@ -264,12 +271,12 @@ public class PrototypeCLI {
   /**
    * <p>Prints a string containing all the clauses.  This is necessary for Lucene.</p>
    *
-   * @param cl
-   * @param options
+   * @param cl The commandline object
+   * @param options The specified options
    *
    * @return String
    *
-   * @throws ParseException
+   * @throws ParseException Parsing error
    */
   private static String printClauses(CommandLine cl, Options options)
                               throws ParseException
