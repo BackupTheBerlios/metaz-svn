@@ -127,7 +127,7 @@ public class MetazScheduler {
 	else if (fourthArgument.equals("now"))
 			  now = true;
     String info = hr + ", min: " + min + ", intv: "+ intv + ", today: " + today + ", now: " + now;
-	logger.debug("CLI used with arguments hr: " + info);
+	logger.debug("Scheduler CLI used with arguments hr: " + info);
 
     // instantiate the MetazScheduler class
     MetazScheduler sch = new MetazScheduler();
@@ -135,6 +135,7 @@ public class MetazScheduler {
     sch.startScheduler();
     sch.setStartTime(hr,min,today);
     sch.setInterval(intv);
+    logger.debug("Trigger info after setting startTime: " + sch.getTrigger().toString());
     if(now)
     		sch.executeJob();
 
@@ -187,8 +188,10 @@ public class MetazScheduler {
    * the given time. Starting on the same day should only be used for test purposes, because it may cause problems if
    * the start time is earlier than the current time. For that reason, starting on the next day is the default. If the
    * start time is changed, the change takes effect immediately, because the trigger of the default job is refreshed.
+   * Note: the start time is also referred to as the next fire time. In fact, both time settings are applied in one
+   * go.
    *
-   * @param hour the hour to start harvesting (on a 24h scale).
+   * @param hour the hour to start harvesting (on a 24-hour clock).
    * @param minute the minute to start the harvesting.
    * @param today if true, the harvesting starts on the same day, else on the day after. Defaults to false.
    */
@@ -202,7 +205,7 @@ public class MetazScheduler {
       cal.add(java.util.GregorianCalendar.DAY_OF_MONTH, 1);
 
     // set the hour
-    cal.set(java.util.GregorianCalendar.HOUR, hour);
+    cal.set(java.util.GregorianCalendar.HOUR_OF_DAY, hour);
     // set the minute
     cal.set(java.util.GregorianCalendar.MINUTE, minute);
     cal.set(java.util.GregorianCalendar.SECOND, 0);
@@ -210,6 +213,7 @@ public class MetazScheduler {
     startTime = cal.getTime();
     // refresh the trigger of the default job
     trigger.setStartTime(startTime);
+    trigger.setNextFireTime(startTime);
     logger.debug("Set harvest start time at " + startTime.toString());
 
   }
@@ -228,7 +232,7 @@ public class MetazScheduler {
       interval = intv * 1000L * 60L * 60L;
       trigger.setRepeatInterval(interval);
       logger.debug("Set harvest interval at " + interval + " millis");
-
+ 
     }
 
   }
@@ -300,8 +304,7 @@ public class MetazScheduler {
     // create a once-only trigger that fires in 10 seconds
     //long          immediateStartTime = System.currentTimeMillis() + 10000L;
     //SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger",
-	//null, new Date(immediateStartTime), null, 0,
-    //                                                   0L);
+	//null, new Date(immediateStartTime), null, 0, 0L);
 
     // add this trigger to the default job, which has already been scheduled
     try {
@@ -319,6 +322,17 @@ public class MetazScheduler {
 
     }
 
+  }
+  
+  
+  /**
+   * Returns the defult trigger object (test purposes only).
+   * @return trigger the default trigger object
+   */
+  private SimpleTrigger getTrigger() {
+	  
+	  return trigger;
+	  
   }
 
 }
