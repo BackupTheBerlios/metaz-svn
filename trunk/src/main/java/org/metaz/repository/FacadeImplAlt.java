@@ -7,7 +7,6 @@ import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
 
 import org.metaz.repository.Facade;
-import org.metaz.repository.FacadeImpl;
 import org.metaz.repository.RepositoryService;
 import org.metaz.repository.Result;
 
