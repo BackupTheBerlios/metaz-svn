@@ -4,7 +4,11 @@ import junit.framework.TestCase;
 
 import org.metaz.util.MetaZ;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Tests Harvester class, requires test_koppleing.xml in xml folder set up in properties file
@@ -17,9 +21,9 @@ public class HarvesterTest extends TestCase {
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
-   * 
+   *setUp the test
    *
-   * @throws Exception DOCUMENT ME!
+   * @throws Exception Should never be thrown
    */
   protected void setUp()
                 throws Exception
@@ -31,16 +35,11 @@ public class HarvesterTest extends TestCase {
 
   /*
    * Test method for 'org.metaz.harvester.Harvester.setXMLFile(String)'
-   */
-  /**
-   * DOCUMENT ME!
    *
-   * @throws FileNotFoundException DOCUMENT ME!
-   * @throws IOException DOCUMENT ME!
+   * @throws IOException is thrown when file input or output problem occurs
    */
   public void testSetXMLFile()
-                      throws FileNotFoundException,
-                             IOException
+                      throws IOException
   {
 
     String filename = "test_koppeling.xml";
