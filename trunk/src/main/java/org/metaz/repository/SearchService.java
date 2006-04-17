@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Service for searching the index of the search engine.
  * 
- * @authors Jurgen Goelen
+ * @author Jurgen Goelen
  * @version 0.1
  */
 public interface SearchService extends RepositoryService {

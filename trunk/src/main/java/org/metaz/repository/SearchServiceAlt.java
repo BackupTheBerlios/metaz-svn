@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Service for searching the index of the search engine.
  * 
- * @authors Sammy Dalewyn
+ * @author Sammy Dalewyn
  * @version 0.1
  */
 public interface SearchServiceAlt extends RepositoryService {

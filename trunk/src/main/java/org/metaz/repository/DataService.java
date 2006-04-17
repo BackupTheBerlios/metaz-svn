@@ -7,7 +7,7 @@ import java.util.List;
 import org.metaz.domain.Record;
 
 /**
- * @authors Jurgen Goelen
+ * @author Jurgen Goelen
  * @version 0.3 
  */
 public interface DataService extends RepositoryService {
@@ -27,6 +27,7 @@ public interface DataService extends RepositoryService {
      * 
      * @param id
      * @return
+		Returns a record
      * @throws Exception
      */
     public Record getRecord(URI id) throws Exception;

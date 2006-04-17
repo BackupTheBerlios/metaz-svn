@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Interface to be extended by all services in the repository.
  * 
- * @authors Jurgen Goelen
+ * @author Jurgen Goelen
  * @version 0.1
  */
 public interface RepositoryService {

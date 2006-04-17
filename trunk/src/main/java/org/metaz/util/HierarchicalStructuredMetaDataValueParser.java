@@ -18,7 +18,7 @@ public class HierarchicalStructuredMetaDataValueParser {
    *
    * @param fullHierarchy
    *
-   * @return
+   * @return The lowest hierarhical level
    */
   public static String getLowestHierarchicalLevelValue(String fullHierarchy) {
 
