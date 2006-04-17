@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tr class="odd">
-				<td align="right">
+				<td>
 				<%  
 					int i = Integer.parseInt(request.getParameter("record"));
 					List results = searchBean.getMetazResults();
