@@ -677,7 +677,7 @@ public class Harvester {
           if (! etemp.getName().equals("waarde") && ! etemp.getName().equals("eindgebruikerwaarde")) {
 
             if (root.getParent().getName().equals("beoogdeEindgebruiker") &&
-                etemp.getParent().getName().equals("hoofdwaarde")) 
+                etemp.getParent().getName().equals("hoofdwaarde"))
             {
 
               etemp = etemp.getParent().element("eindgebruikerwaarde");
