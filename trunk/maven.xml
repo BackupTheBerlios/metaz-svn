@@ -3,16 +3,20 @@
 	xmlns:deploy="deploy">
 	<preGoal name="war:war">
 		<ant:copy file="metaz.props" todir="target/metaz/WEB-INF/classes" failonerror="false"/>
-		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="target/metaz/WEB-INF/classes" failonerror="true"/>
+		<!--
+		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="target/metaz/WEB-INF/classes" failonerror="true"/>		
 		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="target/metaz/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
+		-->
 		<ant:copy file="src/main/java/org/displaytag/messages.properties" todir="target/metaz/WEB-INF/classes/org/displaytag" failonerror="true"/>
 		<ant:copy file="src/main/java/org/displaytag/properties/displaytag.properties" todir="target/metaz/WEB-INF/classes/org/displaytag/properties" failonerror="true"/>
 	</preGoal>
 	<preGoal name="test:test">
+		<!--
 		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="target/test-classes" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="target/test-classes/org/metaz/domain" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="target/test-classes/org/metaz/domain" failonerror="true"/>
+		-->
 	</preGoal>
 	<goal name="generateTestXml">
 		<attainGoal name="test:compile"/>
@@ -42,9 +46,11 @@
 			<ant:arg line="classes ${maven.build.dest}"/>
 		</ant:exec>
 		<ant:copy file="metaz.props" todir="src/webapp/WEB-INF/classes" failonerror="false"/>
+		<!--
 		<ant:copy file="src/main/java/hibernate.cfg.xml" todir="src/webapp/WEB-INF/classes" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/MetaData.hbm.xml" todir="src/webapp/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
 		<ant:copy file="src/main/java/org/metaz/domain/Record.hbm.xml" todir="src/webapp/WEB-INF/classes/org/metaz/domain" failonerror="true"/>
+		-->
 		<ant:copy file="src/main/java/org/displaytag/messages.properties" todir="src/webapp/WEB-INF/classes/org/displaytag" failonerror="true"/>
 		<ant:copy file="src/main/java/org/displaytag/properties/displaytag.properties" todir="src/webapp/WEB-INF/classes/org/displaytag/properties" failonerror="true"/>
 	</goal>
