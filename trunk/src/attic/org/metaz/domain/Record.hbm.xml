@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping
+    PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="org.metaz.domain.Record" table="records" lazy="false">
+		<cache usage="read-write" region="org.metaz"/>
+		<id name="id" type="long" column="ID">
+			<generator class="increment"/>
+		</id>
+		<many-to-one name="title" column="title_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+        <many-to-one name="subject" column="subject_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="description" column="description_id" class="org.metaz.domain.HtmlTextMetaData" cascade="all"/>
+		<many-to-one name="keywords" column="keywords_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="targetEndUser" column="target_enduser_id" class="org.metaz.domain.HierarchicalStructuredTextMetaData" cascade="all"/>
+		<many-to-one name="schoolType" column="schooltype_id" class="org.metaz.domain.HierarchicalStructuredTextMetaDataSet" cascade="all"/>
+		<many-to-one name="schoolDiscipline" column="schooldiscipline_id" class="org.metaz.domain.HierarchicalStructuredTextMetaData" cascade="all"/>
+		<many-to-one name="didacticFunction" column="didacticfunction_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="productType" column="producttype_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="professionalSituation" column="professionalsituation_id" class="org.metaz.domain.HierarchicalStructuredTextMetaData" cascade="all"/>
+		<many-to-one name="competence" column="competence_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="secured" column="secured_id" class="org.metaz.domain.BooleanMetaData" cascade="all"/>
+		<many-to-one name="fileFormat" column="fileformat_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="uri" column="uri_id" class="org.metaz.domain.HyperlinkMetaData" cascade="all"/>
+		<many-to-one name="aggregationLevel" column="aggregationlevel_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="didacticScenario" column="didacticscenario_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="requiredTime" column="requiredtime_id" class="org.metaz.domain.NumericMetaData" cascade="all"/>
+		<many-to-one name="rights" column="rights_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="fileSize" column="filesize_id" class="org.metaz.domain.NumericMetaData" cascade="all"/>
+		<many-to-one name="playingTime" column="playingtime_id" class="org.metaz.domain.NumericMetaData" cascade="all"/>
+		<many-to-one name="technicalRequirements" column="technicalrequirements_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="creationDate" column="creationdate_id" class="org.metaz.domain.DateMetaData" cascade="all"/>
+		<many-to-one name="lastChangedDate" column="lastchangeddate_id" class="org.metaz.domain.DateMetaData" cascade="all"/>
+		<many-to-one name="version" column="version_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="status" column="status_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+		<many-to-one name="roleName" column="rolename_id" class="org.metaz.domain.TextMetaData" cascade="all"/>
+	</class>
+</hibernate-mapping>
