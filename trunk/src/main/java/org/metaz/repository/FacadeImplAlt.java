@@ -29,7 +29,7 @@ class FacadeImplAlt
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   //logger instance
-  private static Logger logger = MetaZ.getLogger(FacadeImpl.class);
+  private static Logger logger = MetaZ.getLogger(FacadeImplAlt.class);
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
