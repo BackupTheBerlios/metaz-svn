@@ -33,7 +33,7 @@ public class HarvesterTest extends TestCase {
 
   }
 
-  /*
+  /**
    * Test method for 'org.metaz.harvester.Harvester.setXMLFile(String)'
    *
    * @throws IOException is thrown when file input or output problem occurs
