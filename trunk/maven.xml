@@ -76,7 +76,7 @@
 		<ant:mkdir dir="target/appz/repository/searchservice/searchindex"/>
 		<!--  property files -->
 		<ant:copy file="metaz.props.demo" tofile="target/metaz.props" failonerror="false"/>
-		<ant:copy file="runtime/log4j.config.demo" tofile="target/log4j.config" failonerror="false"/>
+		<ant:copy file="runtime/log4j.config.demo" tofile="target/appz/log4j.properties" failonerror="false"/>
 				
 		<!-- package files -->
 		<ant:zip destfile="target/installation.zip">
