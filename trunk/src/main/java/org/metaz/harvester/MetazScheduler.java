@@ -214,7 +214,7 @@ public class MetazScheduler {
     // refresh the trigger of the default job
     trigger.setStartTime(startTime);
     trigger.setNextFireTime(startTime);
-    logger.debug("Set harvest start time at " + startTime.toString());
+    logger.info("Set harvest start time at " + startTime.toString());
 
   }
 
@@ -231,7 +231,7 @@ public class MetazScheduler {
       // if the interval changed, refresh the trigger
       interval = intv * 1000L * 60L * 60L;
       trigger.setRepeatInterval(interval);
-      logger.debug("Set harvest interval at " + interval + " millis");
+      logger.info("Set harvest interval at " + interval + " millis");
 
     }
 
