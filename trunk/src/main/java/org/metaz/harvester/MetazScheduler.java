@@ -232,7 +232,7 @@ public class MetazScheduler {
       interval = intv * 1000L * 60L * 60L;
       trigger.setRepeatInterval(interval);
       logger.debug("Set harvest interval at " + interval + " millis");
- 
+
     }
 
   }
@@ -301,18 +301,8 @@ public class MetazScheduler {
    */
   public void executeJob() {
 
-    // create a once-only trigger that fires in 10 seconds
-    //long          immediateStartTime = System.currentTimeMillis() + 10000L;
-    //SimpleTrigger immediateTrigger = new SimpleTrigger("immediateTrigger",
-	//null, new Date(immediateStartTime), null, 0, 0L);
-
-    // add this trigger to the default job, which has already been scheduled
     try {
 
-      //scheduler.scheduleJob(rdmcJobDetail, immediateTrigger);
-    	  // NOTE: if the immediateTrigger is used, an error states:
-    	  // "Unable to store Job with name: 'RdMC_harvest_job' and group: 'DEFAULT',
-    	  // because one already exists with this identification"
       scheduler.triggerJobWithVolatileTrigger("RdMC_harvest_job", null);
       logger.debug("Triggered immediate harvest.");
 
@@ -323,16 +313,16 @@ public class MetazScheduler {
     }
 
   }
-  
-  
+
+
   /**
    * Returns the defult trigger object (test purposes only).
    * @return trigger the default trigger object
    */
   private SimpleTrigger getTrigger() {
-	  
+
 	  return trigger;
-	  
+
   }
 
 }
