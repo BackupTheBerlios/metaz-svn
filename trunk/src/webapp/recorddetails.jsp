@@ -35,7 +35,7 @@
 				   boolean b = ((Boolean) btmd.getValue()).booleanValue();
 					if(b){
 				%>
-					<img src="images/key.jpg" height="50" alt="Sleutel" 
+					<img src="images/key.gif" height="50" alt="Sleutel" 
 								title="Om dit product te kunnen gebruiken moet u inloggen."/>
 				<%
 					}
