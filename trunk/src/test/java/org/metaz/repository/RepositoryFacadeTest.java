@@ -168,9 +168,6 @@ public class RepositoryFacadeTest extends TestCase {
       hits = facade.doSearch("producttype:jjjjjjjj");
       assertEquals(0, hits.size());
 
-      hits = facade.doSearch("title?");
-      assertEquals(8, hits.size());
-
     } catch (Exception e) {
 
       e.printStackTrace();
@@ -337,7 +334,7 @@ public class RepositoryFacadeTest extends TestCase {
 
       String[] values = facade.getSchoolTypesValues();
 
-      assertEquals(6, values.length);
+      assertEquals(24, values.length);
 
     } catch (Exception e) {
 

@@ -774,10 +774,12 @@ public class SearchServiceImplAlt
 
           //String[] origValues = hits.doc(i).getValues(MetaData.SCHOOLDISCIPLINE + ORIG); // if only full hierarchical path is needed
           String[] origValues = hits.doc(i).getValues(MetaData.SCHOOLDISCIPLINE);
+          if(origValues!=null){
 
-          for (int j = 0; j < origValues.length; j++) {
+            for (int j = 0; j < origValues.length; j++) {
 
-            ts.add(origValues[j]);
+                ts.add(origValues[j]);
+            }
 
           }
 

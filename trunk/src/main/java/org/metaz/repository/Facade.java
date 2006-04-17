@@ -10,7 +10,7 @@ import org.metaz.domain.MetaData;
 /**
  * The public interface for the Repository package.
  * 
- * @authors Jurgen Goelen
+ * @author Jurgen Goelen, Sammy Dalewyn
  * @version 0.3 
  */
 public interface Facade {
@@ -64,7 +64,8 @@ public interface Facade {
    * fuzzy search, proximity search, boosting,...).
    * </p>
    * <p>The parameter <code>termValuePairs</code> may also contain the key 
-   * <b>AllTermsRequired</b>. If the value is set to <code>false</code> the
+   * <ul><li>
+   * <b>AllTermsRequired</b></ul><p> If the value is set to <code>false</code> the
    * different terms will be combined by a logical OR, if set to <code>true</code>
    * the different terms are combinded by a logical AND.</p>
    *
