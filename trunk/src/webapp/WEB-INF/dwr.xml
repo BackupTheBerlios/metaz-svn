@@ -7,5 +7,10 @@
     <create creator="new" javascript="SearchBean">
       <param name="class" value="org.metaz.gui.portal.dwr.DWRSearchBeanWrapper"/>
     </create>
+    <convert converter="bean" 
+      match="org.metaz.gui.portal.KeyValuePair">
+      <param name="include" 
+        value="key,value"/>
+    </convert>
   </allow>
 </dwr>

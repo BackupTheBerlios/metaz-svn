@@ -1,35 +1,29 @@
 // @author: Falco Paul
 package org.metaz.gui.portal;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-
-import org.metaz.domain.HierarchicalStructuredTextMetaData;
-import org.metaz.domain.MetaData;
-import org.metaz.domain.Record;
-import org.metaz.domain.TextMetaData;
-import org.metaz.repository.Result;
-import org.metaz.repository.Facade;
-import org.metaz.util.HierarchicalStructuredMetaDataValueParser;
-import org.metaz.util.MetaZ;
-
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.metaz.domain.MetaData;
+import org.metaz.domain.Record;
+import org.metaz.repository.Facade;
+import org.metaz.repository.Result;
+import org.metaz.util.MetaZ;
+
 /**
- * DOCUMENT ME!
+ * Performs searches into the Metaz search index.
  * 
  * @author $author$
  * @version $Revision$
@@ -94,6 +88,7 @@ public class SearchBean {
 
 		populateTargetEndUserOptions();
 		populateSchoolTypeOptions();
+		populateSchoolDisciplineOptions();
 		populateDidacticFunctionOptions();
 		populateProductTypeOptions();
 		populateProfessionalSituationOptions();
@@ -313,11 +308,11 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Sets the logger.
 	 * 
-	 * @param logger
-	 *            DOCUMENT ME!
-	 */
+	 * @param logger the logger
+	 *            	 
+	 *            */
 	public void setLogger(Logger logger) {
 
 		this.logger = logger;
@@ -325,9 +320,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the logger
 	 */
 	public Logger getLogger() {
 
@@ -336,10 +331,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
-	 * @param targetEndUserOptions
-	 *            DOCUMENT ME!
+	 * @param targetEndUserOptions the options
+	 *           
 	 */
 	public void setTargetEndUserOptions(SelectOptionList targetEndUserOptions) {
 
@@ -348,9 +343,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the options
 	 */
 	public SelectOptionList getTargetEndUserOptions() {
 
@@ -359,10 +354,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param schoolTypeOptions
-	 *            DOCUMENT ME!
+	 *            the options
 	 */
 	public void setSchoolTypeOptions(SelectOptionList schoolTypeOptions) {
 
@@ -371,9 +366,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the options.
 	 */
 	public SelectOptionList getSchoolTypeOptions() {
 
@@ -382,10 +377,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param schoolDisciplineOptions
-	 *            DOCUMENT ME!
+	 *            the options
 	 */
 	public void setSchoolDisciplineOptions(
 			SelectOptionList schoolDisciplineOptions) {
@@ -395,9 +390,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the options.
 	 */
 	public SelectOptionList getSchoolDisciplineOptions() {
 
@@ -406,10 +401,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param didacticFunctionOptions
-	 *            DOCUMENT ME!
+	 *            the options
 	 */
 	public void setDidacticFunctionOptions(
 			SelectOptionList didacticFunctionOptions) {
@@ -419,9 +414,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the options.
 	 */
 	public SelectOptionList getDidacticFunctionOptions() {
 
@@ -430,10 +425,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param productTypeOptions
-	 *            DOCUMENT ME!
+	 *            the options.
 	 */
 	public void setProductTypeOptions(SelectOptionList productTypeOptions) {
 
@@ -442,9 +437,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the options.
 	 */
 	public SelectOptionList getProductTypeOptions() {
 
@@ -453,10 +448,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param professionalSituationOptions
-	 *            DOCUMENT ME!
+	 *            the options.
 	 */
 	public void setProfessionalSituationOptions(
 			SelectOptionList professionalSituationOptions) {
@@ -466,9 +461,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the options.
 	 */
 	public SelectOptionList getProfessionalSituationOptions() {
 
@@ -477,10 +472,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param competenceOptions
-	 *            DOCUMENT ME!
+	 *            the options.
 	 */
 	public void setCompetenceOptions(SelectOptionList competenceOptions) {
 
@@ -489,9 +484,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the options.
 	 */
 	public SelectOptionList getCompetenceOptions() {
 
@@ -500,10 +495,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param keywords
-	 *            DOCUMENT ME!
+	 *            the keywords
 	 */
 	public void setKeywords(String keywords) {
 
@@ -512,9 +507,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the keywords
 	 */
 	public String getKeywords() {
 
@@ -523,9 +518,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return escaped keywords
 	 */
 	public String getHtmlEscapedKeywords() {
 
@@ -534,10 +529,10 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Setter.
 	 * 
 	 * @param errorMessage
-	 *            DOCUMENT ME!
+	 *            the errormessage.
 	 */
 	public void setErrorMessage(String errorMessage) {
 
@@ -546,9 +541,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the error message
 	 */
 	public String getErrorMessage() {
 
@@ -557,9 +552,9 @@ public class SearchBean {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Getter.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return the error message
 	 */
 	public String getHtmlEscapedErrorMessage() {
 
@@ -622,8 +617,20 @@ public class SearchBean {
 
 	private void populateSchoolDisciplineOptions() {
 		schoolDisciplineOptions = new SelectOptionList();
-		schoolDisciplineOptions.add(new SelectOption(true, "",
-				"[Kies een schooltype]"));
+		schoolDisciplineOptions.add(new SelectOption(true, "", "[Kies]"));
+		try {
+			String[] values = facade.getSchoolDisciplineValues();
+			for (int i = 0; i < values.length; i++) {
+				String value = values[i];
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
+					schoolDisciplineOptions.add(new SelectOption(value,
+							displayHierarchy(value)));
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -635,17 +642,33 @@ public class SearchBean {
 	 *            the key to find disciplines for.
 	 * @return A map with option/displayvalue pairs.
 	 */
-	public Map<String, String> refreshSchoolDisciplineOptions(String schoolType) {
-		Map<String, String> map = new HashMap<String, String>();
+	public List<KeyValuePair> refreshSchoolDisciplineOptions(String schoolType) {
+		String[] values;
+		List<KeyValuePair> kvPairs = new ArrayList();
 		try {
-			String[] values = facade.getSchoolDisciplineValues(schoolType);
+			if ((schoolType == null) || ("".equals(schoolType))) {
+				values = facade.getSchoolDisciplineValues();
+				// extra option for "[Kies]"
+				KeyValuePair firstKvp = new KeyValuePair();
+				firstKvp.setKey("");
+				firstKvp.setValue("[Kies]");
+				kvPairs.add(firstKvp);
+			} else {
+				values = facade.getSchoolDisciplineValues(schoolType);
+			}
 			for (int i = 0; i < values.length; i++) {
-				map.put(values[i], (displayHierarchy(values[i])));
+				String value = values[i];
+				if (StringUtils.isNotBlank(value) && (!"/".equals(value))) {
+				KeyValuePair kvp = new KeyValuePair();
+				kvp.setKey(value);
+				kvp.setValue(displayHierarchy(value));
+				kvPairs.add(kvp);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return map;
+		return kvPairs;
 	}
 
 	private void populateDidacticFunctionOptions() {

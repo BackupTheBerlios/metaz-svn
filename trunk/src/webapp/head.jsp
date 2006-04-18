@@ -38,7 +38,7 @@
  
  function createList(data){
  	DWRUtil.removeAllOptions("<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>");
- 	DWRUtil.addOptions("<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>", data);
+ 	DWRUtil.addOptions("<%= org.metaz.domain.MetaData.SCHOOLDISCIPLINE %>", data, 'key', 'value');
  }
  
  	function selectTargetEndUser(){
