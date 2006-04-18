@@ -187,7 +187,7 @@
 					Bestandsgrootte:
 				</td>
 				<td>
-					<c:out value="${currentRecord.object.fileSize.value}"/>
+					<c:out value="${currentRecord.object.fileSize.value}"/> Kb.
 				</td>
 			</tr>
 			<tr class="odd">
