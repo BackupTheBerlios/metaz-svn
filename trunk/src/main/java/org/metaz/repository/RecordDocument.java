@@ -17,24 +17,19 @@ import java.util.Set;
  * @author Sammy Dalewyn
  * @version 1.0
  */
-public class RecordDocument {
+public final class RecordDocument {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   /** The name of the Document field containing the merged text fields that  will be full-text searched */
   public final static String MERGED = "merged";
-    private final static char KEYWORDSEPARATOR = ';';
-
-  //~ Constructors -----------------------------------------------------------------------------------------------------
-
-/**
-     * Empty constructor
-     */
-  public RecordDocument() {
-
-  } // end RecordDocument()
+  private final static char KEYWORDSEPARATOR = ';';
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
+  /**
+   * private constructor
+   */
+  private RecordDocument(){}
 
   /**
    * Makes a Lucene document for a MetaZ record.<p>The document contains the searchable metadata elements plus
@@ -79,7 +74,8 @@ public class RecordDocument {
 
     if (keywords != null) {
 
-        String kwords = ((String) keywords.getValue()).replace(KEYWORDSEPARATOR,' ');
+      String kwords = ((String) keywords.getValue()).replace(KEYWORDSEPARATOR, ' ');
+
       doc.add(Field.Text(MetaData.KEYWORDS, kwords));
       merged = merged + kwords;
 
@@ -91,22 +87,22 @@ public class RecordDocument {
     MetaData targetEndUser = r.getTargetEndUser();
 
     if (targetEndUser != null) {
-        
-        Set targetEndUsers = (Set) targetEndUser.getValue();
-        Iterator it = targetEndUsers.iterator();
-        
-        while (it.hasNext()) {
-            
-            String tgeu = it.next().toString();
-            String[] targetEndUserLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(tgeu);
-            
-            for (int j = 0; j < targetEndUserLevels.length; j++) {
-                
-                doc.add(Field.Keyword(MetaData.TARGETENDUSER, targetEndUserLevels[j]));
-                
-            } // end for
-            
-        } // end while       
+
+      Set      targetEndUsers = (Set) targetEndUser.getValue();
+      Iterator it = targetEndUsers.iterator();
+
+      while (it.hasNext()) {
+
+        String   tgeu = it.next().toString();
+        String[] targetEndUserLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(tgeu);
+
+        for (int j = 0; j < targetEndUserLevels.length; j++) {
+
+          doc.add(Field.Keyword(MetaData.TARGETENDUSER, targetEndUserLevels[j]));
+
+        } // end for
+
+      } // end while       
 
     } // end if
 
@@ -135,19 +131,23 @@ public class RecordDocument {
     MetaData schoolDiscipline = r.getSchoolDiscipline();
 
     if (schoolDiscipline != null) {
-        
-        Set schoolDisciplines = (Set) schoolDiscipline.getValue();
-        Iterator it = schoolDisciplines.iterator();
-        
-        while (it.hasNext()) {
-            
-            String schDiscipline = it.next().toString();
-            String[] schoolDisciplineLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schDiscipline);
-            
-            for (int i = 0; i < schoolDisciplineLevels.length; i++) {
-                doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE, schoolDisciplineLevels[i]));
-            } // end for
-        } // end while
+
+      Set      schoolDisciplines = (Set) schoolDiscipline.getValue();
+      Iterator it = schoolDisciplines.iterator();
+
+      while (it.hasNext()) {
+
+        String   schDiscipline = it.next().toString();
+        String[] schoolDisciplineLevels =
+            HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schDiscipline);
+
+        for (int i = 0; i < schoolDisciplineLevels.length; i++) {
+
+          doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE, schoolDisciplineLevels[i]));
+
+        } // end for
+
+      } // end while
 
     } // end if
 
@@ -162,17 +162,23 @@ public class RecordDocument {
     MetaData professionalSituation = r.getProfessionalSituation();
 
     if (professionalSituation != null) {
-        Set professionalSituations = (Set) professionalSituation.getValue();
-        Iterator it = professionalSituations.iterator();
-        
-        while(it.hasNext()) {
-            String prSituation = it.next().toString();
-            String[] professionalSituationLevels = HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(prSituation);
-            
-            for (int i=0; i<professionalSituationLevels.length; i++) {
-                doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION, professionalSituationLevels[i]));
-            } // end for
-        } // end while
+
+      Set      professionalSituations = (Set) professionalSituation.getValue();
+      Iterator it = professionalSituations.iterator();
+
+      while (it.hasNext()) {
+
+        String   prSituation = it.next().toString();
+        String[] professionalSituationLevels =
+            HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(prSituation);
+
+        for (int i = 0; i < professionalSituationLevels.length; i++) {
+
+          doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION, professionalSituationLevels[i]));
+
+        } // end for
+
+      } // end while
 
     } // end if
 
@@ -180,7 +186,8 @@ public class RecordDocument {
 
     if (competence != null) {
 
-        String competences = ((String) competence.getValue()).replace(KEYWORDSEPARATOR,' ');
+      String competences = ((String) competence.getValue()).replace(KEYWORDSEPARATOR, ' ');
+
       doc.add(Field.Keyword(MetaData.COMPETENCE, competences));
 
     } // end if

@@ -87,8 +87,8 @@ public class SearchServiceImplAlt
                                                };
   private MetaZ         app = MetaZ.getInstance();
   private DutchAnalyzer analyzer;
-  private boolean required;
-  private boolean prohibited;
+  private boolean       required;
+  private boolean       prohibited;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -104,12 +104,12 @@ public class SearchServiceImplAlt
     File stemdictFile = app.getRelativeFile(STEMDICT);
 
     analyzer.setStemDictionary(stemdictFile);
-    
+
     Properties props = app.getProperties();
-    
+
     required = Boolean.valueOf(props.getProperty(TERMREQUIREDPROP, "false"));
-    
-    prohibited = Boolean.valueOf(props.getProperty(TERMPROHIBITEDPROP,"false"));
+
+    prohibited = Boolean.valueOf(props.getProperty(TERMPROHIBITEDPROP, "false"));
 
   } // end SearchServiceImpl()
 
@@ -288,10 +288,13 @@ public class SearchServiceImplAlt
 
       File     f = app.getRelativeFile(INDEXPATH);
       Searcher searcher = new IndexSearcher(f.getCanonicalPath());
-      
+
       String allTermsRequired = (String) hmquery.get(ALLTERMSREQUIRED);
-      if(allTermsRequired!=null){
-          required = Boolean.valueOf(allTermsRequired);
+
+      if (allTermsRequired != null) {
+
+        required = Boolean.valueOf(allTermsRequired);
+
       }
 
       BooleanQuery q = new BooleanQuery();
@@ -567,16 +570,25 @@ public class SearchServiceImplAlt
         if (doc.get(MetaData.SCHOOLDISCIPLINE) != null) {
 
           HierarchicalStructuredTextMetaDataSet schoolDiscipline = new HierarchicalStructuredTextMetaDataSet();
-          String[]                           schoolDisciplineLevelSet = doc.getValues(MetaData.SCHOOLDISCIPLINE + ORIG);
-          for (int j=0; j<schoolDisciplineLevelSet.length; j++){
-              HierarchicalStructuredTextMetaData schoolDisciplineSet = new HierarchicalStructuredTextMetaData();
-              String[] schoolDisciplineLevels = schoolDisciplineLevelSet[j].split(LEVELSEPARATOR);
-              for(int k=1; k<schoolDisciplineLevels.length; k++) {
-                  TextMetaData level = new TextMetaData();
-                  level.setValue(schoolDisciplineLevels[k]);
-                  schoolDisciplineSet.addChild(level);
-              }
-              schoolDiscipline.addHierarchy(schoolDisciplineSet);
+          String[]                              schoolDisciplineLevelSet = doc.getValues(MetaData.SCHOOLDISCIPLINE +
+                                                                                         ORIG);
+
+          for (int j = 0; j < schoolDisciplineLevelSet.length; j++) {
+
+            HierarchicalStructuredTextMetaData schoolDisciplineSet = new HierarchicalStructuredTextMetaData();
+            String[]                           schoolDisciplineLevels = schoolDisciplineLevelSet[j].split(LEVELSEPARATOR);
+
+            for (int k = 1; k < schoolDisciplineLevels.length; k++) {
+
+              TextMetaData level = new TextMetaData();
+
+              level.setValue(schoolDisciplineLevels[k]);
+              schoolDisciplineSet.addChild(level);
+
+            }
+
+            schoolDiscipline.addHierarchy(schoolDisciplineSet);
+
           }
 
           rec.setSchoolDiscipline(schoolDiscipline);
@@ -586,16 +598,25 @@ public class SearchServiceImplAlt
         if (doc.get(MetaData.PROFESSIONALSITUATION) != null) {
 
           HierarchicalStructuredTextMetaDataSet professionalSituation = new HierarchicalStructuredTextMetaDataSet();
-          String[]                           professionalSituationLevelSet = doc.getValues(MetaData.PROFESSIONALSITUATION + ORIG);
-          for(int j=0; j<professionalSituationLevelSet.length; j++){
-              HierarchicalStructuredTextMetaData professionalSituationSet = new HierarchicalStructuredTextMetaData();
-              String[] professionalSituationLevels = professionalSituationLevelSet[j].split(LEVELSEPARATOR);
-              for(int k=1; k<professionalSituationLevels.length; k++){
-                  TextMetaData level = new TextMetaData();
-                  level.setValue(professionalSituationLevels[k]);
-                  professionalSituationSet.addChild(level);
-              }
-              professionalSituation.addHierarchy(professionalSituationSet);
+          String[]                              professionalSituationLevelSet = doc.getValues(MetaData.PROFESSIONALSITUATION +
+                                                                                              ORIG);
+
+          for (int j = 0; j < professionalSituationLevelSet.length; j++) {
+
+            HierarchicalStructuredTextMetaData professionalSituationSet = new HierarchicalStructuredTextMetaData();
+            String[]                           professionalSituationLevels = professionalSituationLevelSet[j].split(LEVELSEPARATOR);
+
+            for (int k = 1; k < professionalSituationLevels.length; k++) {
+
+              TextMetaData level = new TextMetaData();
+
+              level.setValue(professionalSituationLevels[k]);
+              professionalSituationSet.addChild(level);
+
+            }
+
+            professionalSituation.addHierarchy(professionalSituationSet);
+
           }
 
           rec.setProfessionalSituation(professionalSituation);
@@ -605,16 +626,24 @@ public class SearchServiceImplAlt
         if (doc.get(MetaData.TARGETENDUSER) != null) {
 
           HierarchicalStructuredTextMetaDataSet targetEndUser = new HierarchicalStructuredTextMetaDataSet();
-          String[]                           targetEndUserLevelSet = doc.getValues(MetaData.TARGETENDUSER + ORIG);
-          for(int j=0; j<targetEndUserLevelSet.length; j++){
-              HierarchicalStructuredTextMetaData targetEndUserSet = new HierarchicalStructuredTextMetaData();
-              String[] targetEndUserLevels = targetEndUserLevelSet[j].split(LEVELSEPARATOR);
-              for(int k=1; k<targetEndUserLevels.length; k++){
-                  TextMetaData level = new TextMetaData();
-                  level.setValue(targetEndUserLevels[k]);
-                  targetEndUserSet.addChild(level);
-              }
-              targetEndUser.addHierarchy(targetEndUserSet);
+          String[]                              targetEndUserLevelSet = doc.getValues(MetaData.TARGETENDUSER + ORIG);
+
+          for (int j = 0; j < targetEndUserLevelSet.length; j++) {
+
+            HierarchicalStructuredTextMetaData targetEndUserSet = new HierarchicalStructuredTextMetaData();
+            String[]                           targetEndUserLevels = targetEndUserLevelSet[j].split(LEVELSEPARATOR);
+
+            for (int k = 1; k < targetEndUserLevels.length; k++) {
+
+              TextMetaData level = new TextMetaData();
+
+              level.setValue(targetEndUserLevels[k]);
+              targetEndUserSet.addChild(level);
+
+            }
+
+            targetEndUser.addHierarchy(targetEndUserSet);
+
           }
 
           rec.setTargetEndUser(targetEndUser);
@@ -691,7 +720,6 @@ public class SearchServiceImplAlt
       if (hierarchical) {
 
         //fieldName = fieldName + ORIG; //if only full hierarchical path is needed
-
       }
 
       File        f = app.getRelativeFile(INDEXPATH);
@@ -758,11 +786,12 @@ public class SearchServiceImplAlt
 
     try {
 
-      String[]  values = new String[0];
-      File      f = app.getRelativeFile(INDEXPATH);
-      Searcher  searcher = new IndexSearcher(f.getCanonicalPath());
+      String[] values = new String[0];
+      File     f = app.getRelativeFile(INDEXPATH);
+      Searcher searcher = new IndexSearcher(f.getCanonicalPath());
+
       //Term      term = new Term(MetaData.SCHOOLTYPE + ORIG, schooltype); // if only full hierarchical path is needed
-      Term      term = new Term(MetaData.SCHOOLTYPE,schooltype);
+      Term      term = new Term(MetaData.SCHOOLTYPE, schooltype);
       TermQuery query = new TermQuery(term);
       Hits      hits = searcher.search(query);
 
@@ -774,11 +803,13 @@ public class SearchServiceImplAlt
 
           //String[] origValues = hits.doc(i).getValues(MetaData.SCHOOLDISCIPLINE + ORIG); // if only full hierarchical path is needed
           String[] origValues = hits.doc(i).getValues(MetaData.SCHOOLDISCIPLINE);
-          if(origValues!=null){
+
+          if (origValues != null) {
 
             for (int j = 0; j < origValues.length; j++) {
 
-                ts.add(origValues[j]);
+              ts.add(origValues[j]);
+
             }
 
           }
@@ -786,7 +817,7 @@ public class SearchServiceImplAlt
         }
 
         values = (String[]) ts.toArray(values);
-          Arrays.sort(values, String.CASE_INSENSITIVE_ORDER);
+        Arrays.sort(values, String.CASE_INSENSITIVE_ORDER);
 
       }
 

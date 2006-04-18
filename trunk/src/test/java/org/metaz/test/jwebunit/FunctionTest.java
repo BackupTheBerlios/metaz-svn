@@ -14,6 +14,7 @@ public class FunctionTest extends WebTestCase {
 
   /** The base URL of the web application */
   public static final String BASE_URL = "http://metaz.dyndns.org:8080/metaz/";
+
   //private static final String BASE_URL = "http://localhost:8080/metaz/";
   private static String endUser = ""; // beoogdeEindgebruiker
   private static String schoolType = ""; // schooltype
@@ -24,12 +25,11 @@ public class FunctionTest extends WebTestCase {
   private static String competence = ""; // competentie  
   private static String keywords = "energiegebruikers"; // trefwoord
   private static String resultTitel = "mengelt verbinden energiegebruikers";
-  //private static String keywords = "lesvoorbereiding"; // trefwoord
-  //private static String resultTitel = "Kennisbank wiskunde";
-  
+
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-
+  //private static String keywords = "lesvoorbereiding"; // trefwoord
+  //private static String resultTitel = "Kennisbank wiskunde";
 /**
      * Creates a new FunctionTest object.
      *

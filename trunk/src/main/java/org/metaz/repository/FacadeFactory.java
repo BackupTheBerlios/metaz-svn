@@ -8,9 +8,9 @@ import org.metaz.util.MetaZ;
 import java.util.Properties;
 
 /**
- * This factory class provides a static method to create an instance of  the Facade.  <br/
- * ><br/
- * > The concrete implementations to be used  for the Facade interface, and  the different services it encapsulates,
+ * This factory class provides a static method to create an instance of  the Facade.  <br>
+ * <br>
+ * The concrete implementations to be used  for the Facade interface, and  the different services it encapsulates,
  * can be configured by modifying the  following default properties:
  *  <ul>
  *    <li>org.metaz.repository.facade.impl = org.metaz.repository.FacadeImpl</li>
@@ -20,7 +20,7 @@ import java.util.Properties;
  *
  * @author J. Goelen
  */
-public class FacadeFactory {
+public final class FacadeFactory {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
@@ -30,9 +30,14 @@ public class FacadeFactory {
   private static final String DATA_DEF_PROP = "org.metaz.repository.DataServiceImpl";
   private static final String FACADE_PROP = "org.metaz.repository.facade.impl";
   private static final String FACADE_DEF_PROP = "org.metaz.repository.FacadeImpl";
-  private static Logger logger = MetaZ.getLogger(FacadeFactory.class);
+  private static Logger       logger = MetaZ.getLogger(FacadeFactory.class);
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
+
+  /**
+   * private constructor
+   */
+  private FacadeFactory(){}
 
   /**
    * Creates a new Facade instance.

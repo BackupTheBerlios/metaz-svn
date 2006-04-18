@@ -126,7 +126,7 @@ public class RepositoryFacadeTest extends TestCase {
   }
 
   /**
-   * Test method for 'org.metaz.repository.FacadeImpl.doUpdate(List<Record>)'
+   * Test method for 'org.metaz.repository.FacadeImpl.doUpdate()'
    */
   public void testDoUpdate() {
 
@@ -147,7 +147,7 @@ public class RepositoryFacadeTest extends TestCase {
   }
 
   /**
-   * Test method for 'org.metaz.repository.FacadeImpl.doSearch(String)'
+   * Test method for 'org.metaz.repository.FacadeImpl.doSearch()'
    */
   public void testDoSearch() {
 
@@ -206,7 +206,7 @@ public class RepositoryFacadeTest extends TestCase {
   }
 
   /**
-   * Test for methdo getDidacticFunctionValues
+   * Test for method getDidacticFunctionValues
    *
    * @throws Exception DOCUMENT ME!
    */

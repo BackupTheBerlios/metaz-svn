@@ -55,7 +55,6 @@ public class Generator {
    */
   public void generateXml(String templatefile) {
 
-
     try {
 
       //template = "test/toxgene/records.tsl";
@@ -106,7 +105,7 @@ public class Generator {
       /*
        * The progress() method sends a progress report
        * message to the message handler.
-       */      
+       */
       tgReporter.progress("Parsing template: ");
 
       File f = app.getRelativeFile(template);
@@ -153,7 +152,6 @@ public class Generator {
       tgReporter.printAllWarnings();
 
     } // end if
-
 
   } // end main()
 

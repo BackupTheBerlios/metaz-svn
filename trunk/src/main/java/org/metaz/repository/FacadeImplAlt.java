@@ -76,8 +76,7 @@ class FacadeImplAlt
 
       records = searchServiceAlt.doSearch(query);
 
-    }
-    finally {
+    } finally {
 
       logger.debug("released read lock");
       rwLock.readLock().unlock();
@@ -111,8 +110,7 @@ class FacadeImplAlt
 
       records = searchServiceAlt.doSearch(termValuePairs);
 
-    }
-    finally {
+    } finally {
 
       logger.debug("released read lock");
       rwLock.readLock().unlock();

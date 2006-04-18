@@ -1,16 +1,7 @@
 package org.metaz.repository;
 
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
-import java.util.Vector;
-
 import junit.framework.TestCase;
+
 import junit.swingui.TestRunner;
 
 import org.metaz.domain.BooleanMetaData;
@@ -23,15 +14,30 @@ import org.metaz.domain.MetaData;
 import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
+
 import org.metaz.util.MetaZ;
 
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+import java.util.Vector;
+
 /**
- * Unit tests the class SearchServiceImpl
+ * Unit tests the class SearchServiceImplAlt
  *
  * @author Sammy Dalewyn
  * @version 1.0
  */
 public class SearchServiceImplAltTest extends TestCase {
+
+  //~ Static fields/initializers ---------------------------------------------------------------------------------------
+
+  private static final String TERMREQUIREDPROP = "applicationz.search.term.required";
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
@@ -39,13 +45,12 @@ public class SearchServiceImplAltTest extends TestCase {
   SearchServiceImplAlt ssi = new SearchServiceImplAlt();
   String               WHITESPACE = " ";
   String               FIELDDELIMITER = ":";
-  MetaZ app = MetaZ.getInstance();
-    private static final String TERMREQUIREDPROP = "applicationz.search.term.required";
+  MetaZ                app = MetaZ.getInstance();
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
 /**
-     * Creates a new SearchServiceImplTest object.
+     * Creates a new SearchServiceImplAltTest object.
      *
      * @param sTestName the name of the test object
      */
@@ -79,333 +84,343 @@ public class SearchServiceImplAltTest extends TestCase {
              throws Exception
   {
 
-     //record 1  (contains some complex hierarchies) 
-     //mandatory metadata
-     TextMetaData title1 = new TextMetaData();
+    //record 1  (contains some complex hierarchies) 
+    //mandatory metadata
+    TextMetaData title1 = new TextMetaData();
 
-     title1.setValue("Geschiedenis van het Koninkrijk der Nederlanden");
+    title1.setValue("Geschiedenis van het Koninkrijk der Nederlanden");
 
-     TextMetaData didacticFunction1 = new TextMetaData();
+    TextMetaData didacticFunction1 = new TextMetaData();
 
-     didacticFunction1.setValue("Leestekst");
+    didacticFunction1.setValue("Leestekst");
 
-     TextMetaData productType1 = new TextMetaData();
+    TextMetaData productType1 = new TextMetaData();
 
-     productType1.setValue("Document");
+    productType1.setValue("Document");
 
-     BooleanMetaData secured1 = new BooleanMetaData();
+    BooleanMetaData secured1 = new BooleanMetaData();
 
-     secured1.setValue(false);
+    secured1.setValue(false);
 
-     TextMetaData fileFormat1 = new TextMetaData();
+    TextMetaData fileFormat1 = new TextMetaData();
 
-     fileFormat1.setValue("text/plain");
+    fileFormat1.setValue("text/plain");
 
-     HyperlinkMetaData uri1 = new HyperlinkMetaData();
+    HyperlinkMetaData uri1 = new HyperlinkMetaData();
 
-     uri1.setValue("http://nl.wikipedia.org/wiki/Geschiedenis_van_Nederland");
+    uri1.setValue("http://nl.wikipedia.org/wiki/Geschiedenis_van_Nederland");
 
-     Record rec1 = new Record(title1, secured1, fileFormat1, didacticFunction1, productType1, uri1);
+    Record rec1 = new Record(title1, secured1, fileFormat1, didacticFunction1, productType1, uri1);
 
-     // optional metadata profession situation
-     TextMetaData profSit1Level1 = new TextMetaData();
+    // optional metadata profession situation
+    TextMetaData profSit1Level1 = new TextMetaData();
 
-     profSit1Level1.setValue("Omgaan met een groep");
+    profSit1Level1.setValue("Omgaan met een groep");
 
-     TextMetaData profSit1Level2 = new TextMetaData();
+    TextMetaData profSit1Level2 = new TextMetaData();
 
-     profSit1Level2.setValue("Leiding geven aan groepsprocessen");
+    profSit1Level2.setValue("Leiding geven aan groepsprocessen");
 
-     HierarchicalStructuredTextMetaData hstmd1 = new HierarchicalStructuredTextMetaData();
-     
-     TextMetaData profSit2Level2 = new TextMetaData();
-     profSit2Level2.setValue("Groepsprocessen evalueren");
-     HierarchicalStructuredTextMetaData hstmdAlt = new HierarchicalStructuredTextMetaData();
+    HierarchicalStructuredTextMetaData hstmd1 = new HierarchicalStructuredTextMetaData();
 
-     hstmd1.addChild(profSit1Level1);
-     hstmd1.addChild(profSit1Level2);
-     hstmdAlt.addChild(profSit1Level1);
-     hstmdAlt.addChild(profSit2Level2);
-     HierarchicalStructuredTextMetaDataSet hstmds = new HierarchicalStructuredTextMetaDataSet();
-     hstmds.addHierarchy(hstmd1);
-     hstmds.addHierarchy(hstmdAlt);
-     rec1.setProfessionalSituation(hstmds);
+    TextMetaData                       profSit2Level2 = new TextMetaData();
 
-     // optional metadata school type
-     TextMetaData vo = new TextMetaData();
+    profSit2Level2.setValue("Groepsprocessen evalueren");
 
-     vo.setValue("Voortgezet onderwijs");
+    HierarchicalStructuredTextMetaData hstmdAlt = new HierarchicalStructuredTextMetaData();
 
-     TextMetaData havo = new TextMetaData();
+    hstmd1.addChild(profSit1Level1);
+    hstmd1.addChild(profSit1Level2);
+    hstmdAlt.addChild(profSit1Level1);
+    hstmdAlt.addChild(profSit2Level2);
 
-     havo.setValue("HAVO");
+    HierarchicalStructuredTextMetaDataSet hstmds = new HierarchicalStructuredTextMetaDataSet();
 
-     TextMetaData vbo = new TextMetaData();
+    hstmds.addHierarchy(hstmd1);
+    hstmds.addHierarchy(hstmdAlt);
+    rec1.setProfessionalSituation(hstmds);
 
-     vbo.setValue("VBO");
+    // optional metadata school type
+    TextMetaData vo = new TextMetaData();
 
-     TextMetaData vmbo = new TextMetaData();
+    vo.setValue("Voortgezet onderwijs");
 
-     vmbo.setValue("VMBO");
+    TextMetaData havo = new TextMetaData();
 
-     HierarchicalStructuredTextMetaData hstmd2 = new HierarchicalStructuredTextMetaData();
+    havo.setValue("HAVO");
 
-     hstmd2.addChild(vo);
-     hstmd2.addChild(havo);
+    TextMetaData vbo = new TextMetaData();
 
-     HierarchicalStructuredTextMetaData hstmd3 = new HierarchicalStructuredTextMetaData();
+    vbo.setValue("VBO");
 
-     hstmd3.addChild(vo);
-     hstmd3.addChild(vbo);
-     hstmd3.addChild(vmbo);
+    TextMetaData vmbo = new TextMetaData();
 
-     HierarchicalStructuredTextMetaDataSet hstmds1 = new HierarchicalStructuredTextMetaDataSet();
+    vmbo.setValue("VMBO");
 
-     hstmds1.addHierarchy(hstmd2);
-     hstmds1.addHierarchy(hstmd3);
-     rec1.setSchoolType(hstmds1);
+    HierarchicalStructuredTextMetaData hstmd2 = new HierarchicalStructuredTextMetaData();
 
-     // optional metadata keywords
-     TextMetaData keywords1 = new TextMetaData();
+    hstmd2.addChild(vo);
+    hstmd2.addChild(havo);
 
-     keywords1.setValue("19de eeuw, Willem I, Nederland, België, Luxemburg");
-     rec1.setKeywords(keywords1);
+    HierarchicalStructuredTextMetaData hstmd3 = new HierarchicalStructuredTextMetaData();
 
-     // optional metadata description
-     HtmlTextMetaData description1 = new HtmlTextMetaData();
+    hstmd3.addChild(vo);
+    hstmd3.addChild(vbo);
+    hstmd3.addChild(vmbo);
 
-     description1.setValue("<p>Nederland werd een <a href=\"/wiki/Monarchie\" title=\"Monarchie\">monarchie</a> met Willem Frederik als koning <a href=\"/wiki/Willem_I_der_Nederlanden\" title=\"Willem I der Nederlanden\">Willem I</a>. Zijn <a href=\"/wiki/Verenigd_Koninkrijk_der_Nederlanden\" title=\"Verenigd Koninkrijk der Nederlanden\">Verenigd Koninkrijk der Nederlanden</a> omvatte oorspronkelijk het huidige Nederland, België en <a href=\"/wiki/Groothertogdom_Luxemburg\" title=\"Groothertogdom Luxemburg\">Luxemburg</a>. Willem pakte de 'wederopbouw' krachtig aan en stimuleerde vooral handel en industrie. Zo liet hij talrijke kanalen graven en wegen verbeteren. Vooral de zware industrie in België profiteerde hiervan. Maar de Belgen voelden zich spoedig tweedeklas burgers: in bestuur en hoge legerposten waren de Belgen zwaar ondervertegenwoordigd hoewel ze een veel groter deel van de bevolking en het leger uitmaakten. Bovendien waren er grote religieuze verschillen (het <a href=\"/wiki/Katholicisme\" title=\"Katholicisme\">katholieke</a> zuiden tegenover het <a href=\"/wiki/Protestantisme\" title=\"Protestantisme\">protestantse</a> noorden), economische verschillen (het zuiden industrialiseerde, het noorden bleef een handelsnatie) en taalkundige verschillen (niet alleen <a href=\"/wiki/Wallonie\" title=\"Wallonie\">Wallonië</a> was in die tijd <a href=\"/wiki/Frans\" title=\"Frans\">Franssprekend</a>, maar ook de <a href=\"/wiki/Bourgeoisie\" title=\"Bourgeoisie\">bourgeoisie</a> in <a href=\"/wiki/Vlaanderen\" title=\"Vlaanderen\">Vlaanderen</a>) . Bovendien werden deze verschillen geaccentueerd en aangewakkerd door Frankrijk, dat moest immers niets hebben van de sterke bufferstaat aan zijn grens, en meende bovendien recht te hebben op de <a href=\"/wiki/Zuidelijke_Nederlanden\" title=\"Zuidelijke Nederlanden\">Zuidelijke Nederlanden</a>. En ook de Katholieke kerk wilde haar bevoorrechte positie in het katholieke zuiden behouden zodat de katholieke prelaten eveneens eerder tegenwerkten dan samenwerkten met Willem.</p>\n" +
-                           "<div class=\"editsection\" style=\"float:right;margin-left:5px;\">[<a href=\"/w/index.php?title=Geschiedenis_van_Nederland&amp;action=edit&amp;section=13\" title=\"Geschiedenis van Nederland\">bewerk</a>]</div>\n" +
-                           "<p><a name=\"De_Belgische_opstand\" id=\"De_Belgische_opstand\"></a></p>");
-     rec1.setDescription(description1);
+    HierarchicalStructuredTextMetaDataSet hstmds1 = new HierarchicalStructuredTextMetaDataSet();
 
-     //record 2   (all metadata fields present)
-     //mandatory metadata
-     TextMetaData title2 = new TextMetaData();
+    hstmds1.addHierarchy(hstmd2);
+    hstmds1.addHierarchy(hstmd3);
+    rec1.setSchoolType(hstmds1);
 
-     title2.setValue("het beste van Raymann is laat");
+    // optional metadata keywords
+    TextMetaData keywords1 = new TextMetaData();
 
-     TextMetaData didacticFunction2 = new TextMetaData();
+    keywords1.setValue("19de eeuw, Willem I, Nederland, België, Luxemburg");
+    rec1.setKeywords(keywords1);
 
-     didacticFunction2.setValue("Oefening");
+    // optional metadata description
+    HtmlTextMetaData description1 = new HtmlTextMetaData();
 
-     TextMetaData productType2 = new TextMetaData();
+    description1.setValue("<p>Nederland werd een <a href=\"/wiki/Monarchie\" title=\"Monarchie\">monarchie</a> met Willem Frederik als koning <a href=\"/wiki/Willem_I_der_Nederlanden\" title=\"Willem I der Nederlanden\">Willem I</a>. Zijn <a href=\"/wiki/Verenigd_Koninkrijk_der_Nederlanden\" title=\"Verenigd Koninkrijk der Nederlanden\">Verenigd Koninkrijk der Nederlanden</a> omvatte oorspronkelijk het huidige Nederland, België en <a href=\"/wiki/Groothertogdom_Luxemburg\" title=\"Groothertogdom Luxemburg\">Luxemburg</a>. Willem pakte de 'wederopbouw' krachtig aan en stimuleerde vooral handel en industrie. Zo liet hij talrijke kanalen graven en wegen verbeteren. Vooral de zware industrie in België profiteerde hiervan. Maar de Belgen voelden zich spoedig tweedeklas burgers: in bestuur en hoge legerposten waren de Belgen zwaar ondervertegenwoordigd hoewel ze een veel groter deel van de bevolking en het leger uitmaakten. Bovendien waren er grote religieuze verschillen (het <a href=\"/wiki/Katholicisme\" title=\"Katholicisme\">katholieke</a> zuiden tegenover het <a href=\"/wiki/Protestantisme\" title=\"Protestantisme\">protestantse</a> noorden), economische verschillen (het zuiden industrialiseerde, het noorden bleef een handelsnatie) en taalkundige verschillen (niet alleen <a href=\"/wiki/Wallonie\" title=\"Wallonie\">Wallonië</a> was in die tijd <a href=\"/wiki/Frans\" title=\"Frans\">Franssprekend</a>, maar ook de <a href=\"/wiki/Bourgeoisie\" title=\"Bourgeoisie\">bourgeoisie</a> in <a href=\"/wiki/Vlaanderen\" title=\"Vlaanderen\">Vlaanderen</a>) . Bovendien werden deze verschillen geaccentueerd en aangewakkerd door Frankrijk, dat moest immers niets hebben van de sterke bufferstaat aan zijn grens, en meende bovendien recht te hebben op de <a href=\"/wiki/Zuidelijke_Nederlanden\" title=\"Zuidelijke Nederlanden\">Zuidelijke Nederlanden</a>. En ook de Katholieke kerk wilde haar bevoorrechte positie in het katholieke zuiden behouden zodat de katholieke prelaten eveneens eerder tegenwerkten dan samenwerkten met Willem.</p>\n" +
+                          "<div class=\"editsection\" style=\"float:right;margin-left:5px;\">[<a href=\"/w/index.php?title=Geschiedenis_van_Nederland&amp;action=edit&amp;section=13\" title=\"Geschiedenis van Nederland\">bewerk</a>]</div>\n" +
+                          "<p><a name=\"De_Belgische_opstand\" id=\"De_Belgische_opstand\"></a></p>");
+    rec1.setDescription(description1);
 
-     productType2.setValue("Video");
+    //record 2   (all metadata fields present)
+    //mandatory metadata
+    TextMetaData title2 = new TextMetaData();
 
-     BooleanMetaData secured2 = new BooleanMetaData();
+    title2.setValue("het beste van Raymann is laat");
 
-     secured2.setValue(true);
+    TextMetaData didacticFunction2 = new TextMetaData();
 
-     TextMetaData fileFormat2 = new TextMetaData();
+    didacticFunction2.setValue("Oefening");
 
-     fileFormat2.setValue("video/x-ms-wmv");
+    TextMetaData productType2 = new TextMetaData();
 
-     HyperlinkMetaData uri2 = new HyperlinkMetaData();
+    productType2.setValue("Video");
 
-     uri2.setValue("http://cgi.omroep.nl/cgi-bin/streams?/nps/raymannislaat/bb.20051223_tante.wmv");
+    BooleanMetaData secured2 = new BooleanMetaData();
 
-     Record rec2 = new Record(title2, secured2, fileFormat2, didacticFunction2, productType2, uri2);
+    secured2.setValue(true);
 
-     //optional metadata subject
-     TextMetaData subject2 = new TextMetaData();
+    TextMetaData fileFormat2 = new TextMetaData();
 
-     subject2.setValue("Het Beste van Raymann is Laat - gepresenteerd door Jörgen Raymann ");
-     rec2.setSubject(subject2);
+    fileFormat2.setValue("video/x-ms-wmv");
 
-     //optional metadata description
-     HtmlTextMetaData description2 = new HtmlTextMetaData();
+    HyperlinkMetaData uri2 = new HyperlinkMetaData();
 
-     description2.setValue("<p class=MsoNormal><span style='font-size:6.5pt;font-family:Verdana;color:black'>Tante\n" +
-                           "Es heeft een openhartig gesprek met zanger <strong><span style='font-family:\n" +
-                           "Verdana'>Xander du Buisonjé </span></strong>en schrijver <strong><span\n" +
-                           "style='font-family:Verdana'>Jan Wolkers</span></strong>. <span class=GramE>In <strong><span\n" +
-                           "style='font-family:Verdana'>De Groeten uit </span></strong></span></span><st1:City><st1:place><span\n" +
-                           "  class=GramE><strong><span style='font-size:6.5pt;font-family:Verdana;\n" +
-                           "  color:black'>Paramaribo</span></strong></span></st1:place></st1:City><span\n" +
-                           "class=GramE><span style='font-size:6.5pt;font-family:Verdana;color:black'> laat\n" +
-                           "Quintis zien dat Surinaamse mannen wél kunnen <a href='something'>koken</a>.</span></span><span\n" +
-                           "style='font-size:6.5pt;font-family:Verdana;color:black'> <strong><span\n" +
-                           "style='font-family:Verdana'>Stand-up comedy</span></strong> is deze keer van </span><st1:place><st1:PlaceName><span\n" +
-                           "  style='font-size:6.5pt;font-family:Verdana;color:black'>Adam</span></st1:PlaceName><span\n" +
-                           " style='font-size:6.5pt;font-family:Verdana;color:black'> </span><st1:PlaceName><span\n" +
-                           "  style='font-size:6.5pt;font-family:Verdana;color:black'>Hills</span></st1:PlaceName></st1:place><span\n" +
-                           "style='font-size:6.5pt;font-family:Verdana;color:black'> en T-Rexx.</span></p>");
-     rec2.setDescription(description2);
+    uri2.setValue("http://cgi.omroep.nl/cgi-bin/streams?/nps/raymannislaat/bb.20051223_tante.wmv");
 
-     //optional metadata keywords
-     TextMetaData keywords2 = new TextMetaData();
+    Record rec2 = new Record(title2, secured2, fileFormat2, didacticFunction2, productType2, uri2);
 
-     keywords2.setValue("muziek, rap, video, uitzending, tv, battel, battle, thebattle, raymann is laat, Jurgen, comedian, young, urban, tante Esselien");
-     rec2.setKeywords(keywords2);
+    //optional metadata subject
+    TextMetaData subject2 = new TextMetaData();
 
-     //optional metadata targetEndUser
-     HierarchicalStructuredTextMetaDataSet targetEndUser2 = new HierarchicalStructuredTextMetaDataSet();
-     TextMetaData                       docent = new TextMetaData();
+    subject2.setValue("Het Beste van Raymann is Laat - gepresenteerd door Jörgen Raymann ");
+    rec2.setSubject(subject2);
 
-     docent.setValue("docent");
-     HierarchicalStructuredTextMetaData targetEndUserLevel1 = new HierarchicalStructuredTextMetaData();
-     targetEndUserLevel1.addChild(docent);
-     
-     targetEndUser2.addHierarchy(targetEndUserLevel1);
-     rec2.setTargetEndUser(targetEndUser2);
+    //optional metadata description
+    HtmlTextMetaData description2 = new HtmlTextMetaData();
 
-     //optional metadata schooltype
-     HierarchicalStructuredTextMetaDataSet schoolType = new HierarchicalStructuredTextMetaDataSet();
-     HierarchicalStructuredTextMetaData    schoolType1 = new HierarchicalStructuredTextMetaData();
-     TextMetaData                          so = new TextMetaData();
+    description2.setValue("<p class=MsoNormal><span style='font-size:6.5pt;font-family:Verdana;color:black'>Tante\n" +
+                          "Es heeft een openhartig gesprek met zanger <strong><span style='font-family:\n" +
+                          "Verdana'>Xander du Buisonjé </span></strong>en schrijver <strong><span\n" +
+                          "style='font-family:Verdana'>Jan Wolkers</span></strong>. <span class=GramE>In <strong><span\n" +
+                          "style='font-family:Verdana'>De Groeten uit </span></strong></span></span><st1:City><st1:place><span\n" +
+                          "  class=GramE><strong><span style='font-size:6.5pt;font-family:Verdana;\n" +
+                          "  color:black'>Paramaribo</span></strong></span></st1:place></st1:City><span\n" +
+                          "class=GramE><span style='font-size:6.5pt;font-family:Verdana;color:black'> laat\n" +
+                          "Quintis zien dat Surinaamse mannen wél kunnen <a href='something'>koken</a>.</span></span><span\n" +
+                          "style='font-size:6.5pt;font-family:Verdana;color:black'> <strong><span\n" +
+                          "style='font-family:Verdana'>Stand-up comedy</span></strong> is deze keer van </span><st1:place><st1:PlaceName><span\n" +
+                          "  style='font-size:6.5pt;font-family:Verdana;color:black'>Adam</span></st1:PlaceName><span\n" +
+                          " style='font-size:6.5pt;font-family:Verdana;color:black'> </span><st1:PlaceName><span\n" +
+                          "  style='font-size:6.5pt;font-family:Verdana;color:black'>Hills</span></st1:PlaceName></st1:place><span\n" +
+                          "style='font-size:6.5pt;font-family:Verdana;color:black'> en T-Rexx.</span></p>");
+    rec2.setDescription(description2);
 
-     so.setValue("Speciaal onderwijs");
-     schoolType1.addChild(so);
-     schoolType.addHierarchy(schoolType1);
-     rec2.setSchoolType(schoolType);
+    //optional metadata keywords
+    TextMetaData keywords2 = new TextMetaData();
 
-     //optional metadata school discipline
-     HierarchicalStructuredTextMetaDataSet schoolDiscipline = new HierarchicalStructuredTextMetaDataSet();
-     TextMetaData                       nl = new TextMetaData();
+    keywords2.setValue("muziek, rap, video, uitzending, tv, battel, battle, thebattle, raymann is laat, Jurgen, comedian, young, urban, tante Esselien");
+    rec2.setKeywords(keywords2);
 
-     nl.setValue("Nederlands");
+    //optional metadata targetEndUser
+    HierarchicalStructuredTextMetaDataSet targetEndUser2 = new HierarchicalStructuredTextMetaDataSet();
+    TextMetaData                          docent = new TextMetaData();
 
-     TextMetaData nl_anders = new TextMetaData();
+    docent.setValue("docent");
 
-     nl_anders.setValue("Nederlands voor anderstaligen");
-     HierarchicalStructuredTextMetaData schoolDisciplineLevel = new HierarchicalStructuredTextMetaData();
-     schoolDisciplineLevel.addChild(nl);
-     schoolDisciplineLevel.addChild(nl_anders);
-     schoolDiscipline.addHierarchy(schoolDisciplineLevel);
-     rec2.setSchoolDiscipline(schoolDiscipline);
+    HierarchicalStructuredTextMetaData targetEndUserLevel1 = new HierarchicalStructuredTextMetaData();
 
-     //optional metadata professional situation
-     HierarchicalStructuredTextMetaDataSet profSit2 = new HierarchicalStructuredTextMetaDataSet();
-     TextMetaData                       sit1 = new TextMetaData();
+    targetEndUserLevel1.addChild(docent);
 
-     sit1.setValue("Omgaan met verschillen");
+    targetEndUser2.addHierarchy(targetEndUserLevel1);
+    rec2.setTargetEndUser(targetEndUser2);
 
-     TextMetaData sit2 = new TextMetaData();
+    //optional metadata schooltype
+    HierarchicalStructuredTextMetaDataSet schoolType = new HierarchicalStructuredTextMetaDataSet();
+    HierarchicalStructuredTextMetaData    schoolType1 = new HierarchicalStructuredTextMetaData();
+    TextMetaData                          so = new TextMetaData();
 
-     sit2.setValue("omgaan met verschillen in taal, leerstijl, motivatie en tempo");
-     HierarchicalStructuredTextMetaData profSitLevel = new HierarchicalStructuredTextMetaData();
-     profSitLevel.addChild(sit1);
-     profSitLevel.addChild(sit2);
-     profSit2.addHierarchy(profSitLevel);
-     rec2.setProfessionalSituation(profSit2);
+    so.setValue("Speciaal onderwijs");
+    schoolType1.addChild(so);
+    schoolType.addHierarchy(schoolType1);
+    rec2.setSchoolType(schoolType);
 
-     //optional metadata competence
-     TextMetaData comp2 = new TextMetaData();
+    //optional metadata school discipline
+    HierarchicalStructuredTextMetaDataSet schoolDiscipline = new HierarchicalStructuredTextMetaDataSet();
+    TextMetaData                          nl = new TextMetaData();
 
-     comp2.setValue("Reflectie");
-     rec2.setCompetence(comp2);
+    nl.setValue("Nederlands");
 
-     //optional metadata aggregation level
-     TextMetaData aggLevel2 = new TextMetaData();
+    TextMetaData nl_anders = new TextMetaData();
 
-     aggLevel2.setValue("lineair");
-     rec2.setAggregationLevel(aggLevel2);
+    nl_anders.setValue("Nederlands voor anderstaligen");
 
-     //optional metadata didactic scenario
-     TextMetaData didSc = new TextMetaData();
+    HierarchicalStructuredTextMetaData schoolDisciplineLevel = new HierarchicalStructuredTextMetaData();
 
-     didSc.setValue("de leerlingen bekijken de video en lossen nadien vragen op");
-     rec2.setDidacticScenario(didSc);
+    schoolDisciplineLevel.addChild(nl);
+    schoolDisciplineLevel.addChild(nl_anders);
+    schoolDiscipline.addHierarchy(schoolDisciplineLevel);
+    rec2.setSchoolDiscipline(schoolDiscipline);
 
-     //optional metadata required time
-     NumericMetaData time2 = new NumericMetaData();
-     long            time2value = 60;
+    //optional metadata professional situation
+    HierarchicalStructuredTextMetaDataSet profSit2 = new HierarchicalStructuredTextMetaDataSet();
+    TextMetaData                          sit1 = new TextMetaData();
 
-     time2.setValue(time2value);
-     rec2.setRequiredTime(time2);
+    sit1.setValue("Omgaan met verschillen");
 
-     //optional metadata rights
-     TextMetaData rights = new TextMetaData();
+    TextMetaData sit2 = new TextMetaData();
 
-     rights.setValue("Copyright 2004 NPS");
-     rec2.setRights(rights);
+    sit2.setValue("omgaan met verschillen in taal, leerstijl, motivatie en tempo");
 
-     //optional metadata file size
-     NumericMetaData size = new NumericMetaData();
-     long            sizevalue = 550;
+    HierarchicalStructuredTextMetaData profSitLevel = new HierarchicalStructuredTextMetaData();
 
-     size.setValue(sizevalue);
-     rec2.setFileSize(size);
+    profSitLevel.addChild(sit1);
+    profSitLevel.addChild(sit2);
+    profSit2.addHierarchy(profSitLevel);
+    rec2.setProfessionalSituation(profSit2);
 
-     //optional metadata playing time
-     NumericMetaData plTime = new NumericMetaData();
-     long            plTimevalue = 40;
+    //optional metadata competence
+    TextMetaData comp2 = new TextMetaData();
 
-     plTime.setValue(plTimevalue);
-     rec2.setPlayingTime(plTime);
+    comp2.setValue("Reflectie");
+    rec2.setCompetence(comp2);
 
-     //optional metadata technical requirements
-     TextMetaData tech2 = new TextMetaData();
+    //optional metadata aggregation level
+    TextMetaData aggLevel2 = new TextMetaData();
 
-     tech2.setValue("Windows Media Player 9");
-     rec2.setTechnicalRequirements(tech2);
+    aggLevel2.setValue("lineair");
+    rec2.setAggregationLevel(aggLevel2);
 
-     //optional metadata creation date
-     DateMetaData date1 = new DateMetaData();
+    //optional metadata didactic scenario
+    TextMetaData didSc = new TextMetaData();
 
-     date1.setValue(new Date(20051214));
-     rec2.setCreationDate(date1);
+    didSc.setValue("de leerlingen bekijken de video en lossen nadien vragen op");
+    rec2.setDidacticScenario(didSc);
 
-     //optional metadata last changed date
-     DateMetaData date2 = new DateMetaData();
+    //optional metadata required time
+    NumericMetaData time2 = new NumericMetaData();
+    long            time2value = 60;
 
-     date2.setValue(new Date(20060129));
-     rec2.setLastChangedDate(date2);
+    time2.setValue(time2value);
+    rec2.setRequiredTime(time2);
 
-     //optional metadata version
-     TextMetaData version = new TextMetaData();
+    //optional metadata rights
+    TextMetaData rights = new TextMetaData();
 
-     version.setValue("compilatie");
-     rec2.setVersion(version);
+    rights.setValue("Copyright 2004 NPS");
+    rec2.setRights(rights);
 
-     //optional metadata status
-     TextMetaData status = new TextMetaData();
+    //optional metadata file size
+    NumericMetaData size = new NumericMetaData();
+    long            sizevalue = 550;
 
-     status.setValue("Gereed");
-     rec2.setStatus(status);
+    size.setValue(sizevalue);
+    rec2.setFileSize(size);
 
-     //optional metadata role and name
-     TextMetaData roleName = new TextMetaData();
+    //optional metadata playing time
+    NumericMetaData plTime = new NumericMetaData();
+    long            plTimevalue = 40;
 
-     roleName.setValue("geen idee wat hier in te vullen");
-     rec2.setRoleName(roleName);
+    plTime.setValue(plTimevalue);
+    rec2.setPlayingTime(plTime);
 
-     // record 3 (only mandatory metadata fields present)
-     TextMetaData title3 = new TextMetaData();
+    //optional metadata technical requirements
+    TextMetaData tech2 = new TextMetaData();
 
-     title3.setValue("nederlands.nl");
+    tech2.setValue("Windows Media Player 9");
+    rec2.setTechnicalRequirements(tech2);
 
-     TextMetaData didacticFunction3 = new TextMetaData();
+    //optional metadata creation date
+    DateMetaData date1 = new DateMetaData();
 
-     didacticFunction3.setValue("Leestekst");
+    date1.setValue(new Date(20051214));
+    rec2.setCreationDate(date1);
 
-     TextMetaData productType3 = new TextMetaData();
+    //optional metadata last changed date
+    DateMetaData date2 = new DateMetaData();
 
-     productType3.setValue("Document");
+    date2.setValue(new Date(20060129));
+    rec2.setLastChangedDate(date2);
 
-     BooleanMetaData secured3 = new BooleanMetaData();
+    //optional metadata version
+    TextMetaData version = new TextMetaData();
 
-     secured3.setValue(false);
+    version.setValue("compilatie");
+    rec2.setVersion(version);
 
-     TextMetaData fileFormat3 = new TextMetaData();
+    //optional metadata status
+    TextMetaData status = new TextMetaData();
 
-     fileFormat3.setValue("text/html");
+    status.setValue("Gereed");
+    rec2.setStatus(status);
 
-     HyperlinkMetaData uri3 = new HyperlinkMetaData();
+    //optional metadata role and name
+    TextMetaData roleName = new TextMetaData();
 
-     uri3.setValue("http://www.nederlands.nl/nedermap");
+    roleName.setValue("geen idee wat hier in te vullen");
+    rec2.setRoleName(roleName);
 
-     Record rec3 = new Record(title3, secured3, fileFormat3, didacticFunction3, productType3, uri3);
+    // record 3 (only mandatory metadata fields present)
+    TextMetaData title3 = new TextMetaData();
 
-     //index creation
-     l = new Vector();
-     l.add(rec1);
-     l.add(rec2);
-     l.add(rec3);
-     ssi.doUpdate(l);
+    title3.setValue("nederlands.nl");
 
-     } // end setUp()
+    TextMetaData didacticFunction3 = new TextMetaData();
+
+    didacticFunction3.setValue("Leestekst");
+
+    TextMetaData productType3 = new TextMetaData();
+
+    productType3.setValue("Document");
+
+    BooleanMetaData secured3 = new BooleanMetaData();
+
+    secured3.setValue(false);
+
+    TextMetaData fileFormat3 = new TextMetaData();
+
+    fileFormat3.setValue("text/html");
+
+    HyperlinkMetaData uri3 = new HyperlinkMetaData();
+
+    uri3.setValue("http://www.nederlands.nl/nedermap");
+
+    Record rec3 = new Record(title3, secured3, fileFormat3, didacticFunction3, productType3, uri3);
+
+    //index creation
+    l = new Vector();
+    l.add(rec1);
+    l.add(rec2);
+    l.add(rec3);
+    ssi.doUpdate(l);
+
+  } // end setUp()
 
   /**
    * Restores the test context
@@ -432,13 +447,18 @@ public class SearchServiceImplAltTest extends TestCase {
     hm.put(MetaData.PRODUCTTYPE, "Document");
     hm.put("", "nederlands");
     hm.put(MetaData.SCHOOLTYPE, "/Speciaal onderwijs");
+
     Properties props = app.getProperties();
-    Boolean required = Boolean.valueOf(props.getProperty(TERMREQUIREDPROP, "false"));
-    if(!required){
-        assertEquals(3, ((List) ssi.doSearch(hm)).size());
-    }
-    else {
-        assertEquals(0, ((List) ssi.doSearch(hm)).size());
+    Boolean    required = Boolean.valueOf(props.getProperty(TERMREQUIREDPROP, "false"));
+
+    if (! required) {
+
+      assertEquals(3, ((List) ssi.doSearch(hm)).size());
+
+    } else {
+
+      assertEquals(0, ((List) ssi.doSearch(hm)).size());
+
     }
 
   } // end testDoSearch2()
@@ -453,7 +473,6 @@ public class SearchServiceImplAltTest extends TestCase {
   {
 
     assertEquals(2, ((List) ssi.doSearch(MetaData.PRODUCTTYPE + FIELDDELIMITER + "Document")).size());
-    
 
   } // end testDoSearch()
 
@@ -552,22 +571,21 @@ public class SearchServiceImplAltTest extends TestCase {
       }
 
       DateMetaData creationDate = record.getCreationDate();
-      
-      if(creationDate != null){
-          
-          System.out.println("creation date: " + creationDate.toString());
-          
+
+      if (creationDate != null) {
+
+        System.out.println("creation date: " + creationDate.toString());
+
       }
-      
+
       DateMetaData lastChanged = record.getLastChangedDate();
-      
-      if(creationDate != null){
-          
-          System.out.println("last changed: " + lastChanged.toString());
-          
+
+      if (creationDate != null) {
+
+        System.out.println("last changed: " + lastChanged.toString());
+
       }
-      
-      
+
       System.out.println("en zo verder...");
 
     }

@@ -8,7 +8,7 @@ import java.net.URI;
  * @author Jurgen Goelen
  * @version 0.1
  *
- * @param <T> the result object 
+ * @param <T> the result object
  */
 public class Result<T> {
 
