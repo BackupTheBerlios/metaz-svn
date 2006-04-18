@@ -78,7 +78,7 @@ public class PortalTabTag extends TagSupport {
    * @param url URL that the tab is pointing to
    * @param tooltip the tab's tooltip
    */
-  private void addTab(String tabId, String text, String url, String tooltip) {
+  private void addTab(String tabId, String text, String url, String tooltip, String target) {
 
     if ((text == null) || (url == null))
 
@@ -92,7 +92,7 @@ public class PortalTabTag extends TagSupport {
     if (getActiveTabId().trim().equals(tabId))
       active = "class=\"current\" ";
 
-    printHtml("<li><a " + active + "href=\"" + url + "\" " + "title=\"" + tooltip + "\"" + ">" + text + "</a></li>");
+    printHtml("<li><a " + active + "href=\"" + url + "\" " + target + "title=\"" + tooltip + "\"" + ">" + text + "</a></li>");
 
   }
 
@@ -107,12 +107,12 @@ public class PortalTabTag extends TagSupport {
                throws JspException
   {
 
-    addTab(TAB_SIMPLE_SEARCH, "Eenvoudig zoeken", "search.jsp", "Zoeken naar leerobjecten");
-    addTab(TAB_ADVANCED_SEARCH, "Uitgebreid zoeken", "advancedsearch.jsp", "Uitgebreid zoeken naar leerobjecten");
-    addTab(TAB_SEARCH_RESULTS, "Zoekresultaat", "searchresults.jsp", "My last search results");
-    addTab(TAB_HELP, "Help", "help.jsp", "Help");
-    addTab(TAB_INFO, "Informatie", "info.jsp", "Informatie over deze website");
-    addTab(TAB_RDMC, "RDMC", "http://www.ou.nl/eCache/DEF/4/991.html", "Ruud de Moor Centrum website");
+    addTab(TAB_SIMPLE_SEARCH, "Eenvoudig zoeken", "search.jsp", "Zoeken naar leerobjecten", "");
+    addTab(TAB_ADVANCED_SEARCH, "Uitgebreid zoeken", "advancedsearch.jsp", "Uitgebreid zoeken naar leerobjecten", "");
+    addTab(TAB_SEARCH_RESULTS, "Zoekresultaat", "searchresults.jsp", "My last search results", "");
+    addTab(TAB_HELP, "Help", "help.jsp", "Help", "");
+    addTab(TAB_INFO, "Informatie", "info.jsp", "Informatie over deze website", "");
+    addTab(TAB_RDMC, "RDMC", "http://www.ou.nl/eCache/DEF/4/991.html", "Ruud de Moor Centrum website", "target=\"_blank\"");
 
     return EVAL_PAGE;
 
