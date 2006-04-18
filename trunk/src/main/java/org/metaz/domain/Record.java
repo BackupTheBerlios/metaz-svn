@@ -15,12 +15,12 @@ public class Record {
   private TextMetaData                          subject;
   private HtmlTextMetaData                      description;
   private TextMetaData                          keywords;
-  private HierarchicalStructuredTextMetaDataSet    targetEndUser;
+  private HierarchicalStructuredTextMetaDataSet targetEndUser;
   private HierarchicalStructuredTextMetaDataSet schoolType;
-  private HierarchicalStructuredTextMetaDataSet    schoolDiscipline;
+  private HierarchicalStructuredTextMetaDataSet schoolDiscipline;
   private TextMetaData                          didacticFunction;
   private TextMetaData                          productType;
-  private HierarchicalStructuredTextMetaDataSet    professionalSituation;
+  private HierarchicalStructuredTextMetaDataSet professionalSituation;
   private TextMetaData                          competence;
   private BooleanMetaData                       secured;
   private TextMetaData                          fileFormat;

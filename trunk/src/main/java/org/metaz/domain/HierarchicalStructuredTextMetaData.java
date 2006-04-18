@@ -86,5 +86,5 @@ public class HierarchicalStructuredTextMetaData extends MetaData {
     value.add((String) child.getValue());
 
   } // end addChild()
-  
+
 } // end HierarchicalStructuredTextMetaData
