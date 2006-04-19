@@ -23,10 +23,13 @@ public class RepositoryFacadeTest extends TestCase {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  Facade facade;
+  private Facade facade;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
+  /**
+   * Constructor
+   */
   public RepositoryFacadeTest() {
 
     facade = MetaZ.getRepositoryFacade();
@@ -35,7 +38,11 @@ public class RepositoryFacadeTest extends TestCase {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
-  @Override
+  /**
+   * Sets the testing environment
+   *
+   * @throws Exception The set up could not be completed.
+   */
   protected void setUp()
                 throws Exception
   {
@@ -45,8 +52,21 @@ public class RepositoryFacadeTest extends TestCase {
 
   }
 
+  /**
+   * Creates a new record
+   *
+   * @param title the title
+   * @param secured security settings
+   * @param fileFormat the file format
+   * @param dictaticFunc the didactic function
+   * @param productType the product type
+   * @param uri the uri
+   * @param schoolType the school type
+   * @return a record instance
+   */
   private Record createRecord(String title, boolean secured, String fileFormat, String dictaticFunc,
-                              String productType, String uri, String schoolType) {
+                              String productType, String uri, String schoolType)
+                              {
 
     Record record = null;
 
@@ -108,6 +128,11 @@ public class RepositoryFacadeTest extends TestCase {
 
   }
 
+  /**
+   * Creates sample records
+   *
+   * @return a list of records
+   */
   private List<Record> createSamples() {
 
     List<Record> records = new Vector<Record>();

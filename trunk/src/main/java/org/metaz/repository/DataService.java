@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author Jurgen Goelen
- * @version 0.3 
+ * @version 0.3
  */
 public interface DataService extends RepositoryService {
 
@@ -23,19 +23,19 @@ public interface DataService extends RepositoryService {
    *
    * @throws Exception The records could not be retrieved.
    */
-  public List<Record> getRecords(List<URI> ids)
+  List<Record> getRecords(List<URI> ids)
                           throws Exception;
 
   /**
    * Returns the record with the given uri attribute value.
    *
-   * @param id
+   * @param id the uri of the requested record
    *
    * @return Returns a record
    *
-   * @throws Exception
+   * @throws Exception The record can not be retrieved.
    */
-  public Record getRecord(URI id)
+  Record getRecord(URI id)
                    throws Exception;
 
   /**
@@ -45,9 +45,9 @@ public interface DataService extends RepositoryService {
    *
    * @return Returns a list of unique values. (sorted ascending)
    *
-   * @throws Exception
+   * @throws Exception The list can not be retrieved.
    */
-  public List getUniqueFieldValues(String recordField)
+  List getUniqueFieldValues(String recordField)
                             throws Exception;
 
 }

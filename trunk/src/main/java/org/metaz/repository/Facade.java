@@ -1,6 +1,5 @@
 package org.metaz.repository;
 
-import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
 
 import java.util.HashMap;
@@ -8,9 +7,9 @@ import java.util.List;
 
 /**
  * The public interface for the Repository package.
- * 
+ *
  * @author Jurgen Goelen, Sammy Dalewyn
- * @version 0.3 
+ * @version 0.3
  */
 public interface Facade {
 
@@ -28,9 +27,9 @@ public interface Facade {
    *
    * @return Returns a List of Record objects.
    *
-   * @throws Exception
+   * @throws Exception The search could not be completed.
    */
-  public List<Result<Record>> doSearch(String query)
+  List<Result<Record>> doSearch(String query)
                                 throws Exception;
 
   /**
@@ -67,9 +66,9 @@ public interface Facade {
    *
    * @return Returns a List of Record objects.
    *
-   * @throws Exception
+   * @throws Exception The search could not be completed.
    */
-  public List<Result<Record>> doSearch(HashMap termValuePairs)
+  List<Result<Record>> doSearch(HashMap termValuePairs)
                                 throws Exception;
 
   /**
@@ -79,7 +78,7 @@ public interface Facade {
    *
    * @throws Exception Update action failed.
    */
-  public void doUpdate(List<Record> records)
+  void doUpdate(List<Record> records)
                 throws Exception;
 
   /**
@@ -88,9 +87,9 @@ public interface Facade {
    *
    * @return the sorted array
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved.
    */
-  public String[] getTargetEndUserValues()
+  String[] getTargetEndUserValues()
                                   throws Exception;
 
   /**
@@ -99,9 +98,9 @@ public interface Facade {
    *
    * @return the sorted array
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved
    */
-  public String[] getSchoolTypesValues()
+  String[] getSchoolTypesValues()
                                 throws Exception;
 
   /**
@@ -110,9 +109,9 @@ public interface Facade {
    *
    * @return the sorted array
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved
    */
-  public String[] getSchoolDisciplineValues()
+  String[] getSchoolDisciplineValues()
                                      throws Exception;
 
   /**
@@ -126,9 +125,9 @@ public interface Facade {
    *
    * @return an array of related SchoolDiscipline values
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved
    */
-  public String[] getSchoolDisciplineValues(String schooltype)
+  String[] getSchoolDisciplineValues(String schooltype)
                                      throws Exception;
 
   /**
@@ -136,9 +135,9 @@ public interface Facade {
    *
    * @return the sorted array
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved
    */
-  public String[] getDidacticFunctionValues()
+  String[] getDidacticFunctionValues()
                                      throws Exception;
 
   /**
@@ -146,9 +145,9 @@ public interface Facade {
    *
    * @return the sorted array
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved
    */
-  public String[] getProductTypeValues()
+  String[] getProductTypeValues()
                                 throws Exception;
 
   /**
@@ -157,9 +156,9 @@ public interface Facade {
    *
    * @return the sorted array
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved
    */
-  public String[] getProfessionalSituationValues()
+  String[] getProfessionalSituationValues()
                                           throws Exception;
 
   /**
@@ -167,9 +166,9 @@ public interface Facade {
    *
    * @return the sorted array
    *
-   * @throws Exception
+   * @throws Exception The array could not be retrieved
    */
-  public String[] getCompetenceValues()
+  String[] getCompetenceValues()
                                throws Exception;
 
   /**
@@ -177,13 +176,13 @@ public interface Facade {
    *
    * @param service A SearchService implementation.
    */
-  public void setSearchService(RepositoryService service);
+  void setSearchService(RepositoryService service);
 
   /**
    * Sets the DataService implementation to be used.
    *
    * @param service A DataService implementation.
    */
-  public void setDataService(RepositoryService service);
+  void setDataService(RepositoryService service);
 
 }

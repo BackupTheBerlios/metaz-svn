@@ -25,7 +25,7 @@ public class Tekst
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-  private final static int len = 45669;
+  static final int LEN = 45669;
   private static String[]  data;
   private static boolean   loaded = false;
   private static Random    pick;
@@ -86,7 +86,7 @@ public class Tekst
 
     for (int i = 0; i < wordCount; i++) {
 
-      result += (Tekst.data[(int) pick.nextInt(len)] + " ");
+      result += (Tekst.data[(int) pick.nextInt(LEN)] + " ");
 
     } // end for
 
@@ -105,7 +105,7 @@ public class Tekst
 
     }
 
-    data = new String[len];
+    data = new String[LEN];
 
     try {
 
@@ -135,8 +135,7 @@ public class Tekst
       } // end do
        while (true);
 
-    } // end try
-    catch (Exception e) {
+    } catch (Exception e) {
 
       ToXgene.error("could not initialize text generator (tekst.txt)");
 

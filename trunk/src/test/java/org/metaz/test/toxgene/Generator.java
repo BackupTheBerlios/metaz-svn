@@ -124,19 +124,16 @@ public class Generator {
       tgEngine.generateLists();
       generateCollections();
 
-    } // end try
-    catch (ToXgeneErrorException e1) {
+    } catch (ToXgeneErrorException e1) {
 
       error(e1.getMessage());
 
-    } // end catch
-    catch (FileNotFoundException e) {
+    } catch (FileNotFoundException e) {
 
       tgEngine.endSession();
       error("cannot open template file \"" + template + "\"");
 
-    } // end catch
-    catch (Exception e) {
+    } catch (Exception e) {
 
       e.printStackTrace();
 
@@ -218,8 +215,7 @@ public class Generator {
              */
             tgEngine.materialize(tgColl, outStream);
 
-          } // end try
-          catch (Exception e) {
+          } catch (Exception e) {
 
             /*
              * The endSession() method
@@ -236,8 +232,7 @@ public class Generator {
 
         tgReporter.progress(" ...Done!\n");
 
-      } // end if
-      else {
+      } else {
 
         /*
          * In this case, the collection has a single
@@ -254,8 +249,7 @@ public class Generator {
 
           tgEngine.materialize(tgColl, outStream);
 
-        } // end try
-        catch (Exception e) {
+        } catch (Exception e) {
 
           tgEngine.endSession();
           throw new ToXgeneErrorException("Couldn't create " + file);

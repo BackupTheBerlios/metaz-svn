@@ -18,11 +18,11 @@ public class FunctionTest extends WebTestCase {
   //private static final String BASE_URL = "http://localhost:8080/metaz/";
   private static String endUser = ""; // beoogdeEindgebruiker
   private static String schoolType = ""; // schooltype
-  private static String schoolDiscipline = ""; // vakleergebied         
+  private static String schoolDiscipline = ""; // vakleergebied
   private static String didacticFunction = ""; // didactischeFunctie
   private static String productType = ""; // producttype
-  private static String professionalSituation = ""; // beroepssituatie  
-  private static String competence = ""; // competentie  
+  private static String professionalSituation = ""; // beroepssituatie
+  private static String competence = ""; // competentie
   private static String keywords = "energiegebruikers"; // trefwoord
   private static String resultTitel = "mengelt verbinden energiegebruikers";
 

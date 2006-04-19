@@ -112,8 +112,7 @@ public class SearchServiceImpl
       reader.close();
       directory.close();
 
-    } // end try
-    catch (IOException ex) {
+    } catch (IOException ex) {
 
       logger.error(ex.getMessage());
 
@@ -159,8 +158,7 @@ public class SearchServiceImpl
          }
          reader.close();
        */
-    } // end try
-    catch (Exception ex) {
+    } catch (Exception ex) {
 
       logger.error(ex.getMessage());
 
@@ -209,8 +207,7 @@ public class SearchServiceImpl
 
             keywordValue = query.substring(semicolon + 2, nextDoubleQuote);
 
-          } // end if
-          else {
+          } else {
 
             int nextWhiteSpace = query.indexOf(WHITESPACE, semicolon + 1);
 
@@ -240,8 +237,7 @@ public class SearchServiceImpl
 
       return doSearch(queryHashMap);
 
-    } // end try
-    catch (Exception ex) {
+    } catch (Exception ex) {
 
       logger.error(ex.getMessage());
 
@@ -337,8 +333,7 @@ public class SearchServiceImpl
       //logger.info("resultList contains " + resultList.size() + " elements");
       return resultList;
 
-    } // end try
-    catch (Exception ex) {
+    } catch (Exception ex) {
 
       logger.error(ex.getMessage());
 

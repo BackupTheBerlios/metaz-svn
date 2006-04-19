@@ -6,15 +6,10 @@ import org.apache.log4j.Priority;
 import org.metaz.domain.MetaData;
 import org.metaz.domain.Record;
 
-import org.metaz.repository.Facade;
-import org.metaz.repository.RepositoryService;
-import org.metaz.repository.Result;
-
 import org.metaz.util.MetaZ;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 

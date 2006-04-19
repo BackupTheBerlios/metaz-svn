@@ -29,18 +29,10 @@ import org.metaz.domain.NumericMetaData;
 import org.metaz.domain.Record;
 import org.metaz.domain.TextMetaData;
 
-import org.metaz.repository.RecordDocument;
-import org.metaz.repository.Result;
-import org.metaz.repository.SearchServiceImpl;
-
 import org.metaz.util.MetaZ;
 
 import java.io.File;
 import java.io.IOException;
-
-import java.net.URI;
-
-import java.text.DateFormat;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -81,10 +73,6 @@ public class SearchServiceImplAlt
                                      MetaData.DIDACTICFUNCTION, MetaData.PRODUCTTYPE, MetaData.PROFESSIONALSITUATION,
                                      MetaData.COMPETENCE
                                    };
-  private String[]      hierarchicalKeywords = new String[] {
-                                                 MetaData.TARGETENDUSER, MetaData.SCHOOLTYPE, MetaData.SCHOOLDISCIPLINE,
-                                                 MetaData.PROFESSIONALSITUATION
-                                               };
   private MetaZ         app = MetaZ.getInstance();
   private DutchAnalyzer analyzer;
   private boolean       required;
@@ -137,8 +125,7 @@ public class SearchServiceImplAlt
       reader.close();
       directory.close();
 
-    } // end try
-    catch (IOException ex) {
+    } catch (IOException ex) {
 
       logger.error(ex.getMessage());
 
@@ -183,8 +170,7 @@ public class SearchServiceImplAlt
            logger.debug((reader.document(i)).toString());
          }
          reader.close();*/
-    } // end try
-    catch (Exception ex) {
+    } catch (Exception ex) {
 
       logger.error(ex.getMessage());
 
@@ -232,8 +218,7 @@ public class SearchServiceImplAlt
 
             keywordValue = query.substring(semicolon + 2, nextDoubleQuote);
 
-          } // end if
-          else {
+          } else {
 
             int nextWhiteSpace = query.indexOf(WHITESPACE, semicolon + 1);
 
@@ -263,8 +248,7 @@ public class SearchServiceImplAlt
 
       return doSearch(queryHashMap);
 
-    } // end try
-    catch (Exception ex) {
+    } catch (Exception ex) {
 
       logger.error(ex.getMessage());
 
@@ -321,7 +305,7 @@ public class SearchServiceImplAlt
             Term  keyword = new Term(keywords[i], terms[j]);
             Query keywordQuery = new TermQuery(keyword);
 
-            q.add(keywordQuery, required, prohibited); // set with metaz.props                        
+            q.add(keywordQuery, required, prohibited); // set with metaz.props
 
           }
 
@@ -340,315 +324,8 @@ public class SearchServiceImplAlt
       for (int i = 0; i < hits.length(); i++) {
 
         Document doc = hits.doc(i);
-        Record   rec = new Record();
 
-        if (doc.get(MetaData.TITLE) != null) {
-
-          TextMetaData title = new TextMetaData();
-
-          title.setValue(doc.get(MetaData.TITLE));
-          rec.setTitle(title);
-
-        }
-
-        if (doc.get(MetaData.DESCRIPTION) != null) {
-
-          HtmlTextMetaData description = new HtmlTextMetaData();
-
-          description.setValue(doc.get(MetaData.DESCRIPTION));
-          rec.setDescription(description);
-
-        }
-
-        if (doc.get(MetaData.KEYWORDS) != null) {
-
-          TextMetaData keywords = new TextMetaData();
-
-          keywords.setValue(doc.get(MetaData.KEYWORDS));
-          rec.setKeywords(keywords);
-
-        }
-
-        if (doc.get(MetaData.PRODUCTTYPE) != null) {
-
-          TextMetaData productType = new TextMetaData();
-
-          productType.setValue(doc.get(MetaData.PRODUCTTYPE));
-          rec.setProductType(productType);
-
-        }
-
-        if (doc.get(MetaData.SECURED) != null) {
-
-          BooleanMetaData secured = new BooleanMetaData();
-
-          secured.setValue(new Boolean(doc.get(MetaData.SECURED)));
-          rec.setSecured(secured);
-
-        }
-
-        if (doc.get(MetaData.FILEFORMAT) != null) {
-
-          TextMetaData fileFormat = new TextMetaData();
-
-          fileFormat.setValue(doc.get(MetaData.FILEFORMAT));
-          rec.setFileFormat(fileFormat);
-
-        }
-
-        if (doc.get(MetaData.URI) != null) {
-
-          HyperlinkMetaData uri = new HyperlinkMetaData();
-
-          uri.setValue(doc.get(MetaData.URI));
-          rec.setUri(uri);
-
-        }
-
-        if (doc.get(MetaData.AGGREGATIONLEVEL) != null) {
-
-          TextMetaData aggregationLevel = new TextMetaData();
-
-          aggregationLevel.setValue(doc.get(MetaData.AGGREGATIONLEVEL));
-          rec.setAggregationLevel(aggregationLevel);
-
-        }
-
-        if (doc.get(MetaData.DIDACTICSCENARIO) != null) {
-
-          TextMetaData didacticScenario = new TextMetaData();
-
-          didacticScenario.setValue(doc.get(MetaData.DIDACTICSCENARIO));
-          rec.setDidacticScenario(didacticScenario);
-
-        }
-
-        if (doc.get(MetaData.REQUIREDTIME) != null) {
-
-          NumericMetaData requiredTime = new NumericMetaData();
-
-          requiredTime.setValue(new Long(doc.get(MetaData.REQUIREDTIME)));
-          rec.setRequiredTime(requiredTime);
-
-        }
-
-        if (doc.get(MetaData.RIGHTS) != null) {
-
-          TextMetaData rights = new TextMetaData();
-
-          rights.setValue(doc.get(MetaData.RIGHTS));
-          rec.setRights(rights);
-
-        }
-
-        if (doc.get(MetaData.FILESIZE) != null) {
-
-          NumericMetaData fileSize = new NumericMetaData();
-
-          fileSize.setValue(new Long(doc.get(MetaData.FILESIZE)));
-          rec.setFileSize(fileSize);
-
-        }
-
-        if (doc.get(MetaData.PLAYINGTIME) != null) {
-
-          NumericMetaData playingTime = new NumericMetaData();
-
-          playingTime.setValue(new Long(doc.get(MetaData.PLAYINGTIME)));
-          rec.setPlayingTime(playingTime);
-
-        }
-
-        if (doc.get(MetaData.TECHNICALREQUIREMENTS) != null) {
-
-          TextMetaData technicalRequirements = new TextMetaData();
-
-          technicalRequirements.setValue(doc.get(MetaData.TECHNICALREQUIREMENTS));
-          rec.setTechnicalRequirements(technicalRequirements);
-
-        }
-
-        if (doc.get(MetaData.CREATIONDATE) != null) {
-
-          DateMetaData creationDate = new DateMetaData();
-
-          creationDate.setValue(new Date((Long.valueOf(doc.get(MetaData.CREATIONDATE)))));
-          rec.setCreationDate(creationDate);
-
-        }
-
-        if (doc.get(MetaData.LASTCHANGEDDATE) != null) {
-
-          DateMetaData lastChangedDate = new DateMetaData();
-
-          lastChangedDate.setValue(new Date((Long.valueOf(doc.get(MetaData.LASTCHANGEDDATE)))));
-          rec.setLastChangedDate(lastChangedDate);
-
-        }
-
-        if (doc.get(MetaData.VERSION) != null) {
-
-          TextMetaData version = new TextMetaData();
-
-          version.setValue(doc.get(MetaData.VERSION));
-          rec.setVersion(version);
-
-        }
-
-        if (doc.get(MetaData.STATUS) != null) {
-
-          TextMetaData status = new TextMetaData();
-
-          status.setValue(doc.get(MetaData.STATUS));
-          rec.setStatus(status);
-
-        }
-
-        if (doc.get(MetaData.ROLENAME) != null) {
-
-          TextMetaData roleName = new TextMetaData();
-
-          roleName.setValue(doc.get(MetaData.ROLENAME));
-          rec.setRoleName(roleName);
-
-        }
-
-        if (doc.get(MetaData.SUBJECT) != null) {
-
-          TextMetaData subject = new TextMetaData();
-
-          subject.setValue(doc.get(MetaData.SUBJECT));
-          rec.setSubject(subject);
-
-        }
-
-        if (doc.get(MetaData.DIDACTICFUNCTION) != null) {
-
-          TextMetaData didacticFunction = new TextMetaData();
-
-          didacticFunction.setValue(doc.get(MetaData.DIDACTICFUNCTION));
-          rec.setDidacticFunction(didacticFunction);
-
-        }
-
-        if (doc.get(MetaData.COMPETENCE) != null) {
-
-          TextMetaData competence = new TextMetaData();
-
-          competence.setValue(doc.get(MetaData.COMPETENCE));
-          rec.setCompetence(competence);
-
-        }
-
-        if (doc.get(MetaData.SCHOOLTYPE) != null) {
-
-          HierarchicalStructuredTextMetaDataSet schoolType = new HierarchicalStructuredTextMetaDataSet();
-          String[]                              schoolTypeLevelSet = doc.getValues(MetaData.SCHOOLTYPE + ORIG);
-
-          for (int j = 0; j < schoolTypeLevelSet.length; j++) {
-
-            HierarchicalStructuredTextMetaData schoolTypeSet = new HierarchicalStructuredTextMetaData();
-            String[]                           schoolTypeLevels = schoolTypeLevelSet[j].split(LEVELSEPARATOR);
-
-            for (int k = 1; k < schoolTypeLevels.length; k++) {
-
-              TextMetaData level = new TextMetaData();
-
-              level.setValue(schoolTypeLevels[k]);
-              schoolTypeSet.addChild(level);
-
-            }
-
-            schoolType.addHierarchy(schoolTypeSet);
-
-          }
-
-          rec.setSchoolType(schoolType);
-
-        }
-
-        if (doc.get(MetaData.SCHOOLDISCIPLINE) != null) {
-
-          HierarchicalStructuredTextMetaDataSet schoolDiscipline = new HierarchicalStructuredTextMetaDataSet();
-          String[]                              schoolDisciplineLevelSet = doc.getValues(MetaData.SCHOOLDISCIPLINE +
-                                                                                         ORIG);
-
-          for (int j = 0; j < schoolDisciplineLevelSet.length; j++) {
-
-            HierarchicalStructuredTextMetaData schoolDisciplineSet = new HierarchicalStructuredTextMetaData();
-            String[]                           schoolDisciplineLevels = schoolDisciplineLevelSet[j].split(LEVELSEPARATOR);
-
-            for (int k = 1; k < schoolDisciplineLevels.length; k++) {
-
-              TextMetaData level = new TextMetaData();
-
-              level.setValue(schoolDisciplineLevels[k]);
-              schoolDisciplineSet.addChild(level);
-
-            }
-
-            schoolDiscipline.addHierarchy(schoolDisciplineSet);
-
-          }
-
-          rec.setSchoolDiscipline(schoolDiscipline);
-
-        }
-
-        if (doc.get(MetaData.PROFESSIONALSITUATION) != null) {
-
-          HierarchicalStructuredTextMetaDataSet professionalSituation = new HierarchicalStructuredTextMetaDataSet();
-          String[]                              professionalSituationLevelSet = doc.getValues(MetaData.PROFESSIONALSITUATION +
-                                                                                              ORIG);
-
-          for (int j = 0; j < professionalSituationLevelSet.length; j++) {
-
-            HierarchicalStructuredTextMetaData professionalSituationSet = new HierarchicalStructuredTextMetaData();
-            String[]                           professionalSituationLevels = professionalSituationLevelSet[j].split(LEVELSEPARATOR);
-
-            for (int k = 1; k < professionalSituationLevels.length; k++) {
-
-              TextMetaData level = new TextMetaData();
-
-              level.setValue(professionalSituationLevels[k]);
-              professionalSituationSet.addChild(level);
-
-            }
-
-            professionalSituation.addHierarchy(professionalSituationSet);
-
-          }
-
-          rec.setProfessionalSituation(professionalSituation);
-
-        }
-
-        if (doc.get(MetaData.TARGETENDUSER) != null) {
-
-          HierarchicalStructuredTextMetaDataSet targetEndUser = new HierarchicalStructuredTextMetaDataSet();
-          String[]                              targetEndUserLevelSet = doc.getValues(MetaData.TARGETENDUSER + ORIG);
-
-          for (int j = 0; j < targetEndUserLevelSet.length; j++) {
-
-            HierarchicalStructuredTextMetaData targetEndUserSet = new HierarchicalStructuredTextMetaData();
-            String[]                           targetEndUserLevels = targetEndUserLevelSet[j].split(LEVELSEPARATOR);
-
-            for (int k = 1; k < targetEndUserLevels.length; k++) {
-
-              TextMetaData level = new TextMetaData();
-
-              level.setValue(targetEndUserLevels[k]);
-              targetEndUserSet.addChild(level);
-
-            }
-
-            targetEndUser.addHierarchy(targetEndUserSet);
-
-          }
-
-          rec.setTargetEndUser(targetEndUser);
-
-        }
+        Record   rec = createRecord(doc);
 
         String suri = doc.get(MetaData.URI);
         float  score = hits.score(i);
@@ -663,8 +340,7 @@ public class SearchServiceImplAlt
 
       return resultList;
 
-    } // end try
-    catch (Exception ex) {
+    } catch (Exception ex) {
 
       logger.error(ex.getMessage());
 
@@ -703,23 +379,6 @@ public class SearchServiceImplAlt
 
         return null;
 
-      }
-
-      boolean hierarchical = false;
-
-      for (int i = 0; i < hierarchicalKeywords.length; i++) {
-
-        if (fieldName.equals(hierarchicalKeywords[i])) {
-
-          hierarchical = true;
-
-        }
-
-      }
-
-      if (hierarchical) {
-
-        //fieldName = fieldName + ORIG; //if only full hierarchical path is needed
       }
 
       File        f = app.getRelativeFile(INDEXPATH);
@@ -790,7 +449,6 @@ public class SearchServiceImplAlt
       File     f = app.getRelativeFile(INDEXPATH);
       Searcher searcher = new IndexSearcher(f.getCanonicalPath());
 
-      //Term      term = new Term(MetaData.SCHOOLTYPE + ORIG, schooltype); // if only full hierarchical path is needed
       Term      term = new Term(MetaData.SCHOOLTYPE, schooltype);
       TermQuery query = new TermQuery(term);
       Hits      hits = searcher.search(query);
@@ -801,7 +459,6 @@ public class SearchServiceImplAlt
 
         for (int i = 0; i < hits.length(); i++) {
 
-          //String[] origValues = hits.doc(i).getValues(MetaData.SCHOOLDISCIPLINE + ORIG); // if only full hierarchical path is needed
           String[] origValues = hits.doc(i).getValues(MetaData.SCHOOLDISCIPLINE);
 
           if (origValues != null) {
@@ -832,6 +489,373 @@ public class SearchServiceImplAlt
     }
 
     return null;
+
+  }
+
+  /**
+   * Creates a record based on the values of the Lucene document
+   *
+   * @param doc the Lucene document
+   *
+   * @return a MetaZ record
+   */
+  private Record createRecord(Document doc) {
+
+    Record rec = new Record();
+
+    rec = addRequiredFields(doc, rec);
+    rec = addOptionalFields(doc, rec);
+    rec = addHierarchicalFields(doc, rec);
+
+    return rec;
+
+  }
+
+  /**
+   * Adds the required field to the record.
+   *
+   * @param doc the Lucene document
+   * @param rec the record
+   *
+   * @return the record
+   */
+  private Record addRequiredFields(Document doc, Record rec) {
+
+    if (doc.get(MetaData.TITLE) != null) {
+
+      TextMetaData title = new TextMetaData();
+
+      title.setValue(doc.get(MetaData.TITLE));
+      rec.setTitle(title);
+
+    }
+
+    if (doc.get(MetaData.PRODUCTTYPE) != null) {
+
+      TextMetaData productType = new TextMetaData();
+
+      productType.setValue(doc.get(MetaData.PRODUCTTYPE));
+      rec.setProductType(productType);
+
+    }
+
+    if (doc.get(MetaData.SECURED) != null) {
+
+      BooleanMetaData secured = new BooleanMetaData();
+
+      secured.setValue(new Boolean(doc.get(MetaData.SECURED)));
+      rec.setSecured(secured);
+
+    }
+
+    if (doc.get(MetaData.FILEFORMAT) != null) {
+
+      TextMetaData fileFormat = new TextMetaData();
+
+      fileFormat.setValue(doc.get(MetaData.FILEFORMAT));
+      rec.setFileFormat(fileFormat);
+
+    }
+
+    if (doc.get(MetaData.URI) != null) {
+
+      HyperlinkMetaData uri = new HyperlinkMetaData();
+
+      uri.setValue(doc.get(MetaData.URI));
+      rec.setUri(uri);
+
+    }
+
+    if (doc.get(MetaData.DIDACTICFUNCTION) != null) {
+
+      TextMetaData didacticFunction = new TextMetaData();
+
+      didacticFunction.setValue(doc.get(MetaData.DIDACTICFUNCTION));
+      rec.setDidacticFunction(didacticFunction);
+
+    }
+
+    return rec;
+
+  }
+
+  /**
+   * Adds the optional fields to the record
+   *
+   * @param doc the Lucene document
+   * @param rec the record
+   *
+   * @return the record
+   */
+  private Record addOptionalFields(Document doc, Record rec) {
+
+    if (doc.get(MetaData.DESCRIPTION) != null) {
+
+      HtmlTextMetaData description = new HtmlTextMetaData();
+
+      description.setValue(doc.get(MetaData.DESCRIPTION));
+      rec.setDescription(description);
+
+    }
+
+    if (doc.get(MetaData.KEYWORDS) != null) {
+
+      TextMetaData keywordset = new TextMetaData();
+
+      keywordset.setValue(doc.get(MetaData.KEYWORDS));
+      rec.setKeywords(keywordset);
+
+    }
+
+    if (doc.get(MetaData.AGGREGATIONLEVEL) != null) {
+
+      TextMetaData aggregationLevel = new TextMetaData();
+
+      aggregationLevel.setValue(doc.get(MetaData.AGGREGATIONLEVEL));
+      rec.setAggregationLevel(aggregationLevel);
+
+    }
+
+    if (doc.get(MetaData.DIDACTICSCENARIO) != null) {
+
+      TextMetaData didacticScenario = new TextMetaData();
+
+      didacticScenario.setValue(doc.get(MetaData.DIDACTICSCENARIO));
+      rec.setDidacticScenario(didacticScenario);
+
+    }
+
+    if (doc.get(MetaData.REQUIREDTIME) != null) {
+
+      NumericMetaData requiredTime = new NumericMetaData();
+
+      requiredTime.setValue(new Long(doc.get(MetaData.REQUIREDTIME)));
+      rec.setRequiredTime(requiredTime);
+
+    }
+
+    if (doc.get(MetaData.RIGHTS) != null) {
+
+      TextMetaData rights = new TextMetaData();
+
+      rights.setValue(doc.get(MetaData.RIGHTS));
+      rec.setRights(rights);
+
+    }
+
+    if (doc.get(MetaData.FILESIZE) != null) {
+
+      NumericMetaData fileSize = new NumericMetaData();
+
+      fileSize.setValue(new Long(doc.get(MetaData.FILESIZE)));
+      rec.setFileSize(fileSize);
+
+    }
+
+    if (doc.get(MetaData.PLAYINGTIME) != null) {
+
+      NumericMetaData playingTime = new NumericMetaData();
+
+      playingTime.setValue(new Long(doc.get(MetaData.PLAYINGTIME)));
+      rec.setPlayingTime(playingTime);
+
+    }
+
+    if (doc.get(MetaData.TECHNICALREQUIREMENTS) != null) {
+
+      TextMetaData technicalRequirements = new TextMetaData();
+
+      technicalRequirements.setValue(doc.get(MetaData.TECHNICALREQUIREMENTS));
+      rec.setTechnicalRequirements(technicalRequirements);
+
+    }
+
+    if (doc.get(MetaData.CREATIONDATE) != null) {
+
+      DateMetaData creationDate = new DateMetaData();
+
+      creationDate.setValue(new Date((Long.valueOf(doc.get(MetaData.CREATIONDATE)))));
+      rec.setCreationDate(creationDate);
+
+    }
+
+    if (doc.get(MetaData.LASTCHANGEDDATE) != null) {
+
+      DateMetaData lastChangedDate = new DateMetaData();
+
+      lastChangedDate.setValue(new Date((Long.valueOf(doc.get(MetaData.LASTCHANGEDDATE)))));
+      rec.setLastChangedDate(lastChangedDate);
+
+    }
+
+    if (doc.get(MetaData.VERSION) != null) {
+
+      TextMetaData version = new TextMetaData();
+
+      version.setValue(doc.get(MetaData.VERSION));
+      rec.setVersion(version);
+
+    }
+
+    if (doc.get(MetaData.STATUS) != null) {
+
+      TextMetaData status = new TextMetaData();
+
+      status.setValue(doc.get(MetaData.STATUS));
+      rec.setStatus(status);
+
+    }
+
+    if (doc.get(MetaData.ROLENAME) != null) {
+
+      TextMetaData roleName = new TextMetaData();
+
+      roleName.setValue(doc.get(MetaData.ROLENAME));
+      rec.setRoleName(roleName);
+
+    }
+
+    if (doc.get(MetaData.SUBJECT) != null) {
+
+      TextMetaData subject = new TextMetaData();
+
+      subject.setValue(doc.get(MetaData.SUBJECT));
+      rec.setSubject(subject);
+
+    }
+
+    if (doc.get(MetaData.COMPETENCE) != null) {
+
+      TextMetaData competence = new TextMetaData();
+
+      competence.setValue(doc.get(MetaData.COMPETENCE));
+      rec.setCompetence(competence);
+
+    }
+
+    return rec;
+
+  }
+
+  /**
+   * Adds the hierarchical fields to the record
+   *
+   * @param doc the Lucene document
+   * @param rec the record
+   *
+   * @return the record
+   */
+  private Record addHierarchicalFields(Document doc, Record rec) {
+
+    if (doc.get(MetaData.SCHOOLTYPE) != null) {
+
+      HierarchicalStructuredTextMetaDataSet schoolType = new HierarchicalStructuredTextMetaDataSet();
+      String[]                              schoolTypeLevelSet = doc.getValues(MetaData.SCHOOLTYPE + ORIG);
+
+      for (int j = 0; j < schoolTypeLevelSet.length; j++) {
+
+        HierarchicalStructuredTextMetaData schoolTypeSet = new HierarchicalStructuredTextMetaData();
+        String[]                           schoolTypeLevels = schoolTypeLevelSet[j].split(LEVELSEPARATOR);
+
+        for (int k = 1; k < schoolTypeLevels.length; k++) {
+
+          TextMetaData level = new TextMetaData();
+
+          level.setValue(schoolTypeLevels[k]);
+          schoolTypeSet.addChild(level);
+
+        }
+
+        schoolType.addHierarchy(schoolTypeSet);
+
+      }
+
+      rec.setSchoolType(schoolType);
+
+    }
+
+    if (doc.get(MetaData.SCHOOLDISCIPLINE) != null) {
+
+      HierarchicalStructuredTextMetaDataSet schoolDiscipline = new HierarchicalStructuredTextMetaDataSet();
+      String[]                              schoolDisciplineLevelSet = doc.getValues(MetaData.SCHOOLDISCIPLINE + ORIG);
+
+      for (int j = 0; j < schoolDisciplineLevelSet.length; j++) {
+
+        HierarchicalStructuredTextMetaData schoolDisciplineSet = new HierarchicalStructuredTextMetaData();
+        String[]                           schoolDisciplineLevels = schoolDisciplineLevelSet[j].split(LEVELSEPARATOR);
+
+        for (int k = 1; k < schoolDisciplineLevels.length; k++) {
+
+          TextMetaData level = new TextMetaData();
+
+          level.setValue(schoolDisciplineLevels[k]);
+          schoolDisciplineSet.addChild(level);
+
+        }
+
+        schoolDiscipline.addHierarchy(schoolDisciplineSet);
+
+      }
+
+      rec.setSchoolDiscipline(schoolDiscipline);
+
+    }
+
+    if (doc.get(MetaData.PROFESSIONALSITUATION) != null) {
+
+      HierarchicalStructuredTextMetaDataSet professionalSituation = new HierarchicalStructuredTextMetaDataSet();
+      String[] professionalSituationLevelSet = doc.getValues(MetaData.PROFESSIONALSITUATION + ORIG);
+
+      for (int j = 0; j < professionalSituationLevelSet.length; j++) {
+
+        HierarchicalStructuredTextMetaData professionalSituationSet = new HierarchicalStructuredTextMetaData();
+        String[] professionalSituationLevels = professionalSituationLevelSet[j].split(LEVELSEPARATOR);
+
+        for (int k = 1; k < professionalSituationLevels.length; k++) {
+
+          TextMetaData level = new TextMetaData();
+
+          level.setValue(professionalSituationLevels[k]);
+          professionalSituationSet.addChild(level);
+
+        }
+
+        professionalSituation.addHierarchy(professionalSituationSet);
+
+      }
+
+      rec.setProfessionalSituation(professionalSituation);
+
+    }
+
+    if (doc.get(MetaData.TARGETENDUSER) != null) {
+
+      HierarchicalStructuredTextMetaDataSet targetEndUser = new HierarchicalStructuredTextMetaDataSet();
+      String[]                              targetEndUserLevelSet = doc.getValues(MetaData.TARGETENDUSER + ORIG);
+
+      for (int j = 0; j < targetEndUserLevelSet.length; j++) {
+
+        HierarchicalStructuredTextMetaData targetEndUserSet = new HierarchicalStructuredTextMetaData();
+        String[]                           targetEndUserLevels = targetEndUserLevelSet[j].split(LEVELSEPARATOR);
+
+        for (int k = 1; k < targetEndUserLevels.length; k++) {
+
+          TextMetaData level = new TextMetaData();
+
+          level.setValue(targetEndUserLevels[k]);
+          targetEndUserSet.addChild(level);
+
+        }
+
+        targetEndUser.addHierarchy(targetEndUserSet);
+
+      }
+
+      rec.setTargetEndUser(targetEndUser);
+
+    }
+
+    return rec;
 
   }
 

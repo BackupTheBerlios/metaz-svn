@@ -24,19 +24,22 @@ import java.util.List;
  * @author Sammy Dalewyn
  * @version 1.0
   */
-public class GenerateTestXml {
+public final class GenerateTestXml {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-  private final static String DEPEND_TEMPLATE = "test/toxgene/depend.tsl";
-  private final static String DEPEND_XML = "test/toxgene/output/depend.xml";
-  private final static String TEMP_XML = "test/toxgene/output/temp.xml";
-  private final static String FINAL_XML = "test/toxgene/output/koppeling.xml";
+  static final String DEPEND_TEMPLATE = "test/toxgene/depend.tsl";
+  static final String DEPEND_XML = "test/toxgene/output/depend.xml";
+  static final String TEMP_XML = "test/toxgene/output/temp.xml";
+  static final String FINAL_XML = "test/toxgene/output/koppeling.xml";
   private static MetaZ        app;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  public GenerateTestXml() {
+  /**
+   * Constructor
+   */
+  private GenerateTestXml() {
 
   }
 

@@ -20,29 +20,52 @@ public class RepositoryPerformanceTest extends TestCase {
 
   //~ Inner Classes ----------------------------------------------------------------------------------------------------
 
+  /**
+   * Class representing the performance metrics of a search
+   */
   class SearchMetrics {
 
-    long elapsedTime;
-    int  numberOfResults;
+    private long elapsedTime;
+    private int  numberOfResults;
 
+    /**
+     * Sets the elapsed time
+     *
+     * @param time the elapsed time
+     */
     void setElapsedTime(long time) {
 
       elapsedTime = time;
 
     }
 
+    /**
+     * Sets the number of results
+     *
+     * @param number the number of results
+     */
     void setNumberOfResults(int number) {
 
       numberOfResults = number;
 
     }
 
+    /**
+     * Returns the elapsed time
+     *
+     * @return the elapsed time
+     */
     long getElapsedTime() {
 
       return elapsedTime;
 
     }
 
+    /**
+     * Returns the number of results
+     *
+     * @return the number of results
+     */
     int getNumberOfResults() {
 
       return numberOfResults;
@@ -58,6 +81,9 @@ public class RepositoryPerformanceTest extends TestCase {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
+  /**
+   * Constructor
+   */
   public RepositoryPerformanceTest() {
 
   }
@@ -133,6 +159,16 @@ public class RepositoryPerformanceTest extends TestCase {
 
   }
 
+  /**
+   * Returns the time a search takes and the number of results.
+   *
+   * @param hm the search values
+   * @param f the facade implementation
+   *
+   * @return the search metrics
+   *
+   * @throws Exception the search could not be completed
+   */
   private SearchMetrics timeSearch(HashMap hm, Facade f)
                             throws Exception
   {

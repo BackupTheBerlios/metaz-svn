@@ -1,7 +1,5 @@
 package org.metaz.repository;
 
-import java.net.URI;
-
 /**
  * This class represents a search result.
  *
@@ -14,7 +12,7 @@ public class Result<T> {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  private final T     obj; //the object represented by the result   
+  private final T     obj; //the object represented by the result
   private final float score; //the relevance score
 
   //~ Constructors -----------------------------------------------------------------------------------------------------

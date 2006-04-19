@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Service for searching the index of the search engine.
- * 
+ *
  * @author Jurgen Goelen
  * @version 0.1
  */
@@ -22,7 +22,7 @@ public interface SearchService extends RepositoryService {
    *
    * @return Returns a List of results (URI's) sorted by their relevance score.
    */
-  public List<Result<URI>> doSearch(String query);
+  List<Result<URI>> doSearch(String query);
 
   /**
    * Searches for results that match the specified query.
@@ -31,6 +31,6 @@ public interface SearchService extends RepositoryService {
    *
    * @return Returns a List of results (URI's) sorted by their relevance score.
    */
-  public List<Result<URI>> doSearch(HashMap termValuePairs);
+  List<Result<URI>> doSearch(HashMap termValuePairs);
 
 } // end SearchService

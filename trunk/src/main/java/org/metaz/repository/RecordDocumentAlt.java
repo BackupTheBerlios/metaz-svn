@@ -23,17 +23,21 @@ public final class RecordDocumentAlt {
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   /** The name of the Document field containing the merged text fields that  will be full-text searched */
-  public final static String MERGED = "merged";
-  private final static char   KEYWORDSEPARATOR = ';';
-  private final static String ORIG = "_orig";
-  private final static String WHITESPACE = " ";
+  static final String MERGED = "merged";
+  static final char   KEYWORDSEPARATOR = ';';
+  static final String ORIG = "_orig";
+  static final String WHITESPACE = " ";
 
-  //~ Methods ----------------------------------------------------------------------------------------------------------
+  //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  /**
+/**
    * private constructor
    */
-  private RecordDocumentAlt(){}
+  private RecordDocumentAlt() {
+
+  }
+
+  //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
    * Makes a Lucene document for a MetaZ record.<p>The document contains the searchable metadata elements plus
@@ -50,9 +54,27 @@ public final class RecordDocumentAlt {
   {
 
     Document doc = new Document();
-    String   merged = "";
 
-    //full text searchable metadata
+    doc = addFullTextFields(doc, r);
+    doc = addKeywordFields(doc, r);
+    doc = addUnIndexedFields(doc, r);
+
+    return doc;
+
+  } // end toDocument()
+
+  /**
+   * Adds the full text fields to the Lucene document
+   *
+   * @param doc the Lucene document
+   * @param r the record
+   *
+   * @return the Lucene document
+   */
+   private static Document addFullTextFields(Document doc, Record r) {
+
+    String merged = "";
+
     doc.add(Field.Text(MetaData.TITLE, (String) r.getTitle().getValue()));
     merged = merged + r.getTitle().getValue().toString() + WHITESPACE;
 
@@ -87,7 +109,20 @@ public final class RecordDocumentAlt {
 
     doc.add(Field.UnIndexed(MERGED, merged));
 
-    //keyword searchable metadata
+    return doc;
+
+  }
+
+  /**
+   * Adds the keyword fields to the Lucene document
+   *
+   * @param doc the Lucene document
+   * @param r the record
+   *
+   * @return the Lucene document
+   */
+  private static Document addKeywordFields(Document doc, Record r) {
+
     MetaData targetEndUser = r.getTargetEndUser();
 
     if (targetEndUser != null) {
@@ -152,7 +187,7 @@ public final class RecordDocumentAlt {
         doc.add(Field.Keyword(MetaData.SCHOOLDISCIPLINE + ORIG, schDiscipline));
 
         String[] schoolDisciplineLevels =
-            HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schDiscipline);
+                HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schDiscipline);
 
         for (int i = 0; i < schoolDisciplineLevels.length; i++) {
 
@@ -186,7 +221,7 @@ public final class RecordDocumentAlt {
         doc.add(Field.Keyword(MetaData.PROFESSIONALSITUATION + ORIG, profSituation));
 
         String[] professionalSituationLevels =
-            HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(profSituation);
+                  HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(profSituation);
 
         for (int i = 0; i < professionalSituationLevels.length; i++) {
 
@@ -208,7 +243,20 @@ public final class RecordDocumentAlt {
 
     } // end if
 
-    //stored metadata (not searchable)
+    return doc;
+
+  }
+
+  /**
+   * Adds the unindexed fields to the Lucene document
+   *
+   * @param doc the Lucene document
+   * @param r the record
+   *
+   * @return the Lucene document
+   */
+  private static Document addUnIndexedFields(Document doc, Record r) {
+
     doc.add(Field.UnIndexed(MetaData.URI, (String) r.getURI().getValue()));
     doc.add(Field.UnIndexed(MetaData.FILEFORMAT, (String) r.getFileFormat().getValue()));
     doc.add(Field.UnIndexed(MetaData.SECURED, r.getSecured().getValue().toString()));
@@ -282,7 +330,7 @@ public final class RecordDocumentAlt {
     if (lastChangedDate != null) {
 
       doc.add(Field.UnIndexed(MetaData.LASTCHANGEDDATE,
-            (Long.toString(((Date) lastChangedDate.getValue()).getTime()))));
+                (Long.toString(((Date) lastChangedDate.getValue()).getTime()))));
 
     }
 
@@ -312,6 +360,7 @@ public final class RecordDocumentAlt {
 
     return doc;
 
-  } // end toDocument()
+  }
 
-} // end RecordDocument
+}
+// end RecordDocument

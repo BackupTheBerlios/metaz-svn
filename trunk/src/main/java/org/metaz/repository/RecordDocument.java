@@ -22,14 +22,19 @@ public final class RecordDocument {
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   /** The name of the Document field containing the merged text fields that  will be full-text searched */
-  public final static String MERGED = "merged";
-  private final static char KEYWORDSEPARATOR = ';';
+  static final String MERGED = "merged";
+  static final char KEYWORDSEPARATOR = ';';
 
-  //~ Methods ----------------------------------------------------------------------------------------------------------
-  /**
+  //~ Constructors -----------------------------------------------------------------------------------------------------
+
+/**
    * private constructor
    */
-  private RecordDocument(){}
+  private RecordDocument() {
+
+  }
+
+  //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
    * Makes a Lucene document for a MetaZ record.<p>The document contains the searchable metadata elements plus
@@ -46,7 +51,26 @@ public final class RecordDocument {
   {
 
     Document doc = new Document();
-    String   merged = "";
+
+    doc = addFullTextFields(doc, r);
+    doc = addKeywordFields(doc, r);
+    doc = addUnIndexedFields(doc, r);
+
+    return doc;
+
+  } // end toDocument()
+
+  /**
+   * Adds the full text fields to the Lucene document
+   *
+   * @param doc the Lucene document
+   * @param r the record
+   *
+   * @return the Lucene document
+   */
+  private static Document addFullTextFields(Document doc, Record r) {
+
+    String merged = "";
 
     //full text searchable metadata
     doc.add(Field.Text(MetaData.TITLE, (String) r.getTitle().getValue()));
@@ -83,7 +107,20 @@ public final class RecordDocument {
 
     doc.add(Field.UnStored(MERGED, merged));
 
-    //keyword searchable metadata
+    return doc;
+
+  }
+
+  /**
+   * Adds the keyword fields to the Lucene document
+   *
+   * @param doc the Lucene document
+   * @param r the record
+   *
+   * @return the Lucene document
+   */
+  private static Document addKeywordFields(Document doc, Record r) {
+
     MetaData targetEndUser = r.getTargetEndUser();
 
     if (targetEndUser != null) {
@@ -102,7 +139,7 @@ public final class RecordDocument {
 
         } // end for
 
-      } // end while       
+      } // end while
 
     } // end if
 
@@ -139,7 +176,7 @@ public final class RecordDocument {
 
         String   schDiscipline = it.next().toString();
         String[] schoolDisciplineLevels =
-            HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schDiscipline);
+                  HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(schDiscipline);
 
         for (int i = 0; i < schoolDisciplineLevels.length; i++) {
 
@@ -170,7 +207,7 @@ public final class RecordDocument {
 
         String   prSituation = it.next().toString();
         String[] professionalSituationLevels =
-            HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(prSituation);
+                  HierarchicalStructuredMetaDataValueParser.getAllHierarchicalPaths(prSituation);
 
         for (int i = 0; i < professionalSituationLevels.length; i++) {
 
@@ -192,11 +229,25 @@ public final class RecordDocument {
 
     } // end if
 
-    //stored metadata (not searchable)
+    return doc;
+
+  }
+
+  /**
+   * Adds the unindexed fields to the Lucene document
+   *
+   * @param doc the Lucene document
+   * @param r the record
+   *
+   * @return the Lucene document
+   */
+  private static Document addUnIndexedFields(Document doc, Record r) {
+
     doc.add(Field.UnIndexed(MetaData.URI, (String) r.getURI().getValue()));
 
     return doc;
 
-  } // end toDocument()
+  }
 
-} // end RecordDocument
+}
+// end RecordDocument

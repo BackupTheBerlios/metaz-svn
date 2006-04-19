@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Interface to be extended by all services in the repository.
- * 
+ *
  * @author Jurgen Goelen
  * @version 0.1
  */
@@ -21,7 +21,7 @@ public interface RepositoryService {
    *
    * @throws Exception Update action failed.
    */
-  public void doUpdate(List<Record> records)
+  void doUpdate(List<Record> records)
                 throws Exception;
 
   /**
@@ -29,7 +29,7 @@ public interface RepositoryService {
    *
    * @throws Exception Purge action failed.
    */
-  public void doPurge()
+  void doPurge()
                throws Exception;
 
 }
