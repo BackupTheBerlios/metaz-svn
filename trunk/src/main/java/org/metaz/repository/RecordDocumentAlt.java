@@ -237,9 +237,13 @@ public final class RecordDocumentAlt {
 
     if (competence != null) {
 
-      String competences = ((String) competence.getValue()).replace(KEYWORDSEPARATOR, ' ');
+      String[] competences = ((String)competence.getValue()).split(String.valueOf(KEYWORDSEPARATOR));
 
-      doc.add(Field.Keyword(MetaData.COMPETENCE, competences));
+      for (int i = 0; i < competences.length; i++) {
+
+        doc.add(Field.Keyword(MetaData.COMPETENCE, competences[i]));
+        
+      } // end for
 
     } // end if
 
