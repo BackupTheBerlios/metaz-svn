@@ -728,7 +728,15 @@ public class SearchServiceImplAlt
 
       TextMetaData competence = new TextMetaData();
 
-      competence.setValue(doc.get(MetaData.COMPETENCE));
+      String[] competences = doc.getValues(MetaData.COMPETENCE);
+      String scompetence = "";
+      
+      for (int j = 0; j < competences.length; j++) {
+          
+          scompetence = scompetence + competences[j] + "; ";
+      }
+      
+      competence.setValue(scompetence);
       rec.setCompetence(competence);
 
     }
