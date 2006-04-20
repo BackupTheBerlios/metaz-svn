@@ -228,9 +228,9 @@ public final class RecordDocument {
         for (int i = 0; i < competences.length; i++) {
 
           doc.add(Field.Keyword(MetaData.COMPETENCE, competences[i]));
-          
+
         } // end for
-    
+
     } // end if
 
     return doc;

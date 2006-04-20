@@ -242,7 +242,7 @@ public final class RecordDocumentAlt {
       for (int i = 0; i < competences.length; i++) {
 
         doc.add(Field.Keyword(MetaData.COMPETENCE, competences[i]));
-        
+
       } // end for
 
     } // end if

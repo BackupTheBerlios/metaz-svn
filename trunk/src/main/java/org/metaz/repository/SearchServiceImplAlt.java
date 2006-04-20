@@ -700,7 +700,6 @@ public class SearchServiceImplAlt
     if (doc.get(MetaData.STATUS) != null) {
 
       TextMetaData status = new TextMetaData();
-
       status.setValue(doc.get(MetaData.STATUS));
       rec.setStatus(status);
 
@@ -709,7 +708,6 @@ public class SearchServiceImplAlt
     if (doc.get(MetaData.ROLENAME) != null) {
 
       TextMetaData roleName = new TextMetaData();
-
       roleName.setValue(doc.get(MetaData.ROLENAME));
       rec.setRoleName(roleName);
 
@@ -718,7 +716,6 @@ public class SearchServiceImplAlt
     if (doc.get(MetaData.SUBJECT) != null) {
 
       TextMetaData subject = new TextMetaData();
-
       subject.setValue(doc.get(MetaData.SUBJECT));
       rec.setSubject(subject);
 
@@ -727,22 +724,18 @@ public class SearchServiceImplAlt
     if (doc.get(MetaData.COMPETENCE) != null) {
 
       TextMetaData competence = new TextMetaData();
-
       String[] competences = doc.getValues(MetaData.COMPETENCE);
       String scompetence = "";
-      
+
       for (int j = 0; j < competences.length; j++) {
-          
+
           scompetence = scompetence + competences[j] + "; ";
       }
-      
       competence.setValue(scompetence);
       rec.setCompetence(competence);
 
     }
-
     return rec;
-
   }
 
   /**
