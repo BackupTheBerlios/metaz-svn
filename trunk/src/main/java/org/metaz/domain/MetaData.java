@@ -14,82 +14,82 @@ public abstract class MetaData
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
   /** Metadata field name constant */
-  public final static String TITLE = "titel";
+  public static final String TITLE = "titel";
 
   /** Metadata field name constant */
-  public final static String SUBJECT = "onderwerp";
+  public static final String SUBJECT = "onderwerp";
 
   /** Metadata field name constant */
-  public final static String DESCRIPTION = "omschrijving";
+  public static final String DESCRIPTION = "omschrijving";
 
   /** Metadata field name constant */
-  public final static String KEYWORDS = "sleutelwoorden";
+  public static final String KEYWORDS = "sleutelwoorden";
 
   /** Metadata field name constant */
-  public final static String TARGETENDUSER = "beoogdeEindgebruiker";
+  public static final String TARGETENDUSER = "beoogdeEindgebruiker";
 
   /** Metadata field name constant */
-  public final static String SCHOOLTYPE = "schooltype";
+  public static final String SCHOOLTYPE = "schooltype";
 
   /** Metadata field name constant */
-  public final static String SCHOOLDISCIPLINE = "vakleergebied";
+  public static final String SCHOOLDISCIPLINE = "vakleergebied";
 
   /** Metadata field name constant */
-  public final static String DIDACTICFUNCTION = "didactischeFunctie";
+  public static final String DIDACTICFUNCTION = "didactischeFunctie";
 
   /** Metadata field name constant */
-  public final static String PRODUCTTYPE = "producttype";
+  public static final String PRODUCTTYPE = "producttype";
 
   /** Metadata field name constant */
-  public final static String PROFESSIONALSITUATION = "beroepssituatie";
+  public static final String PROFESSIONALSITUATION = "beroepssituatie";
 
   /** Metadata field name constant */
-  public final static String COMPETENCE = "competentie";
+  public static final String COMPETENCE = "competentie";
 
   /** Metadata field name constant */
-  public final static String SECURED = "beveiligd";
+  public static final String SECURED = "beveiligd";
 
   /** Metadata field name constant */
-  public final static String FILEFORMAT = "bestandsformaat";
+  public static final String FILEFORMAT = "bestandsformaat";
 
   /** Metadata field name constant */
-  public final static String URI = "uri";
+  public static final String URI = "uri";
 
   /** Metadata field name constant */
-  public final static String AGGREGATIONLEVEL = "aggregatieniveau";
+  public static final String AGGREGATIONLEVEL = "aggregatieniveau";
 
   /** Metadata field name constant */
-  public final static String DIDACTICSCENARIO = "didactischScenario";
+  public static final String DIDACTICSCENARIO = "didactischScenario";
 
   /** Metadata field name constant */
-  public final static String REQUIREDTIME = "benodigdeTijd";
+  public static final String REQUIREDTIME = "benodigdeTijd";
 
   /** Metadata field name constant */
-  public final static String RIGHTS = "rechten";
+  public static final String RIGHTS = "rechten";
 
   /** Metadata field name constant */
-  public final static String FILESIZE = "bestandsgrootte";
+  public static final String FILESIZE = "bestandsgrootte";
 
   /** Metadata field name constant */
-  public final static String PLAYINGTIME = "afspeelduur";
+  public static final String PLAYINGTIME = "afspeelduur";
 
   /** Metadata field name constant */
-  public final static String TECHNICALREQUIREMENTS = "technischeVereiste";
+  public static final String TECHNICALREQUIREMENTS = "technischeVereiste";
 
   /** Metadata field name constant */
-  public final static String CREATIONDATE = "datumCreatie";
+  public static final String CREATIONDATE = "datumCreatie";
 
   /** Metadata field name constant */
-  public final static String LASTCHANGEDDATE = "datumLaatsteWijziging";
+  public static final String LASTCHANGEDDATE = "datumLaatsteWijziging";
 
   /** Metadata field name constant */
-  public final static String VERSION = "versie";
+  public static final String VERSION = "versie";
 
   /** Metadata field name constant */
-  public final static String STATUS = "status";
+  public static final String STATUS = "status";
 
   /** Metadata field name constant */
-  public final static String ROLENAME = "rolEnNaam";
+  public static final String ROLENAME = "rolEnNaam";
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
@@ -242,11 +242,11 @@ public abstract class MetaData
   /**
    * Sets the xml tagname of this MetaData.
    *
-   * @param xmltagname the xml tagname.
+   * @param xmltag the xml tagname.
    */
-  public void setXMLTagName(String xmltagname) {
+  public void setXMLTagName(String xmltag) {
 
-    this.xmltagname = xmltagname;
+    this.xmltagname = xmltag;
 
   } // end setXMLTagName()
 
@@ -266,9 +266,9 @@ public abstract class MetaData
    *
    * @param metadatatype the xml tagname.
    */
-  public void setMetaDataType(String metadatatype) {
+  public void setMetaDataType(String metadtype) {
 
-    this.metadatatype = metadatatype;
+    this.metadatatype = metadtype;
 
   } // end setMetaDataType()
 
