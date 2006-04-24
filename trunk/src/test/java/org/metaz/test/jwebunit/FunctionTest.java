@@ -133,13 +133,13 @@ public class FunctionTest extends WebTestCase {
     // help function (not yet developed)
     clickLinkWithText("Help");
     assertTitleEquals("Ruud de Moor Centrum - Applicatie Z");
-    assertTextPresent("Quisque blandit sollicitudin nisi");
+    assertTextPresent("gebruikershandleiding");
     assertFormNotPresent();
 
     // information about Applicatie Z (not yet developed)
     clickLinkWithText("Informatie");
     assertTitleEquals("Ruud de Moor Centrum - Applicatie Z");
-    assertTextPresent("Lorem ipsum dolor sit amet");
+    assertTextPresent("zoekalgoritme van Applicatie Z");
     assertFormNotPresent();
 
   } // end testStaticContent()
