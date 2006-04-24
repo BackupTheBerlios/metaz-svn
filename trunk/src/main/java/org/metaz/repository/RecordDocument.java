@@ -105,7 +105,7 @@ public final class RecordDocument {
 
     } // end if
 
-    doc.add(Field.UnStored(MERGED, merged));
+    doc.add(Field.Text(MERGED, merged));
 
     return doc;
 

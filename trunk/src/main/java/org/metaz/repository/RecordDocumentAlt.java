@@ -107,7 +107,7 @@ public final class RecordDocumentAlt {
 
     } // end if
 
-    doc.add(Field.UnIndexed(MERGED, merged));
+    doc.add(Field.Text(MERGED, merged));
 
     return doc;
 

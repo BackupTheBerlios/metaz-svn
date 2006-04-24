@@ -286,7 +286,7 @@ public class SearchServiceImplAlt
 
       if (fullText != null) {
 
-        Query fullTextQuery = QueryParser.parse(fullText, RecordDocument.MERGED, analyzer);
+        Query fullTextQuery = QueryParser.parse(fullText, RecordDocumentAlt.MERGED, analyzer);
 
         q.add(fullTextQuery, required, prohibited); // set with metaz.props
 
