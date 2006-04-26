@@ -34,7 +34,8 @@ public class HierarchicalStructuredTextMetaDataSet extends MetaData {
    * @return the set value
    */
   @Override
-  public Object getValue() {
+  public Object getValue()
+  {
 
     return this.value;
 
@@ -46,7 +47,8 @@ public class HierarchicalStructuredTextMetaDataSet extends MetaData {
    * @param value the set value
    */
   @Override
-  public void setValue(Object value) {
+  public void setValue(Object value)
+  {
 
     this.value = (Set) value;
 

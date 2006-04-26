@@ -1,8 +1,7 @@
 package org.metaz.gui.portal;
 
 /**
- * This class represents EXACTLY ONE "select option"
- * Very usefull to represent HTML select options
+ * This class represents EXACTLY ONE "select option" Very usefull to represent HTML select options
  *
  * @author Falco Paul
  * @version $Revision$

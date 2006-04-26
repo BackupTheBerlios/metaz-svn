@@ -104,8 +104,8 @@ public class RecordAttributeSetter {
                           "HierarchicalStructuredTextMetaDataSet");
       recordMetadata.add(targetEndUser);
       schoolType = new HierarchicalStructuredTextMetaDataSet();
-      setMetaDataMetaData(schoolType, false, MetaData.SCHOOLTYPE, 
-    		  "schoolType", "HierarchicalStructuredTextMetaDataSet");
+      setMetaDataMetaData(schoolType, false, MetaData.SCHOOLTYPE, "schoolType",
+                          "HierarchicalStructuredTextMetaDataSet");
       recordMetadata.add(schoolType);
       schoolDiscipline = new HierarchicalStructuredTextMetaDataSet();
       setMetaDataMetaData(schoolDiscipline, false, MetaData.SCHOOLDISCIPLINE, "schoolDiscipline",

@@ -23,7 +23,7 @@ import java.util.List;
  * <p>This class provide a command line interface to Application Z, an application  that provides a search facility
  * within multiple CMS's of the Ruud de Moor Centrum.</p>
  */
-public class PrototypeCLI {
+public final class PrototypeCLI {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
@@ -33,6 +33,9 @@ public class PrototypeCLI {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
+  /**
+   * Private constructor
+   */
   private PrototypeCLI() {
 
     //empty

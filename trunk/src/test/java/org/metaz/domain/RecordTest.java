@@ -16,10 +16,15 @@ public class RecordTest extends TestCase {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  Record rec;
+  private Record rec;
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
+  /**
+   * Primes the testing environment
+   *
+   * @throws Exception Setup failed
+   */
   @Override
   protected void setUp()
                 throws Exception
@@ -91,8 +96,7 @@ public class RecordTest extends TestCase {
 
       lastChangeDate.setDateValue("28-01-2005");
 
-    } // end try
-    catch (ParseException e) {
+    } catch (ParseException e) {
 
       lastChangeDate.setValue(new Date());
 

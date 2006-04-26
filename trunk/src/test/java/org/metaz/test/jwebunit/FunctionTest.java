@@ -25,12 +25,10 @@ public class FunctionTest extends WebTestCase {
   private static String competence = ""; // competentie
   private static String keywords = "onderwijs"; // trefwoord
   private static String resultTitel = "mengelt verbinden energiegebruikers";
-  private static String NoDataFound = "Geen data gevonden ";
+  private static String noDataFound = "Geen data gevonden ";
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  //private static String keywords = "lesvoorbereiding"; // trefwoord
-  //private static String resultTitel = "Kennisbank wiskunde";
 /**
      * Creates a new FunctionTest object.
      *
@@ -156,7 +154,7 @@ public class FunctionTest extends WebTestCase {
     setFormElement("vakleergebied", schoolDiscipline);
     setFormElement("sleutelwoorden", keywords);
     submit();
-    assertTextNotPresent(NoDataFound);
+    assertTextNotPresent(noDataFound);
 
   } // end testSimpleSearch()
 
@@ -175,7 +173,7 @@ public class FunctionTest extends WebTestCase {
     setFormElement("competentie", competence);
     setFormElement("sleutelwoorden", keywords);
     submit();
-    assertTextNotPresent(NoDataFound);
+    assertTextNotPresent(noDataFound);
 
   }
 

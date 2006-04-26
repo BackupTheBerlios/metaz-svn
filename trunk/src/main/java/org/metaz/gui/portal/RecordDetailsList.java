@@ -14,14 +14,14 @@ public final class RecordDetailsList extends ArrayList<RecordDetail> {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  /**
+/**
    * empty constructor
    */
   public RecordDetailsList() {
 
   }
 
-  /**
+/**
    * Constructor based on a given Record
    *
    * @param record Input record

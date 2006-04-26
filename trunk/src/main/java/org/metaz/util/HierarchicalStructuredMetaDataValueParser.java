@@ -3,12 +3,20 @@ package org.metaz.util;
 import java.util.Vector;
 
 /**
- * Helper/utility class to parse the value of the toString() method
- * from HierarchicalStructuredTextMetaData. 
+ * Helper/utility class to parse the value of the toString() method from HierarchicalStructuredTextMetaData.
  *
- * @author Erik-Jan Spaans  
+ * @author Erik-Jan Spaans
  */
-public class HierarchicalStructuredMetaDataValueParser {
+public final class HierarchicalStructuredMetaDataValueParser {
+
+  //~ Constructors -----------------------------------------------------------------------------------------------------
+
+  /**
+   * Private constructor
+   */
+  private HierarchicalStructuredMetaDataValueParser() {
+
+  }
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -16,7 +24,7 @@ public class HierarchicalStructuredMetaDataValueParser {
    * Gets the value of the lowest hierarchical level of the supplied hierarchy. This means the value after the
    * last '/'.
    *
-   * @param fullHierarchy
+   * @param fullHierarchy the pathlike string representation of the hierarchical value
    *
    * @return The lowest hierarhical level
    */

@@ -19,7 +19,8 @@ public class TextMetaData extends MetaData {
    * @return the string value
    */
   @Override
-  public Object getValue() {
+  public Object getValue()
+  {
 
     return this.value;
 
@@ -31,7 +32,8 @@ public class TextMetaData extends MetaData {
    * @param value the string value
    */
   @Override
-  public void setValue(Object value) {
+  public void setValue(Object value)
+  {
 
     this.value = (String) value;
 

@@ -264,7 +264,7 @@ public abstract class MetaData
   /**
    * Sets the xml tagname of this MetaData.
    *
-   * @param metadatatype the xml tagname.
+   * @param metadtype the xml tagname.
    */
   public void setMetaDataType(String metadtype) {
 

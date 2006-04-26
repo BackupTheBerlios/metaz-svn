@@ -8,12 +8,12 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * Tag class that allows "forward" definition of content in JSP pages ('getter')
- * This class will inject previously 'set' forward content
+ * Tag class that allows "forward" definition of content in JSP pages ('getter') This class will inject previously
+ * 'set' forward content
  *
  * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public class GetPortalContentTag extends TagSupport {
 
   //~ Static fields/initializers ---------------------------------------------------------------------------------------

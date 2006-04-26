@@ -19,7 +19,8 @@ public class BooleanMetaData extends MetaData {
    * @return boolean value
    */
   @Override
-  public Object getValue() {
+  public Object getValue()
+  {
 
     return this.value;
 
@@ -31,7 +32,8 @@ public class BooleanMetaData extends MetaData {
    * @param value the boolean value
    */
   @Override
-  public void setValue(Object value) {
+  public void setValue(Object value)
+  {
 
     this.value = (Boolean) value;
 

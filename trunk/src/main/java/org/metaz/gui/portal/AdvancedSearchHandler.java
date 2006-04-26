@@ -8,24 +8,35 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Handles advanced search page form submits.
- * 
+ *
  * @author Falco Paul
  * @author Erik-Jan Spaans
  * @version $Revision$
  */
 public class AdvancedSearchHandler extends SearchHandler {
 
-	private static final boolean ADVANCED_SEARCH = true;
+  //~ Static fields/initializers ---------------------------------------------------------------------------------------
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest,
-	 *      javax.servlet.http.HttpServletResponse)
-	 */
-	public final void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-		getSearchBean(req).search(req, res, ADVANCED_SEARCH);
-	}
+  private static final boolean ADVANCED_SEARCH = true;
+
+  //~ Methods ----------------------------------------------------------------------------------------------------------
+
+  /**
+   * DOCUMENT ME!
+   *
+   * @param req DOCUMENT ME!
+   * @param res DOCUMENT ME!
+   *
+   * @throws ServletException DOCUMENT ME!
+   * @throws IOException DOCUMENT ME!
+   */
+  public final void doPost(HttpServletRequest req, HttpServletResponse res)
+                    throws ServletException,
+                           IOException
+  {
+
+    getSearchBean(req).search(req, res, ADVANCED_SEARCH);
+
+  }
 
 }

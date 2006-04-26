@@ -25,7 +25,8 @@ public class DateMetaData extends MetaData {
    * @return the date value
    */
   @Override
-  public Object getValue() {
+  public Object getValue()
+  {
 
     return this.value;
 
@@ -37,7 +38,8 @@ public class DateMetaData extends MetaData {
    * @param value the date value
    */
   @Override
-  public void setValue(Object value) {
+  public void setValue(Object value)
+  {
 
     this.value = (Date) value;
 

@@ -1,7 +1,5 @@
 package org.metaz.domain;
 
-import java.util.*;
-
 /**
  * Record that holds a number of MetaData for a 'LeerObject'. From a Harvester component a Record instance will be
  * created for each 'leerobject' element in the recieved xml.
@@ -44,7 +42,7 @@ public class Record {
          * Creates a new Record. This constructor ensures only valid Records (that
          * is, Records with all required MetaData) are used. Optional metadata may
          * be added by using one of the setters.
-         * 
+         *
          * @param title
          *            the mandatory title meta data.
          * @param isSecured
@@ -59,7 +57,8 @@ public class Record {
          *            the mandatory uri meta data.
          */
   public Record(TextMetaData title, BooleanMetaData isSecured, TextMetaData fileFormat, TextMetaData didacticFunction,
-                TextMetaData productType, HyperlinkMetaData uri) {
+                TextMetaData productType, HyperlinkMetaData uri)
+  {
 
     this.title = title;
     this.secured = isSecured;
@@ -523,11 +522,11 @@ public class Record {
   /**
    * Sets the creation date of the record
    *
-   * @param Date the creation date
+   * @param date the creation date
    */
-  public void setCreationDate(DateMetaData Date) {
+  public void setCreationDate(DateMetaData date) {
 
-    this.creationDate = Date;
+    this.creationDate = date;
 
   } // end setCreationDate()
 
@@ -683,6 +682,6 @@ public class Record {
 
     this.title = title;
 
-  } // end setTitle()    
+  } // end setTitle()
 
 } // end Record

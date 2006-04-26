@@ -22,7 +22,8 @@ public class NumericMetaData extends MetaData {
    * @return the long value
    */
   @Override
-  public Object getValue() {
+  public Object getValue()
+  {
 
     return this.value;
 
@@ -34,7 +35,8 @@ public class NumericMetaData extends MetaData {
    * @param value the long value
    */
   @Override
-  public void setValue(Object value) {
+  public void setValue(Object value)
+  {
 
     this.value = (Long) value;
 

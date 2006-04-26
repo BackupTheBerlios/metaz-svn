@@ -1,12 +1,12 @@
 package org.metaz.gui.portal;
 
 /**
- * This class represents EXACTLY ONE search result
- * A search result is defined of all the information that represents a match
+ * This class represents EXACTLY ONE search result A search result is defined of all the information that
+ * represents a match
  *
  * @author Falco Paul
  * @version $Revision$
-  */
+ */
 public final class Result {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ public final class Result {
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
-  /**
+/**
    * Constructor that takes the most common parameters
    *
    * @param setName Name

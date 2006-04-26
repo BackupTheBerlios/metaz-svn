@@ -15,6 +15,11 @@ public class BooleanMetaDataTest extends TestCase {
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
+  /**
+   * Primes the testing environment
+   *
+   * @throws Exception Setup failed
+   */
   @Override
   protected void setUp()
                 throws Exception

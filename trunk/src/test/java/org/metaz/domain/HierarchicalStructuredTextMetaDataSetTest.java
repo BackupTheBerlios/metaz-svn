@@ -4,10 +4,7 @@ import junit.framework.TestCase;
 
 import junit.swingui.TestRunner;
 
-import org.metaz.domain.HierarchicalStructuredTextMetaDataSet;
-
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -20,12 +17,12 @@ public class HierarchicalStructuredTextMetaDataSetTest extends TestCase {
 
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  TextMetaData                       level1a;
-  TextMetaData                       level2a;
-  TextMetaData                       level2b;
-  TextMetaData                       level3b;
-  HierarchicalStructuredTextMetaData hstmd1;
-  HierarchicalStructuredTextMetaData hstmd2;
+  private TextMetaData                       level1a;
+  private TextMetaData                       level2a;
+  private TextMetaData                       level2b;
+  private TextMetaData                       level3b;
+  private HierarchicalStructuredTextMetaData hstmd1;
+  private HierarchicalStructuredTextMetaData hstmd2;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -55,6 +52,11 @@ public class HierarchicalStructuredTextMetaDataSetTest extends TestCase {
 
   } // end main()
 
+  /**
+   * Primes the testing environment
+   *
+   * @throws Exception Setup failed
+   */
   protected void setUp()
                 throws Exception
   {
@@ -78,7 +80,7 @@ public class HierarchicalStructuredTextMetaDataSetTest extends TestCase {
   } // end setUp()
 
   /**
-   * 
+   *
    * @see HierarchicalStructuredTextMetaDataSet#setValue(Object)
    */
   public void testSetValue() {
@@ -96,7 +98,7 @@ public class HierarchicalStructuredTextMetaDataSetTest extends TestCase {
   } // end testSetValue()
 
   /**
-   * 
+   *
    * @see HierarchicalStructuredTextMetaDataSet#addHierarchy(HierarchicalStructuredTextMetaData)
    */
   public void testAddHierarchy() {
