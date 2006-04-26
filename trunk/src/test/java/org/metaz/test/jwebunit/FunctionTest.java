@@ -23,8 +23,9 @@ public class FunctionTest extends WebTestCase {
   private static String productType = ""; // producttype
   private static String professionalSituation = ""; // beroepssituatie
   private static String competence = ""; // competentie
-  private static String keywords = "energiegebruikers"; // trefwoord
+  private static String keywords = "onderwijs"; // trefwoord
   private static String resultTitel = "mengelt verbinden energiegebruikers";
+  private static String NoDataFound = "Geen data gevonden ";
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -150,12 +151,12 @@ public class FunctionTest extends WebTestCase {
   public void testSimpleSearch() {
 
     beginAt("search.jsp");
-    setFormElement("beoogdeEindgebruiker", "");
-    setFormElement("schooltype", "");
-    setFormElement("vakleergebied", "");
+    setFormElement("beoogdeEindgebruiker", endUser);
+    setFormElement("schooltype", schoolType);
+    setFormElement("vakleergebied", schoolDiscipline);
     setFormElement("sleutelwoorden", keywords);
     submit();
-    assertTextInTable("row", resultTitel);
+    assertTextNotPresent(NoDataFound);
 
   } // end testSimpleSearch()
 
@@ -165,16 +166,16 @@ public class FunctionTest extends WebTestCase {
   public void testAdvancedSearch() {
 
     beginAt("advancedsearch.jsp");
-    setFormElement("beoogdeEindgebruiker", "");
-    setFormElement("schooltype", "");
-    setFormElement("vakleergebied", "");
-    setFormElement("didactischeFunctie", "");
-    setFormElement("producttype", "");
-    setFormElement("beroepssituatie", "");
-    setFormElement("competentie", "");
+    setFormElement("beoogdeEindgebruiker", endUser);
+    setFormElement("schooltype", schoolType);
+    setFormElement("vakleergebied", schoolDiscipline);
+    setFormElement("didactischeFunctie", didacticFunction);
+    setFormElement("producttype", productType);
+    setFormElement("beroepssituatie", professionalSituation);
+    setFormElement("competentie", competence);
     setFormElement("sleutelwoorden", keywords);
     submit();
-    assertTextInTable("row", resultTitel);
+    assertTextNotPresent(NoDataFound);
 
   }
 
@@ -192,7 +193,7 @@ public class FunctionTest extends WebTestCase {
     assertTextPresent("Meer gegevens");
     // check if results XML contains the records
     clickLinkWithText("XML");
-    assertTextPresent(resultTitel);
+    assertTextPresent("recorddetails.jsp?record=0");
 
   }
 
